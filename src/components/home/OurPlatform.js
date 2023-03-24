@@ -37,7 +37,7 @@ const aboutPlatform = [
 function AboutPlatform({ body }) {
     return (
         <>
-            <div className="col-3 rounded-circle platform-bg py-5 px-5" >
+            <div className="col-3 rounded-pill platform-bg py-5 px-5" >
                 {body.text}
             </div>
         </>
