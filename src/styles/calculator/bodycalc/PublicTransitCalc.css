@@ -1,0 +1,63 @@
+.publicTransit-form {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: #b0d8e8;
+  box-shadow: 1px 1px 36px -11px rgba(0, 0, 0, 0.75);
+  padding: 15px;
+  border-radius: 50px;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.publicT-form__label {
+  background-color: #ffffff;
+  /* box-shadow: 1px 1px 36px -11px rgba(0, 0, 0, 0.75); */
+  /* box-shadow: 1px 1px 46px -8px rgba(0, 0, 0, 0.33); */
+  box-shadow: inset -2px -3px 36px -17px rgba(0, 0, 0, 0.33);
+  border-radius: 10px;
+  font-weight: bold;
+  height: 50%;
+  display: inline-block;
+  /* width: 50%; */
+  margin: 0;
+  padding: 10px;
+}
+.publicT-form__label1 {
+  font-weight: bold;
+  margin: 10px;
+}
+.publicT-form__label2 {
+  width: fit-content;
+  display: flex;
+  font-weight: bold;
+  margin: 10px;
+}
+.publicT-form__button {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  /* width: fit-content; */
+}
+.pTbtn .publicT-form__button:hover {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  /* width: fit-content; */
+}
+.form-content1 {
+  justify-content: center;
+}
+.formMain {
+  /* position: relative; */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 20px;
+}
+.traditionalCountry-ip {
+  padding: 10px;
+}
+.traditionalCountry-dd {
+  padding: 10px;
+}
