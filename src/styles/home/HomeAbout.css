@@ -1,0 +1,29 @@
+.main-div{
+    background-image: url('http://localhost:3000/assets/home/aboutProject.svg');
+    background-size: cover;
+    background-position: 100% 100%;
+    min-height: 70vh;
+    margin-top: -100px;
+    padding-top: 100px;
+}
+
+.about-image{
+    width:200%;
+    height: 70%;
+}
+
+.about-text-content{
+    height: fit-content;
+}
+
+
+.about-head{
+    color: #FFFFFF;
+    font-size: 4rem;
+    font-weight: 600;
+}
+
+.box-bg{
+    background-color: aliceblue;
+    border-radius: 2rem;
+}

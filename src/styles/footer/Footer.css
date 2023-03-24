@@ -1,0 +1,32 @@
+.footLinkLi{
+    list-style-type: None;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.quickLinks ul{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.footLink{
+    text-decoration: none;
+    color: black;
+}
+.footLink:hover{
+    color: #038b97;
+}
+
+.icon-link{
+    color:#00E0FF;
+}
+
+.linkHead {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: #00E0FF;
+    text-decoration-thickness:3px;
+   
+}
