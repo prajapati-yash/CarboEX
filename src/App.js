@@ -4,6 +4,16 @@ import Home from "./pages/Home";
 import Resources from "./pages/Resources";
 import Calculator from "./pages/Calculator";
 import Contact from "./pages/Contact";
+import LandingCalc from "./components/calculator/bodycalc/LandingCalc";
+import CleanEnergyCalc from './components/calculator/bodycalc/CleanEnergyCalc'
+import FuelToCo2Calc from './components/calculator/bodycalc/FuelToCo2Calc'
+import CarTravelCalc from './components/calculator/bodycalc/CarTravelCalc'
+import FlightCalc from './components/calculator/bodycalc/FlightCalc'
+import MotorBikeCalc from './components/calculator/bodycalc/MotorBikeCalc'
+// import PublicTransitCalc from './components/calculator/bodycalc/PublicTransitCalc'
+import PublicTransitMain from "./components/calculator/maincalc/PublicTransitMain";
+// import TraditionalBodyCalc from './components/calculator/bodycalc/TraditionalBodyCalc'
+import TraditionalMain from "./components/calculator/maincalc/TraditionalMain";
 
 
 function App() {
@@ -13,11 +23,20 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About/>} />
-          <Route path='/resources' element={<Resources/>} />
-          <Route path='/contact' element={<Contact/>} />
-          <Route path='/calculator' element={<Calculator/>} />
-          <Route path='/*' element={<Home/>}/>
+          <Route path='/about' element={<About />} />
+          <Route path='/resources' element={<Resources />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/calculator' element={<Calculator />} />
+          <Route path='/calculator/traditionalenergy' element={<TraditionalMain />}></Route>
+          <Route path='/calculator/publictransit' element={<PublicTransitMain />}></Route>
+          <Route path='/calculator/cleanenergy' element={<CleanEnergyCalc />}></Route >
+          <Route path='/calculator/fueltoco2' element={<FuelToCo2Calc />}></Route >
+          <Route path='/calculator/cartravel' element={<CarTravelCalc />}></Route >
+          <Route path='/calculator/flight' element={<FlightCalc />}></Route >
+          <Route path='/calculator/motorbike' element={<MotorBikeCalc />}></Route >
+          <Route path='/calculator/*' element={<TraditionalMain />}></Route>
+          <Route path='/calculator/*' element={<LandingCalc />}></Route>
+          <Route path='/*' element={<Home />} />
         </Routes>
       </BrowserRouter >
     </>
