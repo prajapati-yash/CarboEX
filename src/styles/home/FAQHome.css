@@ -1,0 +1,12 @@
+.main-faq{
+    background-image: url('http://localhost:3000/assets/home/faq.svg');
+    background-size: cover;
+    /* background-position: 100% 100%; */
+    min-height: 100vh;   
+}
+
+.faq-head{
+    /* background-color: #FFFFFF; */
+    color:#00E0FF;
+    padding-top:10%;
+}
