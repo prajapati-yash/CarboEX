@@ -11,32 +11,55 @@ function TraditionalBodyCalc() {
         teCountry: null
     })
 
-    var data = JSON.stringify(`{\n      "consumption": ${teData1.teConsumption},\n      "location": ${teData1.teCountry}\n      }: ''`);
+    // var data = JSON.stringify(`{\n      "consumption": ${teData1.teConsumption},\n      "location": ${teData1.teCountry}\n      }: ''`);
+    var data = {
+        consumption: teData1.teConsumption,
+        location: teData1.teCountry,
+    };
 
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
         url: `https://app.trycarbonapi.com/api/traditionalHydro?consumption=${teData1.teConsumption}&location=${teData1.teCountry}`,
         headers: {
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiOTA4YmE1N2ZmNjRjYmNhNDY1MmYyOTYzNjA2M2E4NGIwOGYzOWFmMzVjN2JmYTM1Y2I5ZDEyMTQ3OGJmMGViZWVlNGRkYmZiMDVmODhmOTAiLCJpYXQiOjE2Nzk3MzczNzEsIm5iZiI6MTY3OTczNzM3MSwiZXhwIjoxNzExMzU5NzcwLCJzdWIiOiIzOTY0Iiwic2NvcGVzIjpbXX0.Vn12tpEaDhpfugkySvV041zw-XU1ficc_GKyiWyoIEYaB_5FY1QnzBekbayM9ymANMC1aOKOSXyFKbUukgzIeg',
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMjY3NWVkMDVkZGYxODZlNDVkMWVmYmFjZjQyYWY0M2NkY2Q0MGUwNjFkZDRiM2EyNDc4YzMyODhlYmNiZTQ1NDNkNGY2ZGQwYWViYTlmYzIiLCJpYXQiOjE2Nzk3NTUzOTMsIm5iZiI6MTY3OTc1NTM5MywiZXhwIjoxNzExMzc3NzkzLCJzdWIiOiI0MDE0Iiwic2NvcGVzIjpbXX0.QNsKp_TCOb13yZhY9uyM9gs4Q3gpbFpWs5QBkXUhKBSBxWMKIbkT0ySsO-xdvk9_6LEhglt_6YusHK9ikhuAkA',
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: data
     };
 
+    // let config = {
+    //     method: 'post',
+    //     maxBodyLength: Infinity,
+    //     url: `https://app.trycarbonapi.com/api/traditionalHydro?consumption=${teData1.teConsumption}&location=${teData1.teCountry}`,
+    //     headers: {
+    //         'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMjY3NWVkMDVkZGYxODZlNDVkMWVmYmFjZjQyYWY0M2NkY2Q0MGUwNjFkZDRiM2EyNDc4YzMyODhlYmNiZTQ1NDNkNGY2ZGQwYWViYTlmYzIiLCJpYXQiOjE2Nzk3NTUzOTMsIm5iZiI6MTY3OTc1NTM5MywiZXhwIjoxNzExMzc3NzkzLCJzdWIiOiI0MDE0Iiwic2NvcGVzIjpbXX0.QNsKp_TCOb13yZhY9uyM9gs4Q3gpbFpWs5QBkXUhKBSBxWMKIbkT0ySsO-xdvk9_6LEhglt_6YusHK9ikhuAkA'
+    //     }
+    // };
+
     const teSubmitData = async () => {
         console.log(`${teData1.teConsumption} ${teData1.teCountry}`)
-        await axios(config)
-            .then(function (response) {
-                // const teResult = JSON.stringify(response.data.carbon);
-                // console.log(teResult);
-                console.log(JSON.stringify(response.data))
-                // const numbers1 = teResult.match(/\d+(\.\d+)?/g);
-                // console.log(numbers1[0]);
+        // console.log(data)
+
+        axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
             })
-            .catch(function (error) {
+            .catch((error) => {
                 console.log(error);
             });
+
+        // await axios(config)
+        //     .then(function (response) {
+        //         const teResult = JSON.stringify(response.data);
+        //         console.log(teResult);
+        //         // console.log(JSON.stringify(response.data))
+        //         // const numbers1 = teResult.match(/\d+(\.\d+)?/g);
+        //         // console.log(numbers1[0]);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
     };
 
 
@@ -80,9 +103,9 @@ function TraditionalBodyCalc() {
                                         <option value='UK'>UK</option>
                                         <option value='Europe'>Europe</option>
                                         <option value='Africa'>Africa</option>
-                                        <option value='Latin-America'>Latin America</option>
-                                        <option value='Middle-East'>Middle East</option>
-                                        <option value='Other-Country'>Other Country</option>
+                                        <option value='LatinAmerica'>Latin America</option>
+                                        <option value='MiddleEast'>Middle East</option>
+                                        <option value='OtherCountry'>Other Country</option>
                                     </select>
                                 </div>
                             </div>

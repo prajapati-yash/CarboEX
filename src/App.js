@@ -12,12 +12,15 @@ import FlightCalc from './components/calculator/bodycalc/FlightCalc'
 import MotorBikeMain from './components/calculator/maincalc/MotorBikeMain'
 import PublicTransitMain from "./components/calculator/maincalc/PublicTransitMain";
 import TraditionalMain from "./components/calculator/maincalc/TraditionalMain";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
 
 
 function App() {
   return (
     <>
       {/* <h1 className="mt-5 text-center">Shree Ganeshay Namah</h1> */}
+      {/* <Navbar /> */}
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
@@ -37,6 +40,7 @@ function App() {
           <Route path='/*' element={<Home />} />
         </Routes>
       </BrowserRouter >
+      {/* <Footer /> */}
     </>
 
 
