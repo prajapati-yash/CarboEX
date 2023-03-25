@@ -4,6 +4,7 @@ import '../../../styles/calculator/maincalc/MainCalc.css'
 import TraditionalBodyCalc from '../bodycalc/TraditionalBodyCalc'
 import '../../../styles/calculator/bodycalc/TraditionalBodyCalc.css'
 import Navbar from '../../navbar/Navbar'
+import Footer from '../../footer/Footer'
 
 
 
@@ -15,7 +16,10 @@ function TraditionalMain() {
             <div className='mainCalclass'>
                 <HeadCalculator />
                 <TraditionalBodyCalc />
+
             </div>
+            <Footer />
+
         </>
     )
 }

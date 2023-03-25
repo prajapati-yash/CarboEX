@@ -24,16 +24,16 @@ const quickLink = [
 const socialLinks = [
 
     {
-        title:"fa-facebook",
-        link:"#",
+        title: "fa-facebook",
+        link: "#",
     },
     {
-        title:"fa-twitter",
-        link:"#",
+        title: "fa-twitter",
+        link: "#",
     },
     {
-        title:"fa-instagram",
-        link:"#",
+        title: "fa-instagram",
+        link: "#",
     },
 ]
 
@@ -41,7 +41,7 @@ const socialLinks = [
 function Footer() {
     return (
         <div>
-            <div id="container" className="container-fluid px-4 px-md-5  ">
+            <div id="container" className="container-fluid px-4 px-md-5 pt-4">
                 <div className='col-4'>
                     <a className="navbar-brand" href="/">
                         <img
@@ -68,8 +68,8 @@ function Footer() {
                     <div className='col-3 '>
                         <p className='linkHead'>Get in Touch</p>
                         <div>
-                            {socialLinks.map((item,index)=>(
-                                <SocialMediaLi body={item} key={index}/>
+                            {socialLinks.map((item, index) => (
+                                <SocialMediaLi body={item} key={index} />
                             ))}
                         </div>
                     </div>
@@ -87,7 +87,7 @@ function QuickLinkLi({ body }) {
     )
 }
 
-function SocialMediaLi({body}) {
+function SocialMediaLi({ body }) {
     const classes = `fa-brands ${body.title} fa-2x pe-2`;
     return (
         <>
