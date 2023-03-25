@@ -1,12 +1,25 @@
 .main-faq{
-    background-image: url('http://localhost:3000/assets/home/faq.svg');
+    background-image: url('http://localhost:3000/assets/home/faq.png');
     background-size: cover;
-    /* background-position: 100% 100%; */
-    min-height: 100vh;   
+    min-height: 90vh;
+    border-radius: 8rem 8rem 0 0;
+  
 }
 
+.faq-content{
+    padding-top: 5rem;
+    padding-left:4rem;
+    padding-right:4rem;
+}
 .faq-head{
-    /* background-color: #FFFFFF; */
+    background-color: #FFFFFF;
     color:#00E0FF;
-    padding-top:10%;
+    width: 17%; 
+    font-size: 2.5rem;
+    font-weight: 600;
+    padding: 1rem 0;
+    border-radius:2rem;
+}
+.accordion-box-border{
+    border-radius: 2.4rem!important;
 }

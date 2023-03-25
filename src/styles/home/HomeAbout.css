@@ -1,10 +1,11 @@
 .main-div{
-    background-image: url('http://localhost:3000/assets/home/aboutProject.svg');
+    background-image: url('http://localhost:3000/assets/home/aboutProject.png');
     background-size: cover;
     background-position: 100% 100%;
     min-height: 70vh;
-    margin-top: -100px;
-    padding-top: 100px;
+    margin-top: -8%;
+    padding-top: 11%;
+    border-radius: 0 0 8rem 8rem;
 }
 
 .about-image{
@@ -19,11 +20,20 @@
 
 .about-head{
     color: #FFFFFF;
-    font-size: 4rem;
+    font-size: 2.5rem;
+    letter-spacing: 5px;
     font-weight: 600;
+    text-transform: uppercase;
 }
 
 .box-bg{
     background-color: aliceblue;
-    border-radius: 2rem;
+    border-radius: 5.5rem;
+    width: 30%;
+    font-size: 1.1rem;
+    font-weight: 550;
+}
+
+.all-boxes{
+    margin-bottom: 5%;
 }
