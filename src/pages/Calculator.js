@@ -13,10 +13,10 @@ function Calculator() {
         // <div style={{ height: '100vh', backgroundColor: 'lightgreen' }}>
         <>
             {/* <Navbar /> */}
-            {/* <div className='calcMain1'> */}
-
-            <TraditionalMain />
-            {/* </div> */}
+            <div className='calcMain1'>
+                {/* <HeadCalculator /> */}
+                <TraditionalMain />
+            </div>
         </>
     )
 }

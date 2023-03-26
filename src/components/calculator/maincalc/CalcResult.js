@@ -1,21 +1,23 @@
 import React from 'react'
 import '../../../styles/calculator/maincalc/MainCalc.css'
-import Navbar from '../../navbar/Navbar'
 import HeadCalculator from '../headcalc/HeadCalculator'
-import PublicTransitCalc from '../bodycalc/PublicTransitCalc'
+import Navbar from '../../navbar/Navbar'
 import Footer from '../../footer/Footer'
-function PublicTransitMain({ setResultCalcAll }) {
+import StoreCalculation from '../storecalculation/StoreCalculation'
+
+function CalcResult() {
     return (
         <>
             <Navbar />
             <div className='mainCalclass'>
-
                 <HeadCalculator />
-                <PublicTransitCalc setResultCalcAll={setResultCalcAll} />
+                <StoreCalculation />
+
             </div>
             <Footer />
+
         </>
     )
 }
 
-export default PublicTransitMain
+export default CalcResult

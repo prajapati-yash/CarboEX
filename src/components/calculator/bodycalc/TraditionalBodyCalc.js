@@ -3,15 +3,15 @@ import '../../../styles/calculator/bodycalc/TraditionalBodyCalc.css'
 import HeadCalculator from '../headcalc/HeadCalculator'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import StoreCalculation from '../storecalculation/StoreCalculation'
 
-function TraditionalBodyCalc() {
-
+function TraditionalBodyCalc({ setResultCalcAll }) {
+    const [calcResult, setCalcResult] = useState("");
     const [teData1, setTeData] = useState({
         teConsumption: null,
         teCountry: null
     })
 
-    // var data = JSON.stringify(`{\n      "consumption": ${teData1.teConsumption},\n      "location": ${teData1.teCountry}\n      }: ''`);
     var data = {
         consumption: teData1.teConsumption,
         location: teData1.teCountry,
@@ -22,45 +22,38 @@ function TraditionalBodyCalc() {
         maxBodyLength: Infinity,
         url: `https://app.trycarbonapi.com/api/traditionalHydro?consumption=${teData1.teConsumption}&location=${teData1.teCountry}`,
         headers: {
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMjY3NWVkMDVkZGYxODZlNDVkMWVmYmFjZjQyYWY0M2NkY2Q0MGUwNjFkZDRiM2EyNDc4YzMyODhlYmNiZTQ1NDNkNGY2ZGQwYWViYTlmYzIiLCJpYXQiOjE2Nzk3NTUzOTMsIm5iZiI6MTY3OTc1NTM5MywiZXhwIjoxNzExMzc3NzkzLCJzdWIiOiI0MDE0Iiwic2NvcGVzIjpbXX0.QNsKp_TCOb13yZhY9uyM9gs4Q3gpbFpWs5QBkXUhKBSBxWMKIbkT0ySsO-xdvk9_6LEhglt_6YusHK9ikhuAkA',
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiODk3YjJkMzQ3YzIzYjdjNzBjNzlmOGQyNjhiYzYxYzM4NDk4NDI3YjJlZDcyMzgwNDc5MDlhNmJhMDlkZjM4MTU1NmIxZjQ3ZmE4ZWQ0NzAiLCJpYXQiOjE2Nzk4MjgxNjksIm5iZiI6MTY3OTgyODE2OSwiZXhwIjoxNzExNDUwNTY3LCJzdWIiOiI0MDQ0Iiwic2NvcGVzIjpbXX0.pq124WIoqCFFVR5CjXtOwM9_N_qYJDcNYSl7tLs-Epy0q77e4sceGkhT-ygmg7ELvSz1OVyQrCnPPdeaEm2puw',
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: data
     };
 
-    // let config = {
-    //     method: 'post',
-    //     maxBodyLength: Infinity,
-    //     url: `https://app.trycarbonapi.com/api/traditionalHydro?consumption=${teData1.teConsumption}&location=${teData1.teCountry}`,
-    //     headers: {
-    //         'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMjY3NWVkMDVkZGYxODZlNDVkMWVmYmFjZjQyYWY0M2NkY2Q0MGUwNjFkZDRiM2EyNDc4YzMyODhlYmNiZTQ1NDNkNGY2ZGQwYWViYTlmYzIiLCJpYXQiOjE2Nzk3NTUzOTMsIm5iZiI6MTY3OTc1NTM5MywiZXhwIjoxNzExMzc3NzkzLCJzdWIiOiI0MDE0Iiwic2NvcGVzIjpbXX0.QNsKp_TCOb13yZhY9uyM9gs4Q3gpbFpWs5QBkXUhKBSBxWMKIbkT0ySsO-xdvk9_6LEhglt_6YusHK9ikhuAkA'
-    //     }
-    // };
-
     const teSubmitData = async () => {
-        console.log(`${teData1.teConsumption} ${teData1.teCountry}`)
+        // console.log(`${teData1.teConsumption} ${teData1.teCountry}`)
         // console.log(data)
 
         axios.request(config)
             .then((response) => {
-                console.log(JSON.stringify(response.data));
+                const teResult = JSON.stringify(response.data.carbon);
+                alert(`Carbon : ${teResult}`);
+                console.log(`Carbon : ${teResult}`);
+                const numbers1 = teResult.match(/\d+(\.\d+)?/g);
+                // alert(numbers1[0])
+                console.log(numbers1[0]);
+                // setCalcResult(numbers1[0])
+                // setCalcResult(prevValues => ({ ...prevValues, TraditionalBodyCalc: numbers1[0] }));
+                // setResultCalcAll = { setResultCalcAll }
+                // setCalcResult(prevValues => ({ ...prevValues, TraditionalBodyCalc: setCalcResult(numbers1[0]) }));
             })
             .catch((error) => {
                 console.log(error);
             });
-
-        // await axios(config)
-        //     .then(function (response) {
-        //         const teResult = JSON.stringify(response.data);
-        //         console.log(teResult);
-        //         // console.log(JSON.stringify(response.data))
-        //         // const numbers1 = teResult.match(/\d+(\.\d+)?/g);
-        //         // console.log(numbers1[0]);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
     };
+
+
+    // useEffect(() => {
+    //     setResultCalcAll(prevValues => ({ ...prevValues, TraditionalBodyCalc: calcResult }));
+    // }, [calcResult, setResultCalcAll]);
 
 
 

@@ -15,7 +15,7 @@ function HeadCalculator() {
                     <NavLink to='/calculator/cartravel'>Car Travel</NavLink>
                     <NavLink to='/calculator/flight'>Flight</NavLink>
                     <NavLink to='/calculator/motorbike'>Motorbike</NavLink>
-                    <NavLink to='/calculator/finalresult'>Result</NavLink>
+                    <NavLink to='/calculator/result'>Result</NavLink>
                 </div>
             </ul>
         </div>
