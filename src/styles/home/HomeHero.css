@@ -1,5 +1,5 @@
 .my-component {
-  background-image: url('http://localhost:3000/assets/home/heroBG.png');
+  background-image: url("http://localhost:3000/assets/home/heroBG.png");
   background-size: cover;
   min-height: 90vh;
   position: relative;
@@ -8,17 +8,10 @@
   margin: auto;
 }
 
-.svg-image {
-  display: block;
-  margin: auto;
-}
-
-
 .secondContainer {
-   width: 100%;
+  width: 100%;
   height: 100%;
- position: absolute; 
- 
+  position: absolute;
 }
 
 .text {
@@ -32,23 +25,21 @@
 }
 
 .second-text {
-
   font-size: 1.2rem;
   background-color: rgba(255, 255, 255, 0.6);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   border-radius: 7rem 7rem 0 0;
-  height: max-content; 
+  height: max-content;
 }
 .start-button-div {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   font-size: 1.25rem;
   background-color: white;
-  border-radius: 0 0 7rem 7rem; 
-  
+  border-radius: 0 0 7rem 7rem;
 }
 
 .start-button {
@@ -57,16 +48,144 @@
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 5px;
-  padding: 0.8rem 0!important;
+  padding: 0.8rem 0 !important;
   width: 50%;
-  box-shadow: 1px 2px 15px 1px rgba(20,20,20,0.3)!important;
+  box-shadow: 1px 2px 15px 1px rgba(20, 20, 20, 0.3) !important;
   background-color: #00e0ff;
 }
 
 .start-button:hover {
-  background-color: #0D6EFD;
+  background-color: #0d6efd;
 }
 
 .start-button:active {
-  box-shadow: 0px 0px 0px 0px rgb(141, 141, 141,0.4) !important;
+  box-shadow: 0px 0px 0px 0px rgb(141, 141, 141, 0.4) !important;
+}
+.for-mobile{
+  display: none;
+}
+
+@media only screen and (max-width:1350px){
+  .my-component{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .my-component {
+    border-radius: 7rem;
+    width: 100%;
+  }
+  .second-text {
+    border-radius: 5rem 5rem 0 0;
+  }
+  .start-button-div {
+    border-radius: 0 0 5rem 5rem;
+  }
+  .second-text{
+    font-size: 1.3rem;
+  }
+  .text{
+    font-size: 2.5rem;
+  }
+}
+
+
+@media only screen and (min-width:1040px) and (max-width: 1200px) {
+  .second-text{
+    font-size: 1.1rem;
+  }
+}
+
+
+
+
+@media only screen and (max-width: 992px) {
+  .my-component {
+    border-radius: 6rem;
+  }
+  .second-text {
+    border-radius: 4rem 4rem 0 0;
+  }
+  .start-button-div {
+    border-radius: 0 0 4rem 4rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .my-component {
+    border-radius: 5rem;
+    width: 100%;
+  }
+  .second-text {
+    border-radius: 3rem 3rem 0 0;
+  }
+  .start-button-div {
+    border-radius: 0 0 3rem 3rem;
+  }
+}
+
+
+@media only screen and (max-width: 576px) {
+  .my-component {
+    border-radius: 4rem;
+    width: 100%;
+    min-height: fit-content;
+  }
+  .text{
+    font-size: 1.3rem!important;
+  }
+  .second-text{
+    font-size: 1rem!important;
+  }
+  .start-button{
+    width: 60%;
+    font-size: 1rem;
+  }
+ 
+}
+
+@media only screen and (max-width: 470px) {
+  .start-button{
+    width: 80%;
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 1040px) {
+  .my-component{
+    min-height: fit-content;
+  }
+  .secondContainer {
+    flex-direction: column !important;
+    position: static;
+    padding-top: 2rem;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+  .second-text{
+    font-size: 1.2rem;
+  }
+  .img-text {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .text-container {
+    width: 80%;
+  }
+
+  .box-container{
+    width: 90%;
+  }
+
+  .text{
+    font-size: 2rem;
+  }
+  .for-desktop{
+    display: none!important;
+  }
+  .for-mobile{
+    display: block;
+  }
 }

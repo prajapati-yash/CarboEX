@@ -43,7 +43,7 @@ function PublicTransitCalc() {
         console.log(`${ptData1.ptDistance} ${ptData1.ptType}`)
         await axios(config)
             .then(function (response) {
-                const ptResult = JSON.stringify(response.data.carbon);
+                const ptResult = JSON.stringify(response.data);
                 console.log(ptResult);
                 const numbers = ptResult.match(/\d+(\.\d+)?/g);
                 console.log(numbers[0]);

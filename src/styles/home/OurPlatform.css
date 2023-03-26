@@ -1,30 +1,80 @@
-.platform-box{
-    margin: 4% 0;
+.platform-box {
+  margin: 4% 0;
 }
 
-.platform-head{
-    font-size: 2.5rem;
-    letter-spacing: 5px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 3%;
+.platform-head {
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 3%;
 }
 
-.platform-bg{
-    background-color: #00daf7;
-    border-radius: 5.5rem;
-    width: 25%;
+.platform-bg {
+  background-color: #00daf7;
+  border-radius: 5.5rem;
+  width: 25%;
 }
-.platform-content-head{
+.platform-content-head {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom-style: solid;
+  border-bottom-width: 2.5px;
+  width: fit-content;
+}
+
+.platform-content {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+@media only screen and (max-width: 1200px) {
+  .platform-bg {
+    border-radius: 4rem;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .platform-bg {
+    width: 85%;
+    border-radius: 3.5rem;
+    /* font-size: 1.3rem; */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .platform-bg {
+    width: 90%;
+  }
+  .platform-head {
+    font-size: 2rem;
+    letter-spacing: 3px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .platform-bg {
+    width: 95%;
+    border-radius: 3rem;
+    font-size: 1rem;
+  }
+
+  .platform-head {
     font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+
+  .platform-content-head {
+    font-size: 1.3rem;
     font-weight: 600;
-    padding-bottom: 8px;
+    padding-bottom: 4px;
     border-bottom-style: solid;
     border-bottom-width: 2.5px;
-    width: fit-content;
-}
+  }
 
-.platform-content{
-    font-size: 1.2rem;
-    font-weight: 700;
+  .platform-content {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
 }

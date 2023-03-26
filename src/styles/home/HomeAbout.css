@@ -1,39 +1,100 @@
-.main-div{
-    background-image: url('http://localhost:3000/assets/home/aboutProject.png');
-    background-size: cover;
-    background-position: 100% 100%;
-    min-height: 70vh;
-    margin-top: -8%;
-    padding-top: 11%;
-    border-radius: 0 0 8rem 8rem;
+.main-div {
+  background-image: url("http://localhost:3000/assets/home/aboutProject.png");
+  background-size: cover;
+  background-position: 100% 100%;
+  /* min-height: 70vh; */
+  margin-top: -8%;
+  padding-top: 11%;
+  border-radius: 0 0 8rem 8rem;
 }
 
-.about-image{
-    width:200%;
-    height: 70%;
+.about-image {
+  width: 200%;
+  height: 70%;
 }
 
-.about-text-content{
-    height: fit-content;
+.about-text-content {
+  height: fit-content;
 }
 
+.about-head {
+  color: #ffffff;
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
 
-.about-head{
-    color: #FFFFFF;
-    font-size: 2.5rem;
-    letter-spacing: 5px;
+.box-bg {
+  background-color: aliceblue;
+  border-radius: 5.5rem;
+  width: 30%;
+  font-size: 1.1rem;
+  font-weight: 550;
+}
+
+.all-boxes {
+  margin-bottom: 5%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .main-div {
+        border-radius: 0 0 7rem 7rem;
+      }
+    .box-bg{
+        border-radius: 4rem;
+    }
+
+}
+
+@media only screen and (max-width: 992px) {
+    .main-div {
+        border-radius: 0 0 6rem 6rem;
+    }
+    .box-bg {
+    width: 85%;
+    border-radius: 3.5rem;
+    /* font-size: 1.3rem; */
+  }
+
+  .all-boxes {
+    margin-bottom: 0%;
+  }
+}
+
+@media only screen and (max-width:768px){
+    
+    .main-div {
+        border-radius: 0 0 5rem 5rem;
+      }
+    .box-bg{
+        width: 90%;
+    }
+    .about-head{
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+  .main-div {
+    border-radius: 0 0 4rem 4rem;
+    margin-top: -14%;
+    padding-top: 19%;
+  }
+
+  .box-bg {
+    width: 95%;
+    border-radius: 3rem;
+    font-size: 1rem;
+  }
+
+  .all-boxes {
+    margin-bottom: 0%;
+  }
+
+  .about-head {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
     font-weight: 600;
-    text-transform: uppercase;
-}
-
-.box-bg{
-    background-color: aliceblue;
-    border-radius: 5.5rem;
-    width: 30%;
-    font-size: 1.1rem;
-    font-weight: 550;
-}
-
-.all-boxes{
-    margin-bottom: 5%;
+  }
 }

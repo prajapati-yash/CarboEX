@@ -19,7 +19,7 @@ const navigation = [
     link: "/calculator",
   },
   {
-    title: "Contact Us",
+    title: "Contact",
     link: "/contact",
   },
 
@@ -81,8 +81,8 @@ function Navbar() {
 
               </ul>
         
-            <div className='ps-lg-5 d-flex align-items-center justify-content-center'> 
-            <button className='btn btn-dark shadow-none login-text justify-content-center px-5 py-2 rounded-pill'>Log In</button>
+            <div className='ps-lg-5 d-flex ms-5 ms-lg-0 align-items-center justify-content-center'> 
+            <button className='btn btn-dark shadow-none login-text justify-content-center px-5 py-2 rounded-pill'>Connect</button>
           </div>
 
           </div>
