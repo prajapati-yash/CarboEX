@@ -5,7 +5,7 @@ function FAQHome() {
     return (
         <>
             <div className="main-faq container-fluid px-4 px-md-5">
-                <div className='faq-content'>
+                <div className='faq-content px-0 px-sm-3 px-md-4'>
                     <div className="faq-head d-flex align-items-center justify-content-center mb-4">
                         FAQ
                     </div>
@@ -72,6 +72,7 @@ function FAQHome() {
                                     </div>
                                 </div>
                             </div>
+                            <div className=''> &nbsp;</div>
                         </div>
                     </div>
                 </div>

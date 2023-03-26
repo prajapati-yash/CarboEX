@@ -42,22 +42,21 @@ const socialLinks = [
 function Footer() {
     return (
         <div>
-            <div id="container" className="container-fluid px-4 px-md-5 pt-4">
-                <div className='col-4'>
+            <div id="container" className="container-fluid px-4 px-md-5 pt-4 flex-column flex-md-row">
+                <div className='col-3 col-md-4'>
                     <NavLink className="navbar-brand" to="/">
                         <img
                             src="../assets/logo/carboEx_Logo.png"
                             height="100px"
                             width="130px"
-
                             className="img-fluid d-inline-block align-top justify-content-between"
                             alt="" style={{ borderRadius: "50%" }}
                         />
                     </NavLink>
                 </div>
-                <div className='col-8 d-flex justify-content-between'>
-                    <div className='col-2'></div>
-                    <div className='col-3 quickLinks'>
+                <div className='col-9 col-md-8 d-flex flex-md-row justify-content-between foot-links mb-4'>
+                    <div className=' col-lg-2'></div>
+                    <div className='col-4 col-md-4 col-lg-3 quickLinks'>
                         <p className='linkHead'>Quick Links</p>
                         <ul>
                             {quickLink.map((item, index) => (
@@ -66,7 +65,7 @@ function Footer() {
                         </ul>
 
                     </div>
-                    <div className='col-3 '>
+                    <div className='col-5 col-md-4 col-lg-3 social-media '>
                         <p className='linkHead'>Get in Touch</p>
                         <div>
                             {socialLinks.map((item, index) => (

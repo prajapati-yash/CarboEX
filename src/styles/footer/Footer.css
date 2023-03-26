@@ -28,5 +28,40 @@
     text-decoration: underline;
     text-decoration-color: #00E0FF;
     text-decoration-thickness:3px;
-   
+}
+
+@media only screen and (max-width: 768px) {
+.foot-links{
+    justify-content: flex-start!important;
+}
+.quickLinks{
+    width: 90%;
+
+}
+.social-media{
+    max-width: 90%;
+    
+}
+}
+@media only screen and (max-width: 576px) {
+.foot-links{
+    justify-content: flex-start!important;
+}
+
+.quickLinks{
+    width: 80%;
+}
+.social-media{
+    max-width: 90%;
+}
+.footLinkLi{
+    font-size: 0.9rem;
+}
+.linkHead{
+    font-size: 0.9rem;
+    margin-top: 2%;
+}
+.fa-2x{
+    font-size: 1.5em;
+}
 }

@@ -25,7 +25,7 @@ const navigation = [
     link: "/calculator",
   },
   {
-    title: "Contact Us",
+    title: "Contact",
     link: "/contact",
   },
 
@@ -258,7 +258,7 @@ function Navbar() {
                 >
                   <h4>Opt In CarboEx channel to get notification </h4>
                   <p>
-                    Channel address - 0xF80a1e20826EED14146d08f88E5557805d439d5f{" "}
+                    Channel address - 0xF80a1e20826EED14146d08f88E5557805d439d5fy{" "}
                   </p>
                 </div>
               ) : null}
