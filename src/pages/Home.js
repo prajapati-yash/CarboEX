@@ -7,16 +7,15 @@ import OurPlatform from '../components/home/OurPlatform'
 import Navbar from '../components/navbar/Navbar'
 
 function Home() {
-  
+
   return (
     <div>
-        <Navbar />
-        <HomeHero />
-        <HomeAbout />
-        <OurPlatform/>
-        <FAQHome/>
-        <Footer/>
-
+      <Navbar />
+      <HomeHero />
+      <HomeAbout />
+      <OurPlatform />
+      <FAQHome />
+      <Footer />
     </div>
   )
 }

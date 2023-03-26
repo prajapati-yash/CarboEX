@@ -1,5 +1,7 @@
 import React from 'react'
 import '../../styles/navbar/Navbar.css'
+import { NavLink } from 'react-router-dom';
+
 
 const navigation = [
   {
@@ -34,19 +36,19 @@ function Navbar() {
         role="navigation"
       >
         <div id="container" className="container-fluid px-4 px-md-5  ">
-         
-              
-            <a className="navbar-brand" href="/">
-              <img
-                src="./assets/logo/carboEx_Logo.png"
-                height="100px"
-                width="150px"
 
-                className="img-fluid d-inline-block align-top justify-content-between"
-                alt="" style={{ borderRadius: "50%" }}
-              />
-            </a>
-       
+
+          <NavLink className="navbar-brand" to="/">
+            <img
+              src="../assets/logo/carboEx_Logo.png"
+              height="100px"
+              width="150px"
+
+              className="img-fluid d-inline-block align-top justify-content-between"
+              alt="" style={{ borderRadius: "50%" }}
+            />
+          </NavLink>
+
           {/* <button
             type="button"
             className="navbar-toggler"
@@ -73,38 +75,38 @@ function Navbar() {
             className="collapse navbar-collapse justify-content-end nav-height"
             id="navbarRightAlignExample"
           >
-           
-              <ul className="navbar-nav  ml-auto align-items-center mb-2 mb-lg-0">
-                {navigation.map((item, index) => (
-                  <NavLink body={item} key={index} />
-                ))}
 
-              </ul>
-        
-            <div className='ps-lg-5 d-flex ms-5 ms-lg-0 align-items-center justify-content-center'> 
-            <button className='btn btn-dark shadow-none login-text justify-content-center px-5 py-2 rounded-pill'>Connect</button>
+            <ul className="navbar-nav  ml-auto align-items-center mb-2 mb-lg-0">
+              {navigation.map((item, index) => (
+                <NavLink1 body={item} key={index} />
+              ))}
+
+            </ul>
+
+            <div className='ps-lg-5 d-flex ms-5 ms-lg-0 align-items-center justify-content-center'>
+              <button className='btn btn-dark shadow-none login-text justify-content-center px-5 py-2 rounded-pill'>Log In</button>
+            </div>
+
           </div>
 
-          </div>
-          
         </div>
       </nav>
     </>
   );
 }
 
-function NavLink({ body }) {
+function NavLink1({ body }) {
   return (
     <>
-    <li className="nav-item">
-      <a
-        className="nav-link p-0 active"
-        aria-current="page"
-        href={body.link}
-      >
-        {body.title}
-      </a>
-    </li>
+      <li className="nav-item">
+        <NavLink
+          className="nav-link p-0 active"
+          aria-current="page"
+          to={body.link}
+        >
+          {body.title}
+        </NavLink>
+      </li>
     </>
   )
 }

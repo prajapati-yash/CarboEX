@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import '../../styles/footer/Footer.css'
 
 const quickLink = [
@@ -43,15 +44,15 @@ function Footer() {
         <div>
             <div id="container" className="container-fluid px-4 px-md-5 pt-4 flex-column flex-md-row">
                 <div className='col-3 col-md-4'>
-                    <a className="navbar-brand" href="/">
+                    <NavLink className="navbar-brand" to="/">
                         <img
-                            src="./assets/logo/carboEx_Logo.png"
+                            src="../assets/logo/carboEx_Logo.png"
                             height="100px"
                             width="130px"
                             className="img-fluid d-inline-block align-top justify-content-between"
                             alt="" style={{ borderRadius: "50%" }}
                         />
-                    </a>
+                    </NavLink>
                 </div>
                 <div className='col-9 col-md-8 d-flex flex-md-row justify-content-between foot-links mb-4'>
                     <div className=' col-lg-2'></div>

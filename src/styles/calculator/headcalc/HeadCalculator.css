@@ -1,10 +1,22 @@
 .lItems {
   position: relative;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; */
+  /* width: fit-content; */
+
+  /* margin: 0 auto; */
+  /* margin-bottom: 20px; */
+  /* background-color: #b0d8e8; */
+  /* box-shadow: 1px 1px 36px -11px rgba(0, 0, 0, 0.75); */
+  /* padding: 15px; */
+  /* border-radius: 50px; */
+  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* width: fit-content; */
 }
 
 .navigation-list {
@@ -42,5 +54,11 @@
 } */
 
 .mainLI {
+  /* position: relative; */
   padding-bottom: 20px;
+  /* width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; */
 }

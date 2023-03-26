@@ -18,9 +18,9 @@ function PublicTransitCalc() {
         maxBodyLength: Infinity,
         url: `https://app.trycarbonapi.com/api/publicTransit?distance=${ptData1.ptDistance}&type=${ptData1.ptType}`,
         headers: {
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiOTA4YmE1N2ZmNjRjYmNhNDY1MmYyOTYzNjA2M2E4NGIwOGYzOWFmMzVjN2JmYTM1Y2I5ZDEyMTQ3OGJmMGViZWVlNGRkYmZiMDVmODhmOTAiLCJpYXQiOjE2Nzk3MzczNzEsIm5iZiI6MTY3OTczNzM3MSwiZXhwIjoxNzExMzU5NzcwLCJzdWIiOiIzOTY0Iiwic2NvcGVzIjpbXX0.Vn12tpEaDhpfugkySvV041zw-XU1ficc_GKyiWyoIEYaB_5FY1QnzBekbayM9ymANMC1aOKOSXyFKbUukgzIeg',
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMjY3NWVkMDVkZGYxODZlNDVkMWVmYmFjZjQyYWY0M2NkY2Q0MGUwNjFkZDRiM2EyNDc4YzMyODhlYmNiZTQ1NDNkNGY2ZGQwYWViYTlmYzIiLCJpYXQiOjE2Nzk3NTUzOTMsIm5iZiI6MTY3OTc1NTM5MywiZXhwIjoxNzExMzc3NzkzLCJzdWIiOiI0MDE0Iiwic2NvcGVzIjpbXX0.QNsKp_TCOb13yZhY9uyM9gs4Q3gpbFpWs5QBkXUhKBSBxWMKIbkT0ySsO-xdvk9_6LEhglt_6YusHK9ikhuAkA',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Cookie': 'XSRF-TOKEN=eyJpdiI6InVBV0FLeGM5ZTZqQkh3L1o4Z2JuQXc9PSIsInZhbHVlIjoiQ0pKZXFGRktNWHdUOHVhMVF1ZzArWWNwTGhRZ1cvS0cwZ0N5SXVISGdJUGZWSHFycnBjOEFpVDM3OWJaY0l5Zmsyek1jMnRwMEk2TUhtVFpmUS9ZQ1Y1MWo5UXpXem92SURhT0FLRkVPTUJxWWJEWUZWRTNrNkJiNCszYytQN3QiLCJtYWMiOiIxMzc2MzMyODZkNDFhYWE5M2Q3YmE4MWU5MDM1ZDdlZWMyNjc4OTY3OWE1NzMzODgzZTY5NjZlOGNiNmJkNDc5In0%3D; trycarbonapi_session=eyJpdiI6IkZqV2pub2tnWE43M3VEZzVTYmZjT1E9PSIsInZhbHVlIjoiV0xrWjA4T2RiSzZIRlhVek9UYnQ3TGtQTHhvYkc5VGx6aFdhRDhwZWVHbXNtY2tRdXYyd3ZsVTR4YnU4djZFQTkxNzJ0U0p5MGdIN3pXakhMSWM0eUVRTm9zcS9WTHVZZWFZc25ocUVhWjBhSVBKRzVzcFNjQm1IRmk5SnI1UFQiLCJtYWMiOiI0ODFhMzE5YmMwMjU4MDI5Mzk5NDk0OGZhZWI3OWU3NTBiMTkyMDYwNGQ3NGFjMjE2YWE5ZGU5N2EwNGI4M2M4In0%3D'
+            // 'Cookie': 'XSRF-TOKEN=eyJpdiI6InVBV0FLeGM5ZTZqQkh3L1o4Z2JuQXc9PSIsInZhbHVlIjoiQ0pKZXFGRktNWHdUOHVhMVF1ZzArWWNwTGhRZ1cvS0cwZ0N5SXVISGdJUGZWSHFycnBjOEFpVDM3OWJaY0l5Zmsyek1jMnRwMEk2TUhtVFpmUS9ZQ1Y1MWo5UXpXem92SURhT0FLRkVPTUJxWWJEWUZWRTNrNkJiNCszYytQN3QiLCJtYWMiOiIxMzc2MzMyODZkNDFhYWE5M2Q3YmE4MWU5MDM1ZDdlZWMyNjc4OTY3OWE1NzMzODgzZTY5NjZlOGNiNmJkNDc5In0%3D; trycarbonapi_session=eyJpdiI6IkZqV2pub2tnWE43M3VEZzVTYmZjT1E9PSIsInZhbHVlIjoiV0xrWjA4T2RiSzZIRlhVek9UYnQ3TGtQTHhvYkc5VGx6aFdhRDhwZWVHbXNtY2tRdXYyd3ZsVTR4YnU4djZFQTkxNzJ0U0p5MGdIN3pXakhMSWM0eUVRTm9zcS9WTHVZZWFZc25ocUVhWjBhSVBKRzVzcFNjQm1IRmk5SnI1UFQiLCJtYWMiOiI0ODFhMzE5YmMwMjU4MDI5Mzk5NDk0OGZhZWI3OWU3NTBiMTkyMDYwNGQ3NGFjMjE2YWE5ZGU5N2EwNGI4M2M4In0%3D'
         },
         data: data
     };
@@ -45,8 +45,8 @@ function PublicTransitCalc() {
             .then(function (response) {
                 const ptResult = JSON.stringify(response.data);
                 console.log(ptResult);
-                const numbers = ptResult.match(/\d+(\.\d+)?/g);
-                console.log(numbers[0]);
+                // const numbers = ptResult.match(/\d+(\.\d+)?/g);
+                // console.log(numbers[0]);
             })
             .catch(function (error) {
                 console.log(error);
@@ -82,14 +82,14 @@ function PublicTransitCalc() {
                                     }}>
                                         <option value='Default'>Select Type</option>
                                         <option value='Taxi'>Taxi</option>
-                                        <option value='Classic-Bus'>Classic Bus</option>
-                                        <option value='EcoBus'>EcoBus</option>
+                                        <option value='ClassicBus'>Classic Bus</option>
+                                        <option value='EcoBus'>Eco Bus</option>
                                         <option value='Coach'>Coach</option>
-                                        <option value='National-Train'>National Train</option>
-                                        <option value='Light-Rail'>Light Rail</option>
+                                        <option value='NationalTrain'>National Train</option>
+                                        <option value='LightRail'>Light Rail</option>
                                         <option value='Subway'>Subway</option>
                                         <option value='FerryOnFoot'>FerryOnFoot</option>
-                                        <option value='FerryOnCar'>FerryOnCar</option>
+                                        <option value='FerryInCar'>FerryInCar</option>
                                     </select>
                                 </div>
                             </div>
