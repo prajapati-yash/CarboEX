@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text,
   View,
-  navigation
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import Calculator from "./Calculator";
@@ -374,7 +373,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   section4_descriptionText: {
-    // textAlign: "center",
     color: "#fff",
     fontSize: 15,
     margin: 2,

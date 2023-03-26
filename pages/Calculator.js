@@ -11,10 +11,12 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import axios from "axios";
 import Sector from "../Api/emissionCalculate";
+import { TotalSum } from "../Api/emissionCalculate";
+
 const te_data = [
   { label: "USA", value: "USA" },
   { label: "Canada", value: "Canada" },
@@ -47,6 +49,7 @@ export default function Calculator() {
   const [ptType, ptSetType] = useState(null);
   const [ptIsFocus, ptSetIsFocus] = useState(false);
   const [ptCalculate, setPtCalculate] = useState(false);
+  const [ result, setResult ] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -195,6 +198,35 @@ export default function Calculator() {
                   key1="distance"
                   key2="type"
                   status={setPtCalculate}
+                  //   url= "https://app.trycarbonapi.com/api/publicTransit?distance="{teText}"&${props.key2}=${props.teCountryValue}"
+                />
+              )}
+            </View>
+          </View>
+
+          <View style={styles.resultCalculateBox}>
+            <View style={styles.calculateHeader}>
+              <ImageBackground
+                style={styles.image1}
+                borderTopRightRadius={36}
+                borderTopLeftRadius={36}
+                source={require("../assets/resultBg.jpg")}
+              >
+                <Text style={styles.header_text}>Result</Text>
+              </ImageBackground>
+            </View>
+            <View style={styles.calculateBody}>
+              <Pressable
+                style={styles.calculate_button}
+                
+                onPress={() => setResult(true)}
+                android_ripple={{ color: "#ff0000" }}
+              >
+                <Text style={styles.calculate_button_text}>Result</Text>
+              </Pressable>
+              {result && (
+                <TotalSum
+                  resultStatus={setResult}
                   //   url= "https://app.trycarbonapi.com/api/publicTransit?distance="{teText}"&${props.key2}=${props.teCountryValue}"
                 />
               )}
@@ -445,6 +477,13 @@ const styles = StyleSheet.create({
   calculateBox: {
     width: 340,
     height: 400,
+    backgroundColor: "#ffffff",
+    marginTop: 50,
+    borderRadius: 36,
+  },
+  resultCalculateBox: {
+    width: 340,
+    height: 230,
     backgroundColor: "#ffffff",
     marginTop: 50,
     borderRadius: 36,
