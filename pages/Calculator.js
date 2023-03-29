@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   Text,
   View,
   ImageBackground,
@@ -16,6 +15,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import axios from "axios";
 import Sector from "../Api/emissionCalculate";
 import { TotalSum } from "../Api/emissionCalculate";
+import styles from "../style/calculatorStyle"
 
 const te_data = [
   { label: "USA", value: "USA" },
@@ -40,6 +40,62 @@ const pt_data = [
   { label: "FerryInCar", value: "FerryInCar" },
 ];
 
+const ce_source = [
+  { label: "Solar", value: "Solar" },
+  { label: "Wind", value: "Wind" },
+  { label: "HydroElectric", value: "HydroElectric" },
+  { label: "Biomass", value: "Biomass" },
+  { label: "Geothermal", value: "Geothermal" },
+  { label: "Tidal", value: "Tidal" },
+  { label: "OtherCleanEnergy", value: "OtherCleanEnergy" },
+];
+
+const fuel_type = [
+  { label: "Petrol", value: "Petrol" },
+  { label: "Diesel", value: "Diesel" },
+  { label: "LPG", value: "LPG" },
+];
+
+const car_travel_type = [
+  { label: "SmallDieselCar", value: "SmallDieselCar" },  
+  { label: "LargeDieselCar", value: "LargeDieselCar" },
+  { label: "MediumHybridCar", value: "MediumHybridCar" },
+  { label: "LargeHybridCar", value: "LargeHybridCar" },
+  { label: "MediumLPGCar", value: "MediumLPGCar" },
+  { label: "LargeLPGCar", value: "LargeLPGCar" },
+  { label: "MediumCNGCar", value: "MediumCNGCar" },
+  { label: "LargeCNGCar", value: "LargeCNGCar" },
+  { label: "SmallPetrolVan", value: "SmallPetrolVan" },
+  { label: "LargePetrolVan", value: "LargePetrolVan" },
+  { label: "SmallDielselVan", value: "SmallDielselVan" },
+  { label: "MediumDielselVan", value: "MediumDielselVan" },
+  { label: "LargeDielselVan", value: "LargeDielselVan" },
+  { label: "LPGVan", value: "LPGVan" },
+  { label: "CNGVan", value: "CNGVan" },
+  { label: "SmallPetrolCar", value: "SmallPetrolCar" },
+  { label: "MediumPetrolCar", value: "MediumPetrolCar" },
+  { label: "LargePetrolCar", value: "LargePetrolCar" },
+  { label: "SmallMotorBike", value: "SmallMotorBike" },
+  { label: "MediumMotorBike", value: "MediumMotorBike" },
+  { label: "LargeMotorBike", value: "LargeMotorBike" },
+];
+
+const flight_type = [
+  { label: "DomesticFlight", value: "DomesticFlight" },
+  { label: "ShortEconomyClassFlight", value: "ShortEconomyClassFlight" },
+  { label: "ShortBusinessClassFlight", value: "ShortBusinessClassFlight" },
+  { label: "LongEconomyClassFlight", value: "LongEconomyClassFlight" },
+  { label: "LongPremiumClassFlight", value: "LongPremiumClassFlight" },
+  { label: "LongBusinessClassFlight", value: "LongBusinessClassFlight" },
+  { label: "LongFirstClassFlight", value: "LongFirstClassFlight" },
+];
+
+const motorbike_type = [
+  { label: "SmallMotorBike", value: "SmallMotorBike" },
+  { label: "MediumMotorBike", value: "MediumMotorBike" },
+  { label: "LargeMotorBike", value: "LargeMotorBike" },
+];
+
 export default function Calculator() {
   const [teText, teSetText] = useState("");
   const [teCountryValue, teCountrySetValue] = useState(null);
@@ -49,6 +105,26 @@ export default function Calculator() {
   const [ptType, ptSetType] = useState(null);
   const [ptIsFocus, ptSetIsFocus] = useState(false);
   const [ptCalculate, setPtCalculate] = useState(false);
+  const [ceConsumption, setCeConsumption] = useState(null);
+  const [ceSource, setCeSource] = useState(null);
+  const [ceIsFocus, setCeIsFocus] = useState(false);
+  const [ceCalculate, setCeCalculate] = useState(false);
+  const [carDistance, setCarDistance] = useState(null);
+  const [carType, setCarType] = useState(null);
+  const [carIsFocus, setCarIsFocus] = useState(false);
+  const [carCalculate, setCarCalculate] = useState(false);
+  const [flightDistance, setFlightDistance] = useState(null);
+  const [flightType, setFlightType] = useState(null);
+  const [flightIsFocus, setFlightIsFocus] = useState(false);
+  const [flightCalculate, setFlightCalculate] = useState(false);
+  const [motorbikeDistance, setMotorbikeDistance] = useState(null);
+  const [motorbikeType, setMotorbikeType] = useState(null);
+  const [motorbikeIsFocus, setMotorbikeIsFocus] = useState(false);
+  const [motorbikeCalculate, setMotorbikeCalculate] = useState(false);
+  const [fuelType, setFuelType] = useState(null);
+  const [fuelLiters, setFuelLiters] = useState(null);
+  const [flIsFocus, setFlIsFocus] = useState(false);
+  const [flCalculate, setFlCalculate] = useState(false);
   const [ result, setResult ] = useState(false);
 
   return (
@@ -87,7 +163,7 @@ export default function Calculator() {
               </Text>
               <Dropdown
                 style={[
-                  styles.dropdown_country,
+                  styles.dropdownStyle,
                   teCountryIsFocus && { borderColor: "blue" },
                 ]}
                 placeholderStyle={styles.placeholderStyle}
@@ -126,7 +202,6 @@ export default function Calculator() {
                   key1="consumption"
                   key2="location"
                   status={setTeCalculate} 
-                  // url = {"https://app.trycarbonapi.com/api/traditionalHydro?consumption='${teText}'&location='${teCountryValue}'"}
                 />
               )}
               
@@ -159,7 +234,7 @@ export default function Calculator() {
               <Text style={styles.input_text}>Enter Type</Text>
               <Dropdown
                 style={[
-                  styles.dropdown_country,
+                  styles.dropdownStyle,
                   ptIsFocus && { borderColor: "blue" },
                 ]}
                 placeholderStyle={styles.placeholderStyle}
@@ -184,7 +259,6 @@ export default function Calculator() {
 
               <Pressable
                 style={styles.calculate_button}
-                
                 onPress={() => setPtCalculate(true)}
                 android_ripple={{ color: "#ff0000" }}
               >
@@ -198,7 +272,358 @@ export default function Calculator() {
                   key1="distance"
                   key2="type"
                   status={setPtCalculate}
-                  //   url= "https://app.trycarbonapi.com/api/publicTransit?distance="{teText}"&${props.key2}=${props.teCountryValue}"
+                />
+              )}
+            </View>
+          </View>
+
+
+          <View style={styles.calculateBox}>
+            <View style={styles.calculateHeader}>
+              <ImageBackground
+                style={styles.image1}
+                borderTopRightRadius={36}
+                borderTopLeftRadius={36}
+                source={require("../assets/CleanEnergyBg.jpg")}
+              >
+                <Text style={styles.header_text}>Clean Energy</Text>
+              </ImageBackground>
+            </View>
+            <View style={styles.calculateBody}>
+              <Text style={styles.input_text}>Consumption</Text>
+              <TextInput
+                value={ceConsumption}
+                style={styles.input_box}
+                placeholder="The amount of energy consumed in kwh"
+                onChangeText={(ceConsumption) => {
+                  setCeConsumption(ceConsumption);
+                }}
+              />
+
+              <Text style={styles.input_text}>The source of clean energy</Text>
+              <Dropdown
+                style={[
+                  styles.dropdownStyle,
+                  ceIsFocus && { borderColor: "blue" },
+                ]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                iconStyle={styles.iconStyle}
+                data={ce_source}
+                search
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={!ceIsFocus ? "Select source of clean energy" : "..."}
+                searchPlaceholder="Search..."
+                value={ceSource}
+                onFocus={() => setCeIsFocus(true)}
+                onBlur={() => setCeIsFocus(false)}
+                onChange={(item) => {
+                  setCeSource(item.value);
+                  setCeIsFocus(false);
+                }}
+              />
+
+              <Pressable
+                style={styles.calculate_button}
+                onPress={() => setCeCalculate(true)}
+                android_ripple={{ color: "#ff0000" }}
+              >
+                <Text style={styles.calculate_button_text}>Calculate</Text>
+              </Pressable>
+              {ceCalculate && (
+                <Sector
+                  value1={ceSource}
+                  value2={ceConsumption}
+                  sector="cleanHydro"
+                  key1="energy"
+                  key2="consumption"
+                  status={setCeCalculate}
+                />
+              )}
+            </View>
+          </View>
+
+
+          <View style={styles.calculateBox}>
+            <View style={styles.calculateHeader}>
+              <ImageBackground
+                style={styles.image1}
+                borderTopRightRadius={36}
+                borderTopLeftRadius={36}
+                source={require("../assets/FuelBg.jpg")}
+              >
+                <Text style={styles.header_text}>Fuel</Text>
+              </ImageBackground>
+            </View>
+            <View style={styles.calculateBody}>
+              <Text style={styles.input_text}>Fuel Type</Text>
+              <Dropdown
+                style={[
+                  styles.dropdownStyle,
+                  flIsFocus && { borderColor: "blue" },
+                ]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                iconStyle={styles.iconStyle}
+                data={fuel_type}
+                search
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={!flIsFocus ? "Select Fuel Type" : "..."}
+                searchPlaceholder="Search..."
+                value={fuelType}
+                onFocus={() => setFlIsFocus(true)}
+                onBlur={() => setFlIsFocus(false)}
+                onChange={(item) => {
+                  setFuelType(item.value);
+                  setFlIsFocus(false);
+                }}
+              />
+
+              <Text style={styles.input_text}>Liters</Text>
+              <TextInput
+                value={fuelLiters}
+                style={styles.input_box}
+                placeholder="The number of liters to calculate from"
+                onChangeText={(fuelLiters) => {
+                  setFuelLiters(fuelLiters);
+                }}
+              />
+
+              <Pressable
+                style={styles.calculate_button}
+                
+                onPress={() => setFlCalculate(true)}
+                android_ripple={{ color: "#ff0000" }}
+              >
+                <Text style={styles.calculate_button_text}>Calculate</Text>
+              </Pressable>
+              {flCalculate && (
+                <Sector
+                  value1={fuelType}
+                  value2={fuelLiters}
+                  sector="fuelToCO2e"
+                  key1="type"
+                  key2="litres"
+                  status={setFlCalculate}
+                />
+              )}
+            </View>
+          </View>
+
+
+          <View style={styles.calculateBox}>
+            <View style={styles.calculateHeader}>
+              <ImageBackground
+                style={styles.image1}
+                borderTopRightRadius={36}
+                borderTopLeftRadius={36}
+                source={require("../assets/VehicleBg.jpg")}
+              >
+                <Text style={styles.header_text}>Car Travel</Text>
+              </ImageBackground>
+            </View>
+            <View style={styles.calculateBody}>
+              
+            <Text style={styles.input_text}>Distance</Text>
+              <TextInput
+                value={carDistance}
+                style={styles.input_box}
+                placeholder="Enter distance in KM"
+                onChangeText={(carDistance) => {
+                  setCarDistance(carDistance);
+                }}
+              />
+              
+              <Text style={styles.input_text}>Vehicle</Text>
+              <Dropdown
+                style={[
+                  styles.dropdownStyle,
+                  carIsFocus && { borderColor: "blue" },
+                ]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                iconStyle={styles.iconStyle}
+                data={car_travel_type}
+                search
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={!carIsFocus ? "Select Vehicle Type" : "..."}
+                searchPlaceholder="Search..."
+                value={carType}
+                onFocus={() => setCarIsFocus(true)}
+                onBlur={() => setCarIsFocus(false)}
+                onChange={(item) => {
+                  setCarType(item.value);
+                  setCarIsFocus(false);
+                }}
+              />
+
+              <Pressable
+                style={styles.calculate_button}
+                
+                onPress={() => setCarCalculate(true)}
+                android_ripple={{ color: "#ff0000" }}
+              >
+                <Text style={styles.calculate_button_text}>Calculate</Text>
+              </Pressable>
+              {carCalculate && (
+                <Sector
+                  value1={carDistance}
+                  value2={carType}
+                  sector="carTravel"
+                  key1="distance"
+                  key2="vehicle"
+                  status={setCarCalculate}
+                />
+              )}
+            </View>
+          </View>
+
+
+          <View style={styles.calculateBox}>
+            <View style={styles.calculateHeader}>
+              <ImageBackground
+                style={styles.image1}
+                borderTopRightRadius={36}
+                borderTopLeftRadius={36}
+                source={require("../assets/FlightBg.jpg")}
+              >
+                <Text style={styles.header_text}>Flight</Text>
+              </ImageBackground>
+            </View>
+            <View style={styles.calculateBody}>
+              
+            <Text style={styles.input_text}>Distance</Text>
+              <TextInput
+                value={flightDistance}
+                style={styles.input_box}
+                placeholder="The flight distance in KM"
+                onChangeText={(flightDistance) => {
+                  setFlightDistance(flightDistance);
+               }}
+              />
+              
+              <Text style={styles.input_text}>Type</Text>
+              <Dropdown
+                style={[
+                  styles.dropdownStyle,
+                  flightIsFocus && { borderColor: "blue" },
+                ]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                iconStyle={styles.iconStyle}
+                data={flight_type}
+                search
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={!flightIsFocus ? "Select Flight Type" : "..."}
+                searchPlaceholder="Search..."
+                value={flightType}
+                onFocus={() => setFlightIsFocus(true)}
+                onBlur={() => setFlightIsFocus(false)}
+                onChange={(item) => {
+                  setFlightType(item.value);
+                  setFlightIsFocus(false);
+                }}
+              />
+
+              <Pressable
+                style={styles.calculate_button}
+                
+                onPress={() => setFlightCalculate(true)}
+                android_ripple={{ color: "#ff0000" }}
+              >
+                <Text style={styles.calculate_button_text}>Calculate</Text>
+              </Pressable>
+              {flightCalculate && (
+                <Sector
+                  value1={flightDistance}
+                  value2={flightType}
+                  sector="flight"
+                  key1="distance"
+                  key2="type"
+                  status={setFlightCalculate}
+                />
+              )}
+            </View>
+          </View>
+
+
+          <View style={styles.calculateBox}>
+            <View style={styles.calculateHeader}>
+              <ImageBackground
+                style={styles.image1}
+                borderTopRightRadius={36}
+                borderTopLeftRadius={36}
+                source={require("../assets/MotorBikeBg.jpg")}
+              >
+                <Text style={styles.header_text}>MotorBike</Text>
+              </ImageBackground>
+            </View>
+            <View style={styles.calculateBody}>
+              
+            <Text style={styles.input_text}>Distance</Text>
+              <TextInput
+                value={motorbikeDistance}
+                style={styles.input_box}
+                placeholder="The distance in KM"
+                onChangeText={(motorbikeDistance) => {
+                  setMotorbikeDistance(motorbikeDistance);
+               }}
+              />
+              
+              <Text style={styles.input_text}>Type</Text>
+              <Dropdown
+                style={[
+                  styles.dropdownStyle,
+                  motorbikeIsFocus && { borderColor: "blue" },
+                ]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                iconStyle={styles.iconStyle}
+                data={motorbike_type}
+                search
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={!motorbikeIsFocus ? "Select MotorBike Type" : "..."}
+                searchPlaceholder="Search..."
+                value={motorbikeType}
+                onFocus={() => setMotorbikeIsFocus(true)}
+                onBlur={() => setMotorbikeIsFocus(false)}
+                onChange={(item) => {
+                  setMotorbikeType(item.value);
+                  setMotorbikeIsFocus(false);
+                }}
+              />
+
+              <Pressable
+                style={styles.calculate_button}
+                
+                onPress={() => setMotorbikeCalculate(true)}
+                android_ripple={{ color: "#ff0000" }}
+              >
+                <Text style={styles.calculate_button_text}>Calculate</Text>
+              </Pressable>
+              {motorbikeCalculate && (
+                <Sector
+                  value1={motorbikeDistance}
+                  value2={motorbikeType}
+                  sector="motorBike"
+                  key1="distance"
+                  key2="type"
+                  status={setMotorbikeCalculate}
                 />
               )}
             </View>
@@ -218,7 +643,6 @@ export default function Calculator() {
             <View style={styles.calculateBody}>
               <Pressable
                 style={styles.calculate_button}
-                
                 onPress={() => setResult(true)}
                 android_ripple={{ color: "#ff0000" }}
               >
@@ -227,325 +651,14 @@ export default function Calculator() {
               {result && (
                 <TotalSum
                   resultStatus={setResult}
-                  //   url= "https://app.trycarbonapi.com/api/publicTransit?distance="{teText}"&${props.key2}=${props.teCountryValue}"
                 />
+                
               )}
             </View>
           </View>
-
-          {/* <View style={styles.calculateBox}>
-				<View style={styles.calculateHeader}>
-				<ImageBackground
-          			style={styles.image1}
-					  borderTopRightRadius={36}
-					  borderTopLeftRadius={36}
-          			source={require("../assets/VehicleBg.jpg")}>
-					<Text style={styles.header_text}>Vehicles</Text>
-					</ImageBackground>
-                </View>
-				<View style={styles.calculateBody}>
-					<Text style={styles.input_text}>Enter Distance</Text>
-					<TextInput style={styles.input_box} placeholder="Enter distance In kilometer"/>
-
-              <Text style={styles.input_text}>Vehicle Type</Text>
-              <Dropdown
-                style={[
-                  styles.dropdown_country,
-                  isFocus && { borderColor: "blue" },
-                ]}
-                placeholderStyle={styles.placeholderStyle}
-                selectedTextStyle={styles.selectedTextStyle}
-                inputSearchStyle={styles.inputSearchStyle}
-                iconStyle={styles.iconStyle}
-                data={country}
-                search
-                maxHeight={300}
-                labelField="label"
-                valueField="value"
-                placeholder={!isFocus ? "Select Vehicle" : "..."}
-                searchPlaceholder="Search..."
-                value={countryValue}
-                onFocus={() => countrySetIsFocus(true)}
-                onBlur={() => countrySetIsFocus(false)}
-                onChange={(item) => {
-                  countrySetValue(item.value);
-                  countrySetIsFocus(false);
-                }}
-              />
-
-              <View
-                style={{
-                  borderRadius: 8,
-                  overflow: "hidden",
-                }}
-              >
-
-                <Pressable
-                  style={styles.calculate_button}
-                  android_ripple={{ color: "#ff0000" }}
-                >
-                  <Text style={styles.calculate_button_text}>Calculate</Text>
-                </Pressable>
 				</View>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.calculateBox}>
-            <View style={styles.calculateHeader}>
-              <ImageBackground
-                style={styles.image1}
-                borderTopRightRadius={36}
-                borderTopLeftRadius={36}
-                source={require("../assets/FlightBg.jpg")}
-              >
-                <Text style={styles.header_text}>Flights</Text>
-              </ImageBackground>
-            </View>
-            <View style={styles.calculateBody}>
-              <Text style={styles.input_text}>Origin Airport</Text>
-              <Dropdown
-                style={[
-                  styles.dropdown_country,
-                  isFocus && { borderColor: "blue" },
-                ]}
-                placeholderStyle={styles.placeholderStyle}
-                selectedTextStyle={styles.selectedTextStyle}
-                inputSearchStyle={styles.inputSearchStyle}
-                iconStyle={styles.iconStyle}
-                data={country}
-                search
-                maxHeight={300}
-                labelField="label"
-                valueField="value"
-                placeholder={!isFocus ? "Select City" : "..."}
-                searchPlaceholder="Search..."
-                value={countryValue}
-                onFocus={() => countrySetIsFocus(true)}
-                onBlur={() => countrySetIsFocus(false)}
-                onChange={(item) => {
-                  countrySetValue(item.value);
-                  countrySetIsFocus(false);
-                }}
-              />
-
-              <Text style={styles.input_text}>Destination Airport</Text>
-              <Dropdown
-                style={[
-                  styles.dropdown_country,
-                  isFocus && { borderColor: "blue" },
-                ]}
-                placeholderStyle={styles.placeholderStyle}
-                selectedTextStyle={styles.selectedTextStyle}
-                inputSearchStyle={styles.inputSearchStyle}
-                iconStyle={styles.iconStyle}
-                data={country}
-                search
-                maxHeight={300}
-                labelField="label"
-                valueField="value"
-                placeholder={!isFocus ? "Select City" : "..."}
-                searchPlaceholder="Search..."
-                value={countryValue}
-                onFocus={() => countrySetIsFocus(true)}
-                onBlur={() => countrySetIsFocus(false)}
-                onChange={(item) => {
-                  countrySetValue(item.value);
-                  countrySetIsFocus(false);
-                }}
-              />
-
-              <View
-                style={{
-                  borderRadius: 20,
-                  overflow: "hidden",
-                }}
-              >
-                <Pressable
-                  style={styles.calculate_button}
-                  android_ripple={{ color: "#ff0000" }}
-                >
-                  <Text style={styles.calculate_button_text}>Calculate</Text>
-                </Pressable>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.calculateBox}>
-            <View style={styles.calculateHeader}>
-              <ImageBackground
-                style={styles.image1}
-                borderTopRightRadius={36}
-                borderTopLeftRadius={36}
-                source={require("../assets/FuelBg.jpg")}
-              >
-                <Text style={styles.header_text}>Fuels</Text>
-              </ImageBackground>
-            </View>
-            <View style={styles.calculateBody}>
-              <Text style={styles.input_text}>Fuel Type</Text>
-              <Dropdown
-                style={[
-                  styles.dropdown_country,
-                  isFocus && { borderColor: "blue" },
-                ]}
-                placeholderStyle={styles.placeholderStyle}
-                selectedTextStyle={styles.selectedTextStyle}
-                inputSearchStyle={styles.inputSearchStyle}
-                iconStyle={styles.iconStyle}
-                data={country}
-                search
-                maxHeight={300}
-                labelField="label"
-                valueField="value"
-                placeholder={!isFocus ? "Select Fuel type" : "..."}
-                searchPlaceholder="Search..."
-                value={countryValue}
-                onFocus={() => countrySetIsFocus(true)}
-                onBlur={() => countrySetIsFocus(false)}
-                onChange={(item) => {
-                  countrySetValue(item.value);
-                  countrySetIsFocus(false);
-                }}
-              />
-
-						<Text style={styles.input_text}>Fuel Used</Text>
-						<TextInput style={styles.input_box} placeholder="Enter usage in liters"/>
-
-						<Pressable
-                  			style={styles.calculate_button}
-                  			android_ripple={{ color: "#ff0000" }}>
-                  			<Text style={styles.calculate_button_text}>Calculate</Text>
-                		</Pressable>
-                </View> 
-				</View> */}
-        </View>
-      </ScrollView>
+        </ScrollView>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    justifyContent: "center",
-    alignContent: "center",
-    backgroundColor: "lightgrey",
-  },
-  centered_view: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title_text: {
-    fontSize: 22,
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-  dropdown: {
-    height: 50,
-    borderColor: "gray",
-    borderWidth: 0.5,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-  },
-  icon: {
-    marginRight: 5,
-  },
-  label: {
-    position: "absolute",
-    backgroundColor: "white",
-    left: 22,
-    top: 8,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 14,
-  },
-  placeholderStyle: {
-    fontSize: 16,
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
-  },
-  calculateBox: {
-    width: 340,
-    height: 400,
-    backgroundColor: "#ffffff",
-    marginTop: 50,
-    borderRadius: 36,
-  },
-  resultCalculateBox: {
-    width: 340,
-    height: 230,
-    backgroundColor: "#ffffff",
-    marginTop: 50,
-    borderRadius: 36,
-  },
-  calculateHeader: {
-    width: 340,
-    height: 120,
-    textAlign: "center",
-  },
-  image1: {
-    width: 340,
-    height: 120,
-    opacity: 1,
-  },
-  header_text: {
-    fontSize: 32,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginTop: 35,
-    color: "#ffffff",
-  },
-  calculateBody: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 20,
-  },
-  input_text: {
-    fontSize: 17,
-  },
-  input_box: {
-    height: 40,
-    width: 300,
-    borderColor: "black",
-    borderWidth: 1,
-    marginTop: 10,
-    marginBottom: 16,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-  },
-  dropdown_country: {
-    height: 40,
-    width: 300,
-    borderColor: "black",
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    marginTop: 10,
-    marginBottom: 16,
-  },
-  calculate_button: {
-    height: 40,
-    width: 300,
-    backgroundColor: "#4681f4",
-    // borderRadius: 8,
-    marginTop: 15,
-  },
-  calculate_button_text: {
-    textAlign: "center",
-    marginTop: 6,
-    fontSize: 18,
-  },
-});
-
-export var teText;
-export var teCountryValue;
