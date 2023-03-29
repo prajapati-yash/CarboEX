@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import Calculator from "./Calculator";
 import styles from "../style/homescreenStyle";
 
+
 export default function HomeScreen() {
   const navigation = useNavigation();
   return (
@@ -227,4 +228,5 @@ export default function HomeScreen() {
     </View>
   );
 }
+
 
