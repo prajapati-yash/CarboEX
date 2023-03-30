@@ -1,5 +1,5 @@
 .main-div {
-  background-image: url("http://localhost:3000/assets/home/aboutProject.png");
+  background-image: url("/public/assets/home/aboutProject.png");
   background-size: cover;
   background-position: 100% 100%;
   /* min-height: 70vh; */
@@ -38,20 +38,19 @@
 }
 
 @media only screen and (max-width: 1200px) {
-    .main-div {
-        border-radius: 0 0 7rem 7rem;
-      }
-    .box-bg{
-        border-radius: 4rem;
-    }
-
+  .main-div {
+    border-radius: 0 0 7rem 7rem;
+  }
+  .box-bg {
+    border-radius: 4rem;
+  }
 }
 
 @media only screen and (max-width: 992px) {
-    .main-div {
-        border-radius: 0 0 6rem 6rem;
-    }
-    .box-bg {
+  .main-div {
+    border-radius: 0 0 6rem 6rem;
+  }
+  .box-bg {
     width: 85%;
     border-radius: 3.5rem;
     /* font-size: 1.3rem; */
@@ -62,17 +61,16 @@
   }
 }
 
-@media only screen and (max-width:768px){
-    
-    .main-div {
-        border-radius: 0 0 5rem 5rem;
-      }
-    .box-bg{
-        width: 90%;
-    }
-    .about-head{
-        font-size: 2rem;
-    }
+@media only screen and (max-width: 768px) {
+  .main-div {
+    border-radius: 0 0 5rem 5rem;
+  }
+  .box-bg {
+    width: 90%;
+  }
+  .about-head {
+    font-size: 2rem;
+  }
 }
 
 @media only screen and (max-width: 576px) {

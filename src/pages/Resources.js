@@ -4,7 +4,7 @@ import Navbar from '../components/navbar/Navbar'
 function Resources() {
   return (
     <div>
-        <Navbar/>
+
     </div>
   )
 }

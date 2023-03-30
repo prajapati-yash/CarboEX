@@ -1,0 +1,14 @@
+/* .storeCalc {
+  background-color: #f5f5f5;
+  padding: 20px;
+} */
+
+.storeCalcBtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+}

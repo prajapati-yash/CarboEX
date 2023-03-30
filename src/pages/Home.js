@@ -10,12 +10,10 @@ function Home() {
 
   return (
     <div>
-      <Navbar />
       <HomeHero />
       <HomeAbout />
       <OurPlatform />
       <FAQHome />
-      <Footer />
     </div>
   )
 }
