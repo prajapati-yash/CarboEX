@@ -11,7 +11,6 @@ import { useNavigation } from "@react-navigation/native";
 import Calculator from "./Calculator";
 import styles from "../style/homescreenStyle";
 
-
 export default function HomeScreen() {
   const navigation = useNavigation();
   return (
@@ -24,7 +23,7 @@ export default function HomeScreen() {
           <ImageBackground
             style={styles.image1}
             borderRadius={50}
-            source={require("../assets/BG1.png")}
+            source={require("../assets/homeScreenAssets/BG1.png")}
           >
             <View>
               <Text style={styles.text}>
@@ -73,7 +72,7 @@ export default function HomeScreen() {
             style={styles.image2}
             borderBottomLeftRadius={70}
             borderBottomRightRadius={70}
-            source={require("../assets/BG2.png")}
+            source={require("../assets/homeScreenAssets/BG2.png")}
           >
             <View>
               <View style={styles.section2_title}>
@@ -103,7 +102,7 @@ export default function HomeScreen() {
 
           <ImageBackground
             style={styles.image3}
-            source={require("../assets/BG3.png")}
+            source={require("../assets/homeScreenAssets/BG3.png")}
           >
             <View>
               <View style={styles.section3_title}>
@@ -143,7 +142,7 @@ export default function HomeScreen() {
             style={styles.image4}
             borderTopLeftRadius={75}
             borderTopRightRadius={75}
-            source={require("../assets/BG4.png")}
+            source={require("../assets/homeScreenAssets/BG4.png")}
           >
             <View>
               <View style={styles.section4_title}>
@@ -228,5 +227,3 @@ export default function HomeScreen() {
     </View>
   );
 }
-
-

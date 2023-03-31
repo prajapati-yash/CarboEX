@@ -10,12 +10,12 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import axios from "axios";
 import Sector from "../Api/emissionCalculate";
 import { TotalSum } from "../Api/emissionCalculate";
-import styles from "../style/calculatorStyle"
+import styles from "../style/calculatorStyle";
 
 const te_data = [
   { label: "USA", value: "USA" },
@@ -57,7 +57,7 @@ const fuel_type = [
 ];
 
 const car_travel_type = [
-  { label: "SmallDieselCar", value: "SmallDieselCar" },  
+  { label: "SmallDieselCar", value: "SmallDieselCar" },
   { label: "LargeDieselCar", value: "LargeDieselCar" },
   { label: "MediumHybridCar", value: "MediumHybridCar" },
   { label: "LargeHybridCar", value: "LargeHybridCar" },
@@ -125,7 +125,7 @@ export default function Calculator() {
   const [fuelLiters, setFuelLiters] = useState(null);
   const [flIsFocus, setFlIsFocus] = useState(false);
   const [flCalculate, setFlCalculate] = useState(false);
-  const [ result, setResult ] = useState(false);
+  const [result, setResult] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -142,7 +142,7 @@ export default function Calculator() {
                 style={styles.image1}
                 borderTopRightRadius={36}
                 borderTopLeftRadius={36}
-                source={require("../assets/HomeBg.jpg")}
+                source={require("../assets/calculatorAssets/HomeBg.jpg")}
               >
                 <Text style={styles.header_text}>Traditional Energy</Text>
               </ImageBackground>
@@ -191,9 +191,9 @@ export default function Calculator() {
                 onPress={() => setTeCalculate(true)}
                 android_ripple={{ color: "#ff0000" }}
               >
-                <Text style={styles.calculate_button_text}>Calculate</Text>  
+                <Text style={styles.calculate_button_text}>Calculate</Text>
               </Pressable>
-            
+
               {teCalculate && (
                 <Sector
                   value1={teText}
@@ -201,13 +201,11 @@ export default function Calculator() {
                   sector="traditionalHydro"
                   key1="consumption"
                   key2="location"
-                  status={setTeCalculate} 
+                  status={setTeCalculate}
                 />
               )}
-              
             </View>
           </View>
-
 
           <View style={styles.calculateBox}>
             <View style={styles.calculateHeader}>
@@ -215,7 +213,7 @@ export default function Calculator() {
                 style={styles.image1}
                 borderTopRightRadius={36}
                 borderTopLeftRadius={36}
-                source={require("../assets/ptBg.jpg")}
+                source={require("../assets/calculatorAssets/ptBg.jpg")}
               >
                 <Text style={styles.header_text}>Public Transit</Text>
               </ImageBackground>
@@ -277,14 +275,13 @@ export default function Calculator() {
             </View>
           </View>
 
-
           <View style={styles.calculateBox}>
             <View style={styles.calculateHeader}>
               <ImageBackground
                 style={styles.image1}
                 borderTopRightRadius={36}
                 borderTopLeftRadius={36}
-                source={require("../assets/CleanEnergyBg.jpg")}
+                source={require("../assets/calculatorAssets/CleanEnergyBg.jpg")}
               >
                 <Text style={styles.header_text}>Clean Energy</Text>
               </ImageBackground>
@@ -315,7 +312,9 @@ export default function Calculator() {
                 maxHeight={300}
                 labelField="label"
                 valueField="value"
-                placeholder={!ceIsFocus ? "Select source of clean energy" : "..."}
+                placeholder={
+                  !ceIsFocus ? "Select source of clean energy" : "..."
+                }
                 searchPlaceholder="Search..."
                 value={ceSource}
                 onFocus={() => setCeIsFocus(true)}
@@ -346,14 +345,13 @@ export default function Calculator() {
             </View>
           </View>
 
-
           <View style={styles.calculateBox}>
             <View style={styles.calculateHeader}>
               <ImageBackground
                 style={styles.image1}
                 borderTopRightRadius={36}
                 borderTopLeftRadius={36}
-                source={require("../assets/FuelBg.jpg")}
+                source={require("../assets/calculatorAssets/FuelBg.jpg")}
               >
                 <Text style={styles.header_text}>Fuel</Text>
               </ImageBackground>
@@ -397,7 +395,6 @@ export default function Calculator() {
 
               <Pressable
                 style={styles.calculate_button}
-                
                 onPress={() => setFlCalculate(true)}
                 android_ripple={{ color: "#ff0000" }}
               >
@@ -416,21 +413,19 @@ export default function Calculator() {
             </View>
           </View>
 
-
           <View style={styles.calculateBox}>
             <View style={styles.calculateHeader}>
               <ImageBackground
                 style={styles.image1}
                 borderTopRightRadius={36}
                 borderTopLeftRadius={36}
-                source={require("../assets/VehicleBg.jpg")}
+                source={require("../assets/calculatorAssets/VehicleBg.jpg")}
               >
                 <Text style={styles.header_text}>Car Travel</Text>
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              
-            <Text style={styles.input_text}>Distance</Text>
+              <Text style={styles.input_text}>Distance</Text>
               <TextInput
                 value={carDistance}
                 style={styles.input_box}
@@ -439,7 +434,7 @@ export default function Calculator() {
                   setCarDistance(carDistance);
                 }}
               />
-              
+
               <Text style={styles.input_text}>Vehicle</Text>
               <Dropdown
                 style={[
@@ -468,7 +463,6 @@ export default function Calculator() {
 
               <Pressable
                 style={styles.calculate_button}
-                
                 onPress={() => setCarCalculate(true)}
                 android_ripple={{ color: "#ff0000" }}
               >
@@ -487,30 +481,28 @@ export default function Calculator() {
             </View>
           </View>
 
-
           <View style={styles.calculateBox}>
             <View style={styles.calculateHeader}>
               <ImageBackground
                 style={styles.image1}
                 borderTopRightRadius={36}
                 borderTopLeftRadius={36}
-                source={require("../assets/FlightBg.jpg")}
+                source={require("../assets/calculatorAssets/FlightBg.jpg")}
               >
                 <Text style={styles.header_text}>Flight</Text>
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              
-            <Text style={styles.input_text}>Distance</Text>
+              <Text style={styles.input_text}>Distance</Text>
               <TextInput
                 value={flightDistance}
                 style={styles.input_box}
                 placeholder="The flight distance in KM"
                 onChangeText={(flightDistance) => {
                   setFlightDistance(flightDistance);
-               }}
+                }}
               />
-              
+
               <Text style={styles.input_text}>Type</Text>
               <Dropdown
                 style={[
@@ -539,7 +531,6 @@ export default function Calculator() {
 
               <Pressable
                 style={styles.calculate_button}
-                
                 onPress={() => setFlightCalculate(true)}
                 android_ripple={{ color: "#ff0000" }}
               >
@@ -558,30 +549,28 @@ export default function Calculator() {
             </View>
           </View>
 
-
           <View style={styles.calculateBox}>
             <View style={styles.calculateHeader}>
               <ImageBackground
                 style={styles.image1}
                 borderTopRightRadius={36}
                 borderTopLeftRadius={36}
-                source={require("../assets/MotorBikeBg.jpg")}
+                source={require("../assets/calculatorAssets/MotorBikeBg.jpg")}
               >
                 <Text style={styles.header_text}>MotorBike</Text>
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              
-            <Text style={styles.input_text}>Distance</Text>
+              <Text style={styles.input_text}>Distance</Text>
               <TextInput
                 value={motorbikeDistance}
                 style={styles.input_box}
                 placeholder="The distance in KM"
                 onChangeText={(motorbikeDistance) => {
                   setMotorbikeDistance(motorbikeDistance);
-               }}
+                }}
               />
-              
+
               <Text style={styles.input_text}>Type</Text>
               <Dropdown
                 style={[
@@ -597,7 +586,9 @@ export default function Calculator() {
                 maxHeight={300}
                 labelField="label"
                 valueField="value"
-                placeholder={!motorbikeIsFocus ? "Select MotorBike Type" : "..."}
+                placeholder={
+                  !motorbikeIsFocus ? "Select MotorBike Type" : "..."
+                }
                 searchPlaceholder="Search..."
                 value={motorbikeType}
                 onFocus={() => setMotorbikeIsFocus(true)}
@@ -610,7 +601,6 @@ export default function Calculator() {
 
               <Pressable
                 style={styles.calculate_button}
-                
                 onPress={() => setMotorbikeCalculate(true)}
                 android_ripple={{ color: "#ff0000" }}
               >
@@ -635,7 +625,7 @@ export default function Calculator() {
                 style={styles.image1}
                 borderTopRightRadius={36}
                 borderTopLeftRadius={36}
-                source={require("../assets/resultBg.jpg")}
+                source={require("../assets/calculatorAssets/resultBg.jpg")}
               >
                 <Text style={styles.header_text}>Result</Text>
               </ImageBackground>
@@ -648,17 +638,11 @@ export default function Calculator() {
               >
                 <Text style={styles.calculate_button_text}>Result</Text>
               </Pressable>
-              {result && (
-                <TotalSum
-                  resultStatus={setResult}
-                />
-                
-              )}
+              {result && <TotalSum resultStatus={setResult} />}
             </View>
           </View>
-				</View>
-        </ScrollView>
+        </View>
+      </ScrollView>
     </View>
   );
 }
-

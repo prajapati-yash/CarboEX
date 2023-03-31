@@ -10,7 +10,7 @@ import {
 	Animated,
   } from "react-native";
   
-  export default function SellCredit  () {
+  export default function SellCredit() {
     return (
         <View style={{ flex: 1, alignItems: 'center',
 				justifyContent: 'center' }}>

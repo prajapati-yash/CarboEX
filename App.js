@@ -7,6 +7,7 @@ import HomeScreen from "./pages/HomeScreen";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import { Image } from "react-native";
+import BuyCredit from "./pages/BuyCredit";
 
 const Drawer = createDrawerNavigator();
 
@@ -71,6 +72,23 @@ export default function App() {
         <Drawer.Screen
           name="AboutUs"
           component={AboutUs}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  width: 130,
+                  height: 70,
+                  marginLeft: -19,
+                  marginTop: -6,
+                }}
+                source={require("./assets/carboex.png")}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="BuyCredit"
+          component={BuyCredit}
           options={{
             headerTitle: () => (
               <Image
