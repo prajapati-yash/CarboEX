@@ -109,49 +109,52 @@ export const TotalSum = (props) => {
         transparent
         animationType="fade"
         hardwareAccelerated
-        style={styles.modal}
-      >
-        <View style={styles.centered_view}>
-          <View style={styles.result_modal}>
-            <View style={styles.result_header}>
-              <View style={styles.result_title}>
-                <Text style={styles.text}>RESULT</Text>
+        style={styles.modal}>
+          <View style={styles.centered_view}>
+            <View style={styles.result_modal}>
+              <View style={styles.result_header}>
+                <View style={styles.result_header_title}>
+                  <Text style={styles.result_header_title_text}>RESULT</Text>
+                </View>
+                <View style={{left: 125}}>
+                  <FontAwesome5 
+                    name={'times'}
+                    size = {30}
+                    onPress={() => setModalVisible(false)}
+                  />
+                </View>
               </View>
-              <View style={{ left: 125 }}>
-                <FontAwesome5
-                  name={"times"}
-                  size={30}
-                  onPress={() => setModalVisible(false)}
-                />
+
+              
+              <View style={styles.result_body}>
+                <Text style={styles.result_body_text}>Total Carbon Emitted : {sum}</Text>
               </View>
-            </View>
 
-            <Text style={styles.text}>Total Carbon Emitted : {sum}</Text>
-            <View style={styles.result_body}></View>
-            <View style={styles.resultFooter}>
-              <Pressable
-                style={styles.buy_button}
-                android_ripple={{ color: "#fff" }}
-                disabled={sum < 7000}
-                onPress={() => navigation.navigate(BuyCredit)}
-              >
-                <Text style={styles.text}>Buy</Text>
-              </Pressable>
-              {/* {buyButton && handleBuyButton} */}
+              <View style={styles.resultFooter}>
+                <Pressable
+                  style={styles.buy_button}
+                  android_ripple={{color:'#fff'}}
+                  disabled={sum < 7000}
+                  // onPress={handleBuyButton}
+                >
+                  <Text style={styles.result_button_text}>Buy</Text>
+                </Pressable>
 
-              <Pressable
-                style={styles.sell_button}
-                android_ripple={{ color: "#fff" }}
-                disabled={sum > 4000}
-                onPress={() => SellCredit}
-              >
-                <Text style={styles.text}>Sell</Text>
-              </Pressable>
+                {buyButton && (<BuyCredit />)}
+
+                <Pressable
+                  style={styles.sell_button}
+                  android_ripple={{color:'#fff'}}
+                  disabled={sum > 4000}
+                  // onPress={handleSellButton}
+                >
+                  <Text style={styles.result_button_text}>Sell</Text>
+                </Pressable>
 
               {/* {sellButton && <BuyCredit></BuyCredit>} */}
             </View>
           </View>
-        </View>
+       </View>
       </Modal>
     </View>
   );

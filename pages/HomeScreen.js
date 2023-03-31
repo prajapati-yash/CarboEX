@@ -80,22 +80,26 @@ export default function HomeScreen() {
               </View>
 
               <View style={styles.section2_description}>
-                <Text style={styles.section2_descriptionText}>
-                  The Carbon Trading Platform Using Blockchain is a
+
+                  <View style={styles.section2_description_view1}><Text style={styles.section2_descriptionText}>The Carbon Trading Platform Using Blockchain is a
                   decentralised application that aims to facilitate carbon
                   credit trading by creating an unchangeable and tamper-proof
                   record of transactions. It will enable buyers and sellers of
-                  carbon credits to conduct safe, open transactions. The
+                  carbon credits to conduct safe, open transactions.</Text></View>
+
+                  <View style={styles.section2_description_view1}><Text style={styles.section2_descriptionText}>The
                   platform will automate the exchange of carbon credits by using
                   smart contracts, reducing transaction cost and providing an
                   incentive mechanism for companies to reduce their emissions.
                   If carbon credits expire before the allotted time, a penalty
-                  must be paid before another batch can be purchased. The Carbon
+                  must be paid before another batch can be purchased.</Text></View>
+
+                  <View style={styles.section2_description_view1}><Text style={styles.section2_descriptionText}>The Carbon
                   Trading Platform Using Blockchain aims to support sustainable
                   development by creating a more effective and transparent
                   carbon credit market, motivating businesses to reduce their
-                  emissions, and reducing climate change's adverse consequences.
-                </Text>
+                  emissions, and reducing climate change's adverse consequences.</Text></View>
+                 
               </View>
             </View>
           </ImageBackground>

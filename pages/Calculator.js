@@ -128,11 +128,12 @@ export default function Calculator() {
   const [result, setResult] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <ScrollView
+    <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.centerView}
+        contentContainerStyle={styles.centered_view}
       >
+    <View style={styles.container}>
+      
         <Text style={styles.title_text}>CARBON FOOTPRINT CALCULATOR</Text>
 
         <View style={styles.centered_view}>
@@ -159,7 +160,7 @@ export default function Calculator() {
               />
 
               <Text style={styles.input_text}>
-                Country and Continent providing Hydro
+                Select Country Providing Hydro
               </Text>
               <Dropdown
                 style={[
@@ -229,7 +230,7 @@ export default function Calculator() {
                 }}
               />
 
-              <Text style={styles.input_text}>Enter Type</Text>
+              <Text style={styles.input_text}>Select Type</Text>
               <Dropdown
                 style={[
                   styles.dropdownStyle,
@@ -287,7 +288,7 @@ export default function Calculator() {
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              <Text style={styles.input_text}>Consumption</Text>
+              <Text style={styles.input_text}>Enter Consumption</Text>
               <TextInput
                 value={ceConsumption}
                 style={styles.input_box}
@@ -297,7 +298,7 @@ export default function Calculator() {
                 }}
               />
 
-              <Text style={styles.input_text}>The source of clean energy</Text>
+              <Text style={styles.input_text}>Select Source Of Clean Energy</Text>
               <Dropdown
                 style={[
                   styles.dropdownStyle,
@@ -357,7 +358,18 @@ export default function Calculator() {
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              <Text style={styles.input_text}>Fuel Type</Text>
+
+            <Text style={styles.input_text}>Enter Liters</Text>
+              <TextInput
+                value={fuelLiters}
+                style={styles.input_box}
+                placeholder="The number of liters to calculate from"
+                onChangeText={(fuelLiters) => {
+                  setFuelLiters(fuelLiters);
+                }}
+              />
+
+              <Text style={styles.input_text}>Select Fuel Type</Text>
               <Dropdown
                 style={[
                   styles.dropdownStyle,
@@ -380,16 +392,6 @@ export default function Calculator() {
                 onChange={(item) => {
                   setFuelType(item.value);
                   setFlIsFocus(false);
-                }}
-              />
-
-              <Text style={styles.input_text}>Liters</Text>
-              <TextInput
-                value={fuelLiters}
-                style={styles.input_box}
-                placeholder="The number of liters to calculate from"
-                onChangeText={(fuelLiters) => {
-                  setFuelLiters(fuelLiters);
                 }}
               />
 
@@ -425,7 +427,8 @@ export default function Calculator() {
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              <Text style={styles.input_text}>Distance</Text>
+              
+            <Text style={styles.input_text}>Enter Distance</Text>
               <TextInput
                 value={carDistance}
                 style={styles.input_box}
@@ -434,8 +437,8 @@ export default function Calculator() {
                   setCarDistance(carDistance);
                 }}
               />
-
-              <Text style={styles.input_text}>Vehicle</Text>
+              
+              <Text style={styles.input_text}>Select Vehicle Type</Text>
               <Dropdown
                 style={[
                   styles.dropdownStyle,
@@ -493,7 +496,8 @@ export default function Calculator() {
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              <Text style={styles.input_text}>Distance</Text>
+              
+            <Text style={styles.input_text}>Enter Distance</Text>
               <TextInput
                 value={flightDistance}
                 style={styles.input_box}
@@ -502,8 +506,8 @@ export default function Calculator() {
                   setFlightDistance(flightDistance);
                 }}
               />
-
-              <Text style={styles.input_text}>Type</Text>
+              
+              <Text style={styles.input_text}>Select Flight Type</Text>
               <Dropdown
                 style={[
                   styles.dropdownStyle,
@@ -561,7 +565,8 @@ export default function Calculator() {
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              <Text style={styles.input_text}>Distance</Text>
+              
+            <Text style={styles.input_text}>Enter Distance</Text>
               <TextInput
                 value={motorbikeDistance}
                 style={styles.input_box}
@@ -570,8 +575,8 @@ export default function Calculator() {
                   setMotorbikeDistance(motorbikeDistance);
                 }}
               />
-
-              <Text style={styles.input_text}>Type</Text>
+              
+              <Text style={styles.input_text}>Select Motorbike Type</Text>
               <Dropdown
                 style={[
                   styles.dropdownStyle,
@@ -638,11 +643,15 @@ export default function Calculator() {
               >
                 <Text style={styles.calculate_button_text}>Result</Text>
               </Pressable>
-              {result && <TotalSum resultStatus={setResult} />}
+              {result && (
+                <TotalSum
+                  resultStatus={setResult}
+                />
+              )}
             </View>
           </View>
+				</View>
         </View>
-      </ScrollView>
-    </View>
+        </ScrollView>
   );
 }

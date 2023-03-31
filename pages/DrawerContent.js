@@ -40,7 +40,12 @@ export function DrawerContent(props) {
               }}
             />
             <DrawerItem label="Market" />
-            <DrawerItem label="Resources" />
+            <DrawerItem
+              label="Resource"
+              onPress={() => {
+                props.navigation.navigate("Resource");
+              }}
+            />
             <DrawerItem
               label="Calculator"
               onPress={() => {
