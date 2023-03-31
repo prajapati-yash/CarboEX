@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const styles = StyleSheet.create({
     body: {
@@ -7,14 +8,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
       modal: {
-        width: 300,
-        height: 240,
-      },
-      text: {
-        color: '#000000',
-        fontSize: 20,
-        margin: 10,
-        textAlign: 'center',
+        width: responsiveWidth(90),
+        height: responsiveHeight(32.2),
       },
       centered_view: {
         flex: 1,
@@ -23,15 +18,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#00000099'
       },
       result_modal: {
-        width: 320,
-        height: 222,
+        width: responsiveWidth(90),
+        height: responsiveHeight(32.2),
         backgroundColor: '#ffffff',
         borderWidth: 1,
         borderColor: '#000',
         borderRadius: 20,
       },
       result_header: {
-        height: 50,
+        height: responsiveHeight(7.4),
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#BAD7E9',
@@ -40,13 +35,34 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         position: "relative",
       },
-      result_title: {
+      result_header_title: {
         position: "absolute",
       },
+      result_header_title_text: {
+        color: '#000000',
+        fontSize: responsiveFontSize(3),
+        textAlign: 'center',
+      },
       result_body: {
-        height: 120,
+        height: responsiveHeight(17.6),
         justifyContent: 'center',
         alignItems: 'center',
+      },
+      result_body_text: {
+        color: '#000000',
+        fontSize: responsiveFontSize(2.5),
+        textAlign: 'center',
+      },
+      resultFooter:{
+        flexDirection:"row",
+        overflow:"hidden",
+        borderBottomRightRadius:20
+      },
+      result_button_text: {
+        color: '#000000',
+        fontSize: responsiveFontSize(2.7),
+        margin: "6.2%",
+        textAlign: 'center',
       },
       buy_button:{
         backgroundColor:'#ff0000',
@@ -57,12 +73,6 @@ const styles = StyleSheet.create({
         backgroundColor:'#00ff00',
         width:"50%",
       },
-      resultFooter:{
-        flexDirection:"row",
-        overflow:"hidden",
-        marginTop:-50,
-        borderBottomRightRadius:20
-      }
   });
 
   export default styles;

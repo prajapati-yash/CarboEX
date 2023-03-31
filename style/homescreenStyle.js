@@ -44,9 +44,10 @@ const styles = StyleSheet.create({
   },
   modal_text: {
     fontSize: responsiveFontSize(1.4),
-    textAlign: "center",
+    textAlign:"justify",
     marginLeft: "5%",
     marginRight: "5%",
+    alignItems:"center"
   },
   modal_body: {
     height: responsiveHeight(15.6),
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
 
   image2: {
     width: responsiveWidth(100),
-    height: responsiveHeight(54),
+    height: responsiveHeight(72),
     marginTop: "-10%",
     flexDirection: "column",
   },
@@ -79,16 +80,26 @@ const styles = StyleSheet.create({
   },
   section2_text: {
     fontSize: responsiveFontSize(3),
-    color: "#fff",
+    color: "#434242",
     fontWeight: "bold",
   },
   section2_description: {
     margin: 20,
   },
+  section2_description_view1: {
+    height: responsiveHeight(16),
+    width: responsiveWidth(90),
+    backgroundColor: "#fff",
+    opacity: 0.8,
+    borderRadius: 20,
+    marginTop: "2%",
+    justifyContent: "center",
+  },
   section2_descriptionText: {
-    textAlign: "center",
-    color: "#fff",
+    textAlign:"justify",
+    color: "#000",
     fontSize: responsiveFontSize(1.67),
+    margin:"3%",
   },
 
   image3: {
@@ -109,7 +120,7 @@ const styles = StyleSheet.create({
   section3_view1: {
     width: responsiveWidth(62),
     height: responsiveHeight(22),
-    borderRadius: 60,
+    borderRadius: 50,
     alignItems: "center",
     // justifyContent: "center",
     backgroundColor: "#86EBF8",
@@ -128,7 +139,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   section3_subtext: {
-    textAlign: "center",
+    textAlign: "justify",
     color: "#fff",
     marginTop: 5,
     marginLeft: 15,
@@ -138,6 +149,7 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     height: responsiveHeight(128),
     marginBottom: -20,
+    marginTop: "5%",
     flexDirection: "column",
   },
   section4_title: {
