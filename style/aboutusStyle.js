@@ -18,25 +18,23 @@ const styles = StyleSheet.create({
     width: responsiveWidth(85),
     height: responsiveHeight(40),
     marginTop: "2%",
-    // position: "relative",
+    position: "relative",
+    zIndex: 1,
   },
   image_view: {
     alignItems: "center",
     justifyContent: "center",
     // flex: 1,
   },
-  blurImage: {
-    width: responsiveWidth(100),
-    height: responsiveHeight(15),
-    opacity: 0.8,
-    marginTop: "-83%",
-    // position: "absolute",
+  blurredContainer: {
+    backgroundColor: "rgba(255, 255, 255, 0.5)", // background color with opacity
+    borderRadius: 10,
+    padding: 20,
   },
-  blur_image_view: {
-    alignItems: "center",
-  },
-  blur_image_text: {
-    fontSize: responsiveFontSize(4),
+  text: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#333",
   },
   lines2: {
     height: responsiveHeight(20),
@@ -60,6 +58,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   view_vision_description: {
+    // flex: 1,
     width: responsiveWidth(100),
     height: responsiveHeight(40),
     backgroundColor: "#86EBF8",
@@ -70,8 +69,12 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   text_vision_description: {
+    marginLeft: "3%",
+    marginRight: "2%",
+    textAlign: "justify",
     marginTop: "20%",
-    fontSize: responsiveFontSize(2), 
+    marginBottom: "15%",
+    fontSize: responsiveFontSize(2),
   },
 
   lines1: {
@@ -80,6 +83,7 @@ const styles = StyleSheet.create({
     marginTop: "-25%",
   },
   view_mission: {
+    // flex: 1,
     width: responsiveWidth(40),
     height: responsiveHeight(8),
     backgroundColor: "#FFFFFF",
@@ -97,7 +101,7 @@ const styles = StyleSheet.create({
   },
   view_mission_description: {
     width: responsiveWidth(100),
-    height: responsiveHeight(40),
+    // height: responsiveHeight(40),
     backgroundColor: "#fff",
     borderBottomLeftRadius: 80,
     borderBottomRightRadius: 80,
@@ -144,6 +148,17 @@ const styles = StyleSheet.create({
     height: 130,
     width: 130,
     borderRadius: 65,
+  },
+  blur_view: {
+    // flex: 1,
+    marginTop: "-48%",
+    width: responsiveWidth(100),
+    zIndex: 2,
+    backgroundColor: "#CDE990",
+    alignItems: "center",
+  },
+  blur_view_text: {
+    fontSize: responsiveFontSize(5),
   },
 });
 

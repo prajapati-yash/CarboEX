@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
       },
       result_modal: {
         width: responsiveWidth(90),
-        height: responsiveHeight(32.2),
+        height: responsiveHeight(30.4),
         backgroundColor: '#ffffff',
         borderWidth: 1,
         borderColor: '#000',
@@ -60,18 +60,22 @@ const styles = StyleSheet.create({
       },
       result_button_text: {
         color: '#000000',
-        fontSize: responsiveFontSize(2.7),
-        margin: "6.2%",
-        textAlign: 'center',
+        textAlign:'center',
+        fontSize: responsiveFontSize(4)
       },
       buy_button:{
         backgroundColor:'#ff0000',
-        width:"50%",
         borderBottomLeftRadius:20,
+        borderBottomRightRadius:20,
+        width:"100%",
+        height:"100%"
       },
       sell_button:{
         backgroundColor:'#00ff00',
-        width:"50%",
+        borderBottomLeftRadius:20,
+        borderBottomRightRadius:20,
+        width:"100%",
+        height:"100%"
       },
   });
 

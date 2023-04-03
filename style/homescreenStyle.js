@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
   },
   image1: {
     width: responsiveWidth(85),
-    height: responsiveHeight(40),
-    // flexDirection: "column",
-    marginTop: 10,
+    // height: responsiveHeight(40),
+    flexDirection: "column",
+    marginTop: "1%",
     zIndex: 1,
   },
   text: {
@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modal_view: {
-    height: responsiveHeight(20),
+    flex:1,
+    // height: responsiveHeight(20),
     width: responsiveWidth(70),
     alignItems: "center",
     justifyContent: "center",
@@ -47,47 +48,58 @@ const styles = StyleSheet.create({
     textAlign:"justify",
     marginLeft: "5%",
     marginRight: "5%",
-    alignItems:"center"
+    alignItems:"center",
+    
   },
   modal_body: {
-    height: responsiveHeight(15.6),
+    flex:1,
+    // height: responsiveHeight(15.6),
     justifyContent: "center",
     alignItems: "center",
+    paddingTop:"5%",
+    paddingBottom:"5%"
   },
   modal_button: {
+    flex:1,
+    justifyContent:"center",
     width: responsiveWidth(70),
-    height: responsiveHeight(5),
+    // height: responsiveHeight(5),
     borderBottomLeftRadius: 35,
     borderBottomRightRadius: 35,
     backgroundColor: "#C4DDFF",
+    paddingBottom:"3%",
+    paddingTop:"3%"
   },
   modal_button_text: {
     textAlign: "center",
-    marginTop: 5,
+    // marginTop: 5,
     fontSize: responsiveFontSize(1.7),
     fontWeight: "bold",
   },
 
   image2: {
+    flex:1,
     width: responsiveWidth(100),
-    height: responsiveHeight(72),
+    // height: responsiveHeight(72),
     marginTop: "-10%",
+    paddingBottom:"5%",
     flexDirection: "column",
   },
   section2_title: {
     alignItems: "center",
-    marginTop: 50,
+    marginTop: "15%",
   },
   section2_text: {
     fontSize: responsiveFontSize(3),
-    color: "#434242",
+    color: "#fff",
     fontWeight: "bold",
   },
   section2_description: {
-    margin: 20,
+    margin: "5%",
   },
   section2_description_view1: {
-    height: responsiveHeight(16),
+    flex:1,
+    // height: responsiveHeight(16),
     width: responsiveWidth(90),
     backgroundColor: "#fff",
     opacity: 0.8,
@@ -103,14 +115,15 @@ const styles = StyleSheet.create({
   },
 
   image3: {
+    flex:1,
     width: responsiveWidth(100),
-    height: responsiveHeight(85),
+    // height: responsiveHeight(85),
     flexDirection: "column",
   },
   section3_title: {
     alignItems: "center",
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: "11%",
+    marginBottom: "5%",
   },
   section3_text: {
     fontSize: responsiveFontSize(3),
@@ -118,43 +131,46 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   section3_view1: {
+    flex:1,
     width: responsiveWidth(62),
-    height: responsiveHeight(22),
+    // height: responsiveHeight(22),
     borderRadius: 50,
     alignItems: "center",
     // justifyContent: "center",
     backgroundColor: "#86EBF8",
-    margin: 10,
+    margin: "2%",
+    paddingBottom:"5%"
   },
   section3_subtitle: {
     fontSize: responsiveFontSize(2.4),
     color: "#fff",
-    marginTop: 25,
+    marginTop: "7.5%",
     fontWeight: 500,
   },
   section3_underline: {
     height: responsiveHeight(0.2),
     width: responsiveWidth(50),
     backgroundColor: "#fff",
-    margin: 10,
+    margin: "2%",
   },
   section3_subtext: {
     textAlign: "justify",
     color: "#fff",
-    marginTop: 5,
-    marginLeft: 15,
-    marginRight: 15,
+    marginTop: "2%",
+    marginLeft: "5.5%",
+    marginRight: "5.5%",
   },
   image4: {
+    flex:1,
     width: responsiveWidth(100),
-    height: responsiveHeight(128),
-    marginBottom: -20,
+    // height: responsiveHeight(128),
+    marginBottom: "-7.4%",
     marginTop: "5%",
     flexDirection: "column",
   },
   section4_title: {
     alignItems: "center",
-    marginTop: 50,
+    marginTop: "14%",
   },
   section4_text: {
     fontSize: responsiveFontSize(3),
@@ -162,7 +178,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   section4_description: {
-    margin: 20,
+    margin: "6%",
   },
   section4_descriptionView: {
     marginBottom: 15,
@@ -172,6 +188,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: responsiveFontSize(1.75),
     margin: 2,
+    textAlign:"justify"
   },
 });
 

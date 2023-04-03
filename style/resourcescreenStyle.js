@@ -16,8 +16,9 @@ import {
         alignItems: "center",
       },
       section1_image: {
+       flex:1,
         width: responsiveWidth(85),
-        height: responsiveHeight(30),
+        // height: responsiveHeight(30),
         marginTop: 10,
         resizeMode:"cover",
         zIndex: 4,
@@ -26,19 +27,22 @@ import {
         marginLeft: "10%",
         marginRight: "10%",
         marginTop: "18%",
+        marginBottom: "18%",
         fontSize: responsiveFontSize(5),
         color:"#ffffff",
         textAlign: "center",
         textAlignVertical:"center"
       },
       section2_image: {
+        flex:1,
         width: responsiveWidth(100),
-        height: responsiveHeight(50),
+        // height: responsiveHeight(50),
         marginTop: "-10%",
         flexDirection: "column",
         resizeMode:"cover",
         opacity:0.7,
-        zIndex:3
+        zIndex:3,
+        paddingBottom:"4%"
       },
       section2_title: {
         alignItems: "center",
@@ -67,7 +71,8 @@ import {
       },
       section3_image: {
         width: responsiveWidth(100),
-        height: responsiveHeight(55),
+        flex:1,
+        // height: responsiveHeight(55),
         marginTop: "-25%",
         flexDirection: "column",
         resizeMode:"cover",
@@ -99,13 +104,15 @@ import {
         borderRadius: 35,
       },
       section4_image: {
+        flex:1,
         width: responsiveWidth(100),
-        height: responsiveHeight(47),
+        // height: responsiveHeight(47),
         marginTop: "-2%",
         flexDirection: "column",
         resizeMode:"cover",
         opacity:0.7,
-        zIndex:1
+        zIndex:1,
+        paddingBottom:"28%"
       },
       section4_title: {
         alignItems: "center",
@@ -137,34 +144,40 @@ import {
         overflow:"hidden"
       },
       section4_description_button: {
+        flex:1,
         width: responsiveWidth(40),
-        height: responsiveHeight(6),
+        // height: responsiveHeight(6),
         borderRadius:35,
         backgroundColor: "#19376D",
       },
       section4_description_button_text: {
         textAlign: "center",
         marginTop: "6%",
+        marginBottom: "6%",
         fontSize: responsiveFontSize(2.2),
         fontWeight: "bold",
         color:"#fff"
       },
       section5_image: {
+        flex:1,
         width: responsiveWidth(100),
-        height: responsiveHeight(30),
+        // height: responsiveHeight(30),
         marginTop: "-18%",
         flexDirection: "column",
         resizeMode:"cover",
         marginBottom: -20,
-        zIndex:2
+        zIndex:2,
+        paddingBottom:"20%"
       },
       section5_title: {
         alignItems: "center",
         marginTop: "18%",
+        marginBottom:"18%"
       },
       section5_inner_image:{
-        width: responsiveWidth(40),
-        height: responsiveHeight(10),
+        flex:1,
+        width: responsiveWidth(60),
+        // height: responsiveHeight(10),
       },
       section5_button_text:{
         marginTop:"-4%",

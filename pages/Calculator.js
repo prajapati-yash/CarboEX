@@ -134,7 +134,8 @@ export default function Calculator() {
       >
     <View style={styles.container}>
       
-        <Text style={styles.title_text}>CARBON FOOTPRINT CALCULATOR</Text>
+        <View style={styles.title_text_view}>
+        <Text style={styles.title_text}>CARBON FOOTPRINT CALCULATOR</Text></View>
 
         <View style={styles.centered_view}>
           <View style={styles.calculateBox}>

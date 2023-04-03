@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
 import {
   Alert,
@@ -10,33 +11,15 @@ import {
   Modal,
   TouchableOpacity,
 } from "react-native";
+import styles from "../style/emissionCalculateStyle";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import BuyCredit from "../pages/BuyCredit";
 import SellCredit from "../pages/SellCredit";
-import styles from "../style/emissionCalculateStyle";
-import { useNavigation } from "@react-navigation/native";
-import NavigationContainer from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+
 
 var numbers = 0;
 var data = [];
 
-// const Stack = createStackNavigator();
-// const handleBuyButton = () => {
-//   <NavigationContainer>
-//   <Stack.Navigator>
-//      <Stack.Screen name="BuyCredit" component={BuyCredit} />
-//    </Stack.Navigator>
-//  </NavigationContainer>
-// }
-
-// const handleSellButton = () => {
-//   <NavigationContainer>
-//   <Stack.Navigator>
-//      <Stack.Screen name="SellCredit" component={SellCredit} />
-//    </Stack.Navigator>
-//  </NavigationContainer>
-// }
 
 const Sector = (props) => {
   var data = JSON.stringify(
@@ -88,22 +71,26 @@ function addValues() {
 }
 
 export const TotalSum = (props) => {
+  
   const navigation = useNavigation();
-  const [buyButton, setBuyButton] = useState(false);
-  const [sellButton, setSellButton] = useState(false);
   const [modalVisible, setModalVisible] = useState(true);
-
   let sum = 0;
   for (let i = 0; i < data.length; i += 1) {
     sum += data[i];
   }
-
-  useEffect(() => {
-    props.resultStatus(true);
-  }, []);
+  
+  if (sum<4000) {
+    sell=sum;
+  }
+  else if(sum>7000){
+    buy=sum;
+  }
+  else{
+    average=sum;
+  }
 
   return (
-    <View style={styles.body}>
+    
       <Modal
         visible={modalVisible}
         transparent
@@ -126,38 +113,56 @@ export const TotalSum = (props) => {
               </View>
 
               
-              <View style={styles.result_body}>
-                <Text style={styles.result_body_text}>Total Carbon Emitted : {sum}</Text>
-              </View>
+                {sum > 7000 ?
+                ( <View>
+                  <View style={styles.result_body}>
+                    <Text style={styles.result_body_text}>Total Carbon Emitted : {sum}</Text>
+                    <Text style={styles.result_body_text}>You are eligible to buy carbon credit</Text>
+                  </View>
+                
+                  <View style={styles.resultFooter}>
+                  <Pressable
+                    style={styles.buy_button}
+                    android_ripple={{color:'#fff'}}
+                    disabled={sum < 7000}
+                    onPress={() => navigation.navigate(BuyCredit)}>
 
-              <View style={styles.resultFooter}>
-                <Pressable
-                  style={styles.buy_button}
-                  android_ripple={{color:'#fff'}}
-                  disabled={sum < 7000}
-                  // onPress={handleBuyButton}
-                >
-                  <Text style={styles.result_button_text}>Buy</Text>
-                </Pressable>
+                    <Text style={styles.result_button_text}>Buy</Text>
+                  </Pressable>
+                  </View>
+                  </View>):sum >= 0 && sum<=4000 ?
+                (
+                  <View>
+                  <View style={styles.result_body}>
+                    <Text style={styles.result_body_text}>Total Carbon Emitted : {sum}</Text>
+                    <Text style={styles.result_body_text}>You are eligible to sell carbon credit</Text>
+                  </View>
 
-                {buyButton && (<BuyCredit />)}
+                  <View style={styles.resultFooter}>
+                  <Pressable
+                    style={styles.sell_button}
+                    android_ripple={{color:'#fff'}}
+                    disabled={sum > 4000}
+                    onPress={() => navigation.navigate(SellCredit)}>
 
-                <Pressable
-                  style={styles.sell_button}
-                  android_ripple={{color:'#fff'}}
-                  disabled={sum > 4000}
-                  // onPress={handleSellButton}
-                >
-                  <Text style={styles.result_button_text}>Sell</Text>
-                </Pressable>
-
-              {/* {sellButton && <BuyCredit></BuyCredit>} */}
-            </View>
+                    <Text style={styles.result_button_text}>Sell</Text>
+                    </Pressable>
+                    </View>
+                    </View>):(
+                  
+                      <View style={styles.result_body}>
+                        <Text style={styles.result_body_text}>Total Carbon Emitted : {sum}</Text>
+                        <Text style={styles.result_body_text}>You are emitted average amount of carbon</Text>
+                      </View>
+                    )}
+                    
           </View>
        </View>
+   
       </Modal>
-    </View>
-  );
-};
+);
+
+}
 
 export default Sector;
+

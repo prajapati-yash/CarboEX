@@ -46,11 +46,13 @@ export default function HomeScreen() {
 
                   <View
                     style={{
+                      flex:1,
                       borderBottomRightRadius: 35,
                       borderBottomLeftRadius: 35,
                       overflow: "hidden",
-                      height: "22%",
+                      // height: "22%",
                       width: "100%",
+                      // paddingTop:"5%"
                     }}
                   >
                     <Pressable
