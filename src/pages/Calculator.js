@@ -6,13 +6,11 @@ import FuelToCo2Calc from '../components/calculator/bodycalc/FuelToCo2Calc';
 import CarTravelCalc from '../components/calculator/bodycalc/CarTravelCalc';
 import FlightCalc from '../components/calculator/bodycalc/FlightCalc';
 import MotorBikeCalc from '../components/calculator/bodycalc/MotorBikeCalc';
-import Navbar from '../components/navbar/Navbar'
-import Footer from '../components/footer/Footer'
 import '../styles/calculator/calculator.css'
 import TraditionalBodyCalc from '../components/calculator/bodycalc/TraditionalBodyCalc';
 import PublicTransitCalc from '../components/calculator/bodycalc/PublicTransitCalc';
 import StoreCalculation from '../components/calculator/storecalculation/StoreCalculation';
-import LandingCalc from '../components/calculator/bodycalc/LandingCalc'
+// import LandingCalc from '../components/calculator/bodycalc/LandingCalc'
 
 function Calculator() {
 

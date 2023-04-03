@@ -1,5 +1,5 @@
 .my-component {
-  background-image: url("http://localhost:3000/assets/home/heroBG.png");
+  background-image: url("/public/assets/home/HeroBg.png");
   background-size: cover;
   min-height: 90vh;
   position: relative;

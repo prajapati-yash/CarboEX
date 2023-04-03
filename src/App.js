@@ -12,7 +12,7 @@ import FlightCalc from './components/calculator/bodycalc/FlightCalc'
 import StoreCalculation from "./components/calculator/storecalculation/StoreCalculation";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
-import { Chat } from "@pushprotocol/uiweb";
+
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 
@@ -67,10 +67,10 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter >
-      <Chat
+      {/* <Chat
         account={address} //user address             
         supportAddress="0xF80a1e20826EED14146d08f88E5557805d439d5f" //support address          
-      />
+      /> */}
     </>
 
 
