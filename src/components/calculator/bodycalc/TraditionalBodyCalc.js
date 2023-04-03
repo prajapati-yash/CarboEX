@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import StoreCalculation from '../storecalculation/StoreCalculation';
+// import StoreCalculation from '../storecalculation/StoreCalculation';
 import '../../../styles/calculator/bodycalc/TraditionalBodyCalc.css';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 // import dotenv from 'dotenv';
 
 function TraditionalBodyCalc({ onValueChange }) {
