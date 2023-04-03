@@ -74,6 +74,13 @@ const styles = StyleSheet.create({
     width: responsiveWidth(25),
     backgroundColor: "#fff",
     borderRadius: 5,
+    // alignItems: "center",
+    justifyContent: "center",
+  },
+  text_phone_descriptionText: {
+    color: "#16172E",
+    fontSize: responsiveFontSize(1.5),
+    marginLeft: "3%",
   },
 
   view_mail: {
@@ -199,6 +206,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: "3%",
     marginBottom: "3%",
+  },
+  map: {
+    width: '100%',
+    height: '100%',
   },
 });
 
