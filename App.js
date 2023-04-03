@@ -103,23 +103,6 @@ export default function App() {
             ),
           }}
         />
-        <Drawer.Screen
-          name="BuyCredit"
-          component={BuyCredit}
-          options={{
-            headerTitle: () => (
-              <Image
-                style={{
-                  width: 130,
-                  height: 70,
-                  marginLeft: -19,
-                  marginTop: -6,
-                }}
-                source={require("./assets/carboex.png")}
-              />
-            ),
-          }}
-        />
       </Drawer.Navigator>
     </NavigationContainer>
   );

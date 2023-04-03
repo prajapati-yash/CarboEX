@@ -22,6 +22,16 @@
         "foregroundImage": "./assets/carboex.png",
         "backgroundColor": "#ffffff"
       },
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_CONTACTS",
+        "android.permission.GET_ACCOUNTS",
+        "android.permission.USE_CREDENTIALS",
+        "android.permission.MANAGE_ACCOUNTS",
+        "android.permission.AUTHENTICATE_ACCOUNTS"
+      ],
       "package": "com.abhishek0097.CarboEx"
     },
     "web": {

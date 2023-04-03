@@ -21,23 +21,6 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 var numbers = 0;
 var data = [];
 
-// const Stack = createStackNavigator();
-// const handleBuyButton = () => {
-//   <NavigationContainer>
-//   <Stack.Navigator>
-//      <Stack.Screen name="BuyCredit" component={BuyCredit} />
-//    </Stack.Navigator>
-//  </NavigationContainer>
-// }
-
-// const handleSellButton = () => {
-//   <NavigationContainer>
-//   <Stack.Navigator>
-//      <Stack.Screen name="SellCredit" component={SellCredit} />
-//    </Stack.Navigator>
-//  </NavigationContainer>
-// }
-
 const Sector = (props) => {
   var data = JSON.stringify(
     `{\n      ${props.key1}: ${props.value1},\n      ${props.key2}: ${props.value2}\n      }: ''`
@@ -140,7 +123,7 @@ export const TotalSum = (props) => {
                   <Text style={styles.result_button_text}>Buy</Text>
                 </Pressable>
 
-                {buyButton && (<BuyCredit />)}
+                {/* {buyButton && (<BuyCredit />)} */}
 
                 <Pressable
                   style={styles.sell_button}
