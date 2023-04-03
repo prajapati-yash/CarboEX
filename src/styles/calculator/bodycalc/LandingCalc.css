@@ -1,9 +1,16 @@
 .landingPageCalc {
-  margin: 13%;
+  /* margin: 13%; */
   padding: 0;
   font-size: xx-large;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   text-align: center;
   align-items: center;
+}
+.calcList p {
+  /* background-color: #fff; */
+  margin-top: 1rem;
+  padding: 0;
+  display: flex;
+  font-size: 1.5rem;
 }

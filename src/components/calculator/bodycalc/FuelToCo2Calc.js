@@ -1,48 +1,99 @@
 import React from 'react'
+import '../../../styles/calculator/bodycalc/PublicTransitCalc.css'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+import StoreCalculation from '../storecalculation/StoreCalculation'
 
-function FuelToCo2Calc() {
+function FuelToCo2Calc({ onValueChange, props }) {
+
+    const [ftcData1, setftcData] = useState({
+        ftcType: null,
+        ftcLitres: null
+    })
+
+    var data = {
+        type: ftcData1.ftcType,
+        litres: ftcData1.ftcLitres,
+    };
+    // var data = JSON.stringify(`{\n      "type": ${ftcData1.ftcType},\n      "litres": ${ftcData1.ftcLitres}\n      }: ''`);
+
+    var config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `https://app.trycarbonapi.com/api/fuelToCO2e?type=${ftcData1.ftcType}&litres=${ftcData1.ftcLitres}`,
+        headers: {
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiNWQ3OWMwYjVmODdmODBkMDA1YTFjZWI4MWI1OGFlZThjN2ZlOTQ5NDIwYmFkODMxNGIxMDZmODRkNzdiZjBiMjY1YzZhZjI0NmRjMDFmYmQiLCJpYXQiOjE2ODAwNzQxMTgsIm5iZiI6MTY4MDA3NDExOCwiZXhwIjoxNzExNjk2NTE4LCJzdWIiOiI0MDY0Iiwic2NvcGVzIjpbXX0.cN3WCdheF7uezNVs8mQ4IFE0sQfEUBRNA6fkR8a2okkkqBAmr2XMZIBtFtdwi78-hRdzZcAjj_1uMZyb77LkSA',
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: data
+    };
+
+
+    // useEffect(() => {
+    //     console.log(ftcData1);
+    // }, [ftcData1]);
+
+
+    const ftcSubmitData = async () => {
+        console.log(`${ftcData1.ftcType} ${ftcData1.ftcLitres}`)
+        // const ftcResult2 = await console.log(ftcResult);
+        // console.log(ftcResult2)
+        await axios(config)
+            .then(function (response) {
+                const ftcResult = JSON.stringify(response.data);
+                // alert(`Carbon: ${ftcResult}`);
+                console.log(`Carbon: ${ftcResult}`);
+                const numbers = ftcResult.match(/\d+(\.\d+)?/g);
+                // console.log(numbers[0]);
+                const demo = numbers[0];
+                alert(demo)
+                console.log(demo)
+
+                // const value = ftcResult
+                const value = demo
+                onValueChange(value);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
     return (
         <>
-            <div className='house-form'>
+            <div className='publicTransit-form'>
                 <div className='form-content1'>
-                    <label className='house-form__label'>Fuel to CO2</label>
+                    <label className='publicT-form__label'>Fuel To CO2e</label>
                     <div className='formMain'>
                         <div className='form-group bottom35'>
-                            <label className='house-form__label1'>Calculate CO2e from the use of traditional hydro provider.</label>
+                            <label className='publicT-form__label1'>Transform liters of Diesel, Petrol or LPG into CO2 Equivalent in Kg.</label>
                         </div>
                         <div className='traditionalCountry-ip'>
                             <div className='form-group '>
-                                <label className='house-form__label2 '>Consumption:</label>
-                                <input className='form-control' type='text' placeholder='in kwh' required id='last_name' name='last_name' />
+                                <label className='publicT-form__label2 '>Litres:</label>
+                                <input className='form-control' type='text' placeholder='The number of litres to calculate from.' required id='last_name' name='last_name' onChange={(e3) => {
+                                    setftcData({ ...ftcData1, ftcLitres: e3.target.value })
+                                }} />
                             </div>
                         </div>
-
-
                         <div className='traditionalCountry-dd'>
                             <div className='form-group bottom35'>
-                                <label className='house-form__label2'>The country or continent providing the hydro:</label>
+                                <label className='publicT-form__label2'>Type:</label>
 
                                 <div className="dropdown">
-                                    {/* <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Country</button>
-                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a className="dropdown-item" href="#">Action</a>
-                                        <a className="dropdown-item" href="#">Another action</a>
-                                        <a className="dropdown-item" href="#">Something else here</a>
-                                    </div> */}
-
-                                    <select className='form-control' id='country' name='country'>
-                                        <option value='USA'>Select Country</option>
-                                        <option value='USA'>USA</option>
-                                        <option value='Canada'>Canada</option>
-                                        <option value='UK'>UK</option>
-                                        <option value='Australia'>Australia</option>
-                                        <option value='India'>India</option>
+                                    <select className='form-control' id='pt-type' name='pt-type' onChange={(e3) => {
+                                        setftcData({ ...ftcData1, ftcType: e3.target.value })
+                                    }}>
+                                        <option value='Default'>Select type</option>
+                                        <option value='Petrol'>Petrol</option>
+                                        <option value='Diesel'>Diesel</option>
+                                        <option value='LPG'>LPG</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div className='traditionalbtn col-sm-12 mt-4'>
-                            <button type='submit' className='house-form__button primary p-2' id='submit_btn' style={{ width: 'fit-content' }}>
+
+                        <div className='pTbtn col-sm-12 mt-4'>
+                            <button type='submit' className='publicT-form__button primary p-2' id='submit_btn' style={{ width: 'fit-content' }} onClick={() => ftcSubmitData()}>
                                 Calculate
                             </button>
                         </div>

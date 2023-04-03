@@ -1,5 +1,5 @@
 .my-component {
-  background-image: url("http://localhost:3000/assets/home/heroBG.png");
+  background-image: url("/public/assets/home/HeroBg.png");
   background-size: cover;
   min-height: 90vh;
   position: relative;
@@ -12,6 +12,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
+  /* text-align: justify; */
 }
 
 .text {
@@ -61,12 +62,12 @@
 .start-button:active {
   box-shadow: 0px 0px 0px 0px rgb(141, 141, 141, 0.4) !important;
 }
-.for-mobile{
+.for-hero-mobile {
   display: none;
 }
 
-@media only screen and (max-width:1350px){
-  .my-component{
+@media only screen and (max-width: 1350px) {
+  .my-component {
     width: 100%;
   }
 }
@@ -82,23 +83,19 @@
   .start-button-div {
     border-radius: 0 0 5rem 5rem;
   }
-  .second-text{
+  .second-text {
     font-size: 1.3rem;
   }
-  .text{
+  .text {
     font-size: 2.5rem;
   }
 }
 
-
-@media only screen and (min-width:1040px) and (max-width: 1200px) {
-  .second-text{
+@media only screen and (min-width: 1040px) and (max-width: 1200px) {
+  .second-text {
     font-size: 1.1rem;
   }
 }
-
-
-
 
 @media only screen and (max-width: 992px) {
   .my-component {
@@ -125,35 +122,33 @@
   }
 }
 
-
 @media only screen and (max-width: 576px) {
   .my-component {
     border-radius: 4rem;
     width: 100%;
     min-height: fit-content;
   }
-  .text{
-    font-size: 1.3rem!important;
+  .text {
+    font-size: 1.3rem !important;
   }
-  .second-text{
-    font-size: 1rem!important;
+  .second-text {
+    font-size: 1rem !important;
   }
-  .start-button{
+  .start-button {
     width: 60%;
     font-size: 1rem;
   }
- 
 }
 
 @media only screen and (max-width: 470px) {
-  .start-button{
+  .start-button {
     width: 80%;
     font-size: 0.9rem;
   }
 }
 
 @media only screen and (max-width: 1040px) {
-  .my-component{
+  .my-component {
     min-height: fit-content;
   }
   .secondContainer {
@@ -164,7 +159,7 @@
     justify-content: center;
     margin: auto;
   }
-  .second-text{
+  .second-text {
     font-size: 1.2rem;
   }
   .img-text {
@@ -175,17 +170,17 @@
     width: 80%;
   }
 
-  .box-container{
+  .box-container {
     width: 90%;
   }
 
-  .text{
+  .text {
     font-size: 2rem;
   }
-  .for-desktop{
-    display: none!important;
+  .for-hero-desktop {
+    display: none !important;
   }
-  .for-mobile{
+  .for-hero-mobile {
     display: block;
   }
 }

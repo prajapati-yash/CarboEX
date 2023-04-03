@@ -1,48 +1,104 @@
 import React from 'react'
+import '../../../styles/calculator/bodycalc/PublicTransitCalc.css'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+import StoreCalculation from '../storecalculation/StoreCalculation'
 
-function FlightCalc() {
+function FlightCalc({ onValueChange, props }) {
+
+    const [fData1, setFData] = useState({
+        fDistance: null,
+        fType: null
+    })
+
+    var data = {
+        type: fData1.fType,
+        distance: fData1.fDistance,
+    };
+    // var data = JSON.stringify(`{\n      "distance": ${fData1.fDistance},\n      "type": ${fData1.fType}\n      }: ''`);
+
+    var config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `https://app.trycarbonapi.com/api/flight?distance=${fData1.fDistance}&type=${fData1.fType}`,
+        headers: {
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiNWQ3OWMwYjVmODdmODBkMDA1YTFjZWI4MWI1OGFlZThjN2ZlOTQ5NDIwYmFkODMxNGIxMDZmODRkNzdiZjBiMjY1YzZhZjI0NmRjMDFmYmQiLCJpYXQiOjE2ODAwNzQxMTgsIm5iZiI6MTY4MDA3NDExOCwiZXhwIjoxNzExNjk2NTE4LCJzdWIiOiI0MDY0Iiwic2NvcGVzIjpbXX0.cN3WCdheF7uezNVs8mQ4IFE0sQfEUBRNA6fkR8a2okkkqBAmr2XMZIBtFtdwi78-hRdzZcAjj_1uMZyb77LkSA',
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: data
+    };
+
+
+    // useEffect(() => {
+    //     console.log(fData1);
+    // }, [fData1]);
+
+
+    const fSubmitData = async () => {
+        // console.log(`${fData1.fDistance} ${fData1.fType}`)
+        // console.log(`${data.distance} ${data.type}`)
+        // const ftcResult2 = await console.log(ftcResult);
+        // console.log(ftcResult2)
+        await axios(config)
+            .then(function (response) {
+                const ftcResult = JSON.stringify(response.data);
+                // alert(`Carbon: ${ftcResult}`);
+                console.log(`Carbon: ${ftcResult}`);
+                const numbers = ftcResult.match(/\d+(\.\d+)?/g);
+                // console.log(numbers[0]);
+                const demo = numbers[0];
+                // alert(demo)
+                console.log(demo)
+
+                // const value = ftcResult
+                const value = demo
+                onValueChange(value);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
     return (
         <>
-            <div className='house-form'>
+            <div className='publicTransit-form'>
                 <div className='form-content1'>
-                    <label className='house-form__label'>Flight</label>
+                    <label className='publicT-form__label'>Flight</label>
                     <div className='formMain'>
                         <div className='form-group bottom35'>
-                            <label className='house-form__label1'>Calculate CO2e from the use of traditional hydro provider.</label>
+                            <label className='publicT-form__label1'>Calculate CO2e in Kg from a travel by air.</label>
                         </div>
                         <div className='traditionalCountry-ip'>
                             <div className='form-group '>
-                                <label className='house-form__label2 '>Consumption:</label>
-                                <input className='form-control' type='text' placeholder='in kwh' required id='last_name' name='last_name' />
+                                <label className='publicT-form__label2 '>Distance:</label>
+                                <input className='form-control' type='text' placeholder='The distance in KM.' required id='last_name' name='last_name' onChange={(e4) => {
+                                    setFData({ ...fData1, fDistance: e4.target.value })
+                                }} />
                             </div>
                         </div>
-
-
                         <div className='traditionalCountry-dd'>
                             <div className='form-group bottom35'>
-                                <label className='house-form__label2'>The country or continent providing the hydro:</label>
+                                <label className='publicT-form__label2'>Type:</label>
 
                                 <div className="dropdown">
-                                    {/* <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Country</button>
-                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a className="dropdown-item" href="#">Action</a>
-                                        <a className="dropdown-item" href="#">Another action</a>
-                                        <a className="dropdown-item" href="#">Something else here</a>
-                                    </div> */}
-
-                                    <select className='form-control' id='country' name='country'>
-                                        <option value='USA'>Select Country</option>
-                                        <option value='USA'>USA</option>
-                                        <option value='Canada'>Canada</option>
-                                        <option value='UK'>UK</option>
-                                        <option value='Australia'>Australia</option>
-                                        <option value='India'>India</option>
+                                    <select className='form-control' id='pt-type' name='pt-type' onChange={(e4) => {
+                                        setFData({ ...fData1, fType: e4.target.value })
+                                    }}>
+                                        <option value='Default'>Select</option>
+                                        <option value='DomesticFlight'>Domestic Flight</option>
+                                        <option value='ShortEconomyClassFlight'>Short Economy Class Flight</option>
+                                        <option value='ShortBusinessClassFlight'>Short Business Class Flight</option>
+                                        <option value='LongEconomyClassFlight'>Long Economy Class Flight</option>
+                                        <option value='LongPremiumClassFlight'>Long Premium Class Flight</option>
+                                        <option value='LongBusinessClassFlight'>Long Business Class Flight</option>
+                                        <option value='LongFirstClassFlight'>Long First Class Flight</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div className='traditionalbtn col-sm-12 mt-4'>
-                            <button type='submit' className='house-form__button primary p-2' id='submit_btn' style={{ width: 'fit-content' }}>
+
+                        <div className='pTbtn col-sm-12 mt-4'>
+                            <button type='submit' className='publicT-form__button primary p-2' id='submit_btn' style={{ width: 'fit-content' }} onClick={() => fSubmitData()}>
                                 Calculate
                             </button>
                         </div>

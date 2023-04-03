@@ -173,6 +173,7 @@ function Navbar() {
               viewBox="0 0 24 24"
               width="36px"
               fill="#111111"
+              cursor="pointer"
               onClick={handleOpen}
             >
               <path d="M0 0h24v24H0V0z" fill="none" />

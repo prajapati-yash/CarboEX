@@ -1,27 +1,28 @@
 import React from 'react'
 import '../../../styles/calculator/bodycalc/PublicTransitCalc.css'
-import HeadCalculator from '../headcalc/HeadCalculator'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import StoreCalculation from '../storecalculation/StoreCalculation'
 
-function PublicTransitCalc({ setResultCalcAll }) {
+function PublicTransitCalc({ onValueChange, props }) {
 
     const [ptData1, setPtData] = useState({
         ptDistance: null,
         ptType: null
     })
-    const [calcResult, setCalcResult] = useState();
 
-
-    var data = JSON.stringify(`{\n      "distance": ${ptData1.ptDistance},\n      "type": ${ptData1.ptType}\n      }: ''`);
+    var data = {
+        distance: ptData1.ptDistance,
+        type: ptData1.ptType,
+    };
+    // var data = JSON.stringify(`{\n      "distance": ${ptData1.ptDistance},\n      "type": ${ptData1.ptType}\n      }: ''`);
 
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
         url: `https://app.trycarbonapi.com/api/publicTransit?distance=${ptData1.ptDistance}&type=${ptData1.ptType}`,
         headers: {
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiODk3YjJkMzQ3YzIzYjdjNzBjNzlmOGQyNjhiYzYxYzM4NDk4NDI3YjJlZDcyMzgwNDc5MDlhNmJhMDlkZjM4MTU1NmIxZjQ3ZmE4ZWQ0NzAiLCJpYXQiOjE2Nzk4MjgxNjksIm5iZiI6MTY3OTgyODE2OSwiZXhwIjoxNzExNDUwNTY3LCJzdWIiOiI0MDQ0Iiwic2NvcGVzIjpbXX0.pq124WIoqCFFVR5CjXtOwM9_N_qYJDcNYSl7tLs-Epy0q77e4sceGkhT-ygmg7ELvSz1OVyQrCnPPdeaEm2puw',
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiNWQ3OWMwYjVmODdmODBkMDA1YTFjZWI4MWI1OGFlZThjN2ZlOTQ5NDIwYmFkODMxNGIxMDZmODRkNzdiZjBiMjY1YzZhZjI0NmRjMDFmYmQiLCJpYXQiOjE2ODAwNzQxMTgsIm5iZiI6MTY4MDA3NDExOCwiZXhwIjoxNzExNjk2NTE4LCJzdWIiOiI0MDY0Iiwic2NvcGVzIjpbXX0.cN3WCdheF7uezNVs8mQ4IFE0sQfEUBRNA6fkR8a2okkkqBAmr2XMZIBtFtdwi78-hRdzZcAjj_1uMZyb77LkSA',
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: data
@@ -40,23 +41,22 @@ function PublicTransitCalc({ setResultCalcAll }) {
         await axios(config)
             .then(function (response) {
                 const ptResult = JSON.stringify(response.data.carbon);
-                alert(`Carbon: ${ptResult}`);
-                console.log(`Carbon: ${ptResult}`);
+                // alert(`Carbon: ${ptResult}`);
+                // console.log(`Carbon: ${ptResult}`);
                 const numbers = ptResult.match(/\d+(\.\d+)?/g);
                 // console.log(numbers[0]);
                 const demo = numbers[0];
+                alert(demo)
                 console.log(demo)
-                // const demo = setCalcResult(numbers[0]);
-                // setResultCalcAll(prevValues => ({ ...prevValues, PublicTransitCalc: demo }));
+
+                // const value = ptResult
+                const value = demo
+                onValueChange(value);
             })
             .catch(function (error) {
                 console.log(error);
             });
     };
-
-    // useEffect(() => {
-    //     setResultCalcAll(prevValues => ({ ...prevValues, PublicTransitCalc: calcResult }));
-    // }, [calcResult, setResultCalcAll]);
 
     return (
         <>

@@ -1,66 +1,47 @@
-import React, { Fragment } from 'react'
-import '../../../styles/calculator/bodycalc/TraditionalBodyCalc.css'
-import HeadCalculator from '../headcalc/HeadCalculator'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import StoreCalculation from '../storecalculation/StoreCalculation'
+import React, { useState } from 'react';
+import axios from 'axios';
+import StoreCalculation from '../storecalculation/StoreCalculation';
+import '../../../styles/calculator/bodycalc/TraditionalBodyCalc.css';
+// import dotenv from 'dotenv';
 
-function TraditionalBodyCalc({ setResultCalcAll }) {
-    const [calcResult, setCalcResult] = useState("");
-    const [teData1, setTeData] = useState({
+function TraditionalBodyCalc({ onValueChange }) {
+    const [teData, setTeData] = useState({
         teConsumption: null,
-        teCountry: null
-    })
-
-    var data = {
-        consumption: teData1.teConsumption,
-        location: teData1.teCountry,
-    };
-
-    var config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `https://app.trycarbonapi.com/api/traditionalHydro?consumption=${teData1.teConsumption}&location=${teData1.teCountry}`,
-        headers: {
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiODk3YjJkMzQ3YzIzYjdjNzBjNzlmOGQyNjhiYzYxYzM4NDk4NDI3YjJlZDcyMzgwNDc5MDlhNmJhMDlkZjM4MTU1NmIxZjQ3ZmE4ZWQ0NzAiLCJpYXQiOjE2Nzk4MjgxNjksIm5iZiI6MTY3OTgyODE2OSwiZXhwIjoxNzExNDUwNTY3LCJzdWIiOiI0MDQ0Iiwic2NvcGVzIjpbXX0.pq124WIoqCFFVR5CjXtOwM9_N_qYJDcNYSl7tLs-Epy0q77e4sceGkhT-ygmg7ELvSz1OVyQrCnPPdeaEm2puw',
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: data
-    };
-
+        teCountry: null,
+    });
+    // const apiKey = process.env.API_BEARER_TOKEN || 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiNWQ3OWMwYjVmODdmODBkMDA1YTFjZWI4MWI1OGFlZThjN2ZlOTQ5NDIwYmFkODMxNGIxMDZmODRkNzdiZjBiMjY1YzZhZjI0NmRjMDFmYmQiLCJpYXQiOjE2ODAwNzQxMTgsIm5iZiI6MTY4MDA3NDExOCwiZXhwIjoxNzExNjk2NTE4LCJzdWIiOiI0MDY0Iiwic2NvcGVzIjpbXX0.cN3WCdheF7uezNVs8mQ4IFE0sQfEUBRNA6fkR8a2okkkqBAmr2XMZIBtFtdwi78-hRdzZcAjj_1uMZyb77LkSA';
+    // // console.log(apiKey)
     const teSubmitData = async () => {
-        // console.log(`${teData1.teConsumption} ${teData1.teCountry}`)
-        // console.log(data)
+        // console.log(apiKey)
+        const data = {
+            consumption: teData.teConsumption,
+            location: teData.teCountry,
+        };
 
-        axios.request(config)
-            .then((response) => {
-                const teResult = JSON.stringify(response.data.carbon);
-                alert(`Carbon : ${teResult}`);
-                console.log(`Carbon : ${teResult}`);
-                const numbers1 = teResult.match(/\d+(\.\d+)?/g);
-                // alert(numbers1[0])
-                console.log(numbers1[0]);
-                // setCalcResult(numbers1[0])
-                // setCalcResult(prevValues => ({ ...prevValues, TraditionalBodyCalc: numbers1[0] }));
-                // setResultCalcAll = { setResultCalcAll }
-                // setCalcResult(prevValues => ({ ...prevValues, TraditionalBodyCalc: setCalcResult(numbers1[0]) }));
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        const config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: `https://app.trycarbonapi.com/api/traditionalHydro?consumption=${teData.teConsumption}&location=${teData.teCountry}`,
+            headers: {
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiNWQ3OWMwYjVmODdmODBkMDA1YTFjZWI4MWI1OGFlZThjN2ZlOTQ5NDIwYmFkODMxNGIxMDZmODRkNzdiZjBiMjY1YzZhZjI0NmRjMDFmYmQiLCJpYXQiOjE2ODAwNzQxMTgsIm5iZiI6MTY4MDA3NDExOCwiZXhwIjoxNzExNjk2NTE4LCJzdWIiOiI0MDY0Iiwic2NvcGVzIjpbXX0.cN3WCdheF7uezNVs8mQ4IFE0sQfEUBRNA6fkR8a2okkkqBAmr2XMZIBtFtdwi78-hRdzZcAjj_1uMZyb77LkSA',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            data: data,
+        };
+
+        try {
+            const response = await axios.request(config);
+            console.log(response)
+            const teResult = JSON.stringify(response.data.carbon);
+            console.log(teResult)
+            const numbers = teResult.match(/\d+(\.\d+)?/g);
+            const value = numbers[0];
+            alert(value)
+            onValueChange(value);
+        } catch (error) {
+            console.log(error);
+        }
     };
-
-
-    // useEffect(() => {
-    //     setResultCalcAll(prevValues => ({ ...prevValues, TraditionalBodyCalc: calcResult }));
-    // }, [calcResult, setResultCalcAll]);
-
-
-
-    // useEffect(() => {
-    //     console.log(teData1);
-    // }, [teData1]);
-
 
     return (
         <>
@@ -74,21 +55,15 @@ function TraditionalBodyCalc({ setResultCalcAll }) {
                         <div className='traditionalCountry-ip'>
                             <div className='form-group'>
                                 <label className='house-form__label2'>Consumption:</label>
-                                <input className='form-control' type='text' placeholder='in kwh' required id='tempN' name='tempN' onChange={(e) => {
-                                    setTeData({ ...teData1, teConsumption: e.target.value })
-                                }} />
+                                <input className='form-control' type='text' placeholder='in kwh' required id='tempN' name='tempN' onChange={(e) => setTeData({ ...teData, teConsumption: e.target.value })} />
                             </div>
                         </div>
-
-
                         <div className='traditionalCountry-dd'>
                             <div className='form-group bottom35'>
                                 <label className='house-form__label2'>The country or continent providing the hydro:</label>
-
-                                <div className="dropdown">
-
+                                <div className='dropdown'>
                                     <select className='form-control' id='country' name='country' onChange={(e) => {
-                                        setTeData({ ...teData1, teCountry: e.target.value })
+                                        setTeData({ ...teData, teCountry: e.target.value })
                                     }}>
                                         <option value='Default'>Select Country</option>
                                         <option value='USA'>USA</option>
@@ -111,7 +86,7 @@ function TraditionalBodyCalc({ setResultCalcAll }) {
                     </div>
                 </div>
             </div>
-
+            {/* </form> */}
         </>
     )
 }

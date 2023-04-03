@@ -15,6 +15,7 @@ function HomeAbout() {
                             <div className=" box-bg mb-lg-0 mb-sm-4 mb-4 align-self-stretch py-5 px-4" key={index}>{item.boxContent}</div>
                         ))}
                     </div>
+                  
                 </div>
             </div>
 
