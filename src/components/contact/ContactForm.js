@@ -77,7 +77,8 @@ function ContactForm() {
                     </div>
                     <div className='conForm-Detail py-5 col-md-8'>
                         <div className='conForm-Detail2'>
-                            <form className='form1 py-3' onSubmit={handleSubmit}>
+                            <form className='form1 py-3' onSubmit={handleSubmit} >
+                                {/* <form className='form1 py-3' action="https://formsubmit.co/devtestingexample1@gmail.com" method="POST"> */}
                                 <div className='form2'>
                                     <div className="row mb-4">
                                         <div className="col">
@@ -126,7 +127,8 @@ function ContactForm() {
                                             required></textarea>
                                     </div>
                                     <div className='sendMessageBtn'>
-                                        <button type="submit" value="Send Message" className="submitConFBtn btn btn-primary btn-block mt-3">{status}</button>
+                                        <button type="submit" name='_next' value="https://carboex.vercel.app/contact" className="submitConFBtn btn btn-primary btn-block mt-3">{status}</button>
+                                        {/* <button type="submit" value="Send Message" className="submitConFBtn btn btn-primary btn-block mt-3">{status}</button> */}
                                     </div>
                                 </div>
                             </form>
