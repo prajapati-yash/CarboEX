@@ -1,8 +1,8 @@
 import '../../../styles/calculator/storecalculation/StoreCalculation.css'
-import TraditionalBodyCalc from '../bodycalc/TraditionalBodyCalc'
-import PublicTransitCalc from '../bodycalc/PublicTransitCalc'
-import Navbar from '../../navbar/Navbar';
-import Footer from '../../footer/Footer';
+// import TraditionalBodyCalc from '../bodycalc/TraditionalBodyCalc'
+// import PublicTransitCalc from '../bodycalc/PublicTransitCalc'
+// import Navbar from '../../navbar/Navbar';
+// import Footer from '../../footer/Footer';
 import React, { useEffect, useState } from 'react'
 import ResultCalculation from './ResultCalculation'; // import the Modal component
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import StoreCalculation from '../storecalculation/StoreCalculation';
+// import StoreCalculation from '../storecalculation/StoreCalculation';
 import '../../../styles/calculator/bodycalc/TraditionalBodyCalc.css';
+// import { useEffect } from 'react';
 // import dotenv from 'dotenv';
 
 function TraditionalBodyCalc({ onValueChange }) {
@@ -9,8 +10,14 @@ function TraditionalBodyCalc({ onValueChange }) {
         teConsumption: null,
         teCountry: null,
     });
-    // const apiKey = process.env.API_BEARER_TOKEN || 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiNWQ3OWMwYjVmODdmODBkMDA1YTFjZWI4MWI1OGFlZThjN2ZlOTQ5NDIwYmFkODMxNGIxMDZmODRkNzdiZjBiMjY1YzZhZjI0NmRjMDFmYmQiLCJpYXQiOjE2ODAwNzQxMTgsIm5iZiI6MTY4MDA3NDExOCwiZXhwIjoxNzExNjk2NTE4LCJzdWIiOiI0MDY0Iiwic2NvcGVzIjpbXX0.cN3WCdheF7uezNVs8mQ4IFE0sQfEUBRNA6fkR8a2okkkqBAmr2XMZIBtFtdwi78-hRdzZcAjj_1uMZyb77LkSA';
-    // // console.log(apiKey)
+
+    // useEffect(() => {
+    //     const apiKey = process.env.REACT_APP_API_BEARER_TOKEN;
+    //     console.log(apiKey)
+    // }, [])
+
+    const apiKey = process.env.REACT_APP_API_BEARER_TOKEN;
+    // console.log(apiKey)
     const teSubmitData = async () => {
         // console.log(apiKey)
         const data = {
@@ -23,15 +30,14 @@ function TraditionalBodyCalc({ onValueChange }) {
             maxBodyLength: Infinity,
             url: `https://app.trycarbonapi.com/api/traditionalHydro?consumption=${teData.teConsumption}&location=${teData.teCountry}`,
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiNWQ3OWMwYjVmODdmODBkMDA1YTFjZWI4MWI1OGFlZThjN2ZlOTQ5NDIwYmFkODMxNGIxMDZmODRkNzdiZjBiMjY1YzZhZjI0NmRjMDFmYmQiLCJpYXQiOjE2ODAwNzQxMTgsIm5iZiI6MTY4MDA3NDExOCwiZXhwIjoxNzExNjk2NTE4LCJzdWIiOiI0MDY0Iiwic2NvcGVzIjpbXX0.cN3WCdheF7uezNVs8mQ4IFE0sQfEUBRNA6fkR8a2okkkqBAmr2XMZIBtFtdwi78-hRdzZcAjj_1uMZyb77LkSA',
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Bearer ${apiKey}`,
             },
             data: data,
         };
 
         try {
             const response = await axios.request(config);
-            console.log(response)
+            // console.log(response)
             const teResult = JSON.stringify(response.data.carbon);
             console.log(teResult)
             const numbers = teResult.match(/\d+(\.\d+)?/g);

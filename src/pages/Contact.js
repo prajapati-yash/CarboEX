@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/navbar/Navbar'
+import ContactForm from '../components/contact/ContactForm'
 
 function Contact() {
   return (
     <div>
-
+      <ContactForm />
     </div>
   )
 }
