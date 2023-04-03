@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import '../../styles/contact/ContactForm.css';
 
 
@@ -28,7 +28,7 @@ function ContactForm() {
             message: message.value
         }
         try {
-            let response = await fetch("http://localhost:3000/contact/send-email", {
+            let response = await fetch("http://localhost:5000/contact/send-email", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json;charset=utf-8",
@@ -68,9 +68,9 @@ function ContactForm() {
                             </div>
                             <div className='socialIcons py-3 '>
                                 <span className='socialIcons2 '>
-                                    <a className='iconsList' target='_blank' href='https://www.twitter.com'><i className="iconsList2 fab fa-twitter fa-lg px-2"></i></a>
-                                    <a className='iconsList' target='_blank' href='https://www.facebook.com'><i className="iconsList2 fab fa-facebook fa-lg px-2"></i></a>
-                                    <a className='iconsList' target='_blank' href='https://www.instagram.com'><i className="iconsList2 fab fa-instagram fa-lg px-2"></i></a>
+                                    <a className='iconsList' target='_blank' href='https://www.twitter.com' rel='noreferrer noopener'><i className="iconsList2 fab fa-twitter fa-lg px-2"></i></a>
+                                    <a className='iconsList' target='_blank' href='https://www.facebook.com' rel='noreferrer noopener'><i className="iconsList2 fab fa-facebook fa-lg px-2"></i></a>
+                                    <a className='iconsList' target='_blank' href='https://www.instagram.com' rel='noreferrer noopener'><i className="iconsList2 fab fa-instagram fa-lg px-2"></i></a>
                                 </span>
                             </div>
                         </div>

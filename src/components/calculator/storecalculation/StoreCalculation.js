@@ -37,6 +37,8 @@ function StoreCalculation({ values }) {
             0
         );
         setSum(newSum);
+        console.log(latestValues)
+
         console.log(newSum)
         // alert()
         setShowModal(true); // show the modal when the sum is calculated

@@ -4,22 +4,17 @@ import Home from "./pages/Home";
 import Resources from "./pages/Resources";
 import Calculator from "./pages/Calculator";
 import Contact from "./pages/Contact";
-// import LandingCalcMain from "./components/calculator/maincalc/LandingCalcMain";
-import CleanEnergyCalc from './components/calculator/bodycalc/CleanEnergyCalc'
-import FuelToCo2Calc from './components/calculator/bodycalc/FuelToCo2Calc'
-import CarTravelCalc from './components/calculator/bodycalc/CarTravelCalc'
-import FlightCalc from './components/calculator/bodycalc/FlightCalc'
-import StoreCalculation from "./components/calculator/storecalculation/StoreCalculation";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+// import { useState } from "react";
 
 
 function App() {
 
-  const [address, setAddress] = useState();
+  // const [address, setAddress] = useState();
   async function getAddressFromMetaMask() {
     // Check if MetaMask is installed
     if (!window.ethereum) {
@@ -35,7 +30,7 @@ function App() {
     // Get the user's address
     const signer = provider.getSigner();
     const address = await signer.getAddress();
-    setAddress(address);
+    // setAddress(address);
     return address;
   }
 
@@ -53,16 +48,7 @@ function App() {
           <Route path='/resources' element={<Resources />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/calculator' element={<Calculator />} />
-          {/* <Route path='/calculator/traditionalenergy' element={<Calculator />}></Route> */}
-          {/* <Route path='/calculator/publictransit' element={<Calculator />}></Route> */}
-          {/* <Route path='/calculator/cleanenergy' element={<CleanEnergyCalc />}></Route >
-          <Route path='/calculator/fueltoco2' element={<FuelToCo2Calc />}></Route >
-          <Route path='/calculator/cartravel' element={<CarTravelCalc />}></Route >
-          <Route path='/calculator/flight' element={<FlightCalc />}></Route >
-          <Route path='/calculator/motorbike' element={<MotorBikeMain />}></Route >*/}
-          <Route path='/calculator/*' element={<Calculator />}></Route>
-          {/* <Route path='/calculator/result' element={<Calculator />}></Route> */}
-          {/* <Route path='/calculator/*' element={<LandingCalc />}></Route> */}
+          <Route path='/calculator/*' element={<Calculator />} />
           <Route path='/*' element={<Home />} />
         </Routes>
         <Footer />

@@ -22,6 +22,7 @@
   border-bottom-style: solid;
   border-bottom-width: 2.5px;
   width: fit-content;
+  text-transform: uppercase;
 }
 
 .platform-content {
