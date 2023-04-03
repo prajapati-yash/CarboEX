@@ -68,9 +68,9 @@ function ContactForm() {
                             </div>
                             <div className='socialIcons py-3 '>
                                 <span className='socialIcons2 '>
-                                    <a className='iconsList' target='_blank' href='https://www.twitter.com' rel=''><i className="iconsList2 fab fa-twitter fa-lg px-2"></i></a>
-                                    <a className='iconsList' target='_blank' href='https://www.facebook.com' rel=''><i className="iconsList2 fab fa-facebook fa-lg px-2"></i></a>
-                                    <a className='iconsList' target='_blank' href='https://www.instagram.com' rel=''><i className="iconsList2 fab fa-instagram fa-lg px-2"></i></a>
+                                    <a className='iconsList' target='_blank' href='https://www.twitter.com' rel='noreferrer noopener'><i className="iconsList2 fab fa-twitter fa-lg px-2"></i></a>
+                                    <a className='iconsList' target='_blank' href='https://www.facebook.com' rel='noreferrer noopener'><i className="iconsList2 fab fa-facebook fa-lg px-2"></i></a>
+                                    <a className='iconsList' target='_blank' href='https://www.instagram.com' rel='noreferrer noopener'><i className="iconsList2 fab fa-instagram fa-lg px-2"></i></a>
                                 </span>
                             </div>
                         </div>

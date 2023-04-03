@@ -8,12 +8,12 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 
 function App() {
 
-  const [address, setAddress] = useState();
+  // const [address, setAddress] = useState();
   async function getAddressFromMetaMask() {
     // Check if MetaMask is installed
     if (!window.ethereum) {
@@ -29,7 +29,7 @@ function App() {
     // Get the user's address
     const signer = provider.getSigner();
     const address = await signer.getAddress();
-    setAddress(address);
+    // setAddress(address);
     return address;
   }
 
