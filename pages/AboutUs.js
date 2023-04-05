@@ -36,14 +36,17 @@ export default function AboutUs() {
             source={require("../assets/aboutUsAssets/lines2.png")}
             style={styles.lines2}
           ></Image>
+
           <View style={styles.view_vision_description}>
-            <Text style={styles.text_vision_description}>
-              The platform will automate the exchange of carbon credits by using
-              smart contracts, reducing transaction cost and providing an
-              incentive mechanism for companies to reduce their emissions. If
-              carbon credits expire before the allotted time, a penalty must be
-              paid before another batch can be purchased.
-            </Text>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.text_vision_description}>
+                The platform will automate the exchange of carbon credits by
+                using smart contracts, reducing transaction cost and providing
+                an incentive mechanism for companies to reduce their emissions.
+                If carbon credits expire before the allotted time, a penalty
+                must be paid before another batch can be purchased.
+              </Text>
+            </View>
           </View>
         </View>
 
@@ -56,7 +59,15 @@ export default function AboutUs() {
             style={styles.lines1}
           ></Image>
           <View style={styles.view_mission_description}>
-            <Text style={styles.text_mission_description}>Description</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.text_mission_description}>
+                The platform will automate the exchange of carbon credits by
+                using smart contracts, reducing transaction cost and providing
+                an incentive mechanism for companies to reduce their emissions.
+                If carbon credits expire before the allotted time, a penalty
+                must be paid before another batch can be purchased.
+              </Text>
+            </View>
           </View>
         </View>
 
