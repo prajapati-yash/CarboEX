@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
       backgroundColor: "#4681f4",
       borderRadius: 8,
       marginTop: "4%",
+      justifyContent: "center",
     },
     calculate_button_text: {
       textAlign: "center",

@@ -15,13 +15,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image1: {
+    // flex: 1,
     height: responsiveHeight(50),
     width: responsiveWidth(90),
     marginTop: 10,
   },
-  text: {
+  image_textView: {
+    flex: 1,
+    justifyContent: "center",
     margin: "10%",
-    fontSize: responsiveFontSize(2.7),
+    // marginTop: "30%",
+    // marginBottom: "30%",
+  },
+  text: {
+    // margin: "10%",
+    fontSize: responsiveFontSize(3),
     fontWeight: "bold",
     textAlign: "center",
     color: "#fff",
@@ -208,8 +216,8 @@ const styles = StyleSheet.create({
     marginBottom: "3%",
   },
   map: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
 });
 

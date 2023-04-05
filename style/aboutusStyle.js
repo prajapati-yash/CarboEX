@@ -31,6 +31,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
   },
+  blur_view: {
+    // flex: 1,
+    marginTop: "-48%",
+    width: responsiveWidth(100),
+    zIndex: 2,
+    backgroundColor: "#CDE990",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  blur_view_text: {
+    fontSize: responsiveFontSize(3),
+  },
   text: {
     fontSize: 24,
     fontWeight: "bold",
@@ -43,7 +55,7 @@ const styles = StyleSheet.create({
   },
   view_vision: {
     width: responsiveWidth(40),
-    height: responsiveHeight(8),
+    // height: responsiveHeight(8),
     backgroundColor: "#86EBF8",
     borderRadius: 18,
     justifyContent: "center",
@@ -56,6 +68,8 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2.5),
     fontWeight: "bold",
     color: "#fff",
+    marginTop: "6%",
+    marginBottom: "6%",
   },
   view_vision_description: {
     // flex: 1,
@@ -72,8 +86,8 @@ const styles = StyleSheet.create({
     marginLeft: "4%",
     marginRight: "4%",
     textAlign: "justify",
-    marginTop: "20%",
-    paddingBottom: "11%",
+    // marginTop: "20%",
+    // paddingBottom: "11%",
     fontSize: responsiveFontSize(2),
   },
 
@@ -133,7 +147,7 @@ const styles = StyleSheet.create({
     margin: "8%",
   },
   team_text: {
-    fontSize: responsiveFontSize(3.2),
+    fontSize: responsiveFontSize(3.5),
     color: "#fff",
     fontWeight: "bold",
   },
@@ -158,14 +172,18 @@ const styles = StyleSheet.create({
   },
   blur_view: {
     // flex: 1,
-    marginTop: "-55%",
+    // marginTop: "-55%",
     width: responsiveWidth(100),
     zIndex: 2,
     backgroundColor: "#CDE990",
     alignItems: "center",
   },
   blur_view_text: {
-    fontSize: responsiveFontSize(5),
+    fontSize: responsiveFontSize(2.5),
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#003865",
+    opacity: 0.8,
   },
 });
 
