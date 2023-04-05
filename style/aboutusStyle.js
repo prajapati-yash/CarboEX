@@ -31,6 +31,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
   },
+  blur_view: {
+    // flex: 1,
+    marginTop: "-48%",
+    width: responsiveWidth(100),
+    zIndex: 2,
+    backgroundColor: "#CDE990",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  blur_view_text: {
+    fontSize: responsiveFontSize(3),
+  },
   text: {
     fontSize: 24,
     fontWeight: "bold",
@@ -43,7 +55,7 @@ const styles = StyleSheet.create({
   },
   view_vision: {
     width: responsiveWidth(40),
-    height: responsiveHeight(8),
+    // height: responsiveHeight(8),
     backgroundColor: "#86EBF8",
     borderRadius: 18,
     justifyContent: "center",
@@ -56,11 +68,13 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2.5),
     fontWeight: "bold",
     color: "#fff",
+    marginTop: "6%",
+    marginBottom: "6%",
   },
   view_vision_description: {
     // flex: 1,
     width: responsiveWidth(100),
-    height: responsiveHeight(40),
+    // height: responsiveHeight(40),
     backgroundColor: "#86EBF8",
     borderBottomLeftRadius: 80,
     borderBottomRightRadius: 80,
@@ -69,11 +83,11 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   text_vision_description: {
-    marginLeft: "3%",
-    marginRight: "2%",
+    marginLeft: "4%",
+    marginRight: "4%",
     textAlign: "justify",
-    marginTop: "20%",
-    marginBottom: "15%",
+    // marginTop: "20%",
+    // marginBottom: "15%",
     fontSize: responsiveFontSize(2),
   },
 
@@ -149,17 +163,7 @@ const styles = StyleSheet.create({
     width: 130,
     borderRadius: 65,
   },
-  blur_view: {
-    // flex: 1,
-    marginTop: "-48%",
-    width: responsiveWidth(100),
-    zIndex: 2,
-    backgroundColor: "#CDE990",
-    alignItems: "center",
-  },
-  blur_view_text: {
-    fontSize: responsiveFontSize(5),
-  },
+  
 });
 
 export default styles;

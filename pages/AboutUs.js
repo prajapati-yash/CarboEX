@@ -17,33 +17,71 @@ export default function AboutUs() {
               borderRadius={50}
               source={require("../assets/aboutUsAssets/BG1.png")}
               // blurRadius={0}
-            ></ImageBackground>
-          </View>
-          <View>
-            <BlurView style={{ opacity: 0.6 }}>
-              <View style={styles.blur_view}>
-                <Text style={styles.blur_view_text}>Lorem Ipsum Dollar</Text>
-              </View>
-            </BlurView>
+            >
+              {/* <BlurView style={{ opacity: 0.6 }}> */}
+                <View style={styles.blur_view}>
+                  <Text style={styles.blur_view_text}>
+                    We've made this project for a cause with a dream in mind.
+                    Know our vision and mission statements.
+                  </Text>
+                </View>
+              {/* </BlurView> */}
+            </ImageBackground>
           </View>
         </View>
 
         <View style={styles.centerView}>
           <View style={styles.view_vision}>
-            <Text style={styles.text_vision}>Our Vision</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.text_vision}>Our Vision</Text>
+            </View>
           </View>
           <Image
             source={require("../assets/aboutUsAssets/lines2.png")}
             style={styles.lines2}
           ></Image>
           <View style={styles.view_vision_description}>
-            <Text style={styles.text_vision_description}>
-              The platform will automate the exchange of carbon credits by using
-              smart contracts, reducing transaction cost and providing an
-              incentive mechanism for companies to reduce their emissions. If
-              carbon credits expire before the allotted time, a penalty must be
-              paid before another batch can be purchased.
-            </Text>
+            <View style={{ flex: 1 }}>
+              <Text
+                style={[styles.text_vision_description, { marginTop: "20%" }]}
+              >
+                Our vision is to create a sustainable future for our planet by
+                harnessing the power of blockchain technology to reduce carbon
+                emissions. We believe that a healthy planet is a foundation for
+                a healthy society.
+              </Text>
+              <Text style={styles.text_vision_description}>
+                Our platform aims to reduce the carbon footprint through
+                blockchain technology by providing a marketplace for CarboEx
+                token buyers and sellers. Our vision includes:
+              </Text>
+              <Text style={styles.text_vision_description}>
+                • Creating a sustainable future for the planet.{" "}
+              </Text>
+              <Text style={styles.text_vision_description}>
+                • Leveraging the power of blockchain technology to reduce carbon
+                emissions.
+              </Text>
+              <Text style={styles.text_vision_description}>
+                • Connect buyers and sellers of CarboEx tokens to reduce carbon
+                footprint globally.
+              </Text>
+              <Text style={styles.text_vision_description}>
+                • Promoting sustainability, transparency, and innovation.
+              </Text>
+              <Text style={styles.text_vision_description}>
+                • Providing a reliable, scalable, and transparent marketplace
+                for carbon credits.
+              </Text>
+              <Text
+                style={[
+                  styles.text_vision_description,
+                  { marginBottom: "15%" },
+                ]}
+              >
+                • Building a brighter, greener future for generations to come.
+              </Text>
+            </View>
           </View>
         </View>
 

@@ -42,8 +42,11 @@ export default function ContactUs() {
           borderRadius={80}
           source={require("../assets/contactUsAssets/contactus.png")}
         >
-          <View>
-            <Text style={styles.text}>Connect Tagline</Text>
+          <View style={styles.image_textView}>
+            <Text style={styles.text}>
+              To know more about our project or participate in Carbon trading,
+              fill out the form and send us your query!
+            </Text>
           </View>
         </ImageBackground>
 
