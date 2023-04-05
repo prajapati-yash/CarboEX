@@ -19,12 +19,14 @@ export default function AboutUs() {
               // blurRadius={0}
             >
               {/* <BlurView style={{ opacity: 0.6 }}> */}
-                <View style={styles.blur_view}>
-                  <Text style={styles.blur_view_text}>
-                    We've made this project for a cause with a dream in mind.
-                    Know our vision and mission statements.
-                  </Text>
+              {/* <View style={styles.blur_view}> */}
+              <View style={{justifyContent: "center", flex: 1, margin: "7%"}}>
+                <Text style={styles.blur_view_text}>
+                  We've made this project for a cause with a dream in mind. Know
+                  our vision and mission statements.
+                </Text>
                 </View>
+              {/* </View> */}
               {/* </BlurView> */}
             </ImageBackground>
           </View>
@@ -40,6 +42,7 @@ export default function AboutUs() {
             source={require("../assets/aboutUsAssets/lines2.png")}
             style={styles.lines2}
           ></Image>
+
           <View style={styles.view_vision_description}>
             <View style={{ flex: 1 }}>
               <Text
@@ -94,7 +97,20 @@ export default function AboutUs() {
             style={styles.lines1}
           ></Image>
           <View style={styles.view_mission_description}>
-            <Text style={styles.text_mission_description}>Description</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.text_mission_description}>
+                At CarboEx, our mission is to facilitate the reduction of carbon
+                emissions through market mechanisms. By creating a reliable and
+                accessible platform for carbon credit trading, we can contribute
+                to global efforts to mitigate climate change. Our platform
+                enables entities to participate in carbon trading safely and
+                openly. It is a chance for individuals and businesses to take
+                meaningful action towards a sustainable future. We are committed
+                to promoting transparency and integrity in the carbon trading
+                market. We achieve this by utilizing blockchain technology to
+                create an unchangeable and tamper-proof record of transactions.
+              </Text>
+            </View>
           </View>
         </View>
 
@@ -144,7 +160,7 @@ export default function AboutUs() {
                   style={styles.team_image}
                 ></Image>
               </View>
-              <View style={styles.row1}>
+              <View style={[styles.row1, {marginBottom: "10%"}]}>
                 <Image
                   source={require("../assets/aboutUsAssets/isha.jpeg")}
                   style={styles.team_image}

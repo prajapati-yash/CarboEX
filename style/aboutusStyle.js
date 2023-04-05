@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginRight: "4%",
     textAlign: "justify",
     // marginTop: "20%",
-    // marginBottom: "15%",
+    // paddingBottom: "11%",
     fontSize: responsiveFontSize(2),
   },
 
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     color: "#86EBF8",
   },
   view_mission_description: {
+    // flex: 1,
     width: responsiveWidth(100),
     // height: responsiveHeight(40),
     backgroundColor: "#fff",
@@ -125,14 +126,20 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   text_mission_description: {
+    marginLeft: "4%",
+    marginRight: "4%",
+    textAlign: "justify",
     marginTop: "20%",
+    paddingBottom: "11%",
     fontSize: responsiveFontSize(2),
   },
 
   image2: {
+    flex: 1,
     width: responsiveWidth(100),
-    height: responsiveHeight(90),
+    // height: responsiveHeight(90),
     marginTop: "5%",
+    marginBottom: "2%",
   },
 
   team_title: {
@@ -140,7 +147,7 @@ const styles = StyleSheet.create({
     margin: "8%",
   },
   team_text: {
-    fontSize: responsiveFontSize(3.2),
+    fontSize: responsiveFontSize(3.5),
     color: "#fff",
     fontWeight: "bold",
   },
@@ -163,7 +170,21 @@ const styles = StyleSheet.create({
     width: 130,
     borderRadius: 65,
   },
-  
+  blur_view: {
+    // flex: 1,
+    // marginTop: "-55%",
+    width: responsiveWidth(100),
+    zIndex: 2,
+    backgroundColor: "#CDE990",
+    alignItems: "center",
+  },
+  blur_view_text: {
+    fontSize: responsiveFontSize(2.5),
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#003865",
+    opacity: 0.8,
+  },
 });
 
 export default styles;
