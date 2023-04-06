@@ -45,7 +45,7 @@ function AboutTeam() {
           <div className="row ">
             {imageData.map((image) => (
               <div className="col-sm-4 mb-5" key={image.id}>
-                <div className="text-center mx-auto" style={{ height: "250px", width: "250px" }}>
+                <div className="text-center mx-auto img-div" >
                   <img src={image.src} className="img-fluid rounded-circle h-100" alt={image.alt} style={{ objectFit: "cover" }} />
                 </div>
               </div>

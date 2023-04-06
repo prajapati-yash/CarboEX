@@ -147,6 +147,13 @@
   }
 }
 
+@media only screen and (min-width:900px) and (max-width: 1040px) {
+.secondContainer{
+  padding: 4rem!important;
+}
+
+}
+
 @media only screen and (max-width: 1040px) {
   .my-component {
     min-height: fit-content;
