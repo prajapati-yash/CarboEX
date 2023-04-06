@@ -9,6 +9,7 @@ import Footer from "./components/footer/Footer";
 
 import { ethers } from "ethers";
 import { useEffect } from "react";
+// import { useState } from "react";
 
 
 function App() {
