@@ -5,10 +5,13 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  border-radius: 50px;
+  border-radius: 8rem;
   background-image: url("/public/assets/calculator/calculator_bg.png");
   background-size: cover;
   background-position: 100% 100%;
+  position: relative;
+  width: 90%;
+  height: 100%;
 }
 
 .lItems {

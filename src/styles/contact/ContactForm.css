@@ -1,3 +1,65 @@
+.contactHero {
+  position: relative;
+}
+
+.contactHeroImg {
+  background-image: url("/public/assets/contact/contactBG.png");
+  display: block;
+  /* z-index: -1; */
+  margin-left: auto;
+  margin-right: auto;
+  width: 85%;
+  background-size: cover;
+  height: 90vh;
+  border-radius: 8rem;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.contactHeroTagline {
+  position: absolute;
+  text-transform: uppercase;
+  /* z-index: 1; */
+  width: 70%;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.contactHeroTagline h1 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  letter-spacing: 0.2rem;
+  font-weight: bold;
+}
+
+@media (max-width: 767px) {
+  .contactHeroImg {
+    height: 40vh;
+    border-radius: 3rem;
+    width: 95%;
+  }
+  /* .contactHeroTagline h1 {
+    font-size: rem;
+  } */
+
+  .contactHero h1 {
+    font-size: small;
+  }
+}
+
+/**/
+
+.inputInfoAll::placeholder {
+  color: #978f8f;
+}
+.inputInfoAll:focus::placeholder {
+  color: rgb(220, 217, 217);
+}
+
+/**/
+
 .conForm-Main {
   display: flex;
   background-color: rgb(255, 255, 255);
@@ -17,7 +79,7 @@
   color: aliceblue;
   background-color: #16172e;
   padding: 3rem;
-  border-radius: 2.4rem;
+  border-radius: 5.4rem;
   z-index: 2;
 }
 
@@ -25,6 +87,7 @@
   font-size: 1.8rem;
   font-weight: 600;
   text-transform: uppercase;
+  margin-top: 1.5rem;
 }
 
 .conInfo-TagLine {
@@ -35,7 +98,8 @@
 }
 
 .conForm-Detail {
-  border-radius: 2.4rem;
+  border-radius: 5.4rem;
+  /* background-color: #89c670; */
   background-color: #b5df78;
   padding: 3rem;
   /* padding-left: 5rem; */
@@ -77,7 +141,14 @@
   margin-top: 2rem;
 }
 .conAdd1 {
-  text-align: justify;
+  text-align: inherit;
+}
+.conAdd12 {
+  color: white;
+  text-decoration: none;
+}
+.conAdd12:hover {
+  color: #4c91f8;
 }
 .socialIcons {
   margin-top: 3rem;
@@ -101,16 +172,23 @@
   font-size: 2em;
   padding: 1rem 0;
 }
-
+.ContactTitle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: xx-large;
+  font-weight: bolder;
+}
 /**/
 
 @media (max-width: 767px) {
   .conForm-Main2 {
     flex-direction: column;
-    margin: 2rem;
+    margin: 0 2rem;
   }
   .conForm-Detail {
     margin-left: 0;
+    border-radius: 3rem;
   }
   .conForm-Detail2 {
     margin-left: 0;
@@ -119,38 +197,68 @@
   .conInfo {
     justify-content: center;
     align-items: center;
+    padding: 2.5rem;
+    border-radius: 3rem;
+  }
+  .ContactTitle {
+    font-size: large;
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .conForm-Main {
-    flex-wrap: wrap;
+@media only screen and (min-width: 768px) and (max-width: 1038px) {
+  .rClass1 {
+    display: block;
+  }
+  .rClass2 {
+    display: block;
+  }
+  .conInfo-Head {
+    font-size: 1rem;
+  }
+  .conInfo-TagLine {
+    font-size: 0.7rem;
   }
   .conForm-Main2 {
-    margin: 3rem;
+    margin: 2rem;
+  }
+  .ContactTitle {
+    font-size: x-large;
   }
   .conInfo {
-    /* flex-basis: 35%; */
-    margin-right: 2rem;
+    border-radius: 5rem;
   }
   .conForm-Detail {
-    flex-basis: 60%;
-    margin-left: -7rem;
+    border-radius: 5rem;
   }
+
+  .contactHeroImg {
+    height: 60vh;
+    border-radius: 5rem;
+    width: 95%;
+  }
+
+  .contactHeroTagline h1 {
+    font-size: medium;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 670px) {
   .conForm-Detail2 {
-    margin-left: -6rem;
-    margin-right: 1rem;
-    padding-left: 12rem !important;
+    padding: 0rem;
+    display: contents;
   }
-  .conIcons1 {
-    margin-top: 2rem;
+  .conInfo-Head {
+    font-size: 1.5rem;
   }
-  .conInfo2 {
-    display: grid;
+  .conInfo-TagLine {
+    font-size: 0.7rem;
   }
-  /* .form2 {
-    flex-direction: column;
-  } */
+  .rClass1 {
+    display: block;
+  }
+  .rClass2 {
+    display: block;
+  }
 }
 
 /* @media only screen and (min-width: 1200px) {

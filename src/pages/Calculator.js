@@ -54,7 +54,7 @@ function Calculator() {
     };
     return (
         <>
-            <div className='mainCalclass1'>
+            <div className='mainCalclass1 mx-auto'>
                 <div className='mainLI d-flex justify-content-center'>
                     <ul className='navigation-list'>
                         <div className='lItems'>
