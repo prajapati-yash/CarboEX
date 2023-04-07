@@ -88,16 +88,16 @@ export default function Resource() {
                   <Text style={styles.section3_modal_text1}>
                     The CarboEx trading platform provides users with certain
                     CarboEx Tokens based on their Renewable Energy Certificate
-                    (REC). An individual or organization with a RE certificate
+                    (REC). An individual or organization with an RE certificate
                     obtains the tokens to operate their business. It is with an
                     oath that they shall abide by the carbon emissions limit.
                     Each token represents a digital allowance, i.e. each token
                     allows one to expend a certain amount of GHGs into the
                     atmosphere as you run your business/ organization/ factory.
                     If and when an organization or an individual spends less
-                    than their allowance, they can lend it to other companies
+                    than their allowance, they can sell it to other companies
                     who require the credits. This further leads to a marketplace
-                    where a company buys credits from a lender and uses them to
+                    where a company buys credits from a sender and uses them to
                     expend energy and release Carbon into the atmosphere.
                   </Text>
                   <Text style={styles.section3_modal_text2}>

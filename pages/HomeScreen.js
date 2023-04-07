@@ -126,7 +126,7 @@ export default function HomeScreen() {
           >
             <View>
               <Text style={styles.text}>
-                Control Carbon emission with CarboEx!
+              Transforming carbon credits trading through blockchain technology
               </Text>
             </View>
 

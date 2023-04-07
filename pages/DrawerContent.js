@@ -39,36 +39,50 @@ export function DrawerContent(props) {
                 props.navigation.navigate("Home");
               }}
             />
-            <DrawerItem label="Market" />
+            {/* <DrawerItem label="Market" /> */}
             <DrawerItem
               label="Resource"
               onPress={() => {
                 props.navigation.navigate("Resource");
               }}
             />
-            <DrawerItem
+            {/* <DrawerItem
               label="Calculator"
               onPress={() => {
                 props.navigation.navigate("Calculator");
               }}
-            />
+            /> */}
             <DrawerItem
               label="Contact Us"
               onPress={() => {
                 props.navigation.navigate("ContactUs");
               }}
             />
-          </Drawer.Section>
 
-          <Drawer.Section style={{ flex: 1, marginTop: 8 }}>
-            <DrawerItem label="Terms & Conditions" />
-            <DrawerItem label="Privacy Policy" />
             <DrawerItem
               label="About Us"
               onPress={() => {
                 props.navigation.navigate("AboutUs");
               }}
             />
+          </Drawer.Section>
+
+          <Drawer.Section style={{ flex: 1, marginTop: 8 }}>
+            {/* <DrawerItem label="Terms & Conditions" />
+            <DrawerItem label="Privacy Policy" />
+            <DrawerItem
+              label="About Us"
+              onPress={() => {
+                props.navigation.navigate("AboutUs");
+              }}
+            /> */}
+
+            <DrawerItem label="Login" />
+            <DrawerItem label="Sign Up" />
+            <DrawerItem label="Become a member" />
+            <DrawerItem label="Proposal Dashboard" />
+            <DrawerItem label="Proposal Details" />
+            <DrawerItem label="" />
           </Drawer.Section>
 
           <Drawer.Section
