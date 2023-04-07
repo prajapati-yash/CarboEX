@@ -9,7 +9,7 @@ function AboutHero() {
         </div>
       </div>
       <div className="aboutHeroText text-center">
-         Lorem Ipsum Dolor 
+      We've made this project for a cause with a dream in mind - to empower the next generation to trade carbon credits on the blockchain and fight climate change. 
       </div>
     </>
   )
