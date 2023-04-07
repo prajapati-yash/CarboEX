@@ -30,11 +30,19 @@
   text-decoration-thickness: 3px;
 }
 
+<<<<<<< HEAD
 @media only screen and (max-width: 768px) {
   .foot-links {
     justify-content: flex-start !important;
   }
   .quickLinks {
+=======
+@media only screen and (max-width: 769px) {
+.foot-links{
+    justify-content: flex-start!important;
+}
+.quickLinks{
+>>>>>>> 99c39e0235a8dd0ffe34833d55b6c55334fb9caa
     width: 90%;
   }
   .social-media {
