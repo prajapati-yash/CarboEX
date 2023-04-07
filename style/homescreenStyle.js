@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
   },
   section3_view1: {
     flex:1,
+    // alignSelf: 'stretch',
     width: responsiveWidth(62),
     // height: responsiveHeight(22),
     borderRadius: 50,

@@ -31,6 +31,37 @@ const handleLocationClick = () => {
 };
 
 export default function ContactUs() {
+  const [inputData, setInputData] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleSendMessage = async () => {
+    const { fname, lname, email, phone, message } = inputData;
+
+    const messageBody = {
+      fname: `${fname}`,
+      lname: `${lname}`,
+      email: `${email}`,
+      phone: `${phone}`,
+      message: `${message}`,
+    };
+
+    let response = await fetch("http://192.168.43.190:5000/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(messageBody),
+    });
+    console.log(response.json());
+    alert(response.json().status);
+    // console.log(response);
+  };
+
   return (
     <View style={{ flex: 1, alignItems: "center" }}>
       <ScrollView
@@ -142,7 +173,9 @@ export default function ContactUs() {
                 <TextInput
                   style={styles.input_box}
                   placeholder="Enter first name"
-                  // onChangeText={(value) => setFname(value)}
+                  onChangeText={(text) =>
+                    setInputData({ ...inputData, fname: text })
+                  }
                 ></TextInput>
               </View>
             </View>
@@ -155,7 +188,9 @@ export default function ContactUs() {
                 <TextInput
                   style={styles.input_box}
                   placeholder="Enter last name"
-                  // onChangeText={(value) => setLname(value)}
+                  onChangeText={(text) =>
+                    setInputData({ ...inputData, lname: text })
+                  }
                 ></TextInput>
               </View>
             </View>
@@ -168,7 +203,9 @@ export default function ContactUs() {
                 <TextInput
                   style={styles.input_box}
                   placeholder="Enter email address"
-                  // onChangeText={(value) => setEmail(value)}
+                  onChangeText={(text) =>
+                    setInputData({ ...inputData, email: text })
+                  }
                 ></TextInput>
               </View>
             </View>
@@ -181,7 +218,9 @@ export default function ContactUs() {
                 <TextInput
                   style={styles.input_box}
                   placeholder="Enter phone number"
-                  // onChangeText={(value) => setPhone(value)}
+                  onChangeText={(text) =>
+                    setInputData({ ...inputData, phone: text })
+                  }
                 ></TextInput>
               </View>
             </View>
@@ -198,7 +237,9 @@ export default function ContactUs() {
                   placeholderTextColor="grey"
                   numberOfLines={6}
                   multiline={true}
-                  // onChangeText={(value) => setAddress(value)}
+                  onChangeText={(text) =>
+                    setInputData({ ...inputData, message: text })
+                  }
                 />
               </View>
             </View>
@@ -207,6 +248,7 @@ export default function ContactUs() {
               <Pressable
                 style={styles.send_button}
                 android_ripple={{ color: "#ff0000" }}
+                onPress={handleSendMessage}
               >
                 <Text style={styles.send_button_text}>SEND MESSAGE</Text>
               </Pressable>

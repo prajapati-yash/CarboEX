@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginTop: "6%",
     marginBottom: "6%",
+    textAlign: "center",
   },
   view_vision_description: {
     // flex: 1,
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
   view_mission: {
     // flex: 1,
     width: responsiveWidth(40),
-    height: responsiveHeight(8),
+    // height: responsiveHeight(8),
     backgroundColor: "#FFFFFF",
     borderRadius: 18,
     justifyContent: "center",
@@ -112,6 +113,9 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2.5),
     fontWeight: "bold",
     color: "#86EBF8",
+    textAlign: "center",
+    marginTop: "6%",
+    marginBottom: "6%",
   },
   view_mission_description: {
     // flex: 1,
@@ -129,8 +133,8 @@ const styles = StyleSheet.create({
     marginLeft: "4%",
     marginRight: "4%",
     textAlign: "justify",
-    marginTop: "20%",
-    paddingBottom: "11%",
+    // marginTop: "20%",
+    // paddingBottom: "11%",
     fontSize: responsiveFontSize(2),
   },
 
@@ -139,7 +143,6 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     // height: responsiveHeight(90),
     marginTop: "5%",
-    marginBottom: "2%",
   },
 
   team_title: {
@@ -155,20 +158,42 @@ const styles = StyleSheet.create({
   view_row1: {
     flexDirection: "row",
     justifyContent: "center",
-    // margin: "8%",
+    marginBottom: "18%",
   },
-  row1: {
+  row1_left: {
     height: 130,
     width: 130,
     borderRadius: 65,
     backgroundColor: "#fff",
-    margin: "5%",
+    marginRight: "5%",
+    // flex: 1,
+  },
+  row1_right: {
+    height: 130,
+    width: 130,
+    borderRadius: 65,
+    backgroundColor: "#fff",
+    marginLeft: "5%",
+    // flex: 1,
   },
 
   team_image: {
     height: 130,
     width: 130,
     borderRadius: 65,
+  },
+  view_image_subtext: {
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    marginTop: "7%",
+    borderRadius: 5,
+    // flex:1,
+    alignItems: "center",
+    margin: "3%",
+  },
+  text_image_subtext: {
+    fontSize: responsiveFontSize(1.3),
+    color: "#413F42",
   },
   blur_view: {
     // flex: 1,
