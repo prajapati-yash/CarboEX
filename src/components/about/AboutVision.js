@@ -4,6 +4,7 @@ import "../../styles/about/About.css";
 function AboutVision() {
   return (
     <>
+<<<<<<< HEAD
       <div className="">
         <div className="visionBg d-flex align-items-center">
           <div className="d-flex all-vision-content align-items-center">
@@ -23,6 +24,14 @@ function AboutVision() {
               society. We strive to be a leader in the carbon credit trading
               industry, promoting social responsibility and sustainability to
               drive a positive impact on the planet for future generations.
+=======
+      <div className=''>
+        <div className='visionBg d-flex align-items-center'>
+          <div className='d-flex all-vision-content '>
+            <div className=' col-md-3 d-flex vision-head my-4 my-md-5 align-items-center'>
+              <div className='for-vm-desktop'> Our<br /> Vision </div>
+              <div className='for-vm-mob'> Our Vision </div>
+>>>>>>> 22cbf2bc4f51adcd3bad16a952e55f79dca4f558
             </div>
           </div>
         </div>

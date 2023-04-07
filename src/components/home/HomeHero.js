@@ -13,11 +13,13 @@ function HomeHero() {
                     <div className='col-xl-6 col-7 d-flex box-container justify-content-end px-3'>
                         <div className="img-text">
                             <div className="second-text px-md-5 py-md-5 px-sm-4 py-sm-4 px-3 py-3">
-                                <span className='for-hero-desktop'>
-                                    The Carbon Trading Platform using Blockchain is a decentralized application built on top of blockchain technology that aims to facilitate carbon credit trading. It will generate an unchangeable and tamper-proof record of transactions, automate the exchange of carbon credits, and support sustainable development by establishing a more effective and transparent carbon credit market.
+                                <span className=''>
+                                    <p>Welcome to CarboEx.</p>
+                                    <p>The Carbon Trading Platform that facilitates carbon credit trading for a sustainable future.</p>
+                                    <p>Powered by blockchain technology.</p>
                                 </span>
 
-                                <span className='for-hero-mobile'>Hi! The Carbon Trading Platform using Blockchain aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions, automating the exchange of carbon credits, and supporting sustainable development.</span>
+                                {/* <span className='for-hero-mobile'>Hi! The Carbon Trading Platform using Blockchain aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions, automating the exchange of carbon credits, and supporting sustainable development.</span> */}
 
                             </div>
                             <div className='start-button-div py-sm-2 py-xl-4 '>

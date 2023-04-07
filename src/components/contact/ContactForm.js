@@ -64,9 +64,9 @@ function ContactForm() {
                             <h1 className='conInfo-Head'>Contact Information</h1>
                             <p className='conInfo-TagLine'>Fill up the form and our team will get back to you within 24 hours.</p>
                             <div className='conIcons1 '>
-                                <p className='d-flex'><i className="fas fa-phone mx-2 mt-1"></i><div className='conAdd1 mx-2'> +91 74908 57634</div></p>
-                                <p className='d-flex'><i className="fas fa-envelope mx-2 mt-1"></i><div className='conAdd1 mx-2 text-white'> <a className='conAdd12' href='mailto:example@gmail.com'>example@gmail.com</a></div></p>
-                                <p className='d-flex'><i className="fas fa-map-marker-alt mx-2 mt-1"></i> <div className='conAdd1 mx-2'>Lampros Tech, Shilp Epitome, 1211, behind Rajpath Rangoli Road, Bodakdev, Ahmedabad, Gujarat 380054</div></p>
+                                <p className='d-flex'><i className="fas fa-phone mx-2 mt-1"></i><div className='conAdd1 mx-2'> +1 202-918-2132</div></p>
+                                <p className='d-flex'><i className="fas fa-envelope mx-2 mt-1"></i><div className='conAdd1 mx-2 text-white'> <a className='conAdd12' href='mailto:example@gmail.com'>cicero@cruickshank.net</a></div></p>
+                                <p className='d-flex'><i className="fas fa-map-marker-alt mx-2 mt-1"></i> <div className='conAdd1 mx-2'>244 Lucienne Harbor, New Hampshire, Lake Maude</div></p>
                             </div>
                             <div className='socialIcons py-3 '>
                                 <span className='socialIcons2 '>

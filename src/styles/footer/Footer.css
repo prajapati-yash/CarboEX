@@ -31,10 +31,17 @@
 }
 
 @media only screen and (max-width: 769px) {
+<<<<<<< HEAD
 .foot-links{
     justify-content: flex-start!important;
 }
 .quickLinks{
+=======
+  .foot-links {
+    justify-content: flex-start !important;
+  }
+  .quickLinks {
+>>>>>>> 22cbf2bc4f51adcd3bad16a952e55f79dca4f558
     width: 90%;
   }
   .social-media {
