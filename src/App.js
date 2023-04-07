@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Resources from "./pages/Resources";
 import Calculator from "./pages/Calculator";
 import Contact from "./pages/Contact";
+import SignUp from "./pages/SignUp"
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 
@@ -49,6 +50,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/calculator' element={<Calculator />} />
           <Route path='/calculator/*' element={<Calculator />} />
+          <Route path='/signup' element={<SignUp />} />
           <Route path='/*' element={<Home />} />
         </Routes>
         <Footer />
