@@ -3,12 +3,11 @@
     "name": "CarboEx",
     "slug": "CarboEx",
     "version": "1.0.0",
-    "sdkVersion": "23.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/icon.png",
+      "image": "./assets/carboex.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,8 +17,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/carboex.png",
+        "backgroundColor": "#fssssssfffff"
       },
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",

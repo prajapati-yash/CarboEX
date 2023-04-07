@@ -1,18 +1,117 @@
-import * as React from "react";
 import {
   ImageBackground,
   Pressable,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   Text,
   View,
 } from "react-native";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Calculator from "./Calculator";
+import Accordion from "react-native-collapsible/Accordion";
 import styles from "../style/homescreenStyle";
+import { Icon } from 'react-native-elements';
+import * as Animatable from 'react-native-animatable';
+
+const faqItems = [
+  {
+    title: "What is CarboEx?",
+    content: "CarboEx is an online marketplace where buyers and sellers can trade carbon credits. Organizations or people can purchase carbon credits to offset their own carbon emissions. Carbon credits are a unit of carbon emissions that have been decreased or offset by a project or activity.",
+  },
+  {
+    title: "How does the CarboEx platform work?",
+    content: "Blockchain technology is used by the CarboEx platform to promote transparency and traceability in the trading of carbon credits. It streamlines the transfer of ownership and tracks the source and chain of custody of the credits, allowing sellers to register their projects and purchasers to acquire carbon credits through the site.",
+  },
+  {
+    title: "What is the purpose of a CarboEx?",
+    content: "CarboEx's goal is to create a market for trading carbon credits, which can encourage activities that reduce emissions and sequester carbon. Platforms for selling carbon credits can assist in lowering greenhouse gas emissions and reducing the consequences of climate change by giving financial incentives for sustainable actions.",
+  },
+  {
+    title: "Who can use a CarboEx platform?",
+    content: "A CarboEx platform can be used by anyone, including intermediaries, purchasers, and project developers. Businesses, governments, or people that want to offset their carbon emissions may be buyers, whereas groups implementing sustainable initiatives that produce carbon credits may be project developers.",
+  },
+  {
+    title: "What are the benefits of using CarboEx?",
+    content: "Using a CarboEx has advantages such as higher accountability, decreased transaction costs, improved efficiency, increased accessibility, and the capacity to incentivize sustainable practices. Platforms that sell carbon credits can aid in the transition to a low-carbon economy and advance sustainable growth.",
+  },
+];
+
+const renderFaqHeader = (item, index, isActive) => {
+  
+  return (
+    // <View style={styles.faqItem}>
+    //   <Text style={styles.faqItemTitle}>{item.title}</Text>
+    //   <View style={{ position: 'absolute', right: 20,marginTop:"5%" }}>
+    //     <Icon
+    //       name={isActive ? 'chevron-up' : 'chevron-down'}
+    //       type="font-awesome"
+    //       color="#555"
+    //       size={16}
+    //     />
+    //   </View>
+    <View style={styles.faqItem}>
+      <Animatable.View
+        duration={300}
+        transition="backgroundColor">
+        <Text style={styles.faqItemTitle}>{item.title}</Text>
+      </Animatable.View>
+      <View style={{ position: 'absolute', right: 20,marginTop:"5%" }}>
+         <Icon
+           name={isActive ? 'chevron-up' : 'chevron-down'}
+           type="font-awesome"
+           color="#555"
+          size={16}
+         />
+       </View>
+      </View>
+  );
+};
+
+
+const customTouchableComponent = (props) => (
+
+  <TouchableOpacity
+    {...props}
+    style={{ backgroundColor: '#fff',marginTop:20}}
+  
+  />
+);
+
+
+const renderFaqContent = (item, index, isActive) => {
+  return (
+    // <View style={styles.faqItemContent}>
+    //   <Text style={{textAlign:"justify"}}>{item.content}</Text>
+    // </View>
+    <View style={styles.faqItemContent}>
+    <Animatable.View
+        duration={300}
+        transition="backgroundColor"
+        style={{ backgroundColor: (isActive ? 'rgba(255,255,255,1)' : 'rgba(245,252,255,1)') }}>
+        <Animatable.Text
+          style={{textAlign:"justify"}}
+          duration={300}
+          easing="ease-out"
+          animation={isActive ? 'zoomIn' : false}>
+          {item.content}
+        </Animatable.Text>
+      </Animatable.View>
+      </View>
+  );
+};
+
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+
+  const [activeSections, setActiveSections] = useState([]);
+
+  const handleAccordionSectionToggle = (sections) => {
+    setActiveSections(sections);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -165,75 +264,16 @@ export default function HomeScreen() {
                 <Text style={styles.section4_text}>FAQs</Text>
               </View>
               <View style={styles.section4_description}>
-                <View style={styles.section4_descriptionView}>
-                  <Text style={styles.section4_descriptionText}>
-                    Q: What is CarboEx?
-                  </Text>
-                  <Text style={styles.section4_descriptionText}>
-                    A: CarboEx is an online marketplace where buyers and sellers
-                    can trade carbon credits. Organizations or people can
-                    purchase carbon credits to offset their own carbon
-                    emissions. Carbon credits are a unit of carbon emissions
-                    that have been decreased or offset by a project or activity.
-                  </Text>
-                </View>
+                <View style={{ flex: 1}}>
+                  <Accordion
+                    sections={faqItems}
+                    activeSections={activeSections}
+                    renderHeader={renderFaqHeader}
+                    renderContent={renderFaqContent}
+                    onChange={handleAccordionSectionToggle}
+                    touchableComponent={customTouchableComponent}
+                  />
 
-                <View style={styles.section4_descriptionView}>
-                  <Text style={styles.section4_descriptionText}>
-                    Q: How does the CarboEx platform work?
-                  </Text>
-
-                  <Text style={styles.section4_descriptionText}>
-                    A: Blockchain technology is used by the CarboEx platform to
-                    promote transparency and traceability in the trading of
-                    carbon credits. It streamlines the transfer of ownership and
-                    tracks the source and chain of custody of the credits,
-                    allowing sellers to register their projects and purchasers
-                    to acquire carbon credits through the site.
-                  </Text>
-                </View>
-
-                <View style={styles.section4_descriptionView}>
-                  <Text style={styles.section4_descriptionText}>
-                    Q: What is the purpose of a CarboEx?
-                  </Text>
-                  <Text style={styles.section4_descriptionText}>
-                    A: CarboEx's goal is to create a market for trading carbon
-                    credits, which can encourage activities that reduce
-                    emissions and sequester carbon. Platforms for selling carbon
-                    credits can assist in lowering greenhouse gas emissions and
-                    reducing the consequences of climate change by giving
-                    financial incentives for sustainable actions.{" "}
-                  </Text>
-                </View>
-
-                <View style={styles.section4_descriptionView}>
-                  <Text style={styles.section4_descriptionText}>
-                    Q: Who can use a CarboEx platform?{" "}
-                  </Text>
-                  <Text style={styles.section4_descriptionText}>
-                    A: A CarboEx platform can be used by anyone, including
-                    intermediaries, purchasers, and project developers.
-                    Businesses, governments, or people that want to offset their
-                    carbon emissions may be buyers, whereas groups implementing
-                    sustainable initiatives that produce carbon credits may be
-                    project developers.{" "}
-                  </Text>
-                </View>
-
-                <View style={styles.section4_descriptionView}>
-                  <Text style={styles.section4_descriptionText}>
-                    Q: What are the benefits of using CarboEx?{" "}
-                  </Text>
-
-                  <Text style={styles.section4_descriptionText}>
-                    A: Using a CarboEx has advantages such as higher
-                    accountability, decreased transaction costs, improved
-                    efficiency, increased accessibility, and the capacity to
-                    incentivize sustainable practices. Platforms that sell
-                    carbon credits can aid in the transition to a low-carbon
-                    economy and advance sustainable growth.
-                  </Text>
                 </View>
               </View>
             </View>

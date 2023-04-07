@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
   },
   section4_description: {
     margin: "6%",
+    paddingBottom:"15%"
   },
   section4_descriptionView: {
     marginBottom: 15,
@@ -190,6 +191,27 @@ const styles = StyleSheet.create({
     margin: 2,
     textAlign:"justify"
   },
+  faqItem: {
+    flex:1,
+    padding: 15,
+    flexDirection: 'row',
+    // borderRadius:20,
+    // borderTopLeftRadius:20,borderTopRightRadius:20
+  },
+  faqItemTitle: {
+    flex: 1,
+    fontWeight: 'bold',
+  },
+  faqItemContent: {
+    backgroundColor: '#fff',
+    paddingLeft: 20,
+    paddingRight:20,
+    paddingBottom:15,
+    // borderRadius:20,
+    // borderBottomLeftRadius:20,
+    // borderBottomRightRadius:20
+  },
+  
 });
 
 

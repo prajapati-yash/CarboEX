@@ -19,30 +19,47 @@ const styles = StyleSheet.create({
     height: responsiveHeight(40),
     marginTop: "2%",
     position: "relative",
-    zIndex: 1,
-  },
-  image_view: {
-    alignItems: "center",
     justifyContent: "center",
-    // flex: 1,
   },
-  blurredContainer: {
-    backgroundColor: "rgba(255, 255, 255, 0.5)", // background color with opacity
-    borderRadius: 10,
-    padding: 20,
-  },
-  blur_view: {
-    // flex: 1,
-    marginTop: "-48%",
+  blurView: {
+    flex: 1,
     width: responsiveWidth(100),
-    zIndex: 2,
-    backgroundColor: "#CDE990",
-    alignItems: "center",
-    justifyContent: "center",
+    position: "absolute",
+    backgroundColor: "#acfaac",
+    marginLeft: "-8.5%",
+    // opacity: 0.5,
   },
   blur_view_text: {
-    fontSize: responsiveFontSize(3),
+    fontSize: responsiveFontSize(2.5),
+    fontWeight: "bold",
+    color: "#003865",
+    paddingRight: "6%",
+    paddingLeft: "8.5%",
+    paddingTop: "4%",
+    paddingBottom: "4%",
   },
+  // image_view: {
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   // flex: 1,
+  // },
+  // blurredContainer: {
+  //   backgroundColor: "rgba(255, 255, 255, 0.5)", // background color with opacity
+  //   borderRadius: 10,
+  //   padding: 20,
+  // },
+  // blur_view: {
+  //   // flex: 1,
+  //   marginTop: "-48%",
+  //   width: responsiveWidth(100),
+  //   zIndex: 2,
+  //   backgroundColor: "#CDE990",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
+  // blur_view_text: {
+  //   fontSize: responsiveFontSize(3),
+  // },
   text: {
     fontSize: 24,
     fontWeight: "bold",
@@ -169,21 +186,6 @@ const styles = StyleSheet.create({
     height: 130,
     width: 130,
     borderRadius: 65,
-  },
-  blur_view: {
-    // flex: 1,
-    // marginTop: "-55%",
-    width: responsiveWidth(100),
-    zIndex: 2,
-    backgroundColor: "#CDE990",
-    alignItems: "center",
-  },
-  blur_view_text: {
-    fontSize: responsiveFontSize(2.5),
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#003865",
-    opacity: 0.8,
   },
 });
 

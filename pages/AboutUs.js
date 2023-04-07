@@ -10,23 +10,20 @@ export default function AboutUs() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.centerView}
       >
-        <View>
+        <View style={{ flex: 1 }}>
           <View style={{ alignItems: "center" }}>
             <ImageBackground
               style={styles.image1}
               borderRadius={50}
               source={require("../assets/aboutUsAssets/BG1.png")}
-              // blurRadius={0}
             >
-              {/* <BlurView style={{ opacity: 0.6 }}> */}
-              {/* <View style={styles.blur_view}> */}
-              <View style={{justifyContent: "center", flex: 1, margin: "7%"}}>
+              {/* <BlurView style={styles.blurView} intensity={90} tint="light"> */}
+              <View style={styles.blurView}>
                 <Text style={styles.blur_view_text}>
                   We've made this project for a cause with a dream in mind. Know
                   our vision and mission statements.
                 </Text>
-                </View>
-              {/* </View> */}
+              </View>
               {/* </BlurView> */}
             </ImageBackground>
           </View>
@@ -160,7 +157,7 @@ export default function AboutUs() {
                   style={styles.team_image}
                 ></Image>
               </View>
-              <View style={[styles.row1, {marginBottom: "10%"}]}>
+              <View style={[styles.row1, { marginBottom: "10%" }]}>
                 <Image
                   source={require("../assets/aboutUsAssets/isha.jpeg")}
                   style={styles.team_image}
