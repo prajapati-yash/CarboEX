@@ -68,20 +68,33 @@ export function DrawerContent(props) {
           </Drawer.Section>
 
           <Drawer.Section style={{ flex: 1, marginTop: 8 }}>
-            {/* <DrawerItem label="Terms & Conditions" />
-            <DrawerItem label="Privacy Policy" />
             <DrawerItem
-              label="About Us"
+              label="SignUp"
               onPress={() => {
-                props.navigation.navigate("AboutUs");
+                props.navigation.navigate("signUP");
               }}
-            /> */}
-
-            <DrawerItem label="Login" />
-            <DrawerItem label="Sign Up" />
+            />
+            <DrawerItem
+              label="Upload Certificate"
+              onPress={() => {
+                props.navigation.navigate("uploadCertificate");
+              }}
+            />
             <DrawerItem label="Become a member" />
             <DrawerItem label="Proposal Dashboard" />
-            <DrawerItem label="Proposal Details" />
+            <DrawerItem
+              label="Proposal Details"
+              onPress={() => {
+                props.navigation.navigate("proposalDetails");
+              }}
+            />
+
+            <DrawerItem
+              label="Sell Credits"
+              onPress={() => {
+                props.navigation.navigate("sellCredits");
+              }}
+            />
             <DrawerItem label="" />
           </Drawer.Section>
 
