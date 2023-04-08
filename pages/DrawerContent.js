@@ -79,10 +79,31 @@ export function DrawerContent(props) {
 
             <DrawerItem label="Login" />
             <DrawerItem label="Sign Up" />
-            <DrawerItem label="Become a member" />
-            <DrawerItem label="Proposal Dashboard" />
+            <DrawerItem
+              label="Become a member"
+              onPress={() => {
+                props.navigation.navigate("BecomeMember");
+              }}
+            />
+            <DrawerItem
+              label="Proposal Dashboard"
+              onPress={() => {
+                props.navigation.navigate("ProposalDashboard");
+              }}
+            />
             <DrawerItem label="Proposal Details" />
-            <DrawerItem label="" />
+            <DrawerItem
+              label="Buy Tokens Dashboard"
+              onPress={() => {
+                props.navigation.navigate("BuyTokensDashboard");
+              }}
+            />
+            <DrawerItem
+              label="Profile Details"
+              onPress={() => {
+                props.navigation.navigate("ProfileDetails");
+              }}
+            />
           </Drawer.Section>
 
           <Drawer.Section

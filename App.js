@@ -11,15 +11,17 @@ import Resource from "./pages/ResourcesScreen";
 import { TotalSum } from "./Api/emissionCalculate";
 import BuyCredit from "./pages/BuyCredit";
 import SellCredit from "./pages/SellCredit";
+import BecomeMember from "./pages/becomeMember";
+import ProposalDashboard from "./pages/proposalDashboard";
+import BuyTokensDashboard from "./pages/buyTokensDashboard";
+import ProfileDetails from "./pages/profileDetails";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator
-        drawerContent={(props) => <DrawerContent {...props} />}
-      >
+      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen
           name="Home"
           component={HomeScreen}
@@ -105,14 +107,78 @@ export default function App() {
             ),
           }}
         />
+
         <Drawer.Screen
-          name="BuyCredit"
-          component={BuyCredit}
+          name="BecomeMember"
+          component={BecomeMember}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  width: 130,
+                  height: 70,
+                  marginLeft: -19,
+                  marginTop: -6,
+                }}
+                source={require("./assets/carboex.png")}
+              />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
+          name="ProposalDashboard"
+          component={ProposalDashboard}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  width: 130,
+                  height: 70,
+                  marginLeft: -19,
+                  marginTop: -6,
+                }}
+                source={require("./assets/carboex.png")}
+              />
+            ),
+          }}
         />
         <Drawer.Screen
-          name="SellCredit"
-          component={SellCredit}
+          name="BuyTokensDashboard"
+          component={BuyTokensDashboard}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  width: 130,
+                  height: 70,
+                  marginLeft: -19,
+                  marginTop: -6,
+                }}
+                source={require("./assets/carboex.png")}
+              />
+            ),
+          }}
         />
+        <Drawer.Screen
+          name="ProfileDetails"
+          component={ProfileDetails}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  width: 130,
+                  height: 70,
+                  marginLeft: -19,
+                  marginTop: -6,
+                }}
+                source={require("./assets/carboex.png")}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen name="BuyCredit" component={BuyCredit} />
+        <Drawer.Screen name="SellCredit" component={SellCredit} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
