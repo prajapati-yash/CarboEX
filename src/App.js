@@ -7,6 +7,8 @@ import Contact from "./pages/Contact";
 import SignUp from "./pages/SignUp"
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import BuyCarbonCredits from "./pages/BuyCarbonCredits";
+import CertificateValidationProposal from "./pages/CertificateValidationProposal";
 
 import { ethers } from "ethers";
 import { useEffect } from "react";
@@ -51,6 +53,8 @@ function App() {
           <Route path='/calculator' element={<Calculator />} />
           <Route path='/calculator/*' element={<Calculator />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/buy-credits' element={<BuyCarbonCredits/>} />
+          <Route path='/certificate-validation-proposal' element={<CertificateValidationProposal/>} />
           <Route path='/*' element={<Home />} />
         </Routes>
         <Footer />

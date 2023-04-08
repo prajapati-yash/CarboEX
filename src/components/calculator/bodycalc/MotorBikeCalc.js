@@ -1,8 +1,8 @@
 import React from 'react'
 import '../../../styles/calculator/bodycalc/PublicTransitCalc.css'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
-import StoreCalculation from '../storecalculation/StoreCalculation'
+import { useState } from 'react'
+// import StoreCalculation from '../storecalculation/StoreCalculation'
 
 function MotorBikeCalc({ onValueChange, props }) {
 

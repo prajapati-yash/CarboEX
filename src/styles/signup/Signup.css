@@ -1,43 +1,49 @@
-.signUpBg{
-    background-image: url('/public/assets/signup/signup.png');
-    background-size: cover;
-    background-position: 100% 100%;
-    min-height: 90vh;
-    padding: 4% 15%;
+.signUpBg {
+  background-image: url("/public/assets/signup/signup.png");
+  background-size: cover;
+  background-position: 100% 100%;
+  min-height: 90vh;
+  padding: 4% 15%;
 }
-.signup-form-Bg{
-    background-color: rgba(174, 245, 220,0.5);
-    backdrop-filter: blur(5px);
-    padding: 7% 12%;
-    border-radius: 8rem;
-}
-
-.signup-head{
-    background-color: #fff;
-    font-weight: 600;
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    border-radius: 1rem;
-     backdrop-filter: blur(5px);
+.signup-form-Bg {
+  background-color: rgba(174, 245, 220, 0.5);
+  backdrop-filter: blur(5px);
+  padding: 7% 12%;
+  border-radius: 8rem;
 }
 
-.signUpFormInput{
-    background-color: transparent!important;
-    color: white!important;
-    border: 3px solid white!important;
-    font-weight: 900!important;
-    border-radius: 1rem!important;
-    padding: 0.7rem 1.3rem!important;
-    font-size: 1.2rem;
-    /* margin: 3% 3% 3% 0; */
+.signup-head {
+  background-color: #fff;
+  font-weight: 600;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  backdrop-filter: blur(5px);
 }
 
-.signUpFormInput option{
-    color: black!Important;
+.signUpFormInput {
+  background-color: transparent !important;
+  color: white !important;
+  border: 3px solid white !important;
+  font-weight: 900 !important;
+  border-radius: 1rem !important;
+  padding: 0.7rem 1.3rem !important;
+  font-size: 1.2rem;
+  /* margin: 3% 3% 3% 0; */
 }
 
+.signUpFormInput option {
+  color: black !important;
+}
 
-
+.signUpBtn {
+  background-color: #aef5dc;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  width: 30%;
+}
 /* .chooseFileBtn{
     max-width: 100%;
 }
@@ -51,57 +57,66 @@
     color: white;
   } */
 
-.signUpFormInput::placeholder{
-    color: #fff!important;
-    font-size: 1.2rem;
+.signUpFormInput::placeholder {
+  color: #fff !important;
+  font-size: 1.2rem;
 }
 
 @media only screen and (max-width: 1200px) {
-
 }
 
 @media only screen and (max-width: 992px) {
-    .signup-form-Bg{
-        border-radius: 6rem;
-    }
+  .signup-form-Bg {
+    border-radius: 6rem;
+  }
+  .signUpBtn {
+    width: 40%;
+  }
 }
 
 @media only screen and (max-width: 768px) {
-    .signup-form-Bg{
-        border-radius: 5rem;
-        padding: 12% 12%;
-    }
-    .signUpBg{
+  .signup-form-Bg {
+    border-radius: 5rem;
+    padding: 12% 12%;
+  }
+  .signUpBg {
     padding: 5% 15%;
-    }
-    .signup-head{
-        font-size: 2rem;
-        padding: 2% 0;
-    }
-    
+  }
+  .signup-head {
+    font-size: 2rem;
+    padding: 2% 0;
+  }
+  .signUpBtn {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    width: 50%;
+  }
 }
 
 @media only screen and (max-width: 576px) {
-   
-    .signUpBg{
+  .signUpBg {
     padding: 10% 10%;
-    }
+  }
 
-    .signup-form-Bg{
-        border-radius: 4rem;
-        padding: 12% 12%;
-    }
+  .signup-form-Bg {
+    border-radius: 4rem;
+    padding: 12% 12%;
+  }
 
-    .signup-head{
-        font-size: 1.5rem;
-        padding: 5% 0;
-    }
-    .signUpFormInput::placeholder{
-        color: #fff!important;
-        font-size: 1rem;
-    }
+  .signup-head {
+    font-size: 1.5rem;
+    padding: 5% 0;
+  }
+  .signUpFormInput::placeholder {
+    color: #fff !important;
+    font-size: 1rem;
+  }
 
-    .signUpFormInput{
-        font-size: 1rem;
-    }
+  .signUpFormInput {
+    font-size: 1rem;
+  }
+  .signUpBtn {
+    font-size: 1rem;
+    width: 60%;
+  }
 }

@@ -9,6 +9,7 @@ function SignUpPage() {
     companyName: "",
     email: "",
     country: "",
+    image:null
   });
 
   const handleChange = (e) => {
@@ -90,7 +91,9 @@ function SignUpPage() {
                   </div>
                 </div>
               </div>
-              <div className="form-group mb-5">
+              <div className="row mb-4">
+              <div className="col-md-6 mb-4 mb-md-0">
+              <div className="form-group">
                 <select
                   id="country"
                   name="country"
@@ -107,22 +110,29 @@ function SignUpPage() {
                   <option value="Other">Other</option>
                 </select>
               </div>
-              {/* <div className="row mb-4">
-                <div className="col-6">
+              </div>
+                <div className="col-md-6">
                   <div className="form-group">
-                    <input
+                    {/* <input
                       type="file"
                       id="image"
                       name="image"
                       className="signUpFormInput chooseFileBtn form-control-file-label "
                       accept="image/*"
                       onChange={handleChange}
+                    /> */}
+
+                    <input
+                      type="file"
+                      className="form-control signUpFormInput chooseFileBtn form-control-file-label"
+                      id="image"
+                      onChange={handleChange}
                     />
                   </div>
-                </div> 
-              </div>  */}
+              </div> 
+              </div>
               <div className="text-center">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn rounded-pill my-2 signUpBtn">
                   Create
                 </button>
               </div>
