@@ -1,0 +1,115 @@
+.MPPageBg {
+  position: relative;
+  background-color: #aef5dc;
+  min-height: 80vh;
+}
+
+.MPPage-content {
+  margin: 0 8% 0 8%;
+}
+
+.MPPage-head {
+  color: #000000;
+  font-size: 2.3rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-top: 3rem !important;
+}
+
+.MPPage-content {
+  height: fit-content;
+  padding-top: 1%;
+}
+.MPPage-box-bg {
+  background-color: aliceblue;
+  border-radius: 3rem;
+  width: fit-content;
+  padding: 2rem !important;
+  font-size: 1.1rem;
+  font-weight: 550;
+  box-shadow: -2px 3px 27px -4px rgba(0, 0, 0, 0.44);
+}
+
+.MPPage-content-data {
+  border-radius: 1rem;
+  margin-left: 4%;
+  margin-right: 4%;
+  padding: 1rem;
+  background-color: rgb(213, 229, 224);
+}
+.MPPage-content-box {
+  padding: 0;
+  margin: 0;
+}
+
+.MPPage-Prop-Label {
+  padding: 0.5rem;
+}
+
+.MPPage-VM-Btn {
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.15) 0 1px 2px, rgba(44, 187, 99, 0.15) 0 2px 4px,
+    rgba(44, 187, 99, 0.15) 0 4px 8px, rgba(44, 187, 99, 0.15) 0 8px 16px,
+    rgba(44, 187, 99, 0.15) 0 16px 32px;
+  color: rgb(0, 129, 0);
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+}
+
+.MPPage-VM-Btn:hover {
+  box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px,
+    rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
+    rgba(44, 187, 99, 0.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+@media (max-width: 400px) {
+  .MPPage-head p {
+    font-size: 1rem;
+    font-weight: bolder !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .MPPage-head p {
+    font-size: 1rem;
+    font-weight: bolder !important;
+  }
+
+  .MPPage-box-bg {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .MPPage-head {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+
+  .MPPage-content {
+    margin: 0 10% 0 10%;
+  }
+}
+
+@media (max-width: 850px) {
+  .MPPage-head {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}

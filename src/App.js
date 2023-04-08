@@ -9,6 +9,9 @@ import Footer from "./components/footer/Footer";
 
 import { ethers } from "ethers";
 import { useEffect } from "react";
+import BecomeMember from "./pages/BecomeMember";
+import DAOMemberProposals from "./pages/DAOMemberProposals";
+import ProposalDataMain from "./pages/ProposalDataMain";
 // import { useState } from "react";
 
 
@@ -50,6 +53,9 @@ function App() {
           <Route path='/calculator' element={<Calculator />} />
           <Route path='/calculator/*' element={<Calculator />} />
           <Route path='/*' element={<Home />} />
+          <Route path="/becomeMember" element={<BecomeMember />} />
+          <Route path="/daoMemberProposals" element={<DAOMemberProposals />} />
+          <Route path="/proposalData" element={<ProposalDataMain />} />
         </Routes>
         <Footer />
       </BrowserRouter >
