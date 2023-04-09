@@ -4,28 +4,28 @@ import '../../styles/DAOMember/MemberProposalsPage.css'
 const proposalData = [
     {
         id: 1,
-        name: "ABhishek",
-        description: "Hello World!"
+        name: "Proposal 1",
+        description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions."
     },
     {
         id: 2,
-        name: "ABhishek",
-        description: "Hello World!"
+        name: "Proposal 2",
+        description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions."
     },
     {
         id: 3,
-        name: "ABhishek",
-        description: "Hello World!"
+        name: "Proposal 3",
+        description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions."
     },
     {
         id: 4,
-        name: "ABhishek",
-        description: "Hello World!"
+        name: "Proposal 4",
+        description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions."
     },
     {
         id: 5,
-        name: "ABhishek",
-        description: "Hello World!"
+        name: "Proposal 5",
+        description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions."
     },
 ]
 
@@ -45,7 +45,7 @@ function MemberProposalsPage() {
                                         <label className='MPPage-Prop-Label'>Name:</label> <span>{item.name}</span>  <br />
                                         <label className='MPPage-Prop-Label'>Description:</label> <span>{item.description}</span>
                                         <div className='d-flex justify-content-center'>
-                                            <button className='MPPage-VM-Btn '>Open</button>
+                                            <button className='MPPage-VM-Btn mt-2'>Open</button>
 
                                         </div>
                                     </div>))}
