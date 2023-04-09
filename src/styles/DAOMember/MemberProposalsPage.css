@@ -5,7 +5,10 @@
 }
 
 .MPPage-content {
+  height: fit-content;
+  padding-top: 1%;
   margin: 0 8% 0 8%;
+  width: fit-content;
 }
 
 .MPPage-head {
@@ -17,10 +20,6 @@
   padding-top: 3rem !important;
 }
 
-.MPPage-content {
-  height: fit-content;
-  padding-top: 1%;
-}
 .MPPage-box-bg {
   background-color: aliceblue;
   border-radius: 3rem;
@@ -29,14 +28,17 @@
   font-size: 1.1rem;
   font-weight: 550;
   box-shadow: -2px 3px 27px -4px rgba(0, 0, 0, 0.44);
+  margin: 1rem;
+  height: fit-content;
 }
 
 .MPPage-content-data {
   border-radius: 1rem;
   margin-left: 4%;
   margin-right: 4%;
-  padding: 1rem;
+  padding: 2rem;
   background-color: rgb(213, 229, 224);
+  text-align: justify;
 }
 .MPPage-content-box {
   padding: 0;
@@ -44,7 +46,9 @@
 }
 
 .MPPage-Prop-Label {
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
+  padding-right: 0.4rem;
+  font-weight: bold;
 }
 
 .MPPage-VM-Btn {
@@ -83,6 +87,13 @@
     font-size: 1rem;
     font-weight: bolder !important;
   }
+  .MPPage-content-box {
+    height: fit-content;
+  }
+  .MPPage-content-data {
+    height: fit-content;
+    font-size: 0.5rem;
+  }
 }
 
 @media (max-width: 650px) {
@@ -90,9 +101,12 @@
     font-size: 1rem;
     font-weight: bolder !important;
   }
-
-  .MPPage-box-bg {
-    padding: 1rem;
+  .MPPage-content-box {
+    height: fit-content;
+  }
+  .MPPage-content-data {
+    height: fit-content;
+    font-size: 0.8rem;
   }
 }
 
@@ -101,9 +115,21 @@
     font-size: 1.8rem;
     font-weight: 600;
   }
-
+  .MPPage-content-data {
+    width: 100%;
+    margin: 1rem;
+    padding: 2rem;
+  }
+  .MPPage-box-bg {
+    width: fit-content;
+    margin: auto 2rem;
+    padding: 1.3rem 2rem !important;
+  }
+  .MPPage-content-box {
+    justify-content: center;
+  }
   .MPPage-content {
-    margin: 0 10% 0 10%;
+    margin: 0;
   }
 }
 

@@ -5,7 +5,7 @@
 }
 
 .PDataPage-content {
-  margin: 0 8% 0 8%;
+  margin: 0 5% 0 5%;
 }
 
 .PDataPage-head {
@@ -14,78 +14,197 @@
   letter-spacing: 3px;
   font-weight: 600;
   text-transform: uppercase;
-  padding-top: 3rem !important;
+  padding-top: 2rem !important;
 }
 
 .PDataPage-content {
   height: fit-content;
   padding-top: 1%;
 }
-.PDataPage-box-bg {
-  background-color: aliceblue;
+
+.PDataPage-content-TD {
+  background-color: rgb(255, 255, 255);
   border-radius: 3rem;
   width: fit-content;
   padding: 2rem !important;
   font-size: 1.1rem;
   font-weight: 550;
   box-shadow: -2px 3px 27px -4px rgba(0, 0, 0, 0.44);
+  margin-left: 5%;
+}
+
+.PDataPage-content-Btns-body {
+  margin: 1.5rem;
+  padding: 0;
+  max-width: 25%;
+  /* position: relative;
+  float: right; */
 }
 
 .PDataPage-content-dataBody {
   border-radius: 1rem;
-  padding: 1rem;
+  /* padding: 1rem; */
   background-color: rgb(213, 229, 224);
-  display: flex;
 }
+
 .PDataPage-content-box {
   padding: 0;
+  display: flex;
   margin: 0;
+  width: 100%;
 }
 
-.PDataPage-Prop-Label {
-  padding: 0.5rem;
-}
 .PDataPage-content-title {
-  color: #4da5a4;
+  color: #4ca235;
   font-size: 1.7rem;
   font-weight: bolder;
+  letter-spacing: 0.3rem;
 }
 
-/* .PDataPage-VM-Btn {
-  background-color: #c2fbd7;
-  border-radius: 100px;
-  box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
-    rgba(44, 187, 99, 0.15) 0 1px 2px, rgba(44, 187, 99, 0.15) 0 2px 4px,
-    rgba(44, 187, 99, 0.15) 0 4px 8px, rgba(44, 187, 99, 0.15) 0 8px 16px,
-    rgba(44, 187, 99, 0.15) 0 16px 32px;
-  color: rgb(0, 129, 0);
-  cursor: pointer;
+.copy-field-input-button {
+  background-color: #fff;
+  border: none;
+  border: 1px solid #aaa5a5;
+  border-radius: 5px;
+  flex: 30%;
+  padding: 0.4rem;
+  padding-left: 8px;
+  padding-right: 8px;
+  line-height: 16.8px;
+  float: right;
+  /* position: relative; */
+}
+
+/**/
+/* .proposalData-public-address {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+} */
+
+.PDataPage-wrapper {
   display: inline-block;
-  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
-  padding: 7px 20px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 250ms;
-  border: 0;
-  font-size: 16px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  width: fit-content;
+  width: 45%;
+  margin: 0;
+  padding: 0 1rem;
+  background-color: #fff;
 }
 
-.PDataPage-VM-Btn:hover {
+.proposalInfoLabel {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.proposalInfoDataBg {
+  background-color: #e1e1e1;
+  color: #2f2f2f;
+  margin: 0;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  /* text-align: justify; */
+  width: 100%;
+  /* box-sizing: border-box; */
+  /* padding-left: 12px;
+  padding-right: 12px; */
+  /* word-break: break-all; */
+}
+
+.allproposalData {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+}
+
+.proposal-summary {
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.summary-scroll-bar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.summary-scroll-bar::-webkit-scrollbar-track {
+  background-color: #e1e1e1;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.summary-scroll-bar::-webkit-scrollbar-thumb {
+  background-color: #5b5b5b;
+  border-radius: 20px;
+}
+
+.summary-scroll-bar::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/**/
+
+.PData-reject-btn {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  transition: all 550ms;
+  box-shadow: rgb(120, 169, 139) 0 -25px 18px -14px inset,
+    rgba(110, 141, 122, 0.719) 0 1px 2px, rgb(154, 174, 162) 0 2px 4px,
+    rgba(114, 142, 125, 0.736) 0 4px 8px, rgba(113, 159, 131, 0.571) 0 8px 16px,
+    rgba(158, 183, 168, 0.719) 0 16px 32px;
+}
+.PData-reject-btn:hover {
+  background-color: #000000;
+  color: #ffffff;
   box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset,
     rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px,
     rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
     rgba(44, 187, 99, 0.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
-} */
+}
+
+.PData-approve-btn {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  transition: all 550ms;
+  box-shadow: rgb(45, 55, 49) 0 -25px 18px -14px inset,
+    rgba(99, 125, 109, 0.719) 0 1px 2px, rgb(154, 174, 162) 0 2px 4px,
+    rgba(114, 142, 125, 0.736) 0 4px 8px, rgba(113, 159, 131, 0.571) 0 8px 16px,
+    rgba(96, 133, 111, 0.766) 0 16px 32px;
+}
+.PData-approve-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: rgba(133, 161, 144, 0.907) 0 -25px 18px -14px inset,
+    rgba(144, 165, 152, 0.929) 0 1px 2px, rgb(123, 150, 133) 0 2px 4px,
+    rgba(145, 171, 155, 0.879) 0 4px 8px, rgba(125, 160, 138, 0.885) 0 8px 16px,
+    rgba(150, 180, 162, 0.918) 0 16px 32px;
+  transform: scale(1.04) rotate(-0.5deg);
+}
 
 @media (max-width: 400px) {
   .PDataPage-head p {
     font-size: 1rem;
     font-weight: bolder !important;
+  }
+  .PDataPage-content-title {
+    font-size: 0.8rem !important;
+    letter-spacing: 0.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .proposalInfoLabel {
+    font-size: 0.9rem;
+  }
+
+  .proposalInfoDataBg {
+    font-size: 0.9rem;
+  }
+  .PDataPage-content-title {
+    font-size: 1.2rem;
+    letter-spacing: 0.2rem;
   }
 }
 
@@ -94,20 +213,30 @@
     font-size: 1rem;
     font-weight: bolder !important;
   }
-
-  .PDataPage-box-bg {
-    padding: 1rem;
-  }
 }
 
 @media (max-width: 767px) {
+  .PDataPage-wrapper {
+    display: block;
+    width: 100%;
+    margin-right: 0rem;
+  }
+  .PDataPage-content-TD {
+    margin: 0rem;
+  }
+
   .PDataPage-head {
     font-size: 1.8rem;
     font-weight: 600;
   }
 
-  .PDataPage-content {
-    margin: 0 10% 0 10%;
+  .proposalInfoLabel {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .proposalInfoDataBg {
+    font-size: 0.9rem;
   }
 }
 
