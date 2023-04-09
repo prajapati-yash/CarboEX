@@ -1,11 +1,10 @@
 import React from 'react'
-import "../../styles/proposal/proposalDashboard.css"
+import ProposalDashComponent from '../components/proposalDashboard/ProposalDashComponent'
 
 function ProposalDashboard() {
   return (
     <div>
-        
-
+       <ProposalDashComponent/>
     </div>
   )
 }

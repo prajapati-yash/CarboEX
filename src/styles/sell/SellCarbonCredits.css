@@ -1,0 +1,59 @@
+.sellBg{
+    background-color: #AFF6FF;
+    padding: 3% 15%;
+}
+
+.sellContainerBg{
+    background-color: #fff;
+    padding: 5% 8%;
+    border-radius: 3rem;
+}
+
+.sellLabel{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.sellHead{
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+@media (max-width: 992px) {
+    .sellBg{
+        padding: 5% 10%;
+    }
+
+    .sellHead{
+        font-size: 2.5rem;
+    }
+
+}
+
+@media (max-width:768px) {
+    .sellBg{
+        padding: 8% 10%;
+    }
+
+    .sellContainerBg{
+        padding: 8%;
+    }
+}
+@media (max-width: 576px) {
+    .sellBg{
+        padding: 7% 10%;
+    }
+    .sellLabel{
+        font-size: 1rem;
+    }
+
+    .sellHead{
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .sellHead{
+        font-size: 1.5rem;
+    }
+}

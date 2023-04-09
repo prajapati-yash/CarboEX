@@ -1,10 +1,11 @@
 import React from 'react'
-import ProposalDashboard from '../components/proposalDashboard/proposalDashboard'
+import ProposalOrderComponent from '../components/proposalDashboard/ProposalOrderComponent'
 
 function ProposalOrders() {
   return (
     <>
-        <ProposalDashboard/>
+    <ProposalOrderComponent/>
+       
     
     </>
   )
