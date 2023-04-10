@@ -1,113 +1,109 @@
-.proposalContainer{
-    background-color: #AFF6FF;
-  }
-  
-  .proposal-company-wrapper {
-      display: inline-block;
-      width: 45%;
-      margin:0 2.5%;
-      margin-bottom: 3rem;
-      background-color: #fff;
-      border-radius: 3rem;
-  }
-  
- 
-  .proposalDetails{
-      padding: 3% 10%;
-  }
-  
-  .proposal-dash-info{
-    padding: 10%;
-  }
-  
-  .proposal-dash-output-Bg{
-      background-color: #e1e1e1;
-      color: #2f2f2f;
-      padding: 5px;
-      border-radius: 0.5rem;
-  }
-  
-  .proposal-dash-label{
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-  
-  .proposal-dash-title{
-    height: 70px;
-    flex-wrap: nowrap;
-    overflow-y: scroll;
-  }
-  /* Set the width and height of the scroll bar */
-  /* .proposal-dash-title::-webkit-scrollbar {
+.proposalContainer {
+  background-color: #c0e28e;
+}
+
+.proposal-company-wrapper {
+  display: inline-block;
+  width: 45%;
+  margin: 0 2.5%;
+  margin-bottom: 3rem;
+  background-color: #fff;
+  border-radius: 3rem;
+}
+
+.proposalDetails {
+  padding: 3% 10%;
+}
+
+.proposal-dash-info {
+  padding: 10%;
+}
+
+.proposal-dash-output-Bg {
+  background-color: #e1e1e1;
+  color: #2f2f2f;
+  padding: 5px;
+  border-radius: 0.5rem;
+}
+
+.proposal-dash-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.proposal-dash-title {
+  height: 70px;
+  flex-wrap: nowrap;
+  overflow-y: scroll;
+}
+/* Set the width and height of the scroll bar */
+/* .proposal-dash-title::-webkit-scrollbar {
     width: 10px;
     height: 100%;
   } */
-  
-  /* Style the track (the background of the scrollbar) */
-  /* .proposal-dash-title::-webkit-scrollbar-track {
+
+/* Style the track (the background of the scrollbar) */
+/* .proposal-dash-title::-webkit-scrollbar-track {
     background: #f1f1f1;
   } */
-  
-  /* Style the thumb (the moving part of the scrollbar) */
-  /* .proposal-dash-title::-webkit-scrollbar-thumb {
+
+/* Style the thumb (the moving part of the scrollbar) */
+/* .proposal-dash-title::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 5px;
   } */
-  
-  /* Change the color of the thumb when hovering over it */
-  /* .proposal-dash-title::-webkit-scrollbar-thumb:hover {
+
+/* Change the color of the thumb when hovering over it */
+/* .proposal-dash-title::-webkit-scrollbar-thumb:hover {
     background: #555;
   } */
-  
- .proposal-dash-enlargedImageStyle{
-    max-width:fit-content;
-    width: 300px;
-    height: auto;
+
+.proposal-dash-enlargedImageStyle {
+  max-width: fit-content;
+  width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.proposal-dash-closeStyle {
+  position: absolute;
+  top: -10%;
+  /* right: 10px; */
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+}
+@media (max-width: 992px) {
+  .proposal-dash-info {
+    padding: 8%;
+  }
+  .companies {
+    padding: 5% 8%;
+  }
+  .buyHead {
+    padding-top: 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  .proposal-company-wrapper {
     display: block;
-    margin: 0 auto;
+    width: 100%;
+    margin-right: 0;
+  }
+  .buy-button {
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 576px) {
+  .proposal-dash-label {
+    font-size: 1.1rem;
   }
 
- .proposal-dash-closeStyle{
-    position: absolute;
-    top: -10%;
-    /* right: 10px; */
-    font-size: 28px;
-    font-weight: bold;
-    color: #000;
-    cursor: pointer;
+  .buyHead {
+    font-size: 2.5rem;
   }
-  @media (max-width: 992px) {
-    .proposal-dash-info{
-      padding: 8%;
-    }
-    .companies{
-      padding:5%  8%;
-    }
-    .buyHead{
-      padding-top: 5%;
-    }
-  
-  }
-    
-  @media (max-width: 768px) {
-      .proposal-company-wrapper {
-        display: block;
-        width: 100%;
-        margin-right: 0;
-      }
-      .buy-button{
-        letter-spacing: 1px;
-      }
-  }
-  
-  @media (max-width: 576px) {
-      .proposal-dash-label{
-        font-size: 1.1rem;
-      }
-  
-      .buyHead{
-  
-        font-size: 2.5rem;
-      }
-  
-  }
+}

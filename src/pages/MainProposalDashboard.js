@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/DAOMember/MainProposalDashboard.css'
+import ProposalDashboard from './ProposalDashboard';
+import ProposalOrders from './ProposalOrders';
+import ProposalDashComponent from '../components/proposalDashboard/ProposalDashComponent';
 
 
 const MainPropPageData = {
@@ -11,6 +14,28 @@ const MainPropPageData = {
 }
 
 function MainProposalDashboard() {
+
+    const [activeComponent, setActiveComponent] = useState('proposalDashboard');
+
+    const handleProposalClick = () => {
+        setActiveComponent('proposalDashboard');
+    };
+
+    const handleOrdersClick = () => {
+        setActiveComponent('proposalOrders');
+    };
+    const renderComponent = () => {
+        switch (activeComponent) {
+            case 'proposalDashboard':
+                return <ProposalDashboard />;
+            case 'proposalOrders':
+                return <ProposalOrders />;
+            default:
+                return <ProposalDashComponent />;
+        }
+    };
+
+
     return (
         <>
             <div class="container-fluid main-prop-dash-Main">
@@ -55,13 +80,14 @@ function MainProposalDashboard() {
                 <hr />
                 <div className='Member-prop-orders-class'>
                     <div className="Member-prop-orders-Btns row">
-                        <button type="button" class="Member-prop-Btn col-12 col-md-5">My proposal</button>
-                        <button type="button" class="Member-orders-Btn col-12 col-md-5">My orders</button>
+                        <button type="button" class="Member-prop-Btn col-12 col-md-5" onClick={handleProposalClick}>My proposal</button>
+                        <button type="button" class="Member-orders-Btn col-12 col-md-5" onClick={handleOrdersClick}>My orders</button>
                     </div>
                 </div>
+                <>
+                    {renderComponent()}
+                </>
             </div>
-
-
         </>
     )
 }

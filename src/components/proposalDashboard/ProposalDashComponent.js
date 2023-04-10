@@ -1,38 +1,38 @@
 import React, { useState } from "react";
 import "../../styles/proposal/ProposalDashboard.css";
 
-const proposalDashboardData=[
+const proposalDashboardData = [
   {
-    id:1,
-    title:"Wind Energy ",
-    image:"assets/about/teamImages/yash.jpg",
-    result:"Approved",
-    stake:"5 BTTC",
-    returnStake:"0 BTTC",
+    id: 1,
+    title: "Wind Energy ",
+    image: "assets/about/teamImages/yash.jpg",
+    result: "Approved",
+    stake: "5 BTTC",
+    returnStake: "0 BTTC",
   },
   {
-    id:2,
-    title:"Solar Energy",
-    image:"assets/about/teamImages/purvik.jpeg",
-    result:"Approved",
-    stake:"5 BTTC",
-    returnStake:"0 BTTC",
+    id: 2,
+    title: "Solar Energy",
+    image: "assets/about/teamImages/purvik.jpeg",
+    result: "Approved",
+    stake: "5 BTTC",
+    returnStake: "0 BTTC",
   },
   {
-    id:3,
-    title:"Solar Plant",
-    image:"assets/about/teamImages/abhishek.png",
-    result:"Not Approved",
-    stake:"0 BTTC",
-    returnStake:"5 BTTC",
+    id: 3,
+    title: "Solar Plant",
+    image: "assets/about/teamImages/abhishek.png",
+    result: "Not Approved",
+    stake: "0 BTTC",
+    returnStake: "5 BTTC",
   },
   {
-    id:4,
-    title:"Afforestation",
-    image:"assets/about/teamImages/isha.jpeg",
-    result:"Approved",
-    stake:"5 BTTC",
-    returnStake:"0 BTTC",
+    id: 4,
+    title: "Afforestation",
+    image: "assets/about/teamImages/isha.jpeg",
+    result: "Approved",
+    stake: "5 BTTC",
+    returnStake: "0 BTTC",
   },
 ]
 
@@ -57,62 +57,62 @@ function ProposalDashComponent() {
     <>
       <div className="proposalContainer">
         <div className="proposalDetails">
-        {proposalDashboardData.map((details) => (
-          <div key={details.id} className="proposal-company-wrapper">
-            <div className="proposal-dash">
-              <div className="proposal-dash-info">
-                <div className="">
-                  {" "}
-                  <span className="proposal-dash-label">Sr No.: </span>{" "}
-                  <p className="proposal-dash-output-Bg "> {details.id}</p>
-                </div>
-               <div className=" ">
-                  <span className="proposal-dash-label">Title: </span>
-                  <p className="proposal-dash-output-Bg proposal-dash-title scroll-bar ">
-                    {details.title}
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <span className="proposal-dash-label">Image:</span>
-                  <div
-                    className="proposal-dash-output-Bg proposal-dash-image"
-                    style={{ width: "fit-content" }}
-                  >
+          {proposalDashboardData.map((details) => (
+            <div key={details.id} className="proposal-company-wrapper">
+              <div className="proposal-dash">
+                <div className="proposal-dash-info">
+                  <div className="">
                     {" "}
-                    <a
-                      href="#"
-                      onClick={() =>
-                        handleImageClick({image: details.image})
-                      }
-                    >
-                      <img
-                        src={details.image}
-                        className="img-thumbnail"
-                        alt="thumbnail"
-                        style={{ height: "150px", width: "150px" }}
-                      />
-                    </a>
+                    <span className="proposal-dash-label">Sr No.: </span>{" "}
+                    <p className="proposal-dash-output-Bg "> {details.id}</p>
                   </div>
-                </div>
-                <div className="">
-                  <span className="proposal-dash-label">Result: </span>{" "}
-                  <p className="proposal-dash-output-Bg">{details.result}</p>
-               </div>
-                <div className="">
-                  <span className="proposal-dash-label">Stake:</span>{" "}
-                  <p className="proposal-dash-output-Bg">{details.stake}</p>
-                </div>
-                <div className="">
-                  <span className="proposal-dash-label">Return Stake:</span>{" "}
-                  <p className="proposal-dash-output-Bg">{details.returnStake}</p>
-                </div>
-                <div className="">
-                  <span className="proposal-dash-label">Credit Issue</span>{" "}<br/>
-                  <button className=" btn btn-primary">Claim</button>
+                  <div className=" ">
+                    <span className="proposal-dash-label">Title: </span>
+                    <p className="proposal-dash-output-Bg proposal-dash-title scroll-bar ">
+                      {details.title}
+                    </p>
+                  </div>
+                  <div className="mb-3">
+                    <span className="proposal-dash-label">Image:</span>
+                    <div
+                      className="proposal-dash-output-Bg proposal-dash-image"
+                      style={{ width: "fit-content" }}
+                    >
+                      {" "}
+                      <a
+                        href="#"
+                        onClick={() =>
+                          handleImageClick({ image: details.image })
+                        }
+                      >
+                        <img
+                          src={details.image}
+                          className="img-thumbnail"
+                          alt="thumbnail"
+                          style={{ height: "150px", width: "150px" }}
+                        />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="">
+                    <span className="proposal-dash-label">Result: </span>{" "}
+                    <p className="proposal-dash-output-Bg">{details.result}</p>
+                  </div>
+                  <div className="">
+                    <span className="proposal-dash-label">Stake:</span>{" "}
+                    <p className="proposal-dash-output-Bg">{details.stake}</p>
+                  </div>
+                  <div className="">
+                    <span className="proposal-dash-label">Return Stake:</span>{" "}
+                    <p className="proposal-dash-output-Bg">{details.returnStake}</p>
+                  </div>
+                  <div className="">
+                    <span className="proposal-dash-label">Credit Issue</span>{" "}<br />
+                    <button className=" btn btn-primary">Claim</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           ))}
           {/* ------ Onclick Enlarged Image ----- */}
           <div className="modal" tabIndex="-1" role="dialog" style={modalStyle} >
