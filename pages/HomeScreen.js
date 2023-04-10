@@ -94,7 +94,7 @@ const renderFaqContent = (item, index, isActive) => {
           style={{textAlign:"justify"}}
           duration={300}
           easing="ease-out"
-          animation={isActive ? 'zoomIn' : false}>
+          animation={'zoomIn'}>
           {item.content}
         </Animatable.Text>
       </Animatable.View>

@@ -49,7 +49,7 @@ export default function ContactUs() {
       phone: `${phone}`,
       message: `${message}`,
     };
-
+    try{
     let response = await fetch("http://192.168.43.190:5000/contact", {
       method: "POST",
       headers: {
@@ -57,9 +57,14 @@ export default function ContactUs() {
       },
       body: JSON.stringify(messageBody),
     });
-    console.log(response.json());
-    alert(response.json().status);
+    // console.log(response.json());
+    // alert(response.json().status);
+    alert(response);
     // console.log(response);
+  }
+    catch(err){
+      console.log("Error: ", err)
+    }
   };
 
   return (
