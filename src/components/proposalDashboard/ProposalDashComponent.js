@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "../../styles/proposal/proposalDashboard.css";
+import "../../styles/proposal/ProposalDashboard.css";
 
 const proposalDashboardData=[
   {
     id:1,
-    title:"Wind ENergy ",
+    title:"Wind Energy ",
     image:"assets/about/teamImages/yash.jpg",
     result:"Approved",
     stake:"5 BTTC",
@@ -61,18 +61,18 @@ function ProposalDashComponent() {
           <div key={details.id} className="proposal-company-wrapper">
             <div className="proposal-dash">
               <div className="proposal-dash-info">
-                <p className="">
+                <div className="">
                   {" "}
                   <span className="proposal-dash-label">Sr No.: </span>{" "}
                   <p className="proposal-dash-output-Bg "> {details.id}</p>
-                </p>
-               <p className=" ">
+                </div>
+               <div className=" ">
                   <span className="proposal-dash-label">Title: </span>
                   <p className="proposal-dash-output-Bg proposal-dash-title scroll-bar ">
                     {details.title}
                   </p>
-                </p>
-                <p className="">
+                </div>
+                <div className="mb-3">
                   <span className="proposal-dash-label">Image:</span>
                   <div
                     className="proposal-dash-output-Bg proposal-dash-image"
@@ -93,23 +93,23 @@ function ProposalDashComponent() {
                       />
                     </a>
                   </div>
-                </p>
-                <p className="">
+                </div>
+                <div className="">
                   <span className="proposal-dash-label">Result: </span>{" "}
                   <p className="proposal-dash-output-Bg">{details.result}</p>
-               </p>
-                <p className="">
+               </div>
+                <div className="">
                   <span className="proposal-dash-label">Stake:</span>{" "}
                   <p className="proposal-dash-output-Bg">{details.stake}</p>
-                </p>
-                <p className="">
+                </div>
+                <div className="">
                   <span className="proposal-dash-label">Return Stake:</span>{" "}
                   <p className="proposal-dash-output-Bg">{details.returnStake}</p>
-                </p>
-                <p className="">
+                </div>
+                <div className="">
                   <span className="proposal-dash-label">Credit Issue</span>{" "}<br/>
                   <button className=" btn btn-primary">Claim</button>
-                </p>
+                </div>
               </div>
             </div>
           </div>
