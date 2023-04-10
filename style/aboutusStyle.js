@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
     position: "relative",
     justifyContent: "center",
   },
+  blurImage: {
+    width: responsiveWidth(20),
+
+  },
   blurView: {
     flex: 1,
     width: responsiveWidth(100),

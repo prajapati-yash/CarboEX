@@ -80,9 +80,6 @@ const customTouchableComponent = (props) => (
 
 const renderFaqContent = (item, index, isActive) => {
   return (
-    // <View style={styles.faqItemContent}>
-    //   <Text style={{textAlign:"justify"}}>{item.content}</Text>
-    // </View>
     <View style={styles.faqItemContent}>
       <Animatable.View
         duration={300}
@@ -97,7 +94,8 @@ const renderFaqContent = (item, index, isActive) => {
           style={{ textAlign: "justify" }}
           duration={10}
           easing="ease-out"
-          animation={isActive ? "zoomIn" : false}
+          animation={"zoomIn"}
+          // isActive ? "zoomIn" : false
         >
           {item.content}
         </Animatable.Text>

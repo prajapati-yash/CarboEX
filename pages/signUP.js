@@ -5,6 +5,7 @@ import {
   ScrollView,
   TextInput,
   ImageBackground,
+  KeyboardAvoidingView,
 } from "react-native";
 import styles from "../style/signUPStyle";
 import { Button, Stack } from "@rneui/themed";
@@ -16,17 +17,17 @@ import {
 
 export default function SignUP() {
   return (
-    <View style={styles.container}>
-      {/* <ScrollView
+    <KeyboardAvoidingView style={styles.container}>
+      <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.centerView}
-      > */}
-      <ImageBackground
-        style={styles.image1}
-        // borderRadius={50}
-        source={require("../assets/signUpAssets/BG1.png")}
+        // contentContainerStyle={styles.centerView}
       >
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ImageBackground
+          style={styles.image1}
+          // borderRadius={50}
+          source={require("../assets/signUpAssets/BG1.png")}
+        >
+          {/* <ScrollView showsVerticalScrollIndicator={false}> */}
           <ImageBackground
             style={styles.image2}
             borderRadius={50}
@@ -40,6 +41,7 @@ export default function SignUP() {
               <TextInput
                 // value={teText}
                 style={styles.input_box}
+                selectionColor="white"
                 placeholder="First Name"
                 placeholderTextColor="#fff"
                 // onChangeText={(teText) => {
@@ -49,6 +51,7 @@ export default function SignUP() {
               <TextInput
                 // value={teText}
                 style={styles.input_box}
+                selectionColor="white"
                 placeholder="Username"
                 placeholderTextColor="#fff"
                 // onChangeText={(teText) => {
@@ -58,15 +61,7 @@ export default function SignUP() {
               <TextInput
                 // value={teText}
                 style={styles.input_box}
-                placeholder="Username"
-                placeholderTextColor="#fff"
-                // onChangeText={(teText) => {
-                //   teSetText(teText);
-                // }}
-              />
-              <TextInput
-                // value={teText}
-                style={styles.input_box}
+                selectionColor="white"
                 placeholder="Company Name"
                 placeholderTextColor="#fff"
                 // onChangeText={(teText) => {
@@ -76,6 +71,7 @@ export default function SignUP() {
               <TextInput
                 // value={teText}
                 style={styles.input_box}
+                selectionColor="white"
                 placeholder="Email"
                 placeholderTextColor="#fff"
                 // onChangeText={(teText) => {
@@ -85,6 +81,7 @@ export default function SignUP() {
               <TextInput
                 // value={teText}
                 style={styles.input_box}
+                selectionColor="white"
                 placeholder="Country"
                 placeholderTextColor="#fff"
                 // onChangeText={(teText) => {
@@ -113,10 +110,9 @@ export default function SignUP() {
               />
             </View>
           </ImageBackground>
-        </ScrollView>
-      </ImageBackground>
-
-      {/* </ScrollView> */}
-    </View>
+          {/* </ScrollView> */}
+        </ImageBackground>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }

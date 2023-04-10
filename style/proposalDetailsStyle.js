@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "5%",
     borderRadius: 8,
-    paddingVertical: 8,
+    paddingVertical: "4%",
+    // paddingVertical: 8,
   },
   calculate_button: {
     height: responsiveHeight(6),

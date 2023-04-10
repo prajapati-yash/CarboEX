@@ -10,26 +10,23 @@ export default function AboutUs() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.centerView}
       >
-        <View style={{ flex: 1 }}>
+        <View>
           <View style={{ alignItems: "center" }}>
             <ImageBackground
               style={styles.image1}
               borderRadius={50}
               source={require("../assets/aboutUsAssets/BG1.png")}
+              // blurRadius={0}
             >
-              {/* <BlurView style={styles.blurView} intensity={90} tint="light"> */}
-              <View style={styles.blurView}>
-                {/* <BlurView style={{ opacity: 0.6 }}> */}
-                {/* <View style={styles.blur_view}> */}
-                <View
-                  style={{ justifyContent: "center", flex: 1, margin: "7%" }}
-                >
-                  <Text style={styles.blur_view_text}>
-                    We've made this project for a cause with a dream in mind.
-                    Know our vision and mission statements.
-                  </Text>
-                </View>
+              {/* <BlurView style={{ opacity: 0.6 }}> */}
+              {/* <View style={styles.blur_view}> */}
+              <View style={{ justifyContent: "center", flex: 1, margin: "7%" }}>
+                <Text style={styles.blur_view_text}>
+                  We've made this project for a cause with a dream in mind. Know
+                  our vision and mission statements.
+                </Text>
               </View>
+              {/* </View> */}
               {/* </BlurView> */}
             </ImageBackground>
           </View>
@@ -126,20 +123,9 @@ export default function AboutUs() {
                   ></Image>
                   <View style={[styles.view_image_subtext]}>
                     {/* <View style={{ flex: 1 }}> */}
-                    <Text
-                      style={[styles.text_image_subtext, { marginTop: "3%" }]}
-                    >
-                      Jay Patel
-                    </Text>
+                      <Text style={[styles.text_image_subtext, {marginTop: "3%"}]}>Jay Patel</Text>
                     {/* </View> */}
-                    <Text
-                      style={[
-                        styles.text_image_subtext,
-                        { marginBottom: "3%" },
-                      ]}
-                    >
-                      Backend Developer
-                    </Text>
+                    <Text style={[styles.text_image_subtext, {marginBottom: "3%"}]}>Backend Developer</Text>
                   </View>
                 </View>
               </View>
@@ -149,16 +135,8 @@ export default function AboutUs() {
                   style={styles.team_image}
                 ></Image>
                 <View style={styles.view_image_subtext}>
-                  <Text
-                    style={[styles.text_image_subtext, { marginTop: "3%" }]}
-                  >
-                    Purvi Vaghela
-                  </Text>
-                  <Text
-                    style={[styles.text_image_subtext, { marginBottom: "3%" }]}
-                  >
-                    Backend Developer
-                  </Text>
+                  <Text style={[styles.text_image_subtext, {marginTop: "3%"}]}>Purvi Vaghela</Text>
+                  <Text style={[styles.text_image_subtext, {marginBottom: "3%"}]}>Backend Developer</Text>
                 </View>
               </View>
             </View>
@@ -169,16 +147,8 @@ export default function AboutUs() {
                   style={styles.team_image}
                 ></Image>
                 <View style={styles.view_image_subtext}>
-                  <Text
-                    style={[styles.text_image_subtext, { marginTop: "3%" }]}
-                  >
-                    Purvik Panchal
-                  </Text>
-                  <Text
-                    style={[styles.text_image_subtext, { marginBottom: "3%" }]}
-                  >
-                    Web Developer
-                  </Text>
+                  <Text style={[styles.text_image_subtext, {marginTop: "3%"}]}>Purvik Panchal</Text>
+                  <Text style={[styles.text_image_subtext, {marginBottom: "3%"}]}>Web Developer</Text>
                 </View>
               </View>
               <View style={styles.row1_right}>
@@ -187,16 +157,8 @@ export default function AboutUs() {
                   style={styles.team_image}
                 ></Image>
                 <View style={styles.view_image_subtext}>
-                  <Text
-                    style={[styles.text_image_subtext, { marginTop: "3%" }]}
-                  >
-                    Yash Prajapati
-                  </Text>
-                  <Text
-                    style={[styles.text_image_subtext, { marginBottom: "3%" }]}
-                  >
-                    Web Developer
-                  </Text>
+                  <Text style={[styles.text_image_subtext, {marginTop: "3%"}]}>Yash Prajapati</Text>
+                  <Text style={[styles.text_image_subtext,{marginBottom: "3%"}]}>Web Developer</Text>
                 </View>
               </View>
             </View>
@@ -207,42 +169,21 @@ export default function AboutUs() {
                   style={styles.team_image}
                 ></Image>
                 <View style={styles.view_image_subtext}>
-                  <Text
-                    style={[styles.text_image_subtext, { marginTop: "3%" }]}
-                  >
-                    Abhishek Rajput
-                  </Text>
-                  <Text
-                    style={[styles.text_image_subtext, { marginBottom: "3%" }]}
-                  >
-                    App Developer
-                  </Text>
+                  <Text style={[styles.text_image_subtext, {marginTop: "3%"}]}>Abhishek Rajput</Text>
+                  <Text style={[styles.text_image_subtext, {marginBottom: "3%"}]}>App Developer</Text>
                 </View>
               </View>
-              <View style={[styles.row1, { marginBottom: "10%" }]}>
-                <View style={[styles.row1_right]}>
-                  <View>
-                    <Image
-                      source={require("../assets/aboutUsAssets/isha.jpeg")}
-                      style={styles.team_image}
-                    ></Image>
-                  </View>
 
-                  <View style={[styles.view_image_subtext]}>
-                    <Text
-                      style={[styles.text_image_subtext, { marginTop: "3%" }]}
-                    >
-                      Isha Mistry
-                    </Text>
-                    <Text
-                      style={[
-                        styles.text_image_subtext,
-                        { marginBottom: "3%" },
-                      ]}
-                    >
-                      App Developer
-                    </Text>
-                  </View>
+              <View style={[styles.row1_right]}>
+                <View>
+                <Image
+                  source={require("../assets/aboutUsAssets/isha.jpeg")}
+                  style={styles.team_image}
+                ></Image></View>
+                
+                <View style={[styles.view_image_subtext]}>
+                  <Text style={[styles.text_image_subtext, {marginTop: "3%"}]}>Isha Mistry</Text>
+                  <Text style={[styles.text_image_subtext, {marginBottom: "3%"}]}>App Developer</Text>
                 </View>
               </View>
             </View>

@@ -80,22 +80,45 @@ export function DrawerContent(props) {
                 props.navigation.navigate("uploadCertificate");
               }}
             />
-            <DrawerItem label="Become a member" />
-            <DrawerItem label="Proposal Dashboard" />
+
             <DrawerItem
               label="Proposal Details"
               onPress={() => {
                 props.navigation.navigate("proposalDetails");
               }}
             />
-
             <DrawerItem
               label="Sell Credits"
               onPress={() => {
                 props.navigation.navigate("sellCredits");
               }}
             />
-            <DrawerItem label="" />
+
+            <DrawerItem
+              label="Become a member"
+              onPress={() => {
+                props.navigation.navigate("BecomeMember");
+              }}
+            />
+            <DrawerItem
+              label="Proposal Dashboard"
+              onPress={() => {
+                props.navigation.navigate("ProposalDashboard");
+              }}
+            />
+
+            <DrawerItem
+              label="Buy Tokens Dashboard"
+              onPress={() => {
+                props.navigation.navigate("BuyTokensDashboard");
+              }}
+            />
+            <DrawerItem
+              label="Profile Details"
+              onPress={() => {
+                props.navigation.navigate("ProfileDetails");
+              }}
+            />
           </Drawer.Section>
 
           <Drawer.Section

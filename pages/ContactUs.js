@@ -14,6 +14,7 @@ import {
   Linking,
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { proc } from "react-native-reanimated";
 
 const handleCallPress = (phoneNumber) => {
   const url = `tel:${phoneNumber}`;
@@ -31,6 +32,8 @@ const handleLocationClick = () => {
 };
 
 export default function ContactUs() {
+  const phone_number = process.env.PHONE_NUMBER;
+  const email = process.env.EMAIL;
   const [inputData, setInputData] = useState({
     fname: "",
     lname: "",
@@ -50,15 +53,21 @@ export default function ContactUs() {
       message: `${message}`,
     };
 
-    let response = await fetch("http://192.168.43.190:5000/contact", {
+    let response = await fetch("http://192.168.0.13:5000/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(messageBody),
     });
-    console.log(response.json());
-    alert(response.json().status);
+
+    let json = await response.json();
+    console.log(response);
+    alert(json.status);
+
+    setInputData({ fname: "", lname: "", email: "", phone: "", message: "" });
+    // console.log(response.json());
+    // alert(response.json().status);
     // console.log(response);
   };
 
@@ -99,15 +108,15 @@ export default function ContactUs() {
                   <FontAwesome5
                     name={"phone-alt"}
                     size={16}
-                    onPress={() => handleCallPress("7621911088")}
+                    onPress={() => handleCallPress(phone_number)}
                   />
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text
                     style={styles.text_phone}
-                    onPress={() => handleCallPress("7621911088")}
+                    onPress={() => handleCallPress(phone_number)}
                   >
-                    +91 9924915518
+                    +91 9999998880
                   </Text>
                 </View>
                 <View></View>
@@ -118,25 +127,15 @@ export default function ContactUs() {
                   <FontAwesome5
                     name={"envelope"}
                     size={16}
-                    onPress={() =>
-                      handleEmailPress(
-                        "mistryisha22@gmail.com",
-                        "Support Request"
-                      )
-                    }
+                    onPress={() => handleEmailPress(email, "Support Request")}
                   />
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text
                     style={styles.text_mail}
-                    onPress={() =>
-                      handleEmailPress(
-                        "mistryisha22@gmail.com",
-                        "Support Request"
-                      )
-                    }
+                    onPress={() => handleEmailPress(email, "Support Request")}
                   >
-                    purvik@gmail.com
+                    lamprostech@gmail.com
                   </Text>
                 </View>
               </View>
@@ -167,7 +166,7 @@ export default function ContactUs() {
           <View style={styles.contact_table}>
             <View style={styles.contact_info_data}>
               <View style={styles.view_contact_heading}>
-                <Text style={styles.text_contact_details}>First Name</Text>
+                <Text>First Name</Text>
               </View>
               <View>
                 <TextInput
@@ -182,7 +181,7 @@ export default function ContactUs() {
 
             <View style={styles.contact_info_data}>
               <View>
-                <Text style={styles.text_contact_details}>Last Name</Text>
+                <Text>Last Name</Text>
               </View>
               <View>
                 <TextInput
@@ -197,7 +196,7 @@ export default function ContactUs() {
 
             <View style={styles.contact_info_data}>
               <View>
-                <Text style={styles.text_contact_details}>Email</Text>
+                <Text>Email</Text>
               </View>
               <View>
                 <TextInput
@@ -212,7 +211,7 @@ export default function ContactUs() {
 
             <View style={styles.contact_info_data}>
               <View>
-                <Text style={styles.text_contact_details}>Phone Number</Text>
+                <Text>Phone Number</Text>
               </View>
               <View>
                 <TextInput
@@ -227,7 +226,7 @@ export default function ContactUs() {
 
             <View style={styles.contact_info_data}>
               <View>
-                <Text style={styles.text_contact_details}>Send Message</Text>
+                <Text>Send Message</Text>
               </View>
               <View style={styles.textAreaContainer}>
                 <TextInput

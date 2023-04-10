@@ -56,6 +56,15 @@ export default function ProposalDetails() {
                 // }}
               />
 
+              <Text style={styles.input_text}>Type</Text>
+              <Text
+                // value={teText}
+                style={styles.input_box}
+                // onChangeText={(teText) => {
+                //   teSetText(teText);
+                // }}
+              />
+
               <Text style={styles.input_text}>Value</Text>
               <Text
                 // value={teText}
