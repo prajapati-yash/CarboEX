@@ -48,10 +48,7 @@
   width: 100%;
   padding: 0.8rem;
 }
-.MemberBuyTknBtn {
-  display: flex;
-  justify-content: center;
-}
+
 .MLPage-LabelTitle {
   font-size: 1.5rem;
   font-weight: 600;
@@ -83,6 +80,10 @@
   display: flex;
   justify-content: center;
   width: 100%;
+}
+.MemberBuyTknBtn {
+  display: flex;
+  justify-content: center;
 }
 
 .MemberBuyTknBtn1 {

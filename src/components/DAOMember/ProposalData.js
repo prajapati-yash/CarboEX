@@ -5,7 +5,6 @@ import '../../styles/DAOMember/ProposalData.css'
 const proposalData = {
     id: 1,
     name: "Example Name",
-    // publicAddress: "0x301",
     publicAddress: "0x3013bjh9yjhnk90h06D69C10710EaE148C8410E1",
     summary: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions.",
     certificateImage: "Certificate image here",

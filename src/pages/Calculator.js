@@ -20,12 +20,6 @@ function Calculator() {
         setValues([...values, value]);
     };
 
-    // const [data, setData] = useState([]);
-
-    // const handleChildData = (childData) => {
-    //     setData(prevData => [...prevData, childData]);
-    // }
-
     const [activeComponent, setActiveComponent] = useState('traditionalEnergy');
     const renderComponent = () => {
         switch (activeComponent) {

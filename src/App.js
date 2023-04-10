@@ -18,6 +18,7 @@ import ProposalDataMain from "./pages/ProposalDataMain";
 import SellCarbonCredits from "./pages/SellCarbonCredits";
 import ProposalDashboard from "./pages/ProposalDashboard";
 import ProposalOrders from "./pages/ProposalOrders";
+import MainProposalDashboard from "./pages/MainProposalDashboard";
 // import { useState } from "react";
 
 
@@ -59,15 +60,16 @@ function App() {
           <Route path='/calculator' element={<Calculator />} />
           <Route path='/calculator/*' element={<Calculator />} />
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/buy-credits' element={<BuyCarbonCredits/>} />
-          <Route path='/sell-credits' element={<SellCarbonCredits/>} />
-          <Route path='/certificate-validation-proposal' element={<CertificateValidationProposal/>} />
+          <Route path='/buy-credits' element={<BuyCarbonCredits />} />
+          <Route path='/sell-credits' element={<SellCarbonCredits />} />
+          <Route path='/certificate-validation-proposal' element={<CertificateValidationProposal />} />
           <Route path='/*' element={<Home />} />
           <Route path="/becomeMember" element={<BecomeMember />} />
           <Route path="/daoMemberProposals" element={<DAOMemberProposals />} />
           <Route path="/proposalData" element={<ProposalDataMain />} />
-          <Route path="/proposal-dashboard" element={<ProposalDashboard/>} />
-          <Route path="/proposal-orders" element={<ProposalOrders/>} />
+          <Route path="/proposal-dashboard" element={<ProposalDashboard />} />
+          <Route path="/proposal-orders" element={<ProposalOrders />} />
+          <Route path="/user-dashboard" element={<MainProposalDashboard />} />
 
         </Routes>
         <Footer />
