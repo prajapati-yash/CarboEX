@@ -1,16 +1,22 @@
 import * as React from "react";
+import { useState } from "react";
 import { Text, View, ScrollView, TextInput } from "react-native";
 import styles from "../style/sellCreditsStyles";
-import { useState } from "react";
-import { Dropdown } from "react-native-element-dropdown";
 import { Button, Stack } from "@rneui/themed";
-import {
-  responsiveFontSize,
-  responsiveHeight,
-  responsiveWidth,
-} from "react-native-responsive-dimensions";
+import { responsiveWidth } from "react-native-responsive-dimensions";
 
 export default function SellCredits() {
+  const [credits, setCredits] = useState("");
+  const price = 100;
+  const [total, setTotal] = useState("");
+
+  const calculateTotal = () => {
+    const calculatedTotal = credits * price;
+    setTotal(calculatedTotal);
+    // setCredits("");
+    // setTotal("");
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -24,30 +30,22 @@ export default function SellCredits() {
                 Enter number of credits to sell
               </Text>
               <TextInput
-                // value={teText}
+                value={credits}
                 style={styles.input_box}
-                // onChangeText={(teText) => {
-                //   teSetText(teText);
-                // }}
+                onChangeText={(value) => setCredits(value)}
               />
 
               <Text style={styles.input_text}>Price per credits</Text>
-              <TextInput
-                // value={teText}
+              <Text
+                value={price}
                 style={styles.input_box}
-                // onChangeText={(teText) => {
-                //   teSetText(teText);
-                // }}
-              />
+                // onChangeText={(value) => setPrice(value)}
+              >
+                {price}
+              </Text>
 
               <Text style={styles.input_text}>Total</Text>
-              <TextInput
-                // value={teText}
-                style={styles.input_box}
-                // onChangeText={(teText) => {
-                //   teSetText(teText);
-                // }}
-              />
+              <Text style={styles.input_box}>{total}</Text>
             </View>
             <View style={{ alignItems: "center" }}>
               <Button
@@ -64,7 +62,7 @@ export default function SellCredits() {
                   width: responsiveWidth(40),
                   marginVertical: "3%",
                 }}
-                onPress={() => console.log("aye")}
+                onPress={calculateTotal}
               />
             </View>
           </View>

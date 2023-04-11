@@ -34,16 +34,12 @@ const styles = StyleSheet.create({
     fontWeight: 900,
   },
   image2: {
-    marginTop: "20%",
-    marginBottom: "20%",
+    marginTop: "10%",
+    marginBottom: "8%",
     flex: 1,
     width: responsiveWidth(80),
     // height: responsiveHeight(50),
     alignItems: "center",
-    // flexDirection: "column",
-    // marginTop: "1%",
-    // zIndex: 1,
-    // paddingBottom: "3%",
   },
   bodyView: {
     flex: 1,
@@ -58,6 +54,16 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
     borderRadius: 8,
     paddingHorizontal: 8,
+  },
+  dropdownStyle: {
+    height: responsiveHeight(6),
+    width: responsiveWidth(70),
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    marginTop: "5%",
+    marginBottom: "5%",
   },
 });
 

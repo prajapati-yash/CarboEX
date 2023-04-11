@@ -14,8 +14,22 @@ const styles = StyleSheet.create({
   },
   centered_view: {
     alignItems: "center",
-    marginTop: "20%",
-    marginBottom: "20%",
+    alignItems: "center",
+    marginTop: "5%",
+    // marginBottom: "20%",
+  },
+  header: {
+    marginBottom: "10%",
+    alignItems: "center",
+  },
+  header_view_text: {
+    fontSize: responsiveFontSize(4),
+    fontWeight: "bold",
+    // alignItems: "center",
+    // textAlign: "center",
+    // marginTop: "11%",
+    // marginBottom: "11%",
+    color: "#000",
   },
   title_text: {
     fontSize: responsiveFontSize(3.5),
@@ -36,6 +50,7 @@ const styles = StyleSheet.create({
     // marginTop: "15%",
     borderRadius: 36,
     paddingBottom: "8%",
+    marginBottom: "8%",
   },
   boxHeader: {
     marginTop: "8%",
