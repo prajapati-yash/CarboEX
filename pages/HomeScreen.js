@@ -136,12 +136,13 @@ export default function HomeScreen() {
               <View style={styles.modal_centered_view}>
                 <View style={styles.modal_view}>
                   <View style={styles.modal_body}>
+                    <Text style={styles.modal_text}>Welcome to CarboEx. </Text>
                     <Text style={styles.modal_text}>
-                      The Carbon Trading Platform using Blockchain aims to
-                      facilitate carbon credit trading by creating an
-                      unchangeable and tamper-proof record of transactions,
-                      automating the exchange of carbon credits, and supporting
-                      sustainable development.
+                      The Carbon Trading Platform that facilitates carbon credit
+                      trading for a sustainable future.
+                    </Text>
+                    <Text style={styles.modal_text}>
+                      Powered by blockchain technology.
                     </Text>
                   </View>
 

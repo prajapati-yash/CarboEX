@@ -52,23 +52,22 @@ export default function ContactUs() {
       phone: `${phone}`,
       message: `${message}`,
     };
-
-    let response = await fetch("http://192.168.0.13:5000/contact", {
+    try{
+    let response = await fetch("http://192.168.43.190:5000/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(messageBody),
     });
-
-    let json = await response.json();
-    console.log(response);
-    alert(json.status);
-
-    setInputData({ fname: "", lname: "", email: "", phone: "", message: "" });
     // console.log(response.json());
     // alert(response.json().status);
+    alert(response);
     // console.log(response);
+  }
+    catch(err){
+      console.log("Error: ", err)
+    }
   };
 
   return (
