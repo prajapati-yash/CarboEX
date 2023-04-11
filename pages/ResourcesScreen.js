@@ -61,7 +61,7 @@ export default function Resource() {
                     allows for controlled and justified emissions of Carbon on
                     the globe. Eventually, there is a responsibility for the
                     human race to expend our resources sustainably and ensure we
-                    use our assets and natural reservoirs wisely. Carbon trading
+                    our assets and natural reservoirs wisely. Carbon trading
                     allows us to do that on a global scale.
                   </Text>
                 </View>

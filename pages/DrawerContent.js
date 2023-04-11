@@ -68,17 +68,32 @@ export function DrawerContent(props) {
           </Drawer.Section>
 
           <Drawer.Section style={{ flex: 1, marginTop: 8 }}>
-            {/* <DrawerItem label="Terms & Conditions" />
-            <DrawerItem label="Privacy Policy" />
             <DrawerItem
-              label="About Us"
+              label="SignUp"
               onPress={() => {
-                props.navigation.navigate("AboutUs");
+                props.navigation.navigate("signUP");
               }}
-            /> */}
+            />
+            <DrawerItem
+              label="Upload Certificate"
+              onPress={() => {
+                props.navigation.navigate("uploadCertificate");
+              }}
+            />
 
-            <DrawerItem label="Login" />
-            <DrawerItem label="Sign Up" />
+            <DrawerItem
+              label="Proposal Details"
+              onPress={() => {
+                props.navigation.navigate("proposalDetails");
+              }}
+            />
+            <DrawerItem
+              label="Sell Credits"
+              onPress={() => {
+                props.navigation.navigate("sellCredits");
+              }}
+            />
+
             <DrawerItem
               label="Become a member"
               onPress={() => {
@@ -91,7 +106,7 @@ export function DrawerContent(props) {
                 props.navigation.navigate("ProposalDashboard");
               }}
             />
-            <DrawerItem label="Proposal Details" />
+
             <DrawerItem
               label="Buy Tokens Dashboard"
               onPress={() => {

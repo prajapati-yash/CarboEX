@@ -6,6 +6,7 @@ import {
   TextInput,
   ImageBackground,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import styles from "../style/profileDetailsStyle";
 import { Button, Dialog } from "@rneui/themed";
@@ -16,6 +17,7 @@ import {
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Avatar } from "react-native-elements";
 
 function EditProfileScreen() {
   return (
@@ -126,26 +128,27 @@ function EditProfileScreen() {
 function MyProposalScreen() {
   const [visible1, setVisible1] = useState(false);
   const toggleDialog = () => {
+    // setSelectedImage(null);
     setVisible1(!visible1);
   };
   const myProposalData = [
     {
       sr_no: "name1",
-      title: "title",
+      title: "title1",
       image: require("../assets/calculatorAssets/HomeBg.jpg"),
-      result: "result",
-      stake: "stake",
-      return_stake: "return stake",
-      credit_issue: "credit issue",
+      result: "result1",
+      stake: "stake1",
+      return_stake: "return stake1",
+      credit_issue: "credit issue1",
     },
     {
-      sr_no: "name1",
-      title: "title",
-      image: "image",
-      result: "result",
-      stake: "stake",
-      return_stake: "return stake",
-      credit_issue: "credit issue",
+      sr_no: "name2",
+      title: "title2",
+      image: require("../assets/calculatorAssets/FuelBg.jpg"),
+      result: "result2",
+      stake: "stake2",
+      return_stake: "return stake2",
+      credit_issue: "credit issue2",
     },
   ];
   return (
@@ -179,23 +182,32 @@ function MyProposalScreen() {
                     ]}
                   >
                     <Text style={styles.text_proposal_description}>Image:</Text>
-                    <Image
-                      source={proposal.image}
-                      style={{
-                        width: 100,
-                        height: 100,
-                        marginVertical: 10,
-                        marginLeft: "6%",
-                      }}
-                      onPress={toggleDialog}
-                    ></Image>
+                    <TouchableOpacity onPress={toggleDialog} key={index}>
+                      <Image
+                        source={proposal.image}
+                        // source={require("../assets/calculatorAssets/HomeBg.jpg")}
+                        style={{
+                          width: 80,
+                          height: 80,
+                          marginVertical: 10,
+                          marginLeft: "6%",
+                        }}
+                      ></Image>
+                    </TouchableOpacity>
+                    <Dialog isVisible={visible1} onBackdropPress={toggleDialog}>
+                      <Dialog.Title title="Your proposal image" />
+                      <Image
+                        // source={require("../assets/calculatorAssets/HomeBg.jpg")}
+                        source={proposal.image}
+                        style={{
+                          width: "100%",
+                          // height: 100,
+                          // marginVertical: 10,
+                          // margin: "3%",
+                        }}
+                      ></Image>
+                    </Dialog>
                   </View>
-                  <Dialog isVisible={visible1} onBackdropPress={toggleDialog}>
-                    <Dialog.Title title="Dialog Title" />
-                    <Text>
-                      Dialog body text. Add relevant information here.
-                    </Text>
-                  </Dialog>
 
                   <View style={styles.view_proposal_description}>
                     <Text style={styles.text_proposal_description}>

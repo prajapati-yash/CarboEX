@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     marginBottom: -20,
     zIndex: 2,
-    paddingBottom: "20%",
+    // paddingBottom: "20%",
   },
   section5_title: {
     alignItems: "center",

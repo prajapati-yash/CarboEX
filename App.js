@@ -11,6 +11,10 @@ import Resource from "./pages/ResourcesScreen";
 import { TotalSum } from "./Api/emissionCalculate";
 import BuyCredit from "./pages/BuyCredit";
 import SellCredit from "./pages/SellCredit";
+import ProposalDetails from "./pages/proposalDetails";
+import SignUP from "./pages/signUP";
+import UploadCertificate from "./pages/uploadCertificate";
+import SellCredits from "./pages/sellCredits";
 import BecomeMember from "./pages/becomeMember";
 import ProposalDashboard from "./pages/proposalDashboard";
 import BuyTokensDashboard from "./pages/buyTokensDashboard";
@@ -109,6 +113,57 @@ export default function App() {
         />
 
         <Drawer.Screen
+          name="uploadCertificate"
+          component={UploadCertificate}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  width: 130,
+                  height: 70,
+                  marginLeft: -19,
+                  marginTop: -6,
+                }}
+                source={require("./assets/carboex.png")}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="signUP"
+          component={SignUP}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  width: 130,
+                  height: 70,
+                  marginLeft: -19,
+                  marginTop: -6,
+                }}
+                source={require("./assets/carboex.png")}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="sellCredits"
+          component={SellCredits}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  width: 130,
+                  height: 70,
+                  marginLeft: -19,
+                  marginTop: -6,
+                }}
+                source={require("./assets/carboex.png")}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
           name="BecomeMember"
           component={BecomeMember}
           options={{
@@ -125,7 +180,6 @@ export default function App() {
             ),
           }}
         />
-
         <Drawer.Screen
           name="ProposalDashboard"
           component={ProposalDashboard}
@@ -144,6 +198,24 @@ export default function App() {
           }}
         />
         <Drawer.Screen
+          name="proposalDetails"
+          component={ProposalDetails}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  width: 130,
+                  height: 70,
+                  marginLeft: -19,
+                  marginTop: -6,
+                }}
+                source={require("./assets/carboex.png")}
+              />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
           name="BuyTokensDashboard"
           component={BuyTokensDashboard}
           options={{
@@ -160,6 +232,7 @@ export default function App() {
             ),
           }}
         />
+
         <Drawer.Screen
           name="ProfileDetails"
           component={ProfileDetails}

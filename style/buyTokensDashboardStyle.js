@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // marginTop: "8%",
   },
-  calculateHeader: {
-    flex:1,
+  header_view: {
+    flex: 1,
     width: responsiveWidth(90),
     // height: responsiveHeight(20),
     textAlign: "center",
@@ -56,10 +56,10 @@ const styles = StyleSheet.create({
     width: responsiveWidth(90),
     height: responsiveHeight(20),
     opacity: 1,
-    justifyContent:"center",
+    justifyContent: "center",
     alignItems: "center",
   },
-  calculateBody: {
+  view_body: {
     justifyContent: "center",
     alignItems: "center",
     marginTop: "6%",
@@ -79,27 +79,13 @@ const styles = StyleSheet.create({
   input_box: {
     height: responsiveHeight(4),
     width: responsiveWidth(72),
+    paddingVertical: "1%",
     borderColor: "black",
     borderWidth: 1,
     marginTop: "3%",
     marginBottom: "3%",
     borderRadius: 8,
     paddingHorizontal: 8,
-  },
-  calculate_button: {
-    height: responsiveHeight(6),
-    width: responsiveWidth(82),
-    backgroundColor: "#4681f4",
-    borderRadius: 8,
-    // marginTop: "4%",
-    justifyContent: "center",
-  },
-  calculate_button_text: {
-    textAlign: "center",
-    marginTop: "1%",
-    marginBottom: "1%",
-    fontWeight: "bold",
-    fontSize: responsiveFontSize(2.5),
   },
 });
 

@@ -1,10 +1,11 @@
-import * as React from "react";
+import React, {useState} from "react";
 import { View, Text, ScrollView, TextInput } from "react-native";
 import styles from "../style/becomeMemberStyle";
 import { Button } from "@rneui/themed";
 import { responsiveFontSize, responsiveWidth } from "react-native-responsive-dimensions";
 
 export default function BecomeMember() {
+  const [numberOfTokens, setNumberOfTokens] = useState(0);
   return (
     <View style={styles.container}>
       <ScrollView
@@ -23,6 +24,7 @@ export default function BecomeMember() {
                 <TextInput
                   style={styles.input_box}
                   placeholder="Enter number of tokens"
+                  onChangeText={setNumberOfTokens}
                 ></TextInput>
               </View>
             </View>
@@ -35,12 +37,12 @@ export default function BecomeMember() {
                 <Text
                   style={styles.input_box}
                   placeholder="Total amount will be displayed here."
-                ></Text>
+                >{numberOfTokens * 100}</Text>
               </View>
             </View>
 
             <View style={styles.view_button}>
-            <Button
+            {/* <Button
               title="Calculate Amount"
               loading={false}
               loadingProps={{ size: "small", color: "white" }}
@@ -57,8 +59,8 @@ export default function BecomeMember() {
                 marginBottom: "5%",
                 
               }}
-              onPress={() => console.log("aye")}
-            />
+              onPress={() => console.log(numberOfTokens)}
+            /> */}
             <Button
               title="Buy Tokens"
               loading={false}
