@@ -10,13 +10,6 @@ export default function SellCredits() {
   const price = 100;
   const [total, setTotal] = useState("");
 
-  const calculateTotal = () => {
-    const calculatedTotal = credits * price;
-    setTotal(calculatedTotal);
-    // setCredits("");
-    // setTotal("");
-  };
-
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -45,7 +38,7 @@ export default function SellCredits() {
               </Text>
 
               <Text style={styles.input_text}>Total</Text>
-              <Text style={styles.input_box}>{total}</Text>
+              <Text style={styles.input_box}>{credits * price}</Text>
             </View>
             <View style={{ alignItems: "center" }}>
               <Button
@@ -58,11 +51,9 @@ export default function SellCredits() {
                 }}
                 titleStyle={{ fontWeight: "bold", fontSize: 23 }}
                 containerStyle={{
-                  //   marginLeft: "12%",
                   width: responsiveWidth(40),
                   marginVertical: "3%",
                 }}
-                onPress={calculateTotal}
               />
             </View>
           </View>

@@ -126,10 +126,10 @@ function EditProfileScreen() {
 }
 
 function MyProposalScreen() {
-  const [visible1, setVisible1] = useState(false);
-  const toggleDialog = () => {
+  const [visible1, setVisible1] = useState(null);
+  const toggleDialog = (index) => {
     // setSelectedImage(null);
-    setVisible1(!visible1);
+    setVisible1(index);
   };
   const myProposalData = [
     {
@@ -182,7 +182,10 @@ function MyProposalScreen() {
                     ]}
                   >
                     <Text style={styles.text_proposal_description}>Image:</Text>
-                    <TouchableOpacity onPress={toggleDialog} key={index}>
+                    <TouchableOpacity
+                      onPress={() => toggleDialog(index)}
+                      key={index}
+                    >
                       <Image
                         source={proposal.image}
                         // source={require("../assets/calculatorAssets/HomeBg.jpg")}
@@ -194,7 +197,10 @@ function MyProposalScreen() {
                         }}
                       ></Image>
                     </TouchableOpacity>
-                    <Dialog isVisible={visible1} onBackdropPress={toggleDialog}>
+                    <Dialog
+                      isVisible={visible1 === index}
+                      onBackdropPress={() => setVisible1(null)}
+                    >
                       <Dialog.Title title="Your proposal image" />
                       <Image
                         // source={require("../assets/calculatorAssets/HomeBg.jpg")}
