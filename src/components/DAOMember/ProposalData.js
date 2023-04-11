@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../styles/DAOMember/ProposalData.css'
 
 
@@ -7,13 +7,33 @@ const proposalData = {
     name: "Example Name",
     publicAddress: "0x3013bjh9yjhnk90h06D69C10710EaE148C8410E1",
     summary: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions.",
-    certificateImage: "Certificate image here",
+    certificateImage: "assets/about/teamImages/yash.jpg",
     type: "Type Name",
     value: "500",
 }
 
 
 function ProposalData() {
+
+
+    const [showModal, setShowModal] = useState(false);
+    const [enlargedImageSrc, setEnlargedImageSrc] = useState("0");
+
+    const handleImageClick = () => {
+        setShowModal(true);
+        setEnlargedImageSrc(proposalData.certificateImage);
+    };
+
+    const handleCloseClick = () => {
+        setShowModal(false);
+        setEnlargedImageSrc("");
+    };
+
+    const modalStyle = {
+
+        display: showModal ? "block" : "none",
+    };
+
     return (
         <>
             <div className='container-fluid PDataPageBg'>
@@ -57,7 +77,31 @@ function ProposalData() {
                                                     </p>
                                                     <p className="proposal-certificate-image">
                                                         <span className="proposalInfoLabel"> Certificate: </span>
-                                                        <p className="proposalInfoDataBg">{proposalData.certificateImage}</p>
+                                                        {/* <p className="proposalInfoDataBg">{proposalData.certificateImage}</p> */}
+                                                        <p className="proposalInfoDataBg">
+                                                            {/* <div className="mb-3"> */}
+                                                            {/* <span className="proposal-dash-label">Image:</span> */}
+                                                            <div
+                                                                className=""
+                                                                style={{ width: "fit-content" }}
+                                                            >
+                                                                {" "}
+                                                                <a
+                                                                    // href="#"
+                                                                    onClick={() =>
+                                                                        handleImageClick({ certificateImage: proposalData.certificateImage })
+                                                                    }
+                                                                >
+                                                                    <img
+                                                                        src={proposalData.certificateImage}
+                                                                        className="img-thumbnail"
+                                                                        alt="thumbnail"
+                                                                        style={{ height: "150px", width: "150px" }}
+                                                                    />
+                                                                </a>
+                                                            </div>
+                                                            {/* </div> */}
+                                                        </p>
                                                     </p>
                                                     <p className="proposal-type">
                                                         <span className="proposalInfoLabel">Type:</span> <p className="proposalInfoDataBg">{proposalData.type}</p>
@@ -84,6 +128,27 @@ function ProposalData() {
                             </div>
                         </div>
                     </div>
+
+                    <div className="modal" tabIndex="-1" role="dialog" style={modalStyle} >
+                        <div className="modal-dialog modal-dialog-centered" role="document">
+                            <div className="modal-content">
+                                <div className="modal-body">
+                                    <img
+                                        src={enlargedImageSrc}
+                                        className="certificate-image-enlargedImage"
+                                        alt="enlarged"
+                                    />
+                                    <span
+                                        className="close certificate-image-closeStyle"
+                                        onClick={handleCloseClick}
+                                    >
+                                        &times;
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div >
         </>

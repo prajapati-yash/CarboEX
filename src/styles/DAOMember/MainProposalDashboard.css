@@ -12,21 +12,81 @@
 
 .DAO-Member-logo {
   width: 150px;
-  border-radius: 2rem;
+  /* border: 2px solid #566160; */
+  border-radius: 1rem;
   height: 100px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
 }
 
 .PropHeadLabel {
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 .DaoMemberDetails-class input[type="text"],
 .DaoMemberDetails-class input[type="email"] {
-  background-color: #ffffff;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
 }
 
-.PDataPage-content-Btns {
+.prop-dash-data-bg {
+  margin-top: 2%;
+  border-radius: 0.7rem;
+  color: #1e2317;
+  background-color: #5f802a;
+  font-weight: 600;
+}
+
+.DMember-db-btns {
+  margin: 1.5rem;
+  padding: 0;
+  max-width: 25%;
+}
+
+.DMember-db-btns-body {
   text-align: center;
+}
+.DMember-edit-save-btn {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  transition: all 550ms;
+  box-shadow: rgb(120, 169, 139) 0 -25px 18px -14px inset,
+    rgba(110, 141, 122, 0.719) 0 1px 2px, rgb(154, 174, 162) 0 2px 4px,
+    rgba(114, 142, 125, 0.736) 0 4px 8px, rgba(113, 159, 131, 0.571) 0 8px 16px,
+    rgba(158, 183, 168, 0.719) 0 16px 32px;
+}
+.DMember-edit-save-btn:hover {
+  background-color: #000000;
+  color: #ffffff;
+  box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px,
+    rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
+    rgba(44, 187, 99, 0.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.PData-sell-btn {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  transition: all 550ms;
+  box-shadow: rgb(45, 55, 49) 0 -25px 18px -14px inset,
+    rgba(99, 125, 109, 0.719) 0 1px 2px, rgb(154, 174, 162) 0 2px 4px,
+    rgba(114, 142, 125, 0.736) 0 4px 8px, rgba(113, 159, 131, 0.571) 0 8px 16px,
+    rgba(96, 133, 111, 0.766) 0 16px 32px;
+}
+.PData-sell-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: rgba(133, 161, 144, 0.907) 0 -25px 18px -14px inset,
+    rgba(144, 165, 152, 0.929) 0 1px 2px, rgb(123, 150, 133) 0 2px 4px,
+    rgba(145, 171, 155, 0.879) 0 4px 8px, rgba(125, 160, 138, 0.885) 0 8px 16px,
+    rgba(150, 180, 162, 0.918) 0 16px 32px;
+  transform: scale(1.04) rotate(-0.5deg);
 }
 
 .Member-prop-orders-class {
@@ -74,6 +134,7 @@
     rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
     rgba(44, 187, 99, 0.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
+  /* color: rgb(0, 129, 0); */
 }
 
 @media only screen and (max-width: 767px) {
@@ -111,10 +172,10 @@
 }
 
 @media only screen and (max-width: 575px) {
-  .PDataPage-content-Btns {
+  .DMember-db-btns-body {
     display: flex;
   }
-  .PData-reject-btn {
+  .DMember-edit-save-btn {
     margin-right: 1rem;
   }
 }

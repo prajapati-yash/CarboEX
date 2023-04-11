@@ -3,9 +3,6 @@ import React from 'react'
 import '../../styles/navbar/Navbar.css'
 import { NavLink } from 'react-router-dom';
 import ConnectButtonCustom from '../ConnectButtonCustom';
-// import { Box, Button, Modal, Skeleton, Typography } from "@mui/material";
-// import { useAccount, useSigner } from "wagmi";
-// import * as PushAPI from "@pushprotocol/restapi";
 
 
 const navigation = [
@@ -53,7 +50,7 @@ function Navbar() {
             />
           </NavLink>
 
-          <button
+          <buttons
             type="button"
             className="navbar-toggler collapsed d-flex d-lg-none flex-column justify-content-around" data-bs-toggle="collapse" data-bs-target="#navbarRightAlignExample"
             aria-controls="navbarRightAlignExample" aria-expanded="false" aria-label="Toggle navigation"
@@ -61,35 +58,23 @@ function Navbar() {
             <span className="toggler-icon top-bar"></span>
             <span className="toggler-icon middle-bar"></span>
             <span className="toggler-icon bottom-bar"></span>
-          </button>
-          {/* <span className="navbar-toggler-icon"></span>
-          </button> */}
-
+          </buttons>
           <div
             className="collapse navbar-collapse justify-content-end nav-height"
             id="navbarRightAlignExample"
           >
-
-
             <ul className="navbar-nav  ml-auto align-items-center mb-2 mb-lg-0">
               {navigation.map((item, index) => (
                 <NavLink1 body={item} key={index} />
               ))}
 
             </ul>
-
-            <div className='ps-lg-5 d-flex align-items-center justify-content-center'>
+            <div className='ps-lg-5 ps-4 d-flex align-items-center justify-content-center'>
               <ConnectButtonCustom />
             </div>
-
-
           </div>
-
         </div>
-
-
       </nav >
-
     </>
   );
 }
@@ -102,10 +87,19 @@ function NavLink1({ body }) {
           className="nav-link p-0 active"
           aria-current="page"
           to={body.link}
+          onClick={() => {
+            // console.log(window.innerWidth)
+            if (window.innerWidth < 1000) {
+              const navbarToggler = document.querySelector('.navbar-toggler');
+              if (navbarToggler) {
+                navbarToggler.click();
+              }
+            }
+          }}
         >
           {body.title}
         </NavLink>
-      </li>
+      </li >
     </>
   )
 }

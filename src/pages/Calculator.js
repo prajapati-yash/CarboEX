@@ -53,7 +53,7 @@ function Calculator() {
                     <ul className='navigation-list'>
                         <div className='lItems'>
                             <NavLink
-                                to='/calculator/traditionalenergy'
+                                to='/calculator'
                                 isActive={() => activeComponent === 'traditionalEnergy'}
                                 onClick={() => setActiveComponent('traditionalEnergy')}
                             >

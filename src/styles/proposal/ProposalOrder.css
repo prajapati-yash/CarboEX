@@ -31,6 +31,42 @@
   font-weight: 600;
 }
 
+.POrders-head {
+  color: #000000;
+  font-size: 2.3rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-top: 3rem !important;
+}
+
+@media (max-width: 400px) {
+  .POrders-head p {
+    font-size: 1rem;
+    font-weight: bolder !important;
+  }
+}
+@media (max-width: 650px) {
+  .POrders-head p {
+    font-size: 1rem;
+    font-weight: bolder !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .POrders-head {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 850px) {
+  .POrders-head {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}
+
 /* .proposal-order-dash-title{
     height: 70px;
     flex-wrap: nowrap;

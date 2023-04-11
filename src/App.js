@@ -70,7 +70,7 @@ function App() {
           <Route path="/proposal-dashboard" element={<ProposalDashboard />} />
           <Route path="/proposal-orders" element={<ProposalOrders />} />
           <Route path="/user-dashboard" element={<MainProposalDashboard />} />
-
+          <Route path="/user-dashboard/*" element={<MainProposalDashboard />} />
         </Routes>
         <Footer />
       </BrowserRouter >

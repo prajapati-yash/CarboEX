@@ -56,6 +56,9 @@ function ProposalDashComponent() {
   return (
     <>
       <div className="proposalContainer">
+        <div className="myProposals-head-title py-3 py-sm-4 d-flex justify-content-center">
+          <p>PROPOSALS</p>
+        </div>
         <div className="proposalDetails">
           {proposalDashboardData.map((details) => (
             <div key={details.id} className="proposal-company-wrapper">
@@ -80,7 +83,7 @@ function ProposalDashComponent() {
                     >
                       {" "}
                       <a
-                        href="#"
+                        // href="#"
                         onClick={() =>
                           handleImageClick({ image: details.image })
                         }
