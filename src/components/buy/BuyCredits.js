@@ -4,7 +4,7 @@ import "../../styles/buy/BuyCarbonCredits.css";
 const companyData = [
   {
     id: 1,
-    name: "Global Urja",
+    name: "Tata Power Solar",
     description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions.",
     publicAddress: "Public Address for Company A",
     credits: "9",
