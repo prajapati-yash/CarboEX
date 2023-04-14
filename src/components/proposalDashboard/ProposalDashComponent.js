@@ -11,20 +11,6 @@ function ProposalDashComponent() {
   const { address } = useAccount();
   const [allData, setAllData] = useState();
   const [userProp, setUserProp] = useState([]);
-  // const [idArray, setIdArray] = useState([]);
-  // let getUserData;
-
-  // const proposalDashboardData = [
-  //   {
-  //     type: "",
-  //     description: "",
-  //     image: "",
-  //     status: "",
-  //     proposedAt: "",
-  //     proposalExpiry: "",
-  //   },
-  // ]
-
 
   const getUserIDs = async () => {
     try {
@@ -41,14 +27,12 @@ function ProposalDashComponent() {
         let arr = []
         for (let i = 0; i < getUserID.length; i++) {
           const getUserData = await con.getProposal(getUserID[i]._hex);
-          // setUserProp([...userProp, getUserData]);
           arr.push(getUserData);
           console.log(getUserData)
         }
         setUserProp(arr);
         setAllData(getUserID);
         return getUserID
-        // console.log(allData[0]._hex)
       }
     } catch (error) {
       console.log(error);

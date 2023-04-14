@@ -1,47 +1,56 @@
 import React from "react";
 import "../../styles/proposal/ProposalOrder.css";
+import { ethers } from "ethers";
+import { companyInstance } from "../Contracts";
+import { useAccount } from 'wagmi';
+import { useState } from "react";
 
-const proposalOrderData = [
-  {
-    id: 1,
-    totalCredits: 10,
-    pricePerCredit: 10,
-    totalPrice: 100,
-    orderDate: "03-02-2023",
-    create: "04-02-2023",
-    completeDate: "09-04-2023",
-  },
-  {
-    id: 2,
-    totalCredits: 10,
-    pricePerCredit: 10,
-    totalPrice: 100,
-    orderDate: "03-02-2023",
-    create: "04-02-2023",
-    completeDate: "09-04-2023",
-  },
-  {
-    id: 3,
-    totalCredits: 10,
-    pricePerCredit: 10,
-    totalPrice: 100,
-    orderDate: "03-02-2023",
-    create: "04-02-2023",
-    completeDate: "09-04-2023",
-  },
-  {
-    id: 4,
-    totalCredits: 10,
-    pricePerCredit: 10,
-    totalPrice: 100,
-    orderDate: "03-02-2023",
-    create: "04-02-2023",
-    completeDate: "09-04-2023",
-  },
-
-]
 
 function ProposalOrderComponent() {
+  const [userOrders, setUserOrders] = useState([]);
+  const address = useAccount();
+
+  const sellingCredits = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+        const con = await companyInstance();
+        console.log(address)
+        const getUserOrId = await con.OrderstructId(address);
+        console.log(getUserOrId)
+        return getUserOrId
+        // let arr = []
+        // for (let i = 0; i < getUserID.length; i++) {
+        //   const getUserData = await con.getProposal(getUserID[i]._hex);
+        //   arr.push(getUserData);
+        //   console.log(getUserData)
+        // }
+        // setUserProp(arr);
+        // setAllData(getUserID);
+        // return getUserID
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const proposalOrderData = [
+    {
+      id: 1,
+      totalCredits: 10,
+      pricePerCredit: 10,
+      totalPrice: 100,
+      orderDate: "03-02-2023",
+      create: "04-02-2023",
+      completeDate: "09-04-2023",
+    },
+  ]
+
   return (
     <>
       <div className="orderContainer">
@@ -96,6 +105,7 @@ function ProposalOrderComponent() {
           ))}
         </div>
       </div>
+      <button onClick={() => sellingCredits()}>Click</button>
     </>
   );
 }
