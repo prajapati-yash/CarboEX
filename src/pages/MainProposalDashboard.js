@@ -5,8 +5,9 @@ import ProposalOrders from './ProposalOrders';
 import { useNavigate } from 'react-router-dom';
 import { ethers } from 'ethers';
 import { companyInstance } from '../components/Contracts';
-
 import { useAccount } from 'wagmi';
+import  {ToastContainer,toast}  from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function MainProposalDashboard() {
@@ -17,6 +18,7 @@ function MainProposalDashboard() {
     const [isEditing, setIsEditing] = useState(false);
     const { address } = useAccount();
     const [credits, setCredits] = useState();
+    const [zero, setZero] = useState(false);
 
     const MainPropPageData = {
         logo: logoImg,
@@ -82,7 +84,23 @@ function MainProposalDashboard() {
         getUserAccountDetails();
     }, [])
 
-
+    const handleNavigation = async({value}) => {
+        setZero(value  < 0)
+        if(zero === true){
+            navigate("/sell-carbon-credits")
+        }else{
+            toast.error('Insufficient Carbon Credits', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+        }
+    }
     const getUserCreditDetails = async () => {
         try {
             const { ethereum } = window;
@@ -155,7 +173,8 @@ function MainProposalDashboard() {
                                     </button>
                                 </div> */}
                                 <div className='DMember-db-btns-ES'>
-                                    <button className='PData-sell-btn  rounded-pill' onClick={() => { navigate("/sell-carbon-credits") }}>SELL</button>
+                                    <button className='PData-sell-btn rounded-pill' onClick={() => handleNavigation(MainPropPageData.availableCredits) }>SELL</button>
+                                    <ToastContainer/>
                                 </div>
                             </div>
                         </div>

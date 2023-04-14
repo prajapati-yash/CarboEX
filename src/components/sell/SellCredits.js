@@ -4,8 +4,11 @@ import { useAccount } from 'wagmi';
 import { ethers } from "ethers";
 import { companyInstance } from "../Contracts";
 import { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function SellCredits() {
+  const navigate = useNavigate();
+  const [btnloading, setbtnloading] = useState(false)
   const [credits, setCredits] = useState();
   const [price, setPrice] = useState(); // define price value here
   const [total, setTotal] = useState(0);
@@ -13,6 +16,7 @@ function SellCredits() {
 
   const sellingCredits = async () => {
     try {
+      setbtnloading(true)
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -23,10 +27,14 @@ function SellCredits() {
         const con = await companyInstance();
         const sellCreditsUser = await con.createOrder(credits, price, address)
         // console.log(verifyUser)
+        setbtnloading(false)
+        navigate("/user-dashboard")
         return sellCreditsUser;
+
       }
     } catch (error) {
       console.log(error);
+      setbtnloading(true)
     }
   }
 
@@ -84,7 +92,22 @@ function SellCredits() {
               />
             </div>
 
-            <button className=" rounded-pill buy-button mt-4 mt-sm-5" onClick={() => sellingCredits()}>Sell</button>
+            <button className=" rounded-pill buy-button mt-4 mt-sm-5" onClick={() => sellingCredits()}>
+            {btnloading?(
+                    <svg
+                    className="animate-spin button-spin-svg-pic"
+                    version="1.1"
+                    id="L9"
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 100 100"
+                    style={{width:"20%", fill:"#fff"}}
+                  >
+                    <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+                  </svg>
+                  ):(<>SELL</>)}
+            </button>
           </div>
         </div>
       </div>
