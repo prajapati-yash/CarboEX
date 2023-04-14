@@ -7,6 +7,7 @@ import { daoInstance } from "../Contracts";
 import { Web3Storage } from "web3.storage";
 
 function CertificateValidate() {
+  const navigate = useNavigate();
   const [certificate, setCertificate] = useState("");
   const [domain, setDomain] = useState("");
   const [emission, setEmission] = useState("");
@@ -75,6 +76,8 @@ function CertificateValidate() {
         const conDAO = await daoInstance();
         console.log(conDAO)
         const CPTx = await conDAO.createProposal(proposal, cids, domain, emission)
+        navigate("/dao-member-proposals")
+
         console.log(CPTx)
       }
     } catch (error) {

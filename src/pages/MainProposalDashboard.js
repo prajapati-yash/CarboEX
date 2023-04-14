@@ -16,18 +16,15 @@ function MainProposalDashboard() {
     const [email, setEmail] = useState();
     const [isEditing, setIsEditing] = useState(false);
     const { address } = useAccount();
-
-
-
+    const [credits, setCredits] = useState();
 
     const MainPropPageData = {
         logo: logoImg,
         name: companyName,
         userName: userName,
         email: email,
-        availableCredits: "",
+        availableCredits: credits ? credits : "ZERO",
     };
-
 
     const [activeComponent, setActiveComponent] = useState('proposalDashboard');
     const navigate = useNavigate();
@@ -53,9 +50,7 @@ function MainProposalDashboard() {
                 return <ProposalDashboard />;
         }
     };
-    useEffect(() => {
-        getUserAccountDetails();
-    }, [])
+
 
     const getUserAccountDetails = async () => {
         try {
@@ -68,8 +63,9 @@ function MainProposalDashboard() {
                 }
                 const con = await companyInstance();
                 const userData = await con.getUser(address);
-                console.log(userData)
-                console.log(userData[5])
+
+                // console.log(userData)
+                // console.log(userData[5])
                 setLogoImg(userData[5])
                 setCompanyName(userData[3])
                 setUserName(userData[1])
@@ -82,6 +78,34 @@ function MainProposalDashboard() {
             console.log(error);
         }
     }
+    useEffect(() => {
+        getUserAccountDetails();
+    }, [])
+
+
+    const getUserCreditDetails = async () => {
+        try {
+            const { ethereum } = window;
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                if (!provider) {
+                    console.log("Metamask is not installed, please install!");
+                }
+                const con = await companyInstance();
+                const totalCredits = await con.totalcredit(address);
+                const creditsInDecimal = parseInt(totalCredits._hex, 16)
+                setCredits(creditsInDecimal);
+                console.log(totalCredits)
+                return credits
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        getUserCreditDetails()
+    }, [])
 
     // const receivedData = getUserAccountDetails();
 
@@ -122,16 +146,16 @@ function MainProposalDashboard() {
                     <div className="col-lg-2 col-md-3 col-sm-4 d-flex justify-content-end">
                         <div className='DMember-db-btns d-flex justify-content-center align-items-center col-8 mx-auto'>
                             <div className='DMember-db-btns-body '>
-                                <div className='DMember-db-btns-ES d-flex justify-content-center align-items-center'>
+                                {/* <div className='DMember-db-btns-ES d-flex justify-content-center align-items-center'>
                                     <button
                                         className='DMember-edit-save-btn rounded-pill'
                                         onClick={() => setIsEditing(!isEditing)}
                                     >
                                         {isEditing ? 'SAVE' : 'EDIT'}
                                     </button>
-                                </div>
+                                </div> */}
                                 <div className='DMember-db-btns-ES'>
-                                    <button className='PData-sell-btn  rounded-pill'>SELL</button>
+                                    <button className='PData-sell-btn  rounded-pill' onClick={() => { navigate("/sell-carbon-credits") }}>SELL</button>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +172,7 @@ function MainProposalDashboard() {
                     {renderComponent()}
                 </>
             </div>
-            {/* <button onClick={getUserAccountDetails}>Click to get data</button> */}
+            {/* <button onClick={getUserCreditDetails}>Click to get data</button> */}
             {/* {console.log(receivedData)} */}
         </>
     )

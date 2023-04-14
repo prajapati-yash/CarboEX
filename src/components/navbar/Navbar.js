@@ -1,63 +1,127 @@
-import React, { useState } from "react";
-// import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from "react";
 import "../../styles/navbar/Navbar.css";
 import { NavLink } from "react-router-dom";
 import ConnectButtonCustom from "../ConnectButtonCustom";
-
-const navigation = [
- 
-  // {
-  //   title: "Resources",
-  //   link: "/Resources",
-  // },
-
-  {
-    title: "Explore",
-    link: "/buy-carbon-credits",
-  },
-  {
-    title: "Member",
-    link: "",
-    auth: true,
-    submenu: [
-      { title: "Become a Member", link: "/" },
-      { title: "Proposals", link: "/" },
-    ],
-  },
-  {
-    title: "Our Approach",
-    link: "",
-    auth: true,
-    submenu: [
-      { title: "Validate Carbon Credits", link: "/approach/validate" },
-      { title: "Calculate Carbon Footprints", link: "/calculator" },
-    ],
-  },
-  // {
-  //   title: "Market",
-  //   link: "/market",
-  // },
-  {
-    title: "Know More",
-    link: "",
-    submenu:[
-      {
-        title:"About Us",
-        link:"/about"},
-      {
-        title:"Resources",
-        link:"/resources"
-      }
-    ]
-  },
-  {
-    title: "Contact",
-    link: "/contact",
-  },
-];
+import { useAccount } from 'wagmi';
+import { ethers } from "ethers";
+import { companyInstance } from "../Contracts";
+import { useNavigate } from "react-router-dom";
+import SignUp from "../../pages/SignUp";
 
 function Navbar() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { address, isConnected } = useAccount();
+
+  const verifyUserAccount = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+        const con = await companyInstance();
+        const verifyUser = await con.iscompaniesAdd(address)
+        // console.log(verifyUser)
+        return verifyUser;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // const verifyNavbar = async () => {
+  //   if (address) {
+  //     const tx = await verifyUserAccount();
+  //     if (tx) {
+  //       setIsAuthenticated(true)
+  //     } else {
+  //       setIsAuthenticated(false)
+  //     }
+  //   }
+  // }
+  const verifyNavbar = async () => {
+    try {
+      if (address) {
+        const tx = await verifyUserAccount();
+        if (tx) {
+          setIsAuthenticated(true)
+        } else {
+          setIsAuthenticated(false)
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    verifyNavbar()
+  }, [isAuthenticated])
+
+
+  const navigation = [
+    // {
+    //   title: "Resources",
+    //   link: "/Resources",
+    // },
+
+    {
+      title: "Explore",
+      link: "/buy-carbon-credits",
+      auth: true,
+    },
+    {
+      title: "Member",
+      link: "",
+      auth: true,
+      submenu: [
+        { title: "Become a Member", link: "/become-member" },
+        { title: "Proposals", link: "/dao-member-proposals" },
+      ],
+    },
+    {
+      title: "Our Approach",
+      link: "",
+      auth: true,
+      submenu: [
+        { title: "Validate Carbon Credits", link: "/certificate-validation-proposal" },
+        { title: "Calculate Carbon Footprints", link: "/calculator" },
+      ],
+    },
+    // {
+    //   title: "Market",
+    //   link: "/market",
+    // },
+    {
+      title: "Know More",
+      link: "",
+      submenu: [
+        {
+          title: "About Us",
+          link: "/about"
+        },
+        {
+          title: "Resources",
+          link: "/resources"
+        }
+      ]
+    },
+    {
+      title: "Contact",
+      link: "/contact",
+    },
+    {
+      title: "Dashboard",
+      link: "/user-dashboard",
+      auth: true,
+    },
+  ];
+
+
+
 
   const hasSubmenu = (item) => {
     return item.submenu && item.submenu.length > 0;
@@ -65,6 +129,7 @@ function Navbar() {
 
   return (
     <>
+      {/* <button onClick={verifyUserAccount}></button> */}
       <nav
         className="navbar navbar-expand-lg navbar-light sticky-top"
         role="navigation"
@@ -118,16 +183,16 @@ function Navbar() {
                           data-bs-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          // onClick={() => {
-                          //   console.log(window.innerWidth)
-                          //   if (window.innerWidth < 1000) {
-                          //     const navbarToggler =
-                          //       document.querySelector(".navbar-toggler");
-                          //     if (navbarToggler) {
-                          //       navbarToggler.click();
-                          //     }
-                          //   }
-                          // }}
+                        // onClick={() => {
+                        //   console.log(window.innerWidth)
+                        //   if (window.innerWidth < 1000) {
+                        //     const navbarToggler =
+                        //       document.querySelector(".navbar-toggler");
+                        //     if (navbarToggler) {
+                        //       navbarToggler.click();
+                        //     }
+                        //   }
+                        // }}
                         >
                           {item.title}
                         </NavLink>
@@ -240,6 +305,7 @@ function Navbar() {
     </>
   );
 } */
+
 }
 
 export default Navbar;

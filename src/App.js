@@ -65,7 +65,7 @@ function App() {
           <Route path='/certificate-validation-proposal' element={<CertificateValidationProposal />} />
           <Route path='/*' element={<Home />} />
           <Route path="/become-member" element={<BecomeMember />} />
-          <Route path="/daoMemberProposals" element={<DAOMemberProposals />} />
+          <Route path="/dao-member-proposals" element={<DAOMemberProposals />} />
           <Route path="/proposalData" element={<ProposalDataMain />} />
           <Route path="/proposal-dashboard" element={<ProposalDashboard />} />
           <Route path="/proposal-orders" element={<ProposalOrders />} />

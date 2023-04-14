@@ -68,6 +68,7 @@ function SignUpPage() {
         await tx.wait();
 
         navigate("/user-dashboard")
+        window.location.reload();
         console.log(con);
       }
     } catch (error) {

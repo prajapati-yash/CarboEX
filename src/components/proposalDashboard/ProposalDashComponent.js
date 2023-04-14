@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/proposal/proposalDashboard.css";
 import { ethers } from "ethers";
 import { daoInstance } from "../Contracts";
@@ -10,16 +10,20 @@ function ProposalDashComponent() {
   const [enlargedImageSrc, setEnlargedImageSrc] = useState("0");
   const { address } = useAccount();
   const [allData, setAllData] = useState();
-  const proposalDashboardData = [
-    {
-      id: 1,
-      title: "Wind Energy ",
-      image: "assets/about/teamImages/yash.jpg",
-      result: "Approved",
-      stake: "5 BTTC",
-      returnStake: "0 BTTC",
-    },
-  ]
+  const [userProp, setUserProp] = useState([]);
+  // const [idArray, setIdArray] = useState([]);
+  // let getUserData;
+
+  // const proposalDashboardData = [
+  //   {
+  //     type: "",
+  //     description: "",
+  //     image: "",
+  //     status: "",
+  //     proposedAt: "",
+  //     proposalExpiry: "",
+  //   },
+  // ]
 
 
   const getUserIDs = async () => {
@@ -33,31 +37,17 @@ function ProposalDashComponent() {
         }
         const con = await daoInstance();
         const getUserID = await con.getUserProposals(address);
-        setAllData(getUserID);
-        // console.log(allData[0]._hex)
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-
-  const getUserDataById = async () => {
-    try {
-      const { ethereum } = window;
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        if (!provider) {
-          console.log("Metamask is not installed, please install!");
+        console.log(getUserID.length)
+        let arr = []
+        for (let i = 0; i < getUserID.length; i++) {
+          const getUserData = await con.getProposal(getUserID[i]._hex);
+          // setUserProp([...userProp, getUserData]);
+          arr.push(getUserData);
+          console.log(getUserData)
         }
-        const con = await daoInstance();
-        const idInDecimal = parseInt(allData[0]._hex, 16)
-        // console.log(allData[0]._hex)
-        const getUserData = await con.getProposal(idInDecimal);
-        console.log(getUserData)
-        // const getUserID = await con.getUserProposals(address);
-        // setAllData(getUserID);
+        setUserProp(arr);
+        setAllData(getUserID);
+        return getUserID
         // console.log(allData[0]._hex)
       }
     } catch (error) {
@@ -66,6 +56,27 @@ function ProposalDashComponent() {
   }
 
 
+  // const getUserDataById = async (e) => {
+  //   try {
+  //     const { ethereum } = window;
+  //     if (ethereum) {
+  //       const provider = new ethers.providers.Web3Provider(ethereum);
+  //       const signer = provider.getSigner();
+  //       if (!provider) {
+  //         console.log("Metamask is not installed, please install!");
+  //       }
+  //       const con = await daoInstance();
+  //       const getResult = await con.getProposalResult(e)
+  //       return await getResult
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getUserDataById()
+  // }, [])
 
   const handleImageClick = (src) => {
     setShowModal(true);
@@ -80,6 +91,31 @@ function ProposalDashComponent() {
   const modalStyle = {
     display: showModal ? "block" : "none",
   };
+
+  // useEffect(() => {
+  //   console.log(userProp)
+  // }, [userProp.length])
+
+  useEffect(() => {
+    getUserIDs()
+  }, [])
+
+
+  function hexToTimestamp(hex) {
+    // const unixTimestamp = parseInt(hex, 16);
+    // const date = new Date(unixTimestamp * 1000);
+    // return date.toISOString().replace('T', ' ').replace('Z', '');
+    const unixTimestamp = parseInt(hex, 16);
+    const date = new Date(unixTimestamp * 1000);
+    const year = date.getUTCFullYear();
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const hours = date.getUTCHours().toString().padStart(2, '0');
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    const seconds = date.getUTCSeconds().toString().padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+
   return (
     <>
       <div className="proposalContainer">
@@ -87,19 +123,19 @@ function ProposalDashComponent() {
           <p>PROPOSALS</p>
         </div>
         <div className="proposalDetails">
-          {proposalDashboardData.map((details) => (
-            <div key={details.id} className="proposal-company-wrapper">
+          {userProp.map((details, key) => (
+            <div className="proposal-company-wrapper" key={key}>
               <div className="proposal-dash">
                 <div className="proposal-dash-info">
                   <div className="">
                     {" "}
-                    <span className="proposal-dash-label">Sr No.: </span>{" "}
-                    <p className="proposal-dash-output-Bg "> {details.id}</p>
+                    <span className="proposal-dash-label">Type: </span>{" "}
+                    <p className="proposal-dash-output-Bg ">{details[3] ? "Emission" : "Offset"}</p>
                   </div>
                   <div className=" ">
-                    <span className="proposal-dash-label">Title: </span>
+                    <span className="proposal-dash-label">Description: </span>
                     <p className="proposal-dash-output-Bg proposal-dash-title scroll-bar ">
-                      {details.title}
+                      {details[1]}
                     </p>
                   </div>
                   <div className="mb-3">
@@ -110,13 +146,12 @@ function ProposalDashComponent() {
                     >
                       {" "}
                       <a
-                        // href="#"
-                        onClick={() =>
-                          handleImageClick({ image: details.image })
-                        }
+                        onClick={() => {
+                          handleImageClick({ image: "https://" + `${details[2]}` + ".ipfs.w3s.link" })
+                        }}
                       >
                         <img
-                          src={details.image}
+                          src={"https://" + `${details[2]}` + ".ipfs.w3s.link"}
                           className="img-thumbnail"
                           alt="thumbnail"
                           style={{ height: "150px", width: "150px" }}
@@ -125,20 +160,21 @@ function ProposalDashComponent() {
                     </div>
                   </div>
                   <div className="">
-                    <span className="proposal-dash-label">Result: </span>{" "}
-                    <p className="proposal-dash-output-Bg">{details.result}</p>
+                    <span className="proposal-dash-label">Status: </span>{" "}
+                    <p className="proposal-dash-output-Bg">{details[10] ? details[10] : "Waiting..."}</p>
                   </div>
                   <div className="">
-                    <span className="proposal-dash-label">Stake:</span>{" "}
-                    <p className="proposal-dash-output-Bg">{details.stake}</p>
+                    <span className="proposal-dash-label">Proposed at:</span>{" "}
+                    <p className="proposal-dash-output-Bg">{hexToTimestamp(details[8]._hex)}</p>
                   </div>
                   <div className="">
-                    <span className="proposal-dash-label">Return Stake:</span>{" "}
-                    <p className="proposal-dash-output-Bg">{details.returnStake}</p>
+                    <span className="proposal-dash-label">Proposal Expire Time:</span>{" "}
+                    <p className="proposal-dash-output-Bg">{hexToTimestamp(details[9]._hex)}</p>
                   </div>
                   <div className="">
-                    <span className="proposal-dash-label">Credit Issue</span>{" "}<br />
-                    <button className=" btn btn-primary">Claim</button>
+                    <span className="proposal-dash-label">Result:</span>{" "}<br />
+                    {/* <button className=" btn btn-primary" onClick={getUserDataById(details[0])}>Result</button> */}
+                    <button className=" btn btn-primary" onClick={""}>Result</button>
                   </div>
                 </div>
               </div>
@@ -165,8 +201,7 @@ function ProposalDashComponent() {
             </div>
           </div>
           {/* ----------Ends here ---------------- */}
-          <button onClick={getUserIDs}>click to get array of id</button>
-          <button onClick={getUserDataById}>click to get data by id</button>
+          {/* <button onClick={getUserIDs}>Click</button> */}
         </div>
       </div>
     </>
