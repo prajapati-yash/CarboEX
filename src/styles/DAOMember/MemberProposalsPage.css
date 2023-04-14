@@ -7,8 +7,8 @@
 .MPPage-content {
   height: fit-content;
   padding-top: 1%;
-  margin: 0 8% 0 8%;
-  width: fit-content;
+  /* margin: 0 8% 0 8%;
+  width: fit-content; */
 }
 
 .MPPage-head {
@@ -38,7 +38,8 @@
   margin-right: 4%;
   padding: 2rem;
   background-color: rgb(213, 229, 224);
-  text-align: justify;
+  /* text-align: justify; */
+  /* position: relative; */
 }
 .MPPage-content-box {
   padding: 0;
@@ -50,6 +51,12 @@
   padding-right: 0.4rem;
   font-weight: bold;
 }
+/* .MPPage-VM-Btn-class {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-30%);
+} */
 
 .MPPage-VM-Btn {
   background-color: #c2fbd7;
@@ -93,6 +100,9 @@
   .MPPage-content-data {
     height: fit-content;
     font-size: 0.5rem;
+  }
+  .MPPage-box-bg {
+    border-radius: 1.5rem;
   }
 }
 
