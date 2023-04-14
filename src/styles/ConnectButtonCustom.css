@@ -20,11 +20,11 @@ button.connect-wallet {
   letter-spacing: 1.5px;
 }
 button.chain-button {
-  margin: auto 10px;
+  margin: auto 5px;
   padding: 5px;
   font-size: 0.865rem;
-  background-color: #fff;
-  color: #00daf7;
+  background-color: #6e6e6e;
+  color: #fff;
   font-weight: 700;
   border: 1px solid #fff;
   border-radius: 10px;
@@ -37,8 +37,8 @@ button.address-balance {
   padding: 2px;
   padding-left: 5px;
   font-size: 0.865rem;
-  background-color: #fff;
-  color: #00daf7;
+  background-color: #6e6e6e;
+  color: #fff;
   border: 1px solid #fff;
   font-weight: 700;
   border-radius: 10px;
