@@ -1,19 +1,85 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../styles/DAOMember/ProposalData.css'
-
-
-const proposalData = {
-    id: 1,
-    name: "Example Name",
-    publicAddress: "0x3013bjh9yjhnk90h06D69C10710EaE148C8410E1",
-    summary: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions.",
-    certificateImage: "Certificate image here",
-    type: "Type Name",
-    value: "500",
-}
-
+import { useLocation } from 'react-router-dom';
+import { daoInstance } from '../Contracts';
+import { ethers } from 'ethers';
 
 function ProposalData() {
+    const location = useLocation()
+    // console.log(location.state.data);
+    const proposal = location.state.data ? location.state.data : "";
+    const [downvoteProposal, setDownvoteProposal] = useState()
+
+
+    const daoProposalApprove = async () => {
+        try {
+            const { ethereum } = window;
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                if (!provider) {
+                    console.log("Metamask is not installed, please install!");
+                }
+                const con = await daoInstance();
+                const upvoteProposal = await con.upvote(proposal[0])
+                // console.log(upvoteProposal)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    const daoProposalReject = async () => {
+        try {
+            const { ethereum } = window;
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                if (!provider) {
+                    console.log("Metamask is not installed, please install!");
+                }
+                const con = await daoInstance();
+                const downvoteProposal = await con.downvote(proposal[0])
+                // console.log(downvoteProposal)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const [showModal, setShowModal] = useState(false);
+    const [enlargedImageSrc, setEnlargedImageSrc] = useState("0");
+    const proposalValue = parseInt(proposal[4]._hex, 16)
+    const proposalData = {
+        id: proposal[0],
+        name: proposal[3] ? "Emission" : "Offset",
+        publicAddress: proposal[5],
+        summary: proposal[1],
+        certificateImage: "https://" + `${proposal[2]}` + ".ipfs.w3s.link",
+        // type: "Type Name",
+        value: proposalValue,
+    }
+
+    const handleImageClick = () => {
+        setShowModal(true);
+        setEnlargedImageSrc(proposalData.certificateImage);
+    };
+
+    const handleCloseClick = () => {
+        setShowModal(false);
+        setEnlargedImageSrc("");
+    };
+
+    const modalStyle = {
+        display: showModal ? "block" : "none",
+    };
+
+    // const downvoteButton = document.getElementById('downvote-button');
+    // downvoteButton.addEventListener('click', () => {
+    //     console.log(downvoteProposal);
+    // });
+
     return (
         <>
             <div className='container-fluid PDataPageBg'>
@@ -32,7 +98,7 @@ function ProposalData() {
                                             <div className="PDataPage-wrapper col">
                                                 <div className="">
                                                     <p className="scrollEffect">
-                                                        <span className="proposalInfoLabel"> Name: </span>
+                                                        <span className="proposalInfoLabel"> Type: </span>
                                                         <p className="proposalInfoDataBg " > {proposalData.name}</p>
                                                     </p>
                                                     <p className="proposalData-public-address scrollEffect">
@@ -57,11 +123,32 @@ function ProposalData() {
                                                     </p>
                                                     <p className="proposal-certificate-image">
                                                         <span className="proposalInfoLabel"> Certificate: </span>
-                                                        <p className="proposalInfoDataBg">{proposalData.certificateImage}</p>
+                                                        <p className="proposalInfoDataBg-Cert">
+                                                            <div
+                                                                className=""
+                                                                style={{ width: "fit-content" }}
+                                                            >
+                                                                {" "}
+                                                                <a
+                                                                    // href="#"
+                                                                    onClick={() =>
+                                                                        handleImageClick({ certificateImage: proposalData.certificateImage })
+                                                                    }
+                                                                >
+                                                                    <img
+                                                                        src={proposalData.certificateImage}
+                                                                        className="img-thumbnail"
+                                                                        alt="thumbnail"
+                                                                        style={{ height: "150px", width: "150px" }}
+                                                                    />
+                                                                </a>
+                                                            </div>
+                                                            {/* </div> */}
+                                                        </p>
                                                     </p>
-                                                    <p className="proposal-type">
+                                                    {/* <p className="proposal-type">
                                                         <span className="proposalInfoLabel">Type:</span> <p className="proposalInfoDataBg">{proposalData.type}</p>
-                                                    </p>
+                                                    </p> */}
                                                     <p className="proposal-value">
                                                         <span className="proposalInfoLabel">Value:</span> <p className="proposalInfoDataBg">{proposalData.value}</p>
                                                     </p>
@@ -74,16 +161,37 @@ function ProposalData() {
                                 <div className='PDataPage-content-Btns-body d-flex justify-content-center align-items-center col-8 mx-auto'>
                                     <div className='PDataPage-content-Btns '>
                                         <div className='PDataPage-RA-Btns d-flex justify-content-center align-items-center'>
-                                            <button className='PData-reject-btn  rounded-pill'>REJECT</button>
+                                            <button id='downvote-button' className='PData-reject-btn  rounded-pill' onClick={daoProposalReject}>REJECT</button>
                                         </div>
                                         <div>
-                                            <button className='PData-approve-btn  rounded-pill'>APPROVE</button>
+                                            <button id='upvote-button' className='PData-approve-btn  rounded-pill' onClick={daoProposalApprove}>APPROVE</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div className="modal" tabIndex="-1" role="dialog" style={modalStyle} >
+                        <div className="modal-dialog modal-dialog-centered" role="document">
+                            <div className="modal-content">
+                                <div className="modal-body">
+                                    <img
+                                        src={enlargedImageSrc}
+                                        className="certificate-image-enlargedImage"
+                                        alt="enlarged"
+                                    />
+                                    <span
+                                        className="close certificate-image-closeStyle"
+                                        onClick={handleCloseClick}
+                                    >
+                                        &times;
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div >
         </>

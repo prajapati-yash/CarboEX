@@ -99,7 +99,7 @@ function ConnectButtonCustom() {
                       height="24px"
                       viewBox="0 0 24 24"
                       width="24px"
-                      fill="#0914d9"
+                      fill="#00daf7"
                     >
                       <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
                       <path  d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z" />

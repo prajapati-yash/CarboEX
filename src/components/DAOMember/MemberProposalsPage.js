@@ -1,35 +1,42 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../../styles/DAOMember/MemberProposalsPage.css'
-
-const proposalData = [
-    {
-        id: 1,
-        name: "Proposal 1",
-        description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions."
-    },
-    {
-        id: 2,
-        name: "Proposal 2",
-        description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions."
-    },
-    {
-        id: 3,
-        name: "Proposal 3",
-        description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions."
-    },
-    {
-        id: 4,
-        name: "Proposal 4",
-        description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions."
-    },
-    {
-        id: 5,
-        name: "Proposal 5",
-        description: "The Carbon Trading Platform Using Blockchain is a decentralised application that aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions. It will enable buyers and sellers of carbon credits to conduct safe, open transactions."
-    },
-]
+import { useState } from 'react';
+import { ethers } from 'ethers';
+import { daoInstance } from '../Contracts';
+import { useNavigate } from 'react-router-dom';
 
 function MemberProposalsPage() {
+    // const [id, setId] = useState("")
+    // const [name, setName] = useState("");
+    // const [description, setDescription] = useState("");
+    const [allPData, setAllPData] = useState([]);
+
+    const daoProposal = async () => {
+        try {
+            const { ethereum } = window;
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                if (!provider) {
+                    console.log("Metamask is not installed, please install!");
+                }
+                const con = await daoInstance();
+                const daoPData = await con.getAllProposal();
+                setAllPData(daoPData)
+                console.log(daoPData);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        daoProposal()
+    }, [])
+
+
+
+    const navigate = useNavigate();
     return (
         <>
             <div className='container-fluid MPPageBg'>
@@ -40,20 +47,14 @@ function MemberProposalsPage() {
                     <div className='MPPage-content d-lg-flex row pb-4 align-items-center justify-content-around'>
                         <div className="MPPage-box-bg mb-lg-0 mb-sm-4 mb-4 align-self-stretch py-5 px-4">
                             <div className='MPPage-content-box row'>
-                                {proposalData.map((item) => (
-                                    <div className='MPPage-content-data  col-6 col-md-5 my-3' key={item.id}>
-                                        <label className='MPPage-Prop-Label'>Name:</label> <span>{item.name}</span>  <br />
-                                        <label className='MPPage-Prop-Label'>Description:</label> <span>{item.description}</span>
-                                        <div className='d-flex justify-content-center'>
-                                            <button className='MPPage-VM-Btn mt-2'>Open</button>
-
+                                {allPData.map((item, key) => (
+                                    <div className='MPPage-content-data  col-6 col-md-5 my-3' key={key}>
+                                        <label className='MPPage-Prop-Label'>Type:</label> <span>{item[3] ? "Emission" : "Offset"}</span>  <br />
+                                        <label className='MPPage-Prop-Label'>Description:</label> <span>{item[1]}</span>
+                                        <div className='MPPage-VM-Btn-class d-flex justify-content-center'>
+                                            <button className='MPPage-VM-Btn mt-2' onClick={() => navigate("/proposalData", { state: { data: allPData[key] } })}>Open</button>
                                         </div>
                                     </div>))}
-                                {/* <div className='MPPage-content-data col-6 col-md-5'>
-                                    <label className='MPPage-Prop-Label'>Name:</label><br />
-                                    <label className='MPPage-Prop-Label'>Description:</label>
-                                    <button className='MPPage-VM-Btn'>Open</button>
-                                </div> */}
                             </div>
                         </div>
                     </div>

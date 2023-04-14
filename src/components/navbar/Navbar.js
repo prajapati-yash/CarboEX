@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import "../../styles/navbar/Navbar.css";
 import { NavLink } from "react-router-dom";
 import ConnectButtonCustom from "../ConnectButtonCustom";
-// import { Box, Button, Modal, Skeleton, Typography } from "@mui/material";
-// import { useAccount, useSigner } from "wagmi";
-// import * as PushAPI from "@pushprotocol/restapi";
 
 const navigation = [
   {
@@ -15,13 +12,11 @@ const navigation = [
   {
     title: "Resources",
     link: "/Resources",
-   
   },
-  
+
   {
     title: "Explore",
     link: "/buy-carbon-credits",
-   
   },
   {
     title: "Member",
@@ -45,7 +40,7 @@ const navigation = [
   //   title: "Market",
   //   link: "/market",
   // },
- 
+
   {
     title: "Contact",
     link: "/contact",
@@ -77,7 +72,7 @@ function Navbar() {
             />
           </NavLink>
 
-          <button
+          <buttons
             type="button"
             className="navbar-toggler collapsed d-flex d-lg-none flex-column justify-content-around"
             data-bs-toggle="collapse"
@@ -89,10 +84,7 @@ function Navbar() {
             <span className="toggler-icon top-bar"></span>
             <span className="toggler-icon middle-bar"></span>
             <span className="toggler-icon bottom-bar"></span>
-          </button>
-          {/* <span className="navbar-toggler-icon"></span>
-          </button> */}
-
+          </buttons>
           <div
             className="collapse navbar-collapse justify-content-end nav-height"
             id="navbarRightAlignExample"
@@ -100,56 +92,66 @@ function Navbar() {
             <ul className="navbar-nav  ml-auto align-items-center mb-2 mb-lg-0">
               {navigation.map((item, index) => {
                 // <NavLink1 body={item} key={index} />
-              
-                  if (item.auth && !isAuthenticated) {
-                    return null;
-                  }
-                return(
-                <li className="nav-item" key={index}>
-                  {hasSubmenu(item) ? (
-                    <div className="dropdown">
-                      <NavLink
-                        className="nav-link dropdown-toggle p-0 active"
-                        aria-current="page"
-                        to={item.link}
-                        id={`nav-link-${index}`}
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
+
+                if (item.auth && !isAuthenticated) {
+                  return null;
+                }
+                return (
+                  <li className="nav-item" key={index}>
+                    {hasSubmenu(item) ? (
+                      <div className="dropdown">
+                        <NavLink
+                          className="nav-link dropdown-toggle p-0 active"
+                          aria-current="page"
+                          to={item.link}
+                          id={`nav-link-${index}`}
+                          role="button"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          // onClick={() => {
+                          //   console.log(window.innerWidth)
+                          //   if (window.innerWidth < 1000) {
+                          //     const navbarToggler =
+                          //       document.querySelector(".navbar-toggler");
+                          //     if (navbarToggler) {
+                          //       navbarToggler.click();
+                          //     }
+                          //   }
+                          // }}
+                        >
+                          {item.title}
+                        </NavLink>
+
+                        <ul
+                          className="dropdown-menu"
+                          aria-labelledby={`dropdown-${index}`}
+                        >
+                          {item.submenu.map((subitem, subindex) => (
+                            <li key={subindex}>
+                              <NavLink
+                                className="sub-item dropdown-item p-0 active"
+                                aria-current="page"
+                                // key={subindex}
+                                to={subitem.link}
+                              >
+                                {subitem.title}
+                              </NavLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : (
+                      <NavLink to={item.link} className="nav-link">
                         {item.title}
                       </NavLink>
-
-                      <ul
-                        className="dropdown-menu"
-                        aria-labelledby={`dropdown-${index}`}
-                      >
-                        {item.submenu.map((subitem, subindex) => (
-                          <li key={subindex} >
-                            <NavLink
-                              className="sub-item dropdown-item p-0 active"
-                              aria-current="page"
-                              // key={subindex}
-                              to={subitem.link}
-                            >
-                              {subitem.title}
-                            </NavLink>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : (
-                    <NavLink to={item.link} className="nav-link">
-                      {item.title}
-                    </NavLink>
-                  )}
-                </li>
-              );
-                  })}
+                    )}
+                  </li>
+                );
+              })}
             </ul>
 
-            <div className="ps-lg-3 d-flex align-items-center justify-content-center">
+            <div className="ps-lg-3 ps-4 d-flex align-items-center justify-content-center">
               <ConnectButtonCustom />
             </div>
           </div>
@@ -168,6 +170,15 @@ function Navbar() {
           className="nav-link p-0 active"
           aria-current="page"
           to={body.link}
+          onClick={() => {
+            // console.log(window.innerWidth)
+            if (window.innerWidth < 1000) {
+              const navbarToggler = document.querySelector('.navbar-toggler');
+              if (navbarToggler) {
+                navbarToggler.click();
+              }
+            }
+          }}
         >
           {body.title}
         </NavLink>

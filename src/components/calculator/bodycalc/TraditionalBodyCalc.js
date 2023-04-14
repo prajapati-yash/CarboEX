@@ -3,7 +3,6 @@ import axios from 'axios';
 // import StoreCalculation from '../storecalculation/StoreCalculation';
 import '../../../styles/calculator/bodycalc/TraditionalBodyCalc.css';
 // import { useEffect } from 'react';
-// import dotenv from 'dotenv';
 
 function TraditionalBodyCalc({ onValueChange }) {
     const [teData, setTeData] = useState({

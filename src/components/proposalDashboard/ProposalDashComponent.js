@@ -1,44 +1,71 @@
 import React, { useState } from "react";
 import "../../styles/proposal/ProposalDashboard.css";
+import { ethers } from "ethers";
+import { daoInstance } from "../Contracts";
+import { useAccount } from 'wagmi';
 
-const proposalDashboardData = [
-  {
-    id: 1,
-    title: "Wind Energy ",
-    image: "assets/about/teamImages/yash.jpg",
-    result: "Approved",
-    stake: "5 BTTC",
-    returnStake: "0 BTTC",
-  },
-  {
-    id: 2,
-    title: "Solar Energy",
-    image: "assets/about/teamImages/purvik.jpeg",
-    result: "Approved",
-    stake: "5 BTTC",
-    returnStake: "0 BTTC",
-  },
-  {
-    id: 3,
-    title: "Solar Plant",
-    image: "assets/about/teamImages/abhishek.png",
-    result: "Not Approved",
-    stake: "0 BTTC",
-    returnStake: "5 BTTC",
-  },
-  {
-    id: 4,
-    title: "Afforestation",
-    image: "assets/about/teamImages/isha.jpeg",
-    result: "Approved",
-    stake: "5 BTTC",
-    returnStake: "0 BTTC",
-  },
-]
 
 function ProposalDashComponent() {
   const [showModal, setShowModal] = useState(false);
   const [enlargedImageSrc, setEnlargedImageSrc] = useState("0");
+  const { address } = useAccount();
+  const [allData, setAllData] = useState();
+  const proposalDashboardData = [
+    {
+      id: 1,
+      title: "Wind Energy ",
+      image: "assets/about/teamImages/yash.jpg",
+      result: "Approved",
+      stake: "5 BTTC",
+      returnStake: "0 BTTC",
+    },
+  ]
+
+
+  const getUserIDs = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+        const con = await daoInstance();
+        const getUserID = await con.getUserProposals(address);
+        setAllData(getUserID);
+        // console.log(allData[0]._hex)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  const getUserDataById = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+        const con = await daoInstance();
+        const idInDecimal = parseInt(allData[0]._hex, 16)
+        // console.log(allData[0]._hex)
+        const getUserData = await con.getProposal(idInDecimal);
+        console.log(getUserData)
+        // const getUserID = await con.getUserProposals(address);
+        // setAllData(getUserID);
+        // console.log(allData[0]._hex)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
 
   const handleImageClick = (src) => {
     setShowModal(true);
@@ -56,6 +83,9 @@ function ProposalDashComponent() {
   return (
     <>
       <div className="proposalContainer">
+        <div className="myProposals-head-title py-3 py-sm-4 d-flex justify-content-center">
+          <p>PROPOSALS</p>
+        </div>
         <div className="proposalDetails">
           {proposalDashboardData.map((details) => (
             <div key={details.id} className="proposal-company-wrapper">
@@ -80,7 +110,7 @@ function ProposalDashComponent() {
                     >
                       {" "}
                       <a
-                        href="#"
+                        // href="#"
                         onClick={() =>
                           handleImageClick({ image: details.image })
                         }
@@ -135,6 +165,8 @@ function ProposalDashComponent() {
             </div>
           </div>
           {/* ----------Ends here ---------------- */}
+          <button onClick={getUserIDs}>click to get array of id</button>
+          <button onClick={getUserDataById}>click to get data by id</button>
         </div>
       </div>
     </>
