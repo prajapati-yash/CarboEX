@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/proposal/ProposalDashboard.css";
+import "../../styles/proposal/proposalDashboard.css";
 import { ethers } from "ethers";
 import { daoInstance } from "../Contracts";
 import { useAccount } from 'wagmi';
