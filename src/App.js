@@ -60,11 +60,11 @@ function App() {
           <Route path='/calculator' element={<Calculator />} />
           <Route path='/calculator/*' element={<Calculator />} />
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/buy-credits' element={<BuyCarbonCredits />} />
-          <Route path='/sell-credits' element={<SellCarbonCredits />} />
+          <Route path='/buy-carbon-credits' element={<BuyCarbonCredits />} />
+          <Route path='/sell-carbon-credits' element={<SellCarbonCredits />} />
           <Route path='/certificate-validation-proposal' element={<CertificateValidationProposal />} />
           <Route path='/*' element={<Home />} />
-          <Route path="/becomeMember" element={<BecomeMember />} />
+          <Route path="/become-member" element={<BecomeMember />} />
           <Route path="/daoMemberProposals" element={<DAOMemberProposals />} />
           <Route path="/proposalData" element={<ProposalDataMain />} />
           <Route path="/proposal-dashboard" element={<ProposalDashboard />} />
