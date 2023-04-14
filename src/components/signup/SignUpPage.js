@@ -5,6 +5,8 @@ import "../../styles/signup/Signup.css";
 import { companyInstance } from "../Contracts";
 import { useNavigate } from "react-router-dom";
 import { Web3Storage } from "web3.storage";
+import  {ToastContainer,toast}  from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUpPage() {
   const [btnloading,setbtnloading]=useState(false)
@@ -48,10 +50,20 @@ function SignUpPage() {
 
   const createUserAccount = async () => {
  
-    const c = await uploadImage();
-    const cids = c;
     try {
+      toast.info('Process is in Progress', {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       setbtnloading(true)
+      const c = await uploadImage();
+      const cids = c;
       const { ethereum } = window; 
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -70,6 +82,7 @@ function SignUpPage() {
         await tx.wait();
         setbtnloading(false)
         navigate("/user-dashboard")
+        window.location.reload();
         console.log(con);
       }
     } catch (error) {
@@ -203,6 +216,7 @@ function SignUpPage() {
                   </svg>
                   ):(<>Create</>)}
                 </button>
+                <ToastContainer/>
               </div>
             </form>{" "}
           </div>
