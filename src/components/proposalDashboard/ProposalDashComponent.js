@@ -55,24 +55,28 @@ function ProposalDashComponent() {
     }
   }
 
+  useEffect(() => {
+    getUserIDs()
+  }, [])
 
-  // const getUserDataById = async (e) => {
-  //   try {
-  //     const { ethereum } = window;
-  //     if (ethereum) {
-  //       const provider = new ethers.providers.Web3Provider(ethereum);
-  //       const signer = provider.getSigner();
-  //       if (!provider) {
-  //         console.log("Metamask is not installed, please install!");
-  //       }
-  //       const con = await daoInstance();
-  //       const getResult = await con.getProposalResult(e)
-  //       return await getResult
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+
+  const getUserDataById = async (e) => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+        const con = await daoInstance();
+        const getResult = await con.getProposalResult(e);
+        return await getResult
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // useEffect(() => {
   //   getUserDataById()
@@ -91,14 +95,6 @@ function ProposalDashComponent() {
   const modalStyle = {
     display: showModal ? "block" : "none",
   };
-
-  // useEffect(() => {
-  //   console.log(userProp)
-  // }, [userProp.length])
-
-  useEffect(() => {
-    getUserIDs()
-  }, [])
 
 
   function hexToTimestamp(hex) {
@@ -161,7 +157,7 @@ function ProposalDashComponent() {
                   </div>
                   <div className="">
                     <span className="proposal-dash-label">Status: </span>{" "}
-                    <p className="proposal-dash-output-Bg">{details[10] ? details[10] : "Waiting..."}</p>
+                    <p className="proposal-dash-output-Bg">{details[10]}</p>
                   </div>
                   <div className="">
                     <span className="proposal-dash-label">Proposed at:</span>{" "}
@@ -173,8 +169,8 @@ function ProposalDashComponent() {
                   </div>
                   <div className="">
                     <span className="proposal-dash-label">Result:</span>{" "}<br />
-                    {/* <button className=" btn btn-primary" onClick={getUserDataById(details[0])}>Result</button> */}
-                    <button className=" btn btn-primary" onClick={""}>Result</button>
+                    <button className=" btn btn-primary" onClick={() => getUserDataById(details[0])}>Result</button>
+                    {/* <button className=" btn btn-primary" onClick={""}>Result</button> */}
                   </div>
                 </div>
               </div>

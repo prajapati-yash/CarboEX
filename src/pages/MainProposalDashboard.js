@@ -23,7 +23,7 @@ function MainProposalDashboard() {
         name: companyName,
         userName: userName,
         email: email,
-        availableCredits: credits ? credits : "ZERO",
+        availableCredits: credits ? credits : 0,
     };
 
     const [activeComponent, setActiveComponent] = useState('proposalDashboard');
