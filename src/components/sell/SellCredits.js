@@ -9,7 +9,7 @@ function SellCredits() {
   const [credits, setCredits] = useState();
   const [price, setPrice] = useState(); // define price value here
   const [total, setTotal] = useState(0);
-  const { address, isConnected } = useAccount();
+  const { address } = useAccount();
 
   const sellingCredits = async () => {
     try {
