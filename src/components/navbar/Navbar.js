@@ -5,14 +5,11 @@ import { NavLink } from "react-router-dom";
 import ConnectButtonCustom from "../ConnectButtonCustom";
 
 const navigation = [
-  {
-    title: "About",
-    link: "/about",
-  },
-  {
-    title: "Resources",
-    link: "/Resources",
-  },
+ 
+  // {
+  //   title: "Resources",
+  //   link: "/Resources",
+  // },
 
   {
     title: "Explore",
@@ -40,7 +37,19 @@ const navigation = [
   //   title: "Market",
   //   link: "/market",
   // },
-
+  {
+    title: "Know More",
+    link: "",
+    submenu:[
+      {
+        title:"About Us",
+        link:"/about"},
+      {
+        title:"Resources",
+        link:"/resources"
+      }
+    ]
+  },
   {
     title: "Contact",
     link: "/contact",
