@@ -1,5 +1,6 @@
 import { getDefaultWallets, RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import React from 'react';
+import './index.css'
 import ReactDOM from 'react-dom/client';
 // import { BrowserRouter } from 'react-router-dom';
 import '@rainbow-me/rainbowkit/styles.css';

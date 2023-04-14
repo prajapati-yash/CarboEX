@@ -20,8 +20,8 @@ const navigation = [
     link: "",
     auth: true,
     submenu: [
-      { title: "Become a Member", link: "/" },
-      { title: "Proposals", link: "/" },
+      { title: "Become a Member", link: "/become-member" },
+      { title: "Proposals", link: "/dao-member-proposals" },
     ],
   },
   {
@@ -29,7 +29,7 @@ const navigation = [
     link: "",
     auth: true,
     submenu: [
-      { title: "Validate Carbon Credits", link: "/approach/validate" },
+      { title: "Validate Carbon Credits", link: "/certificate-validation-proposal" },
       { title: "Calculate Carbon Footprints", link: "/calculator" },
     ],
   },
