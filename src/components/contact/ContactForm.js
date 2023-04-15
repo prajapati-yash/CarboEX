@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
 import '../../styles/contact/ContactForm.css';
-// import PhoneInput from 'react-phone-number-input'
-// import 'react-phone-number-input/style.css'
 
 
 function ContactForm() {
@@ -85,7 +82,7 @@ function ContactForm() {
                                 <div className='form2'>
                                     <div className="row mb-4 rClass1">
                                         <div className="col">
-                                            <div className="form-outline mb-4 rClass12">
+                                            <div className="form-outline rClass12">
                                                 <label className="form-label font-weight-bold" for="">First name:</label>
                                                 <input type="text" id="" className="form-control inputInfoAll" name="firstName"
                                                     placeholder='Please enter your firstname'
