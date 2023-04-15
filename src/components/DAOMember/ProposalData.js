@@ -23,7 +23,8 @@ function ProposalData() {
           console.log("Metamask is not installed, please install!");
         }
         const con = await daoInstance();
-        const upvoteProposal = await con.upvote(proposal[0]);
+        const value = await con.getConfigs()
+        const upvoteProposal = await con.upvote(proposal[0], { value: String(value[1]) });
         // console.log(upvoteProposal)
         setapprovebtnloading(false);
       }
@@ -44,7 +45,8 @@ function ProposalData() {
           console.log("Metamask is not installed, please install!");
         }
         const con = await daoInstance();
-        const downvoteProposal = await con.downvote(proposal[0]);
+        const value = await con.getConfigs()
+        const downvoteProposal = await con.downvote(proposal[0], { value: String(value[1]) });
         setrejectbtnloading(false);
         // console.log(downvoteProposal)
       }
@@ -188,24 +190,24 @@ function ProposalData() {
                         className="PData-reject-btn  rounded-pill"
                         onClick={daoProposalReject}
                       >
-                       
-                          {rejectbtnloading ? (
-                            <svg
-                              className="animate-spin button-spin-svg-pic"
-                              version="1.1"
-                              id="L9"
-                              xmlns="http://www.w3.org/2000/svg"
-                              x="0px"
-                              y="0px"
-                              viewBox="0 0 100 100"
-                              style={{width:"10%",fill:"#fff"}}
-                
-                            >
-                              <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-                            </svg>
-                          ) : (
-                            <>REJECT</>
-                          )}
+
+                        {rejectbtnloading ? (
+                          <svg
+                            className="animate-spin button-spin-svg-pic"
+                            version="1.1"
+                            id="L9"
+                            xmlns="http://www.w3.org/2000/svg"
+                            x="0px"
+                            y="0px"
+                            viewBox="0 0 100 100"
+                            style={{ width: "10%", fill: "#fff" }}
+
+                          >
+                            <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+                          </svg>
+                        ) : (
+                          <>REJECT</>
+                        )}
                       </button>
                     </div>
                     <div>
@@ -214,24 +216,24 @@ function ProposalData() {
                         className="PData-approve-btn  rounded-pill"
                         onClick={daoProposalApprove}
                       >
-                       
-                          {approvebtnloading ? (
-                            <svg
-                              className="animate-spin button-spin-svg-pic"
-                              version="1.1"
-                              id="L9"
-                              xmlns="http://www.w3.org/2000/svg"
-                              x="0px"
-                              y="0px"
-                              viewBox="0 0 100 100"
-                              style={{width:"10%",fill:"#fff"}}
-                            >
-                              <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-                            </svg>
-                          ) : (
-                            <>APPROVE</>
-                          )}
-                      
+
+                        {approvebtnloading ? (
+                          <svg
+                            className="animate-spin button-spin-svg-pic"
+                            version="1.1"
+                            id="L9"
+                            xmlns="http://www.w3.org/2000/svg"
+                            x="0px"
+                            y="0px"
+                            viewBox="0 0 100 100"
+                            style={{ width: "10%", fill: "#fff" }}
+                          >
+                            <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+                          </svg>
+                        ) : (
+                          <>APPROVE</>
+                        )}
+
                       </button>
                     </div>
                   </div>

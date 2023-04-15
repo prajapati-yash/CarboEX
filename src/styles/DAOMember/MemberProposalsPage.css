@@ -38,6 +38,7 @@
   margin-right: 4%;
   padding: 2rem;
   background-color: rgb(213, 229, 224);
+  width: fit-content;
   /* text-align: justify; */
   /* position: relative; */
 }

@@ -75,7 +75,7 @@ function BuyCredits() {
   return (
     <>
       <div className="buyBg">
-        <div className="buyHead text-center">BUY</div>
+        <div className="buyHead text-dark text-center">BUY</div>
         <div className="companies">
 
           {count && userDetailsById.map((company, key) => (

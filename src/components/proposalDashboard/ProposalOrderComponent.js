@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../styles/proposal/ProposalOrder.css";
 import { ethers } from "ethers";
 import { companyInstance } from "../Contracts";
@@ -8,9 +8,10 @@ import { useState } from "react";
 
 function ProposalOrderComponent() {
   const [userOrders, setUserOrders] = useState([]);
-  const address = useAccount();
+  const { address } = useAccount();
+  // const address = account[1];
 
-  const sellingCredits = async () => {
+  const ordersData = async () => {
     try {
       const { ethereum } = window;
       if (ethereum) {
@@ -21,35 +22,39 @@ function ProposalOrderComponent() {
         }
         const con = await companyInstance();
         console.log(address)
-        const getUserOrId = await con.OrderstructId(address);
+        const getUserOrId = await con.getUserOrders(address);
         console.log(getUserOrId)
-        return getUserOrId
-        // let arr = []
-        // for (let i = 0; i < getUserID.length; i++) {
-        //   const getUserData = await con.getProposal(getUserID[i]._hex);
-        //   arr.push(getUserData);
-        //   console.log(getUserData)
-        // }
-        // setUserProp(arr);
-        // setAllData(getUserID);
-        // return getUserID
+
+
+        let arr = []
+        for (let i = 0; i < getUserOrId.length; i++) {
+          const getUserData = await con.Orderstruct(getUserOrId[i]["_hex"]);
+          arr.push(getUserData);
+        }
+
+        setUserOrders(arr)
+        // console.log(userOrders)
       }
     } catch (error) {
       console.log(error);
     }
   }
 
-  const proposalOrderData = [
-    {
-      id: 1,
-      totalCredits: 10,
-      pricePerCredit: 10,
-      totalPrice: 100,
-      orderDate: "03-02-2023",
-      create: "04-02-2023",
-      completeDate: "09-04-2023",
-    },
-  ]
+  useEffect(() => {
+    ordersData()
+  }, [])
+
+  // const proposalOrderData = [
+  //   {
+  //     id: 1,
+  //     totalCredits: 10,
+  //     pricePerCredit: 10,
+  //     totalPrice: 100,
+  //     orderDate: "03-02-2023",
+  //     create: "04-02-2023",
+  //     completeDate: "09-04-2023",
+  //   },
+  // ]
 
   return (
     <>
@@ -58,54 +63,54 @@ function ProposalOrderComponent() {
           <p>ORDERS</p>
         </div>
         <div className="orderDetails">
-          {proposalOrderData.map((details) => (
-            <div key={details.id} className="proposal-order-wrapper">
+          {userOrders.map((details, key) => (
+            <div key={key} className="proposal-order-wrapper">
               <div className="proposal-order-dash">
                 <div className="proposal-order-dash-info">
-                  <div className="">
+                  {/* <div className="">
                     {" "}
                     <span className="proposal-order-dash-label">Sr No.: </span>{" "}
                     <p className="proposal-order-dash-output-Bg "> {details.id}</p>
-                  </div>
+                  </div> */}
                   <div className=" ">
-                    <span className="proposal-dash-label">Total Credits: </span>
+                    <span className="proposal-dash-label">Credits: </span>
                     <p className="proposal-order-dash-output-Bg proposal-order-dash-title scroll-bar ">
-                      {details.totalCredits}
+                      {parseInt(details[1])}
                     </p>
                   </div>
 
                   <div className="">
                     <span className="proposal-dash-label">Price Per Credit: </span>{" "}
-                    <p className="proposal-order-dash-output-Bg">{details.pricePerCredit}</p>
+                    <p className="proposal-order-dash-output-Bg">{parseInt(details[2])}</p>
                   </div>
-                  <div className="">
+                  {/* <div className="">
                     <span className="proposal-dash-label">Total Price:</span>{" "}
                     <p className="proposal-order-dash-output-Bg">{details.totalPrice}</p>
+                  </div> */}
+                  <div className="">
+                    <span className="proposal-dash-label">Address:</span>{" "}
+                    <p className="proposal-order-dash-output-Bg">{details[4]}</p>
                   </div>
                   <div className="">
-                    <span className="proposal-dash-label">Order Date:</span>{" "}
-                    <p className="proposal-order-dash-output-Bg">{details.orderDate}</p>
+                    <span className="proposal-dash-label">Status:</span>{" "}
+                    <p className="proposal-order-dash-output-Bg">{details[3] ? "true" : "false"}</p>
                   </div>
-                  <div className="">
-                    <span className="proposal-dash-label">Create:</span>{" "}
-                    <p className="proposal-order-dash-output-Bg">{details.create}</p>
-                  </div>
-                  <div className="">
+                  {/* <div className="">
                     <span className="proposal-dash-label">Complete Date:</span>{" "}
                     <p className="proposal-order-dash-output-Bg">{details.completeDate}</p>
-                  </div>
+                  </div> */}
 
-                  <div className="">
+                  {/* <div className="">
                     <span className="proposal-dash-label">Status:</span>{" "}<br />
                     <button className=" btn btn-success">Active</button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <button onClick={() => sellingCredits()}>Click</button>
+      {/* <button onClick={ordersData}>Click</button> */}
     </>
   );
 }
