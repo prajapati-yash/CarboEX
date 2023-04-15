@@ -25,13 +25,13 @@ function ProposalDashComponent() {
           console.log("Metamask is not installed, please install!");
         }
         const con = await daoInstance();
+        console.log(address)
         const getUserID = await con.getUserProposals(address);
         // console.log(getUserID.length)
         let arr = []
         for (let i = 0; i < getUserID.length; i++) {
           const getUserData = await con.getProposal(getUserID[i]._hex);
           arr.push(getUserData);
-          // console.log(getUserData)
         }
         setUserProp(arr);
         setAllData(getUserID);
