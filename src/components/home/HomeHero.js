@@ -64,7 +64,7 @@ function HomeHero() {
             <div className='my-component '>
                 <div className="secondContainer d-flex justify-content-center align-items-center">
                     <div className='text-container col-xl-5 col-4'>
-                        <p className="text">Transforming carbon credits trading through blockchain technology.</p>
+                        <p className="text">Transforming carbon credits trading through Blockchain Technology.</p>
                     </div>
                     <div className='col-xl-6 col-7 d-flex box-container justify-content-end px-3'>
                         <div className="img-text">
@@ -72,7 +72,7 @@ function HomeHero() {
                                 <span className=''>
                                     <p>Welcome to CarboEx.</p>
                                     <p>The Carbon Trading Platform that facilitates carbon credit trading for a sustainable future.</p>
-                                    <p>Powered by blockchain technology.</p>
+                                    <p>Powered by Blockchain Technology.</p>
                                 </span>
 
                                 {/* <span className='for-hero-mobile'>Hi! The Carbon Trading Platform using Blockchain aims to facilitate carbon credit trading by creating an unchangeable and tamper-proof record of transactions, automating the exchange of carbon credits, and supporting sustainable development.</span> */}
