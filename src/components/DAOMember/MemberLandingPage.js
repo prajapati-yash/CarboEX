@@ -10,16 +10,35 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function MemberLandingPage() {
   const navigate = useNavigate();
-  const [numOfTokens, setNumOfTokens] = useState("");
+  const [numOfTokens, setNumOfTokens] = useState("0");
   const [tknAmtResult, setTknAmtResult] = useState("");
   const [tokenPrice, setTokenPrice] = useState("");
   const [btnloading, setbtnloading] = useState(false);
+  const [btndisable, setbtndisable] = useState(false);
+
+
 
   const ercTokenFunc = async () => {
     try {
         // toast.warn('Transaction is in Progress !', {
         //     position: toast.POSITION.TOP_RIGHT
         // });
+        
+        if(numOfTokens===null || numOfTokens <= 0){
+          toast.error('Oops! Number of Tokens must be greater than 0!', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+           
+        }else{
+          setbtndisable(true)
+        setbtnloading(true)
         
         toast.info('Process is in Progress', {
             position: "top-left",
@@ -31,7 +50,7 @@ function MemberLandingPage() {
             progress: undefined,
             theme: "light",
             });
-        setbtnloading(true)
+        
       const { ethereum } = window;
       if (ethereum) {
         
@@ -51,7 +70,11 @@ function MemberLandingPage() {
           value: numOfTokens * hexValue,
         });
         
+        setbtndisable(false)
         setbtnloading(false)
+        // if(btnloading === false){  
+        //   setbtndisable(false)
+        // }
         navigate("/dao-member-proposals");
         console.log(addMemberFunc);
         // setTknAmtResult(decimalValue * numOfTokens)
@@ -62,9 +85,12 @@ function MemberLandingPage() {
         // console.log(decimalValue)
         // return decimalValue;
       }
+    }
     } catch (error) {
+      setbtndisable(false)
       console.log(error);
       setbtnloading(false)
+
     }
   };
 
@@ -161,8 +187,9 @@ function MemberLandingPage() {
                                             onClick={handleCalculation}>Calculate</button> */}
                     <button
                       type="button"
-                      className="MemberBuyTknBtn2 col-12 col-md-5"
+                      className="MemberBuyTknBtn2 col-12 col-md-10"
                       onClick={ercTokenFunc}
+                      disabled={btndisable}
                     >
                       {/* onClick={() => window.location.href = '/daoMemberProposals'}> */}
                    
@@ -175,7 +202,7 @@ function MemberLandingPage() {
                           x="0px"
                           y="0px"
                           viewBox="0 0 100 100"
-                          style={{width:"10%"}}
+                          style={{width:"15%"}}
                         >
                           <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
                         </svg>

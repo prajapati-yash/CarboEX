@@ -15,7 +15,8 @@ function CertificateValidate() {
   const [domain, setDomain] = useState("");
   const [emission, setEmission] = useState("");
   const [proposal, setProposal] = useState("");
-  const [btnloading,setbtnloading]=useState(false)
+  const [btnloading,setbtnloading]=useState(false);
+  const [btndisable, setbtndisable] = useState(false);
 
   const handleCertificateChange = (e) => {
     setCertificate(e.target.value);
@@ -69,6 +70,19 @@ function CertificateValidate() {
   const createProposalMain = async () => {
     
     try {
+      if(certificate=='' || domain=='' || emission=='' || proposal==''){
+        toast.error('Enter the required details', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      }else{
+       setbtndisable(true)
       toast.info('Process is in Progress', {
         position: "top-left",
         autoClose: 5000,
@@ -93,11 +107,15 @@ function CertificateValidate() {
         console.log(conDAO)
         const CPTx = await conDAO.createProposal(proposal, cids, domain, emission)
         setbtnloading(false)
+        setbtndisable(false)
         navigate("/dao-member-proposals")
         console.log(CPTx)
       }
+    
+    }
     } catch (error) {
       console.log(error);
+      setbtndisable(false)
       setbtnloading(false)
     }
   }
@@ -160,7 +178,7 @@ function CertificateValidate() {
                 value={proposal}
               ></textarea>
             </div>
-            <button type="submit" className=" rounded-pill certiSubmit mt-3" onClick={createProposalMain}>
+            <button type="submit" className=" rounded-pill certiSubmit mt-3" disabled={btndisable} onClick={createProposalMain}>
               {btnloading?(
                 <svg
                 className="animate-spin button-spin-svg-pic"
@@ -176,7 +194,7 @@ function CertificateValidate() {
               </svg>
               ):(<>Submit</>)}
             </button>
-            <ToastContainer />
+            <ToastContainer /> 
           </form>
         </div>
       </div>
