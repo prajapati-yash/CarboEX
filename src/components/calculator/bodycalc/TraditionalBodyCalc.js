@@ -8,8 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function TraditionalBodyCalc({ onValueChange }) {
-    const [btndisable, setbtndisable] = useState(false)
     const [btnloading, setbtnloading] = useState(false)
+    const [btndisable, setbtndisable] = useState(false);
     const [teData, setTeData] = useState({
         teConsumption: null,
         teCountry: null,
@@ -36,47 +36,33 @@ function TraditionalBodyCalc({ onValueChange }) {
         };
 
         try {
-            if (teData === null) {
-                toast.error('Enter the Value', {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
-
-            } else {
-                setbtndisable(true)
-                toast.info('Calculating', {
-                    position: "top-left",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
-                setbtnloading(true)
-                const response = await axios.request(config);
-                // console.log(response)
-                const teResult = JSON.stringify(response.data.carbon);
-                console.log(teResult)
-                const numbers = teResult.match(/\d+(\.\d+)?/g);
-                const value = numbers[0];
-                alert(value)
-                setbtnloading(false)
-                setbtndisable(false)
-
-                onValueChange(value);
-            }
-        } catch (error) {
-            console.log(error);
+            setbtndisable(true)
+            toast.info('Calculating', {
+                position: "top-left",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            setbtnloading(true)
+            const response = await axios.request(config);
+            // console.log(response)
+            const teResult = JSON.stringify(response.data.carbon);
+            console.log(teResult)
+            const numbers = teResult.match(/\d+(\.\d+)?/g);
+            const value = numbers[0];
+            alert(value)
             setbtndisable(false)
             setbtnloading(false)
+            onValueChange(value);
+
+        } catch (error) {
+            console.log(error);
+            setbtnloading(false)
+            setbtndisable(false)
         }
     };
 
@@ -116,7 +102,7 @@ function TraditionalBodyCalc({ onValueChange }) {
                             </div>
                         </div>
                         <div className='traditionalbtn col-sm-12 mt-4'>
-                            <button type='submit' className='house-form__button primary p-2' disabled={btndisable} id='submit_btn' style={{ width: 'fit-content' }} onClick={() => teSubmitData()}>
+                            <button type='submit' className='house-form__button primary p-2' id='submit_btn' disabled={btndisable} style={{ width: 'fit-content' }} onClick={() => teSubmitData()}>
                                 {btnloading ? (
                                     <svg
                                         className="animate-spin button-spin-svg-pic"

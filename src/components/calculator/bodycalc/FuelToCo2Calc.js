@@ -1,12 +1,12 @@
 import React from 'react'
 import '../../../styles/calculator/bodycalc/PublicTransitCalc.css'
 import axios from 'axios'
-import { useState} from 'react'
-import  {ToastContainer,toast}  from "react-toastify";
+import { useState } from 'react'
+import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 function FuelToCo2Calc({ onValueChange, props }) {
-    const [btnloading, setbtnloading]=useState(false)
+    const [btnloading, setbtnloading] = useState(false)
 
     const [ftcData1, setftcData] = useState({
         ftcType: null,
@@ -18,7 +18,7 @@ function FuelToCo2Calc({ onValueChange, props }) {
         litres: ftcData1.ftcLitres,
     };
     // var data = JSON.stringify(`{\n      "type": ${ftcData1.ftcType},\n      "litres": ${ftcData1.ftcLitres}\n      }: ''`);
-    const apiKey = process.env.REACT_APP_API_BEARER_TOKEN;
+    const apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMWU3MzVmMTgzYWJjYTkzMWIzMWM4NDNhMTFhZmYxMWM0MGQ4NzlmMDVjNzM0ZTMzMjQ5MzI5Y2MwZTkxYmUyMWYyNTVjZjIzYTRlMjBiNmYiLCJpYXQiOjE2ODE1NTg3OTUsIm5iZiI6MTY4MTU1ODc5NSwiZXhwIjoxNzEzMTgxMTk1LCJzdWIiOiI0MTM0Iiwic2NvcGVzIjpbXX0.ZVntnNAix7jwIa4YfecWb0IjI_KK4aDEp0ZTF1ihYxs-121_3lD2px_B3EVSW28hzHIjn3Ctz8gP-j9r_-f9gw";
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
@@ -50,7 +50,7 @@ function FuelToCo2Calc({ onValueChange, props }) {
             draggable: true,
             progress: undefined,
             theme: "light",
-            });
+        });
         setbtnloading(true)
             .then(function (response) {
                 const ftcResult = JSON.stringify(response.data);
@@ -109,22 +109,22 @@ function FuelToCo2Calc({ onValueChange, props }) {
 
                         <div className='pTbtn col-sm-12 mt-4'>
                             <button type='submit' className='publicT-form__button primary p-2' id='submit_btn' style={{ width: 'fit-content' }} onClick={() => ftcSubmitData()}>
-                            {btnloading?(
+                                {btnloading ? (
                                     <svg
-                                    className="animate-spin button-spin-svg-pic"
-                                    version="1.1"
-                                    id="L9"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    x="0px"
-                                    y="0px"
-                                    viewBox="0 0 100 100"
-                                    style={{width:"10%"}}
-                                  >
-                                    <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-                                  </svg>
-                                ):(<>Calculate</>)}
+                                        className="animate-spin button-spin-svg-pic"
+                                        version="1.1"
+                                        id="L9"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        x="0px"
+                                        y="0px"
+                                        viewBox="0 0 100 100"
+                                        style={{ width: "10%" }}
+                                    >
+                                        <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+                                    </svg>
+                                ) : (<>Calculate</>)}
                             </button>
-                            <ToastContainer/>
+                            <ToastContainer />
                         </div>
                     </div>
                 </div>

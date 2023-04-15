@@ -5,11 +5,11 @@ import "../../styles/signup/Signup.css";
 import { companyInstance } from "../Contracts";
 import { useNavigate } from "react-router-dom";
 import { Web3Storage } from "web3.storage";
-import  {ToastContainer,toast}  from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 function SignUpPage() {
-  const [btnloading,setbtnloading]=useState(false)
+  const [btnloading, setbtnloading] = useState(false)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: null,
@@ -37,19 +37,21 @@ function SignUpPage() {
       name: formData.image.name,
       maxRetries: 3,
     });
-    // console.log(img);
-    const res = await client.get(rootCid); // Web3Response
-    const files = await res.files(formData.image); // Web3File[]
-    for (const file of files) {
-      // setCid(file.cid)
-      console.log(file.cid);
-      return file.cid;
-    }
+    console.log(formData);
+    return rootCid + "/" + fileInput.files[0].name;
+    // return rootCid + "/" + fileInput.files[0].name;
+    // const res = await client.get(rootCid); // Web3Response
+    // const files = await res.files(formData.image); // Web3File[]
+    // for (const file of files) {
+    //   // setCid(file.cid)
+    //   console.log(file.cid);
+    //   return file.cid;
+    // }
   };
 
 
   const createUserAccount = async () => {
- 
+
     try {
       toast.info('Process is in Progress', {
         position: "top-left",
@@ -60,11 +62,12 @@ function SignUpPage() {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
       setbtnloading(true)
       const c = await uploadImage();
       const cids = c;
-      const { ethereum } = window; 
+      console.log();
+      const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
@@ -201,22 +204,22 @@ function SignUpPage() {
               </div>
               <div className="text-center">
                 <button type="submit" className="btn rounded-pill my-2 signUpBtn" onClick={createUserAccount}>
-                 
-                  {btnloading?(
+
+                  {btnloading ? (
                     <svg
-                    className="animate-spin button-spin-svg-pic"
-                    version="1.1"
-                    id="L9"
-                    xmlns="http://www.w3.org/2000/svg"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 100 100"
-                  >
-                    <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-                  </svg>
-                  ):(<>Create</>)}
+                      className="animate-spin button-spin-svg-pic"
+                      version="1.1"
+                      id="L9"
+                      xmlns="http://www.w3.org/2000/svg"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 100 100"
+                    >
+                      <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+                    </svg>
+                  ) : (<>Create</>)}
                 </button>
-                <ToastContainer/>
+                <ToastContainer />
               </div>
             </form>{" "}
           </div>

@@ -68,6 +68,7 @@ function MainProposalDashboard() {
 
                 // console.log(userData)
                 // console.log(userData[5])
+                console.log(userData[5])
                 setLogoImg(userData[5])
                 setCompanyName(userData[3])
                 setUserName(userData[1])
@@ -132,7 +133,7 @@ function MainProposalDashboard() {
             <div className="container-fluid main-prop-dash-Main">
                 <div className="row justify-content-center">
                     <div className="col-lg-2 col-md-3 col-sm-4 DAO-Member-logo-class">
-                        <img src={"https://" + `${MainPropPageData.logo}` + ".ipfs.w3s.link"} alt="Logo" className="DAO-Member-logo img-fluid" />
+                        <img src={"https://ipfs.io/ipfs/" + logoImg} alt="Logo" className="DAO-Member-logo img-fluid" />
                     </div>
                     <div className="col-lg-8 col-md-6 col-sm-4 DaoMemberDetails-class">
                         <div className="row">
