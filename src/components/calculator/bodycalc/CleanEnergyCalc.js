@@ -17,7 +17,7 @@ function CleanEnergyCalc({ onValueChange, props }) {
         consumption: ceData1.ceConsumption,
     };
     // var data = JSON.stringify(`{\n      "energy": ${ceData1.ceEnergy},\n      "consumption": ${ceData1.ceConsumption}\n      }: ''`);
-    const apiKey = process.env.REACT_APP_API_BEARER_TOKEN;
+    const apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMWU3MzVmMTgzYWJjYTkzMWIzMWM4NDNhMTFhZmYxMWM0MGQ4NzlmMDVjNzM0ZTMzMjQ5MzI5Y2MwZTkxYmUyMWYyNTVjZjIzYTRlMjBiNmYiLCJpYXQiOjE2ODE1NTg3OTUsIm5iZiI6MTY4MTU1ODc5NSwiZXhwIjoxNzEzMTgxMTk1LCJzdWIiOiI0MTM0Iiwic2NvcGVzIjpbXX0.ZVntnNAix7jwIa4YfecWb0IjI_KK4aDEp0ZTF1ihYxs-121_3lD2px_B3EVSW28hzHIjn3Ctz8gP-j9r_-f9gw";
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
