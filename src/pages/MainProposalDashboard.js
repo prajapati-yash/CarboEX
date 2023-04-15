@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { ethers } from 'ethers';
 import { companyInstance } from '../components/Contracts';
 import { useAccount } from 'wagmi';
-import  {ToastContainer,toast}  from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -84,11 +84,11 @@ function MainProposalDashboard() {
         getUserAccountDetails();
     }, [])
 
-    const handleNavigation = async({value}) => {
-        setZero(value  < 0)
-        if(zero === true){
+    const handleNavigation = async ({ value }) => {
+        setZero(value > 0)
+        if (zero === false) {
             navigate("/sell-carbon-credits")
-        }else{
+        } else {
             toast.error('Insufficient Carbon Credits', {
                 position: "top-center",
                 autoClose: 3000,
@@ -98,7 +98,7 @@ function MainProposalDashboard() {
                 draggable: true,
                 progress: undefined,
                 theme: "colored",
-                });
+            });
         }
     }
     const getUserCreditDetails = async () => {
@@ -114,7 +114,7 @@ function MainProposalDashboard() {
                 const totalCredits = await con.totalcredit(address);
                 const creditsInDecimal = parseInt(totalCredits._hex, 16)
                 setCredits(creditsInDecimal);
-                console.log(totalCredits)
+                // console.log(totalCredits)
                 return credits
             }
         } catch (error) {
@@ -173,8 +173,8 @@ function MainProposalDashboard() {
                                     </button>
                                 </div> */}
                                 <div className='DMember-db-btns-ES'>
-                                    <button className='PData-sell-btn rounded-pill' onClick={() => handleNavigation(MainPropPageData.availableCredits) }>SELL</button>
-                                    <ToastContainer/>
+                                    <button className='PData-sell-btn rounded-pill' onClick={() => handleNavigation(MainPropPageData.availableCredits)}>SELL</button>
+                                    <ToastContainer />
                                 </div>
                             </div>
                         </div>
