@@ -95,7 +95,7 @@ function CertificateValidate() {
         });
       setbtnloading(true)
       const c = await uploadImage();
-    const cids = c;
+      const cids = c;
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -107,11 +107,10 @@ function CertificateValidate() {
         console.log(conDAO)
         const CPTx = await conDAO.createProposal(proposal, cids, domain, emission)
         setbtnloading(false)
-        setbtndisable(false)
         navigate("/dao-member-proposals")
+        setbtndisable(false)
         console.log(CPTx)
       }
-    
     }
     } catch (error) {
       console.log(error);
