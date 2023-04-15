@@ -64,7 +64,7 @@ function ProposalData() {
     name: proposal[3] ? "Emission" : "Offset",
     publicAddress: proposal[5],
     summary: proposal[1],
-    certificateImage: "https://" + `${proposal[2]}` + ".ipfs.w3s.link",
+    certificateImage: `https://ipfs.io/ipfs/${proposal[2]}`,
     // type: "Type Name",
     value: proposalValue,
   };

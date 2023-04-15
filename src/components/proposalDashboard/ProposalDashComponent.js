@@ -16,7 +16,7 @@ function ProposalDashComponent() {
 
   const getUserIDs = async () => {
     try {
-      
+
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -33,6 +33,7 @@ function ProposalDashComponent() {
           const getUserData = await con.getProposal(getUserID[i]._hex);
           arr.push(getUserData);
         }
+        console.log(arr)
         setUserProp(arr);
         setAllData(getUserID);
         return getUserID
@@ -47,7 +48,7 @@ function ProposalDashComponent() {
   }, [])
 
 
-  const getUserDataById = async (e,key) => {
+  const getUserDataById = async (e, key) => {
     try {
       setLoadingIndex(key)
       setbtnloading(true)
@@ -135,11 +136,11 @@ function ProposalDashComponent() {
                       {" "}
                       <a
                         onClick={() => {
-                          handleImageClick({ image: "https://" + `${details[2]}` + ".ipfs.w3s.link" })
+                          handleImageClick({ image: `https://ipfs.io/ipfs/${details[2]}` })
                         }}
                       >
                         <img
-                          src={"https://" + `${details[2]}` + ".ipfs.w3s.link"}
+                          src={`https://ipfs.io/ipfs/${details[2]}`}
                           className="img-thumbnail"
                           alt="thumbnail"
                           style={{ height: "150px", width: "150px" }}
@@ -161,8 +162,8 @@ function ProposalDashComponent() {
                   </div>
                   <div className="">
                     <span className="proposal-dash-label">Result:</span>{" "}<br />
-                    <button className="btn btn-primary" style={{width:"30%"}} key={key} onClick={() => getUserDataById(details[0], key)}>
-                    {btnloading && loadingIndex === key ? (
+                    <button className="btn btn-primary" style={{ width: "30%" }} key={key} onClick={() => getUserDataById(details[0], key)}>
+                      {btnloading && loadingIndex === key ? (
                         <svg
                           className="animate-spin button-spin-svg-pic"
                           version="1.1"
@@ -171,8 +172,8 @@ function ProposalDashComponent() {
                           x="0px"
                           y="0px"
                           viewBox="0 0 100 100"
-                          style={{ fill: "#fff", height:"30%", width:"30%"}}
-                          
+                          style={{ fill: "#fff", height: "30%", width: "30%" }}
+
                         >
                           <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
                         </svg>

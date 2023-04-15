@@ -26,8 +26,6 @@ function HomeHero() {
                     console.log("Metamask is not installed, please install!");
                 }
                 const con = await companyInstance();
-                // const tx = await con.setUser(formData.firstName, formData.email, formData.companyName, formData.country);
-                // tx.wait();
                 const verifyTx = await con.iscompaniesAdd(address)
                 // result = verifyTx
                 console.log(verifyTx)

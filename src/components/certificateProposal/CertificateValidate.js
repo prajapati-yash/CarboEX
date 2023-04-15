@@ -52,18 +52,19 @@ function CertificateValidate() {
   const uploadImage = async () => {
     const fileInput = document.querySelector('input[type="file"]');
     // Pack files into a CAR and send to web3.storage
-    const rootCid = await client.put(fileInput.files, {
+    const certCID = await client.put(fileInput.files, {
       name: certificate.name,
       maxRetries: 3,
     });
+    return certCID + "/" + fileInput.files[0].name;
     // console.log(img);
-    const res = await client.get(rootCid); // Web3Response
-    const files = await res.files(certificate); // Web3File[]
-    for (const file of files) {
-      // setCid(file.cid)
-      console.log(file.cid);
-      return file.cid;
-    }
+    // const res = await client.get(certCID); // Web3Response
+    // const files = await res.files(certificate); // Web3File[]
+    // for (const file of files) {
+    //   // setCid(file.cid)
+    //   console.log(file.cid);
+    //   return file.cid;
+    // }
   };
 
 

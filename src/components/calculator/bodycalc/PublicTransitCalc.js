@@ -2,11 +2,11 @@ import React from 'react'
 import '../../../styles/calculator/bodycalc/PublicTransitCalc.css'
 import axios from 'axios'
 import { useState } from 'react'
-import  {ToastContainer,toast}  from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 function PublicTransitCalc({ onValueChange, props }) {
-    const [btnloading, setbtnloading]=useState(false)
+    const [btnloading, setbtnloading] = useState(false)
 
     const [ptData1, setPtData] = useState({
         ptDistance: null,
@@ -50,8 +50,8 @@ function PublicTransitCalc({ onValueChange, props }) {
             draggable: true,
             progress: undefined,
             theme: "light",
-            });
-            setbtnloading(true)
+        });
+        setbtnloading(true)
             .then(function (response) {
                 const ptResult = JSON.stringify(response.data.carbon);
                 // alert(`Carbon: ${ptResult}`);
@@ -113,22 +113,22 @@ function PublicTransitCalc({ onValueChange, props }) {
                         </div>
                         <div className='pTbtn col-sm-12 mt-4'>
                             <button type='submit' className='publicT-form__button primary p-2' id='submit_btn' style={{ width: 'fit-content' }} onClick={() => ptSubmitData()}>
-                            {btnloading?(
+                                {btnloading ? (
                                     <svg
-                                    className="animate-spin button-spin-svg-pic"
-                                    version="1.1"
-                                    id="L9"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    x="0px"
-                                    y="0px"
-                                    viewBox="0 0 100 100"
-                                    style={{width:5%""}}
-                                  >
-                                    <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-                                  </svg>
-                                ):(<>Calculate</>)}
+                                        className="animate-spin button-spin-svg-pic"
+                                        version="1.1"
+                                        id="L9"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        x="0px"
+                                        y="0px"
+                                        viewBox="0 0 100 100"
+                                        style={{ width: 5 % "" }}
+                                    >
+                                        <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+                                    </svg>
+                                ) : (<>Calculate</>)}
                             </button>
-                            <ToastContainer/>
+                            <ToastContainer />
                         </div>
                     </div>
                 </div>
