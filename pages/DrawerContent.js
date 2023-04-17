@@ -1,21 +1,12 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
-import {
-  Avatar,
-  Title,
-  Caption,
-  Paragraph,
-  Drawer,
-  Text,
-  TouchableRipple,
-  Switch,
-} from "react-native-paper";
+import { Drawer } from "react-native-paper";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import WalletConnectProvider from "@walletconnect/react-native-dapp";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import WalletConnectExperience from "../WalletConnectExperience";
+import WalletConnectExperience from "../components/WalletConnectExperience";
 
 const SCHEME_FROM_APP_JSON = "walletconnect-example";
 
@@ -25,18 +16,6 @@ export function DrawerContent(props) {
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
           <View style={[styles.userInfoSection, { flexDirection: "row" }]}>
-            {/* <View
-              style={{
-                marginTop: 15,
-              }}
-            >
-              <Avatar.Image source={require("../assets/profile.jpg")} />
-            </View>
-            <View style={{ marginLeft: 9, marginTop: 15 }}>
-              <Title style={styles.title}>UserName</Title>
-              <Caption style={styles.caption}>@UserId</Caption>
-            </View> */}
-
             <WalletConnectProvider
               redirectUrl={
                 Platform.OS === "web"
@@ -49,7 +28,6 @@ export function DrawerContent(props) {
             >
               <View style={styles.container}>
                 <WalletConnectExperience />
-                {/* <StatusBar style="auto" /> */}
               </View>
             </WalletConnectProvider>
           </View>

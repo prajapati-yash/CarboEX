@@ -12,10 +12,10 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
-import axios from "axios";
-import Sector from "../Api/emissionCalculate";
-import { TotalSum } from "../Api/emissionCalculate";
+import Sector from "../components/emissionCalculate";
+import { TotalSum } from "../components/emissionCalculate";
 import styles from "../style/calculatorStyle";
+import { connector } from "../components/WalletConnectExperience";
 
 const te_data = [
   { label: "USA", value: "USA" },
@@ -127,15 +127,17 @@ export default function Calculator() {
   const [flCalculate, setFlCalculate] = useState(false);
   const [result, setResult] = useState(false);
 
+  console.log(connector.accounts[0]);
+
   return (
     <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.centered_view}
-      >
-    <View style={styles.container}>
-      
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.centered_view}
+    >
+      <View style={styles.container}>
         <View style={styles.title_text_view}>
-        <Text style={styles.title_text}>CARBON FOOTPRINT CALCULATOR</Text></View>
+          <Text style={styles.title_text}>CARBON FOOTPRINT CALCULATOR</Text>
+        </View>
 
         <View style={styles.centered_view}>
           <View style={styles.calculateBox}>
@@ -299,7 +301,9 @@ export default function Calculator() {
                 }}
               />
 
-              <Text style={styles.input_text}>Select Source Of Clean Energy</Text>
+              <Text style={styles.input_text}>
+                Select Source Of Clean Energy
+              </Text>
               <Dropdown
                 style={[
                   styles.dropdownStyle,
@@ -359,8 +363,7 @@ export default function Calculator() {
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-
-            <Text style={styles.input_text}>Enter Liters</Text>
+              <Text style={styles.input_text}>Enter Liters</Text>
               <TextInput
                 value={fuelLiters}
                 style={styles.input_box}
@@ -428,8 +431,7 @@ export default function Calculator() {
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              
-            <Text style={styles.input_text}>Enter Distance</Text>
+              <Text style={styles.input_text}>Enter Distance</Text>
               <TextInput
                 value={carDistance}
                 style={styles.input_box}
@@ -438,7 +440,7 @@ export default function Calculator() {
                   setCarDistance(carDistance);
                 }}
               />
-              
+
               <Text style={styles.input_text}>Select Vehicle Type</Text>
               <Dropdown
                 style={[
@@ -497,8 +499,7 @@ export default function Calculator() {
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              
-            <Text style={styles.input_text}>Enter Distance</Text>
+              <Text style={styles.input_text}>Enter Distance</Text>
               <TextInput
                 value={flightDistance}
                 style={styles.input_box}
@@ -507,7 +508,7 @@ export default function Calculator() {
                   setFlightDistance(flightDistance);
                 }}
               />
-              
+
               <Text style={styles.input_text}>Select Flight Type</Text>
               <Dropdown
                 style={[
@@ -566,8 +567,7 @@ export default function Calculator() {
               </ImageBackground>
             </View>
             <View style={styles.calculateBody}>
-              
-            <Text style={styles.input_text}>Enter Distance</Text>
+              <Text style={styles.input_text}>Enter Distance</Text>
               <TextInput
                 value={motorbikeDistance}
                 style={styles.input_box}
@@ -576,7 +576,7 @@ export default function Calculator() {
                   setMotorbikeDistance(motorbikeDistance);
                 }}
               />
-              
+
               <Text style={styles.input_text}>Select Motorbike Type</Text>
               <Dropdown
                 style={[
@@ -644,15 +644,11 @@ export default function Calculator() {
               >
                 <Text style={styles.calculate_button_text}>Result</Text>
               </Pressable>
-              {result && (
-                <TotalSum
-                  resultStatus={setResult}
-                />
-              )}
+              {result && <TotalSum resultStatus={setResult} />}
             </View>
           </View>
-				</View>
         </View>
-        </ScrollView>
+      </View>
+    </ScrollView>
   );
 }

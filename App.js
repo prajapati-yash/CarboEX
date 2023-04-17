@@ -10,7 +10,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import { Image, StyleSheet } from "react-native";
 import Resources from "./pages/ResourcesScreen";
-import { TotalSum } from "./Api/emissionCalculate";
+import { TotalSum } from "./components/emissionCalculate";
 import BuyCredit from "./pages/BuyCredit";
 import SellCredit from "./pages/SellCredit";
 import ProposalDetails from "./pages/proposalDetails";
@@ -132,7 +132,7 @@ export default function App() {
           }}
         />
         <Drawer.Screen
-          name="signUP"
+          name="SignUP"
           component={SignUP}
           options={{
             headerTitle: () => (

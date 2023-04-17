@@ -16,17 +16,18 @@ function Button({ onPress, label }) {
     </TouchableOpacity>
   );
 }
+export let connector = "";
 
 export default function WalletConnectExperience() {
-  const connector = useWalletConnect();
+  connector = useWalletConnect();
 
   const connectWallet = async () => {
-    console.log(connector);
+    console.log(connector.accounts[0]);
     return await connector.connect();
   };
 
   const killSession = async () => {
-    console.log(connector);
+    console.log(connector.accounts[0]);
     return await connector.killSession();
   };
 
