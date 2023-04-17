@@ -20,14 +20,14 @@ function Button({ onPress, label }) {
 export default function WalletConnectExperience() {
   const connector = useWalletConnect();
 
-  const connectWallet = async () => {
-    console.log(connector);
-    return await connector.connect();
+  const connectWallet = () => {
+    console.log(connector.accounts[0]);
+    return connector.connect();
   };
 
-  const killSession = async () => {
-    console.log(connector);
-    return await connector.killSession();
+  const killSession = () => {
+    console.log(connector.accounts[0]);
+    return connector.killSession();
   };
 
   return (

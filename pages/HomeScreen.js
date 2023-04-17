@@ -19,9 +19,7 @@ import Accordion from "react-native-collapsible/Accordion";
 import styles from "../style/homescreenStyle";
 import { Icon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
-import WalletConnectProvider from "@walletconnect/react-native-dapp";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import WalletConnectExperience from "../WalletConnectExperience";
+import SignUP from "./signUP";
 
 const SCHEME_FROM_APP_JSON = "walletconnect-example";
 
@@ -146,12 +144,27 @@ export default function HomeScreen() {
               <View style={styles.modal_centered_view}>
                 <View style={styles.modal_view}>
                   <View style={styles.modal_body}>
-                    <Text style={[styles.modal_text, {fontSize: responsiveFontSize(2.2),fontWeight: "bold"}]}>Welcome to CarboEx. </Text>
-                    <Text style={[styles.modal_text, {marginTop: "2%", marginBottom: "2%"}]}>
+                    <Text
+                      style={[
+                        styles.modal_text,
+                        {
+                          fontSize: responsiveFontSize(2.2),
+                          fontWeight: "bold",
+                        },
+                      ]}
+                    >
+                      Welcome to CarboEx.{" "}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.modal_text,
+                        { marginTop: "2%", marginBottom: "2%" },
+                      ]}
+                    >
                       The Carbon Trading Platform that facilitates carbon credit
                       trading for a sustainable future.
                     </Text>
-                    <Text style={[styles.modal_text, {fontWeight: 600}]}>
+                    <Text style={[styles.modal_text, { fontWeight: 600 }]}>
                       Powered by blockchain technology.
                     </Text>
                   </View>
@@ -169,7 +182,7 @@ export default function HomeScreen() {
                   >
                     <Pressable
                       style={styles.modal_button}
-                      onPress={() => navigation.navigate(Calculator)}
+                      onPress={() => navigation.navigate(SignUP)}
                       android_ripple={{
                         color: "#3C84AB",
                       }}

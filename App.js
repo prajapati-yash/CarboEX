@@ -132,7 +132,7 @@ export default function App() {
           }}
         />
         <Drawer.Screen
-          name="signUP"
+          name="SignUP"
           component={SignUP}
           options={{
             headerTitle: () => (
