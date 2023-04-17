@@ -38,7 +38,7 @@ function MemberLandingPage() {
            
         }else{
           setbtndisable(true)
-        setbtnloading(true)
+          setbtnloading(true)
         
         toast.info('Process is in Progress', {
             position: "top-left",
