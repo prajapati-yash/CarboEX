@@ -63,7 +63,7 @@ function ProposalDashComponent() {
         const getResult = await con.getProposalResult(e);
         window.location.reload();
         setbtnloading(false)
-        return await getResult
+        return getResult
       }
     } catch (error) {
       console.log(error);

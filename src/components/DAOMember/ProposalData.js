@@ -46,6 +46,7 @@ function ProposalData() {
         }
         const con = await daoInstance();
         const value = await con.getConfigs()
+        console.log(value[1])
         const downvoteProposal = await con.downvote(proposal[0], { value: String(value[1]) });
         setrejectbtnloading(false);
         // console.log(downvoteProposal)

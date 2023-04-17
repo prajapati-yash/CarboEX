@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function CertificateValidate() {
   const navigate = useNavigate();
   const [certificate, setCertificate] = useState("");
-  const [domain, setDomain] = useState("");
+  const [domain, setDomain] = useState();
   const [emission, setEmission] = useState("");
   const [proposal, setProposal] = useState("");
   const [btnloading, setbtnloading] = useState(false);
@@ -22,9 +22,21 @@ function CertificateValidate() {
     setCertificate(e.target.value);
   };
 
+  // const handleDomainChange = (e) => {
+  //   if(e==="Emission"){
+  //     setDomain(true)
+  //   }
+  //   setDomain(e.target.value);
+  // };
+
   const handleDomainChange = (e) => {
-    setDomain(e.target.value);
+    if (e === "Emission") {
+      setDomain(true);
+    } else if (e === "Offset") {
+      setDomain(false)
+    }
   };
+
 
   const handleEmissionChange = (e) => {
     setEmission(e.target.value);
@@ -70,7 +82,8 @@ function CertificateValidate() {
 
   const createProposalMain = async () => {
     try {
-      if (certificate == '' || domain == '' || emission == '' || proposal == '') {
+      console.log(domain)
+      if (certificate === '' || domain === '' || emission === '' || proposal === '') {
         toast.error('Enter the required details', {
           position: "top-center",
           autoClose: 3000,
@@ -105,16 +118,15 @@ function CertificateValidate() {
           }
           const conDAO = await daoInstance();
           console.log(conDAO)
-          console.log(proposal, cids, domain, emission)
+          // console.log(proposal, cids, domain, emission)
           const value = await conDAO.getConfigs()
           console.log(value)
+          console.log(proposal, cids, domain, emission)
           const CPTx = await conDAO.createProposal(proposal, cids, domain, emission, { value: String(value[0]) })
           setbtnloading(false)
           navigate("/dao-member-proposals")
           setbtndisable(false)
           console.log(CPTx)
-
-
         }
       }
     } catch (error) {
@@ -148,17 +160,23 @@ function CertificateValidate() {
               <select
                 className="form-select certiInput"
                 id="domain"
-                onChange={handleDomainChange}
-                value={domain}
+                onChange={(e) => {
+                  if (e.target.value === "Emission") {
+                    setDomain(true);
+                  } else if (e.target.value === "Offset") {
+                    setDomain("")
+                  }
+                }}
+                defaultValue={domain}
               >
                 <option value="">Select domain</option>
-                <option value="true">Emission</option>
-                <option value="false">Offset</option>
+                <option value="Emission">Emission</option>
+                <option value="Offset">Offset</option>
               </select>
             </div>
             <div className="mb-3">
               <label htmlFor="emission" className="form-label certiLabel">
-                Enter the value of emission
+                Enter the value of emission/offset
               </label>
               <input
                 type="text"
@@ -202,6 +220,7 @@ function CertificateValidate() {
           </form>
         </div>
       </div>
+      <button onClick={handleSubmit}> Click to get true/false</button>
     </>
   );
 }

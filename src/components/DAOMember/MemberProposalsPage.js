@@ -6,9 +6,7 @@ import { daoInstance } from '../Contracts';
 import { useNavigate } from 'react-router-dom';
 
 function MemberProposalsPage() {
-    // const [id, setId] = useState("")
-    // const [name, setName] = useState("");
-    // const [description, setDescription] = useState("");
+    // const [showProp, setShowProp] = useState([]);
     const [allPData, setAllPData] = useState([]);
 
     const daoProposal = async () => {
@@ -23,7 +21,7 @@ function MemberProposalsPage() {
                 const con = await daoInstance();
                 const daoPData = await con.getAllProposal();
                 setAllPData(daoPData)
-                console.log(daoPData);
+                console.log(allPData);
             }
         } catch (error) {
             console.log(error);
@@ -33,8 +31,6 @@ function MemberProposalsPage() {
     useEffect(() => {
         daoProposal()
     }, [])
-
-
 
     const navigate = useNavigate();
     return (
@@ -54,12 +50,14 @@ function MemberProposalsPage() {
                                         <div className='MPPage-VM-Btn-class d-flex justify-content-center'>
                                             <button className='MPPage-VM-Btn mt-2' onClick={() => navigate("/proposalData", { state: { data: allPData[key] } })}>Open</button>
                                         </div>
-                                    </div>))}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <button onClick={daoProposal}>click to get the type</button>
         </>
     )
 }
