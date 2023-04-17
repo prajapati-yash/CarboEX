@@ -20,15 +20,16 @@ function SignUpPage() {
     image: null,
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   const client = new Web3Storage({
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEEzNmM2ODkwYTNhZTJEMDRjZkMwNjNERjJjNjliNjY2Y0JlRkY4ZTYiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODEzMTIxMDk4OTksIm5hbWUiOiJDYXJib0VYIn0.aR-kLKB8sNL2GAKAwq-iaBI0hoxAkxIW1hnJMsOLzC8",
     // token: process.env.REACT_APP_LOGO_IMG_UPLOAD_TOKEN,
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
 
   const uploadImage = async () => {
     const fileInput = document.querySelector('input[type="file"]');
@@ -51,7 +52,6 @@ function SignUpPage() {
 
 
   const createUserAccount = async () => {
-
     try {
       toast.info('Process is in Progress', {
         position: "top-left",

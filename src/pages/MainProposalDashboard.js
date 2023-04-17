@@ -74,8 +74,6 @@ function MainProposalDashboard() {
                 setUserName(userData[1])
                 setEmail(userData[2])
                 return userData;
-                // console.log(userData[4])
-                // console.log(con);
             }
         } catch (error) {
             console.log(error);
