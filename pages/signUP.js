@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  Image,
   Text,
   View,
   ScrollView,
@@ -12,15 +13,15 @@ import { useState } from "react";
 import styles from "../style/signUPStyle";
 import { Button, Stack } from "@rneui/themed";
 import { responsiveWidth } from "react-native-responsive-dimensions";
-import * as DocumentPicker from "expo-document-picker";
-import { Web3Storage } from "web3.storage";
 import { companyInstance } from "../components/contract";
 import { useNavigation } from "@react-navigation/native";
 import ProfileDetails from "./profileDetails";
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import * as ImagePicker from "expo-image-picker";
 
 const select_country = [
-  { label: "United States", value: "Carbon offset" },
-  { label: "Canada", value: "Carbon Emission" },
+  { label: "United States", value: "United States" },
+  { label: "Canada", value: "Canada" },
   { label: "United Kingdom", value: "United Kingdom" },
   { label: "Australia", value: "Australia" },
   { label: "Other", value: "Other" },
@@ -30,53 +31,57 @@ export default function SignUP() {
   const navigation = useNavigation();
 
   const [countryIsFocus, countrySetIsFocus] = useState(false);
-  const [countryValue, countrySetValue] = useState(null);
+  const [countryValue, countrySetValue] = useState("");
   const [firstName, setFirstName] = useState("");
   const [username, setUsername] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
-  const [logo, setLogo] = useState("");
+  const [image, setImage] = useState("");
 
-  const handleCreate = () => {
-    console.log("First Name", firstName);
-    console.log("User Name:", username);
-    console.log("Company Name:", companyName);
-    console.log("Email:", email);
-    console.log("Logo:", logo);
-  };
-
-  _pickDocument = async () => {
-    let result = await DocumentPicker.getDocumentAsync({});
-    setLogo(result.uri);
-    alert(result.uri);
-    console.log(result);
-  };
-
-  const client = new Web3Storage({
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEEzNmM2ODkwYTNhZTJEMDRjZkMwNjNERjJjNjliNjY2Y0JlRkY4ZTYiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODEzMTIxMDk4OTksIm5hbWUiOiJDYXJib0VYIn0.aR-kLKB8sNL2GAKAwq-iaBI0hoxAkxIW1hnJMsOLzC8",
-    // token: process.env.REACT_APP_LOGO_IMG_UPLOAD_TOKEN,
-  });
-
-  const uploadImage = async () => {
-    const fileInput = document.querySelector("#uploadLogo");
-    // Pack files into a CAR and send to web3.storage
-    const rootCid = await client.put(fileInput.files, {
-      name: logo.id,
-      maxRetries: 3,
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
     });
 
-    console.log(rootCid);
+    if (!result.canceled) {
+      setImage(result.uri);
+      uploadImage(result.uri);
+    }
+  };
 
-    return rootCid + "/" + fileInput.files[0].name;
+  const uploadImage = async (uri) => {
+    let formData = new FormData();
+    formData.append("file", {
+      uri,
+      name: "image.jpg",
+      type: "image/jpeg",
+    });
+
+    let response = await fetch("https://api.web3.storage/upload", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${
+          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+            .eyJzdWIiOiJkaWQ6ZXRocjoweDkxMzhEYjc0ZDliOTIxOWRFMjc0ZEI1ZDRmNTQ0YjYwOUUyNjE0NDYiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE3MjcwOTI1NjYsIm5hbWUiOiJDYXJib0V4In0
+            .S8bfLoh - AAzgMW9UXfU21OgdMxNgCwv7Z8ugact3_FY
+        }`,
+        "Content-Type": "multipart/form-data",
+      },
+      body: formData,
+    });
+
+    let data = await response.json();
+    console.log("data.cids : ", data.cid);
   };
 
   const createUserAccount = async () => {
     try {
       // setbtnloading(true);
-      const c = await uploadImage();
-      const cids = c;
-      console.log(cids);
+      const cids = data.cid;
+      console.log("cids createUserAcount: ", cids);
       const { connector } = useWalletConnect();
 
       if (!connector.connected) {
@@ -84,16 +89,8 @@ export default function SignUP() {
         return;
       }
 
-      const provider = new ethers.providers.Web3Provider(connector.ethereum);
-      const signer = provider.getSigner();
-      if (!provider) {
-        console.log("Metamask is not installed, please install!");
-      }
       const con = await companyInstance();
-      // if (formData.image) {
-      //   await uploadImage();
-      // }
-      console.log(cids);
+      console.log("con cids ", cids);
       const tx = await con.setUser(
         firstName,
         username,
@@ -103,13 +100,13 @@ export default function SignUP() {
         cids
       );
 
-      console.log(tx);
+      console.log("tx: ", tx);
       await tx.wait();
       // setbtnloading(false);
       navigation.navigate(ProfileDetails);
-      console.log(con);
+      console.log("con: ", con);
     } catch (error) {
-      console.log(error);
+      console.log("error: ", error);
       // setbtnloading(false);
     }
   };
@@ -168,7 +165,6 @@ export default function SignUP() {
                   styles.dropdownStyle,
                   countryIsFocus && {
                     borderColor: "white",
-                    // placeholderTextColor: "white",
                   },
                 ]}
                 data={select_country}
@@ -193,23 +189,15 @@ export default function SignUP() {
                   countrySetIsFocus(false);
                 }}
               />
-              <Button
-                id="uploadLogo"
-                title="Upload Logo"
-                loading={false}
-                loadingProps={{ size: "small", color: "white" }}
-                buttonStyle={{
-                  backgroundColor: "#1ba1b3",
-                  borderRadius: 10,
-                }}
-                titleStyle={{ fontWeight: "bold", fontSize: 17 }}
-                containerStyle={{
-                  width: responsiveWidth(50),
-                  marginVertical: "3%",
-                  marginHorizontal: "12%",
-                }}
-                onPress={this._pickDocument}
-              />
+
+              {image && (
+                <Image
+                  source={{ uri: image }}
+                  style={{ width: 200, height: 200 }}
+                />
+              )}
+              <Button title="Pick an image" onPress={pickImage} />
+
               <Button
                 title="Create"
                 loading={false}

@@ -17,7 +17,7 @@ import * as Animatable from "react-native-animatable";
 import { connector } from "../components/WalletConnectExperience";
 import SignUP from "./signUP";
 import ProfileDetails from "./profileDetails";
-import WalletConnectExperience from "../components/WalletConnectExperience";
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
 
 const faqItems = [
   {
@@ -100,8 +100,6 @@ const renderFaqContent = (item, index, isActive) => {
 export default function HomeScreen() {
   const navigation = useNavigation();
 
-  // const address = connector.accounts[0];
-
   const [activeSections, setActiveSections] = useState([]);
 
   const verifyUserAccount = async () => {
@@ -113,25 +111,20 @@ export default function HomeScreen() {
         return;
       }
 
-      const provider = new ethers.providers.Web3Provider(connector.ethereum);
-      const signer = provider.getSigner();
-      if (!provider) {
-        console.log("Metamask is not installed, please install!");
-      }
       const con = await companyInstance();
       const verifyTx = await con.iscompaniesAdd(connector.accounts[0]);
-      console.log(verifyTx);
-      console.log(con);
+      console.log("verifyTx hs:", verifyTx);
+      console.log("con hs", con);
       return verifyTx;
     } catch (error) {
-      console.log(error);
+      console.log("error hs: ", error);
     }
   };
 
   const SignupWithWallet = async () => {
     if (connector.accounts[0]) {
       const test = await verifyUserAccount();
-      console.log(test);
+      console.log("test hs: ", test);
       if (test) {
         navigation.navigate(ProfileDetails);
       } else {
@@ -145,14 +138,6 @@ export default function HomeScreen() {
   const handleAccordionSectionToggle = (sections) => {
     setActiveSections(sections);
   };
-
-  // function connectButton() {
-  //   if (!connector.accounts[0]) {
-  //     alert("Wallet Is Not Connected");
-  //   } else {
-  //     navigation.navigate(SignUP);
-  //   }
-  // }
 
   return (
     <View style={styles.container}>

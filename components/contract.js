@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import Web3 from "web3";
 import companyABI from "../contracts/artifacts/Companyabi.json";
 import daoABI from "../contracts/artifacts/Daoabi.json";
 import ercTokenABI from "../contracts/artifacts/ErcTokenabi.json";
@@ -16,50 +16,47 @@ export const companyInstance = async () => {
     return;
   }
 
-  const provider = new ethers.providers.Web3Provider(connector.ethereum);
-  const signer = provider.getSigner();
-  if (!provider) {
-    console.log("Metamask is not installed, please install!");
-  }
-
-  const con = new ethers.Contract(COMPANY_ADDRESS, companyABI, signer);
-
-  return con;
+  const provider = new Web3(connector.ethereum);
+  const accounts = await provider.eth.getAccounts();
+  const conn = new provider.eth.Contract(companyABI, COMPANY_ADDRESS, {
+    from: accounts[0],
+  });
+  return conn;
 };
 
-export const daoInstance = async () => {
-  const { connector } = useWalletConnect();
+// export const daoInstance = async () => {
+//   const { connector } = useWalletConnect();
 
-  if (!connector.connected) {
-    console.log("WalletConnect not connected");
-    return;
-  }
+//   if (!connector.connected) {
+//     console.log("WalletConnect not connected");
+//     return;
+//   }
 
-  const provider = new ethers.providers.Web3Provider(connector.ethereum);
-  const signer = provider.getSigner();
-  if (!provider) {
-    console.log("Metamask is not installed, please install!");
-  }
+//   const provider = new ethers.providers.Web3Provider(connector.ethereum);
+//   const signer = provider.getSigner();
+//   if (!provider) {
+//     console.log("Metamask is not installed, please install!");
+//   }
 
-  const con = new ethers.Contract(DAO_MEMBER_ADDRESS, daoABI, signer);
+//   const con = new ethers.Contract(DAO_MEMBER_ADDRESS, daoABI, signer);
 
-  return con;
-};
+//   return con;
+// };
 
-export const ercTokenInstance = async () => {
-  const { connector } = useWalletConnect();
+// export const ercTokenInstance = async () => {
+//   const { connector } = useWalletConnect();
 
-  if (!connector.connected) {
-    console.log("WalletConnect not connected");
-    return;
-  }
+//   if (!connector.connected) {
+//     console.log("WalletConnect not connected");
+//     return;
+//   }
 
-  const provider = new ethers.providers.Web3Provider(connector.ethereum);
-  const signer = provider.getSigner();
-  if (!provider) {
-    console.log("Metamask is not installed, please install!");
-  }
+//   const provider = new ethers.providers.Web3Provider(connector.ethereum);
+//   const signer = provider.getSigner();
+//   if (!provider) {
+//     console.log("Metamask is not installed, please install!");
+//   }
 
-  const con = new ethers.Contract(ERC_TOKEN_ADDRESS, ercTokenABI, signer);
-  return con;
-};
+//   const con = new ethers.Contract(ERC_TOKEN_ADDRESS, ercTokenABI, signer);
+//   return con;
+// };
