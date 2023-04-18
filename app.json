@@ -7,9 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "walletconnect-example",
-    "plugins": [
-      "./app.plugin"
-    ],
+    "plugins": ["./app.plugin"],
     "splash": {
       "image": "./assets/carboex.png",
       "resizeMode": "contain",
@@ -18,9 +16,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

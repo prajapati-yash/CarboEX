@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  Image,
   Text,
   View,
   ScrollView,
@@ -12,24 +13,30 @@ import { useState } from "react";
 import styles from "../style/signUPStyle";
 import { Button, Stack } from "@rneui/themed";
 import { responsiveWidth } from "react-native-responsive-dimensions";
-import * as DocumentPicker from "expo-document-picker";
+import * as ImagePicker from "expo-image-picker";
+import { companyInstance } from "../components/contract";
+import { useNavigation } from "@react-navigation/native";
+import ProfileDetails from "./profileDetails";
 
 const select_country = [
-  { label: "United States", value: "Carbon offset" },
-  { label: "Canada", value: "Carbon Emission" },
+  { label: "United States", value: "United States" },
+  { label: "Canada", value: "Canada" },
   { label: "United Kingdom", value: "United Kingdom" },
   { label: "Australia", value: "Australia" },
   { label: "Other", value: "Other" },
 ];
 
 export default function SignUP() {
+  const navigation = useNavigation();
+
   const [countryIsFocus, countrySetIsFocus] = useState(false);
   const [countryValue, countrySetValue] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [username, setUsername] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
-  const [logo, setLogo] = useState("");
+  // const [logo, setLogo] = useState("");
+  const [image, setImage] = useState(null);
 
   const handleCreate = () => {
     console.log("First Name", firstName);
@@ -37,13 +44,80 @@ export default function SignUP() {
     console.log("Company Name:", companyName);
     console.log("Email:", email);
     console.log("Logo:", logo);
+    console.log("Country:", countryValue);
   };
 
-  _pickDocument = async () => {
-    let result = await DocumentPicker.getDocumentAsync({});
-    setLogo(result.uri);
-    alert(result.uri);
-    console.log(result);
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.uri);
+      uploadImage(result.uri);
+    }
+  };
+
+  const uploadImage = async (uri) => {
+    let formData = new FormData();
+    formData.append("file", {
+      uri,
+      name: "image.jpg",
+      type: "image/jpeg",
+    });
+
+    let response = await fetch("https://api.web3.storage/upload", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${
+          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+            .eyJzdWIiOiJkaWQ6ZXRocjoweDkxMzhEYjc0ZDliOTIxOWRFMjc0ZEI1ZDRmNTQ0YjYwOUUyNjE0NDYiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE3MjcwOTI1NjYsIm5hbWUiOiJDYXJib0V4In0
+            .S8bfLoh - AAzgMW9UXfU21OgdMxNgCwv7Z8ugact3_FY
+        }`,
+        "Content-Type": "multipart/form-data",
+      },
+      body: formData,
+    });
+
+    let data = await response.json();
+    console.log("data.cids : ", data.cid);
+  };
+
+  const createUserAccount = async () => {
+    try {
+      // setbtnloading(true);
+      const cids = data.cid;
+      console.log("cids createUserAccount: ", cids);
+      const { connector } = useWalletConnect();
+
+      if (!connector.connected) {
+        console.log("WalletConnect not connected");
+        return;
+      }
+
+      const con = await companyInstance();
+      console.log("con cids ", cids);
+      const tx = await con.setUser(
+        firstName,
+        username,
+        countryValue,
+        email,
+        companyName,
+        cids
+      );
+
+      console.log("tx: ", tx);
+      await tx.wait();
+      // setbtnloading(false);
+      navigation.navigate(ProfileDetails);
+      console.log("con: ", con);
+    } catch (error) {
+      console.log("error: ", error);
+      // setbtnloading(false);
+    }
   };
 
   return (
@@ -108,7 +182,13 @@ export default function SignUP() {
                 maxHeight={300}
                 labelField="label"
                 valueField="value"
-                placeholder={!countryIsFocus ? <Text style={{color: "white"}}>Select country</Text> : "..."}
+                placeholder={
+                  !countryIsFocus ? (
+                    <Text style={{ color: "white" }}>Select country</Text>
+                  ) : (
+                    "..."
+                  )
+                }
                 searchPlaceholder="Search..."
                 selectionColor="white"
                 value={countryValue}
@@ -119,7 +199,8 @@ export default function SignUP() {
                   countrySetIsFocus(false);
                 }}
               />
-              <Button
+              {/* <Button
+                id="uploadLogo"
                 title="Upload Logo"
                 loading={false}
                 loadingProps={{ size: "small", color: "white" }}
@@ -134,7 +215,22 @@ export default function SignUP() {
                   marginHorizontal: "12%",
                 }}
                 onPress={this._pickDocument}
-              />
+              /> */}
+              <View
+                style={{
+                  // flex: 1,
+                  alignItems: "center",
+                  // justifyContent: "center",
+                }}
+              >
+                {image && (
+                  <Image
+                    source={{ uri: image }}
+                    style={{ width: 200, height: 200 }}
+                  />
+                )}
+                <Button title="Pick an image" onPress={pickImage} />
+              </View>
               <Button
                 title="Create"
                 loading={false}
@@ -152,7 +248,7 @@ export default function SignUP() {
                   marginHorizontal: "12%",
                   marginTop: "4%",
                 }}
-                onPress={handleCreate}
+                onPress={createUserAccount}
               />
             </View>
           </ImageBackground>

@@ -2,16 +2,11 @@ import {
   ImageBackground,
   Pressable,
   ScrollView,
-  StyleSheet,
   TouchableOpacity,
   Text,
   View,
 } from "react-native";
-import {
-  responsiveFontSize,
-  responsiveHeight,
-  responsiveWidth,
-} from "react-native-responsive-dimensions";
+import { responsiveFontSize } from "react-native-responsive-dimensions";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Calculator from "./Calculator";
@@ -19,9 +14,10 @@ import Accordion from "react-native-collapsible/Accordion";
 import styles from "../style/homescreenStyle";
 import { Icon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
+import { connector } from "../components/WalletConnectExperience";
 import SignUP from "./signUP";
-
-const SCHEME_FROM_APP_JSON = "walletconnect-example";
+import ProfileDetails from "./profileDetails";
+import WalletConnectExperience from "../components/WalletConnectExperience";
 
 const faqItems = [
   {
@@ -53,16 +49,6 @@ const faqItems = [
 
 const renderFaqHeader = (item, index, isActive) => {
   return (
-    // <View style={styles.faqItem}>
-    //   <Text style={styles.faqItemTitle}>{item.title}</Text>
-    //   <View style={{ position: 'absolute', right: 20,marginTop:"5%" }}>
-    //     <Icon
-    //       name={isActive ? 'chevron-up' : 'chevron-down'}
-    //       type="font-awesome"
-    //       color="#555"
-    //       size={16}
-    //     />
-    //   </View>
     <View style={styles.faqItem}>
       <Animatable.View duration={300} transition="backgroundColor">
         <Text style={styles.faqItemTitle}>{item.title}</Text>
@@ -103,7 +89,6 @@ const renderFaqContent = (item, index, isActive) => {
           duration={10}
           easing="ease-out"
           animation={"zoomIn"}
-          // isActive ? "zoomIn" : false
         >
           {item.content}
         </Animatable.Text>
@@ -115,11 +100,59 @@ const renderFaqContent = (item, index, isActive) => {
 export default function HomeScreen() {
   const navigation = useNavigation();
 
+  // const address = connector.accounts[0];
+
   const [activeSections, setActiveSections] = useState([]);
+
+  const verifyUserAccount = async () => {
+    try {
+      const { connector } = useWalletConnect();
+
+      if (!connector.connected) {
+        console.log("WalletConnect not connected");
+        return;
+      }
+
+      const provider = new ethers.providers.Web3Provider(connector.ethereum);
+      const signer = provider.getSigner();
+      if (!provider) {
+        console.log("Metamask is not installed, please install!");
+      }
+      const con = await companyInstance();
+      const verifyTx = await con.iscompaniesAdd(connector.accounts[0]);
+      console.log(verifyTx);
+      console.log(con);
+      return verifyTx;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const SignupWithWallet = async () => {
+    if (connector.accounts[0]) {
+      const test = await verifyUserAccount();
+      console.log(test);
+      if (test) {
+        navigation.navigate(ProfileDetails);
+      } else {
+        navigation.navigate(SignUP);
+      }
+    } else {
+      alert("Wallet Is Not Connected! Please Connect");
+    }
+  };
 
   const handleAccordionSectionToggle = (sections) => {
     setActiveSections(sections);
   };
+
+  // function connectButton() {
+  //   if (!connector.accounts[0]) {
+  //     alert("Wallet Is Not Connected");
+  //   } else {
+  //     navigation.navigate(SignUP);
+  //   }
+  // }
 
   return (
     <View style={styles.container}>
@@ -175,14 +208,12 @@ export default function HomeScreen() {
                       borderBottomRightRadius: 35,
                       borderBottomLeftRadius: 35,
                       overflow: "hidden",
-                      // height: "22%",
                       width: "100%",
-                      // paddingTop:"5%"
                     }}
                   >
                     <Pressable
                       style={styles.modal_button}
-                      onPress={() => navigation.navigate(SignUP)}
+                      onPress={SignupWithWallet}
                       android_ripple={{
                         color: "#3C84AB",
                       }}
@@ -303,22 +334,6 @@ export default function HomeScreen() {
               </View>
             </View>
           </ImageBackground>
-
-          {/* <WalletConnectProvider
-            redirectUrl={
-              Platform.OS === "web"
-                ? window.location.origin
-                : `${SCHEME_FROM_APP_JSON}://`
-            }
-            storageOptions={{
-              asyncStorage: AsyncStorage,
-            }}
-          >
-            <View style={styles.container}>
-              <WalletConnectExperience />
-             <StatusBar style="auto" /> 
-            </View>
-          </WalletConnectProvider> */}
         </View>
       </ScrollView>
     </View>

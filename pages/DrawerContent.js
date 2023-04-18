@@ -1,21 +1,12 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
-import {
-  Avatar,
-  Title,
-  Caption,
-  Paragraph,
-  Drawer,
-  Text,
-  TouchableRipple,
-  Switch,
-} from "react-native-paper";
+import { Drawer } from "react-native-paper";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import WalletConnectProvider from "@walletconnect/react-native-dapp";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import WalletConnectExperience from "../WalletConnectExperience";
+import WalletConnectExperience from "../components/WalletConnectExperience";
 
 const SCHEME_FROM_APP_JSON = "walletconnect-example";
 
