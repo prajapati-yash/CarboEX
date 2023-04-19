@@ -17,7 +17,7 @@ import * as Animatable from "react-native-animatable";
 import { connector } from "../components/WalletConnectExperience";
 import SignUP from "./signUP";
 import ProfileDetails from "./profileDetails";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import { companyInstance } from "../components/contract";
 
 const faqItems = [
   {
@@ -103,28 +103,32 @@ export default function HomeScreen() {
   const [activeSections, setActiveSections] = useState([]);
 
   const verifyUserAccount = async () => {
-    try {
-      const { connector } = useWalletConnect();
 
+    try{
       if (!connector.connected) {
         console.log("WalletConnect not connected");
         return;
       }
 
-      const con = await companyInstance();
-      const verifyTx = await con.iscompaniesAdd(connector.accounts[0]);
-      console.log("verifyTx hs:", verifyTx);
-      console.log("con hs", con);
-      return verifyTx;
-    } catch (error) {
-      console.log("error hs: ", error);
-    }
+      let con = await companyInstance();
+      // console.log("Con:",con);
+      console.log("Wallet Address",connector.accounts[0]);
+      // console.log("Is Companies Added:",con.iscompaniesAdd());
+      // con.options.from = connector.accounts[0]
+      // let verifyTx = await con.methods.iscompaniesAdd(connector.accounts[0]).call();
+      
+      console.log("VerifyTx: ",verifyTx);
+      return verifyTx;}
+      catch(error){
+        console.log("Error:",error);
+      }
   };
+
 
   const SignupWithWallet = async () => {
     if (connector.accounts[0]) {
       const test = await verifyUserAccount();
-      console.log("test hs: ", test);
+      console.log("Verified: ",test);
       if (test) {
         navigation.navigate(ProfileDetails);
       } else {

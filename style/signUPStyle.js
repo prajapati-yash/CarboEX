@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   image2: {
     marginTop: "10%",
-    marginBottom: "8%",
+    marginBottom: "5%",
     flex: 1,
     width: responsiveWidth(80),
     // height: responsiveHeight(50),

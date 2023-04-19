@@ -7,7 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "walletconnect-example",
-    "plugins": ["./app.plugin"],
+    "plugins": [
+      "./app.plugin"
+    ],
     "splash": {
       "image": "./assets/carboex.png",
       "resizeMode": "contain",
@@ -16,7 +18,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -29,6 +33,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "64b6a40d-8b75-4bbe-81a9-6a15cc9975ec"
+      }
     }
   }
 }

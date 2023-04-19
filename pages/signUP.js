@@ -13,11 +13,11 @@ import { useState } from "react";
 import styles from "../style/signUPStyle";
 import { Button, Stack } from "@rneui/themed";
 import { responsiveWidth } from "react-native-responsive-dimensions";
+import * as ImagePicker from "expo-image-picker";
 import { companyInstance } from "../components/contract";
 import { useNavigation } from "@react-navigation/native";
 import ProfileDetails from "./profileDetails";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import * as ImagePicker from "expo-image-picker";
+import { connector } from "../components/WalletConnectExperience";
 
 const select_country = [
   { label: "United States", value: "United States" },
@@ -27,89 +27,88 @@ const select_country = [
   { label: "Other", value: "Other" },
 ];
 
-export default function SignUP() {
+export default function SignUP() {      
   const navigation = useNavigation();
 
   const [countryIsFocus, countrySetIsFocus] = useState(false);
-  const [countryValue, countrySetValue] = useState("");
+  const [countryValue, countrySetValue] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [username, setUsername] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+    const pickImage = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
 
-    if (!result.canceled) {
-      setImage(result.uri);
-      uploadImage(result.uri);
-    }
-  };
-
-  const uploadImage = async (uri) => {
-    let formData = new FormData();
-    formData.append("file", {
-      uri,
-      name: "image.jpg",
-      type: "image/jpeg",
-    });
-
-    let response = await fetch("https://api.web3.storage/upload", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${
-          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-            .eyJzdWIiOiJkaWQ6ZXRocjoweDkxMzhEYjc0ZDliOTIxOWRFMjc0ZEI1ZDRmNTQ0YjYwOUUyNjE0NDYiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE3MjcwOTI1NjYsIm5hbWUiOiJDYXJib0V4In0
-            .S8bfLoh - AAzgMW9UXfU21OgdMxNgCwv7Z8ugact3_FY
-        }`,
-        "Content-Type": "multipart/form-data",
-      },
-      body: formData,
-    });
-
-    let data = await response.json();
-    console.log("data.cids : ", data.cid);
-  };
-
-  const createUserAccount = async () => {
-    try {
-      // setbtnloading(true);
-      const cids = data.cid;
-      console.log("cids createUserAcount: ", cids);
-      const { connector } = useWalletConnect();
-
-      if (!connector.connected) {
-        console.log("WalletConnect not connected");
-        return;
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+        uploadImage(result.assets[0].uri);
       }
+    };
 
-      const con = await companyInstance();
-      console.log("con cids ", cids);
-      const tx = await con.setUser(
-        firstName,
-        username,
-        countryValue,
-        email,
-        companyName,
-        cids
-      );
+    const uploadImage = async (uri) => {
+      console.log("Uploading Image");
+      let formData = new FormData();
+      formData.append("file", {
+        uri:uri,
+        name: "image.jpg",
+        type: "image/jpeg",
+      });
 
-      console.log("tx: ", tx);
-      await tx.wait();
-      // setbtnloading(false);
-      navigation.navigate(ProfileDetails);
-      console.log("con: ", con);
-    } catch (error) {
-      console.log("error: ", error);
-      // setbtnloading(false);
-    }
-  };
+      let response = await fetch("https://api.web3.storage/upload", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkxMzhEYjc0ZDliOTIxOWRFMjc0ZEI1ZDRmNTQ0YjYwOUUyNjE0NDYiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE4MjI3NTk5MTgsIm5hbWUiOiJDYXJib0V4In0.yq_pJuHSPlUB6fsecby-JnZwy9RDtjoT1sfPwJBikEA"
+          }`,
+          "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+      });
+
+      const data = await response.json();
+      console.log("data.cids : ", data.cid);
+      return data.cid;
+    };
+
+    const createUserAccount = async () => {
+      try {
+        if (connector.accounts[0] == null) {
+          console.log("WalletConnect not connected");
+          return;
+        }
+
+        console.log(connector.accounts[0]);
+        const cids = await uploadImage();
+        console.log("cids createUserAccount: ", cids);
+
+        const con = await companyInstance();
+        console.log("con cids ", cids);
+        const tx = await con.setUser(
+          firstName,
+          username,
+          companyName,
+          email,
+          countryValue,
+          cids
+        );
+
+        console.log("tx: ", tx);
+        await tx.wait();
+        // setbtnloading(false);
+        navigation.navigate(ProfileDetails);
+        console.log("con: ", con);
+      } catch (error) {
+        console.log("error: ", error);
+        // setbtnloading(false);
+      }
+    };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -165,6 +164,7 @@ export default function SignUP() {
                   styles.dropdownStyle,
                   countryIsFocus && {
                     borderColor: "white",
+                    // placeholderTextColor: "white",
                   },
                 ]}
                 data={select_country}
@@ -189,15 +189,27 @@ export default function SignUP() {
                   countrySetIsFocus(false);
                 }}
               />
-
-              {image && (
-                <Image
-                  source={{ uri: image }}
-                  style={{ width: 200, height: 200 }}
+              <View
+                style={{
+                  alignItems: "center",
+                }}
+              >
+                {image && (
+                  <Image
+                    source={{ uri: image }}
+                    style={{ width: 80, height: 50 }}
+                  />
+                )}
+                <Button
+                  title="Pick an image"
+                  onPress={pickImage}
+                  containerStyle={{
+                    width: responsiveWidth(50),
+                    marginHorizontal: "12%",
+                    marginTop: "4%",
+                  }}
                 />
-              )}
-              <Button title="Pick an image" onPress={pickImage} />
-
+              </View>
               <Button
                 title="Create"
                 loading={false}

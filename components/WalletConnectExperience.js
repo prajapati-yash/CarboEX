@@ -22,8 +22,8 @@ export default function WalletConnectExperience() {
   connector = useWalletConnect();
 
   const connectWallet = async () => {
-    console.log(connector.accounts[0]);
     return await connector.connect();
+    // console.log(connector.accounts[0]);
   };
 
   const killSession = async () => {
