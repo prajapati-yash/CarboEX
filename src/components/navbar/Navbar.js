@@ -78,7 +78,7 @@ function Navbar() {
       link: "",
       auth: true,
       submenu: [
-        { title: "Become a Member", link: "/become-member" },
+        { title: "Become a DAO Member", link: "/become-member" },
         { title: "Proposals", link: "/dao-member-proposals" },
       ],
     },

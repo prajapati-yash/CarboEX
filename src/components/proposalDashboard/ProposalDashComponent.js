@@ -108,8 +108,8 @@ function ProposalDashComponent() {
   return (
     <>
       <div className="proposalContainer">
-        <div className="myProposals-head-title py-3 py-sm-4 d-flex justify-content-center">
-          <p>PROPOSALS</p>
+        <div className="myProposals-head-title py-sm-4 d-flex justify-content-center">
+          <p className="myProposals-head-title-name">PROPOSALS MADE BY YOU</p>
         </div>
         <div className="proposalDetails">
           {userProp.map((details, key) => (
@@ -128,7 +128,7 @@ function ProposalDashComponent() {
                     </p>
                   </div>
                   <div className="mb-3">
-                    <span className="proposal-dash-label">Image:</span>
+                    <span className="proposal-dash-label">Certificate:</span>
                     <div
                       className="proposal-dash-output-Bg proposal-dash-image"
                       style={{ width: "fit-content" }}
@@ -162,7 +162,7 @@ function ProposalDashComponent() {
                   </div>
                   <div className="">
                     <span className="proposal-dash-label">Result:</span>{" "}<br />
-                    <button className="btn btn-primary" style={{ width: "30%" }} key={key} onClick={() => getUserDataById(details[0], key)}>
+                    <button className="btn btn-primary" style={{ width: "fit-content" }} key={key} onClick={() => getUserDataById(details[0], key)}>
                       {btnloading && loadingIndex === key ? (
                         <svg
                           className="animate-spin button-spin-svg-pic"
@@ -178,7 +178,7 @@ function ProposalDashComponent() {
                           <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
                         </svg>
                       ) : (
-                        <>Result</>
+                        <>Get Result</>
                       )}
                     </button>
                     {/* <button className=" btn btn-primary" onClick={""}>Result</button> */}

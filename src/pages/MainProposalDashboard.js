@@ -130,6 +130,9 @@ function MainProposalDashboard() {
         <>
             <div className="container-fluid main-prop-dash-Main">
                 <div className="row justify-content-center">
+                    <div className='u-dashboard-title d-flex justify-content-center'>
+                        <p className='u-dashboard-title-name'>MY DASHBOARD</p>
+                    </div> <hr />
                     <div className="col-lg-2 col-md-3 col-sm-4 DAO-Member-logo-class">
                         <img src={"https://ipfs.io/ipfs/" + logoImg} alt="Logo" className="DAO-Member-logo img-fluid" />
                     </div>

@@ -59,8 +59,11 @@ function ProposalOrderComponent() {
   return (
     <>
       <div className="orderContainer">
-        <div className="POrders-head py-3 py-sm-4 d-flex justify-content-center">
+        {/* <div className="POrders-head py-3 py-sm-4 d-flex justify-content-center">
           <p>ORDERS</p>
+        </div> */}
+        <div className="myProposals-head-title py-sm-4 d-flex justify-content-center">
+          <p className="myProposals-head-title-name">ORDERS</p>
         </div>
         <div className="orderDetails">
           {userOrders.map((details, key) => (
