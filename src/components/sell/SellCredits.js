@@ -4,19 +4,46 @@ import { useAccount } from 'wagmi';
 import { ethers } from "ethers";
 import { companyInstance } from "../Contracts";
 import { useEffect } from "react";
+import  {ToastContainer,toast}  from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { Navigate, useNavigate } from "react-router-dom";
 
 function SellCredits() {
   const navigate = useNavigate();
   const [btnloading, setbtnloading] = useState(false)
-  const [credits, setCredits] = useState();
-  const [price, setPrice] = useState(); // define price value here
+  const [credits, setCredits] = useState("0");
+  const [price, setPrice] = useState("0"); // define price value here
   const [total, setTotal] = useState(0);
+  const [btndisable, setbtndisable] = useState(false);
   const { address } = useAccount();
 
   const sellingCredits = async () => {
     try {
+      if(credits===null || credits <= 0 || price <= 0 || price ===null){
+        toast.error('Enter the required details!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      }else{
       setbtnloading(true)
+      setbtndisable(true)
+
+      toast.info('Process is in Progress', {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        }); 
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -24,15 +51,16 @@ function SellCredits() {
         if (!provider) {
           console.log("Metamask is not installed, please install!");
         }
-        const con = await companyInstance();
+        const con = await companyInstance()
         const sellCreditsUser = await con.createOrder(credits, price, address)
-        // console.log(verifyUser)
+        setbtndisable(false)
         setbtnloading(false)
         navigate("/user-dashboard")
         return sellCreditsUser;
-
       }
+    }
     } catch (error) {
+      setbtndisable(false)
       console.log(error);
       setbtnloading(true)
     }
@@ -92,7 +120,7 @@ function SellCredits() {
               />
             </div>
 
-            <button className=" rounded-pill buy-button mt-4 mt-sm-5" onClick={() => sellingCredits()}>
+            <button className=" rounded-pill buy-button mt-4 mt-sm-5" disabled={btndisable} onClick={() => sellingCredits()}>
             {btnloading?(
                     <svg
                     className="animate-spin button-spin-svg-pic"
@@ -108,6 +136,7 @@ function SellCredits() {
                   </svg>
                   ):(<>SELL</>)}
             </button>
+            <ToastContainer/>
           </div>
         </div>
       </div>
