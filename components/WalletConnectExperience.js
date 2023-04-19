@@ -22,13 +22,15 @@ export default function WalletConnectExperience() {
   connector = useWalletConnect();
 
   const connectWallet = async () => {
-    console.log(connector.accounts[0]);
-    return await connector.connect();
+    console.log("connectWallet connector: ",connector.accounts[0]);
+    let connectAddress = await connector.connect();
+    return connectAddress;
   };
 
   const killSession = async () => {
-    console.log(connector.accounts[0]);
-    return await connector.killSession();
+    console.log("killSession connector: ",connector.accounts[0]);
+    let disconnectAddress = await connector.killSession();
+    return disconnectAddress;
   };
 
   return (

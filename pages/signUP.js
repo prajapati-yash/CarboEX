@@ -17,6 +17,7 @@ import * as ImagePicker from "expo-image-picker";
 import { companyInstance } from "../components/contract";
 import { useNavigation } from "@react-navigation/native";
 import ProfileDetails from "./profileDetails";
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
 
 const select_country = [
   { label: "United States", value: "United States" },
@@ -26,8 +27,12 @@ const select_country = [
   { label: "Other", value: "Other" },
 ];
 
+let imageUri = "";
+
 export default function SignUP() {
   const navigation = useNavigation();
+  const { connector } = useWalletConnect();
+  console.log("connector export: ", connector);
 
   const [countryIsFocus, countrySetIsFocus] = useState(false);
   const [countryValue, countrySetValue] = useState(null);
@@ -55,16 +60,21 @@ export default function SignUP() {
       quality: 1,
     });
 
+    imageUri = result.assets[0].uri;
+    console.log("pickImage uri: ", imageUri);
+
     if (!result.canceled) {
-      setImage(result.uri);
-      uploadImage(result.uri);
+      setImage(result.assets[0].uri);
+      // uploadImage();
     }
   };
 
-  const uploadImage = async (uri) => {
+  const uploadImage = async () => {
+    console.log("Uploading Image");
+    console.log("UploadImage uri:", imageUri);
     let formData = new FormData();
     formData.append("file", {
-      uri,
+      uri: imageUri,
       name: "image.jpg",
       type: "image/jpeg",
     });
@@ -72,11 +82,7 @@ export default function SignUP() {
     let response = await fetch("https://api.web3.storage/upload", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${
-          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-            .eyJzdWIiOiJkaWQ6ZXRocjoweDkxMzhEYjc0ZDliOTIxOWRFMjc0ZEI1ZDRmNTQ0YjYwOUUyNjE0NDYiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE3MjcwOTI1NjYsIm5hbWUiOiJDYXJib0V4In0
-            .S8bfLoh - AAzgMW9UXfU21OgdMxNgCwv7Z8ugact3_FY
-        }`,
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkxMzhEYjc0ZDliOTIxOWRFMjc0ZEI1ZDRmNTQ0YjYwOUUyNjE0NDYiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE4MjI3NTk5MTgsIm5hbWUiOiJDYXJib0V4In0.yq_pJuHSPlUB6fsecby-JnZwy9RDtjoT1sfPwJBikEA"}`,
         "Content-Type": "multipart/form-data",
       },
       body: formData,
@@ -84,15 +90,17 @@ export default function SignUP() {
 
     let data = await response.json();
     console.log("data.cids : ", data.cid);
+    let cids = data.cid;
+    return cids;
   };
 
   const createUserAccount = async () => {
     try {
-      // setbtnloading(true);
-      const cids = data.cid;
+      console.log("createUserAccount imageUri: ", imageUri);
+      let cids = await uploadImage();
       console.log("cids createUserAccount: ", cids);
-      const { connector } = useWalletConnect();
 
+      console.log("connector: ", connector);
       if (!connector.connected) {
         console.log("WalletConnect not connected");
         return;
@@ -224,13 +232,20 @@ export default function SignUP() {
                 }}
               >
                 {image && (
-                  <Image
-                    source={{ uri: image }}
-                    style={{ width: 200, height: 200 }}
-                  />
+                  <View>
+                    <Image
+                      source={{ uri: image }}
+                      style={{ width: 100, height: 100, marginBottom: 5 }}
+                    />
+                  </View>
                 )}
-                <Button title="Pick an image" onPress={pickImage} />
+                <Button
+                  style={{ flex: 1 }}
+                  title="Pick an image"
+                  onPress={pickImage}
+                />
               </View>
+
               <Button
                 title="Create"
                 loading={false}
@@ -247,6 +262,7 @@ export default function SignUP() {
                   width: responsiveWidth(50),
                   marginHorizontal: "12%",
                   marginTop: "4%",
+                  // marginBottom: "10%",
                 }}
                 onPress={createUserAccount}
               />
