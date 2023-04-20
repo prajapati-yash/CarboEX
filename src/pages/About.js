@@ -1,7 +1,7 @@
 import React from 'react'
 import AboutHero from '../components/about/AboutHero'
 import AboutMission from '../components/about/AboutMission'
-import AboutTeam from '../components/about/AboutTeam'
+// import AboutTeam from '../components/about/AboutTeam'
 import AboutVision from '../components/about/AboutVision'
 
 function About() {
@@ -11,7 +11,7 @@ function About() {
       <AboutHero/>
       <AboutVision/>
       <AboutMission/>
-      <AboutTeam/>
+      {/* <AboutTeam/> */}
    
     </div>
   )
