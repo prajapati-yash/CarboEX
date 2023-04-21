@@ -14,10 +14,11 @@ import styles from "../style/signUPStyle";
 import { Button, Stack } from "@rneui/themed";
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import * as ImagePicker from "expo-image-picker";
-import { companyInstance } from "../components/contract";
+import { COMPANY_ADDRESS, companyInstance } from "../components/contract";
 import { useNavigation } from "@react-navigation/native";
 import ProfileDetails from "./profileDetails";
 import { connector } from "../components/WalletConnectExperience";
+import Web3 from "web3";
 
 const select_country = [
   { label: "United States", value: "United States" },
@@ -27,6 +28,7 @@ const select_country = [
   { label: "Other", value: "Other" },
 ];
 
+let imageUri = "";
 export default function SignUP() {      
   const navigation = useNavigation();
 
@@ -46,17 +48,19 @@ export default function SignUP() {
         quality: 1,
       });
 
+      imageUri = result.assets[0].uri;
+    console.log("pickImage uri: ", imageUri);
+
       if (!result.canceled) {
         setImage(result.assets[0].uri);
-        uploadImage(result.assets[0].uri);
       }
     };
 
-    const uploadImage = async (uri) => {
+    const uploadImage = async () => {
       console.log("Uploading Image");
       let formData = new FormData();
       formData.append("file", {
-        uri:uri,
+        uri:imageUri,
         name: "image.jpg",
         type: "image/jpeg",
       });
@@ -79,34 +83,59 @@ export default function SignUP() {
 
     const createUserAccount = async () => {
       try {
-        if (connector.accounts[0] == null) {
-          console.log("WalletConnect not connected");
-          return;
-        }
-
         console.log(connector.accounts[0]);
         const cids = await uploadImage();
         console.log("cids createUserAccount: ", cids);
+        // console.log(connector.connected);
 
+        if (connector.connected) {
+          console.log("Connector---",connector);
+          const provider = new Web3('https://pre-rpc.bt.io/');
+          // const signer = provider.eth.accounts.signTransaction();
+          // console.log("Connected");
+
+        console.log("Company Instance"); 
         const con = await companyInstance();
         console.log("con cids ", cids);
-        const tx = await con.setUser(
+        const txObject = await con.methods.setUser(
           firstName,
           username,
           companyName,
           email,
           countryValue,
           cids
-        );
+        ).encodeABI();
 
-        console.log("tx: ", tx);
-        await tx.wait();
+        const gasPrice = await provider.eth.getGasPrice();
+        const gasLimit = 3000000;
+        const recipient = COMPANY_ADDRESS; // replace with recipient address
+        const nonce = await provider.eth.getTransactionCount(connector.accounts[0], 'pending');
+        const txOptions = {
+          gasPrice,
+          gasLimit,
+          from:connector.accounts[0],
+          to: recipient,
+          data: txObject,
+          nonce,
+        };
+
+        const signTx = await connector.signTransaction(txOptions);
+        console.log(signTx);
+        // console.log("tx: ", tx);
+        // await tx.send({
+        //   'from': connector.accounts[0]
+        // })
+        // const signer = await provider.eth.accounts.signTransaction(tx);
+        
+        // console.log(signer);
+        // await tx.wait();
         // setbtnloading(false);
         navigation.navigate(ProfileDetails);
-        console.log("con: ", con);
-      } catch (error) {
+        // console.log("con: ", con);
+      } 
+    }
+    catch (error) {
         console.log("error: ", error);
-        // setbtnloading(false);
       }
     };
 
@@ -164,7 +193,6 @@ export default function SignUP() {
                   styles.dropdownStyle,
                   countryIsFocus && {
                     borderColor: "white",
-                    // placeholderTextColor: "white",
                   },
                 ]}
                 data={select_country}

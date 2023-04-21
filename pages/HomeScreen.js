@@ -111,13 +111,9 @@ export default function HomeScreen() {
       }
 
       let con = await companyInstance();
-      // console.log("Con:",con);
       console.log("Wallet Address",connector.accounts[0]);
-      // console.log("Is Companies Added:",con.iscompaniesAdd());
-      // con.options.from = connector.accounts[0]
-      // let verifyTx = await con.methods.iscompaniesAdd(connector.accounts[0]).call();
-      
-      console.log("VerifyTx: ",verifyTx);
+      let verifyTx = await con.methods.iscompaniesAdd(connector.accounts[0]).call();
+      console.log("verifyTx: ", verifyTx);    
       return verifyTx;}
       catch(error){
         console.log("Error:",error);
@@ -143,188 +139,188 @@ export default function HomeScreen() {
     setActiveSections(sections);
   };
 
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.centerView}
-      >
-        <View style={{ alignItems: "center" }}>
-          <ImageBackground
-            style={styles.image1}
-            borderRadius={50}
-            source={require("../assets/homeScreenAssets/BG1.png")}
-          >
-            <View>
-              <Text style={styles.text}>
-                Transforming carbon credits trading through blockchain
-                technology
-              </Text>
-            </View>
+return (
+  <View style={styles.container}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.centerView}
+    >
+      <View style={{ alignItems: "center" }}>
+        <ImageBackground
+          style={styles.image1}
+          borderRadius={50}
+          source={require("../assets/homeScreenAssets/BG1.png")}
+        >
+          <View>
+            <Text style={styles.text}>
+              Transforming carbon credits trading through blockchain
+              technology
+            </Text>
+          </View>
 
-            <View transparent animationType="fade" hardwareAccelerated>
-              <View style={styles.modal_centered_view}>
-                <View style={styles.modal_view}>
-                  <View style={styles.modal_body}>
-                    <Text
-                      style={[
-                        styles.modal_text,
-                        {
-                          fontSize: responsiveFontSize(2.2),
-                          fontWeight: "bold",
-                        },
-                      ]}
-                    >
-                      Welcome to CarboEx.{" "}
-                    </Text>
-                    <Text
-                      style={[
-                        styles.modal_text,
-                        { marginTop: "2%", marginBottom: "2%" },
-                      ]}
-                    >
-                      The Carbon Trading Platform that facilitates carbon credit
-                      trading for a sustainable future.
-                    </Text>
-                    <Text style={[styles.modal_text, { fontWeight: 600 }]}>
-                      Powered by blockchain technology.
-                    </Text>
-                  </View>
+          <View transparent animationType="fade" hardwareAccelerated>
+            <View style={styles.modal_centered_view}>
+              <View style={styles.modal_view}>
+                <View style={styles.modal_body}>
+                  <Text
+                    style={[
+                      styles.modal_text,
+                      {
+                        fontSize: responsiveFontSize(2.2),
+                        fontWeight: "bold",
+                      },
+                    ]}
+                  >
+                    Welcome to CarboEx.{" "}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.modal_text,
+                      { marginTop: "2%", marginBottom: "2%" },
+                    ]}
+                  >
+                    The Carbon Trading Platform that facilitates carbon credit
+                    trading for a sustainable future.
+                  </Text>
+                  <Text style={[styles.modal_text, { fontWeight: 600 }]}>
+                    Powered by blockchain technology.
+                  </Text>
+                </View>
 
-                  <View
-                    style={{
-                      flex: 1,
-                      borderBottomRightRadius: 35,
-                      borderBottomLeftRadius: 35,
-                      overflow: "hidden",
-                      width: "100%",
+                <View
+                  style={{
+                    flex: 1,
+                    borderBottomRightRadius: 35,
+                    borderBottomLeftRadius: 35,
+                    overflow: "hidden",
+                    width: "100%",
+                  }}
+                >
+                  <Pressable
+                    style={styles.modal_button}
+                    onPress={SignupWithWallet}
+                    android_ripple={{
+                      color: "#3C84AB",
                     }}
                   >
-                    <Pressable
-                      style={styles.modal_button}
-                      onPress={SignupWithWallet}
-                      android_ripple={{
-                        color: "#3C84AB",
-                      }}
-                    >
-                      <Text style={styles.modal_button_text}>Get Started</Text>
-                    </Pressable>
-                  </View>
+                    <Text style={styles.modal_button_text}>Get Started</Text>
+                  </Pressable>
                 </View>
               </View>
             </View>
-          </ImageBackground>
+          </View>
+        </ImageBackground>
 
-          <ImageBackground
-            style={styles.image2}
-            borderBottomLeftRadius={70}
-            borderBottomRightRadius={70}
-            source={require("../assets/homeScreenAssets/BG2.png")}
-          >
-            <View>
-              <View style={styles.section2_title}>
-                <Text style={styles.section2_text}>ABOUT PROJECT</Text>
+        <ImageBackground
+          style={styles.image2}
+          borderBottomLeftRadius={70}
+          borderBottomRightRadius={70}
+          source={require("../assets/homeScreenAssets/BG2.png")}
+        >
+          <View>
+            <View style={styles.section2_title}>
+              <Text style={styles.section2_text}>ABOUT PROJECT</Text>
+            </View>
+
+            <View style={styles.section2_description}>
+              <View style={styles.section2_description_view1}>
+                <Text style={styles.section2_descriptionText}>
+                  The Carbon Trading Platform Using Blockchain is a
+                  decentralised application that aims to facilitate carbon
+                  credit trading by creating an unchangeable and tamper-proof
+                  record of transactions. It will enable buyers and sellers of
+                  carbon credits to conduct safe, open transactions.
+                </Text>
               </View>
 
-              <View style={styles.section2_description}>
-                <View style={styles.section2_description_view1}>
-                  <Text style={styles.section2_descriptionText}>
-                    The Carbon Trading Platform Using Blockchain is a
-                    decentralised application that aims to facilitate carbon
-                    credit trading by creating an unchangeable and tamper-proof
-                    record of transactions. It will enable buyers and sellers of
-                    carbon credits to conduct safe, open transactions.
-                  </Text>
-                </View>
+              <View style={styles.section2_description_view1}>
+                <Text style={styles.section2_descriptionText}>
+                  The platform will automate the exchange of carbon credits by
+                  using smart contracts, reducing transaction cost and
+                  providing an incentive mechanism for companies to reduce
+                  their emissions. If carbon credits expire before the
+                  allotted time, a penalty must be paid before another batch
+                  can be purchased.
+                </Text>
+              </View>
 
-                <View style={styles.section2_description_view1}>
-                  <Text style={styles.section2_descriptionText}>
-                    The platform will automate the exchange of carbon credits by
-                    using smart contracts, reducing transaction cost and
-                    providing an incentive mechanism for companies to reduce
-                    their emissions. If carbon credits expire before the
-                    allotted time, a penalty must be paid before another batch
-                    can be purchased.
-                  </Text>
-                </View>
-
-                <View style={styles.section2_description_view1}>
-                  <Text style={styles.section2_descriptionText}>
-                    The Carbon Trading Platform Using Blockchain aims to support
-                    sustainable development by creating a more effective and
-                    transparent carbon credit market, motivating businesses to
-                    reduce their emissions, and reducing climate change's
-                    adverse consequences.
-                  </Text>
-                </View>
+              <View style={styles.section2_description_view1}>
+                <Text style={styles.section2_descriptionText}>
+                  The Carbon Trading Platform Using Blockchain aims to support
+                  sustainable development by creating a more effective and
+                  transparent carbon credit market, motivating businesses to
+                  reduce their emissions, and reducing climate change's
+                  adverse consequences.
+                </Text>
               </View>
             </View>
-          </ImageBackground>
+          </View>
+        </ImageBackground>
 
-          <ImageBackground
-            style={styles.image3}
-            source={require("../assets/homeScreenAssets/BG3.png")}
-          >
-            <View>
-              <View style={styles.section3_title}>
-                <Text style={styles.section3_text}>Why Our Platform?</Text>
+        <ImageBackground
+          style={styles.image3}
+          source={require("../assets/homeScreenAssets/BG3.png")}
+        >
+          <View>
+            <View style={styles.section3_title}>
+              <Text style={styles.section3_text}>Why Our Platform?</Text>
+            </View>
+
+            <View style={styles.centerView}>
+              <View style={styles.section3_view1}>
+                <Text style={styles.section3_subtitle}>SUSTAINABLILITY</Text>
+                <View style={styles.section3_underline}></View>
+                <Text style={styles.section3_subtext}>
+                  Ensures a balance between economic growth, environmental
+                  care and social well-being
+                </Text>
               </View>
-
-              <View style={styles.centerView}>
-                <View style={styles.section3_view1}>
-                  <Text style={styles.section3_subtitle}>SUSTAINABLILITY</Text>
-                  <View style={styles.section3_underline}></View>
-                  <Text style={styles.section3_subtext}>
-                    Ensures a balance between economic growth, environmental
-                    care and social well-being
-                  </Text>
-                </View>
-                <View style={styles.section3_view1}>
-                  <Text style={styles.section3_subtitle}>TAMPER-PROOF</Text>
-                  <View style={styles.section3_underline}></View>
-                  <Text style={styles.section3_subtext}>
-                    Protection against unauthorized entry through cryptographic
-                    chains
-                  </Text>
-                </View>
-                <View style={styles.section3_view1}>
-                  <Text style={styles.section3_subtitle}>TRANSPARENCY</Text>
-                  <View style={styles.section3_underline}></View>
-                  <Text style={styles.section3_subtext}>
-                    Provide open and accessible information about the
-                    transactions and activities
-                  </Text>
-                </View>
+              <View style={styles.section3_view1}>
+                <Text style={styles.section3_subtitle}>TAMPER-PROOF</Text>
+                <View style={styles.section3_underline}></View>
+                <Text style={styles.section3_subtext}>
+                  Protection against unauthorized entry through cryptographic
+                  chains
+                </Text>
+              </View>
+              <View style={styles.section3_view1}>
+                <Text style={styles.section3_subtitle}>TRANSPARENCY</Text>
+                <View style={styles.section3_underline}></View>
+                <Text style={styles.section3_subtext}>
+                  Provide open and accessible information about the
+                  transactions and activities
+                </Text>
               </View>
             </View>
-          </ImageBackground>
+          </View>
+        </ImageBackground>
 
-          <ImageBackground
-            style={styles.image4}
-            borderTopLeftRadius={75}
-            borderTopRightRadius={75}
-            source={require("../assets/homeScreenAssets/BG4.png")}
-          >
-            <View>
-              <View style={styles.section4_title}>
-                <Text style={styles.section4_text}>FAQs</Text>
-              </View>
-              <View style={styles.section4_description}>
-                <View style={{ flex: 1 }}>
-                  <Accordion
-                    sections={faqItems}
-                    activeSections={activeSections}
-                    renderHeader={renderFaqHeader}
-                    renderContent={renderFaqContent}
-                    onChange={handleAccordionSectionToggle}
-                    touchableComponent={customTouchableComponent}
-                  />
-                </View>
+        <ImageBackground
+          style={styles.image4}
+          borderTopLeftRadius={75}
+          borderTopRightRadius={75}
+          source={require("../assets/homeScreenAssets/BG4.png")}
+        >
+          <View>
+            <View style={styles.section4_title}>
+              <Text style={styles.section4_text}>FAQs</Text>
+            </View>
+            <View style={styles.section4_description}>
+              <View style={{ flex: 1 }}>
+                <Accordion
+                  sections={faqItems}
+                  activeSections={activeSections}
+                  renderHeader={renderFaqHeader}
+                  renderContent={renderFaqContent}
+                  onChange={handleAccordionSectionToggle}
+                  touchableComponent={customTouchableComponent}
+                />
               </View>
             </View>
-          </ImageBackground>
-        </View>
-      </ScrollView>
-    </View>
-  );
+          </View>
+        </ImageBackground>
+      </View>
+    </ScrollView>
+  </View>
+);
 }

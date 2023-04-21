@@ -74,7 +74,7 @@ export function DrawerContent(props) {
           ) : (
             <>
               <View style={[styles.userInfoSection, { flexDirection: "row" }]}>
-                <WalletConnectProvider
+                {/* <WalletConnectProvider
                   redirectUrl={
                     Platform.OS === "web"
                       ? window.location.origin
@@ -86,9 +86,9 @@ export function DrawerContent(props) {
                 >
                   <View style={styles.container}>
                     <WalletConnectExperience />
-                    {/* <StatusBar style="auto" />  */}
+                    <StatusBar style="auto" />  
                   </View>
-                </WalletConnectProvider>
+                </WalletConnectProvider> */}
               </View>
               <Drawer.Section style={{ flex: 1, marginTop: 8 }}>
                 <DrawerItem

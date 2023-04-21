@@ -8,7 +8,7 @@ import Calculator from "./pages/Calculator";
 import HomeScreen from "./pages/HomeScreen";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, View,StatusBar } from "react-native";
 import Resources from "./pages/ResourcesScreen";
 import { TotalSum } from "./components/emissionCalculate";
 import BuyCredit from "./pages/BuyCredit";
@@ -22,11 +22,32 @@ import ProposalDashboard from "./pages/proposalDashboard";
 import BuyTokensDashboard from "./pages/buyTokensDashboard";
 import ProfileDetails from "./pages/profileDetails";
 
+import WalletConnectProvider from "@walletconnect/react-native-dapp";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import WalletConnectExperience from "./components/WalletConnectExperience";
+
+const SCHEME_FROM_APP_JSON = "walletconnect-example";
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
+      <WalletConnectProvider
+                  redirectUrl={
+                    Platform.OS === "web"
+                      ? window.location.origin
+                      : `${SCHEME_FROM_APP_JSON}://`
+                  }
+                  storageOptions={{
+                    asyncStorage: AsyncStorage,
+                  }}
+                >
+                  <View style={styles.container}>
+                    <WalletConnectExperience />
+                    <StatusBar style="auto" />  
+                  </View>
+                </WalletConnectProvider>
       <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen
           name="Home"
