@@ -1,42 +1,41 @@
 import companyABI from "../contracts/artifacts/Companyabi.json";
 import daoABI from "../contracts/artifacts/Daoabi.json";
 import ercTokenABI from "../contracts/artifacts/ErcTokenabi.json";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import Web3 from "web3";
+import { connector } from "./WalletConnectExperience";
 
-export const COMPANY_ADDRESS = "0x9BF762b943b0eBdC0413C4B4eE73407D659fe7dD";
-export const DAO_MEMBER_ADDRESS = "0xF526be3099084401103e9ef205f0D08749A0ce2B";
-export const ERC_TOKEN_ADDRESS = "0x211e127c03AbE404744EA333D45FBE4177c2EEF4";
+export const COMPANY_ADDRESS = "0x49c21E94DE2969F07a2a538D4031B41eD3798525";
+export const DAO_MEMBER_ADDRESS = "0x65ce02B7e5E6DdEF50Face194efA217572f2bb5b";
+export const ERC_TOKEN_ADDRESS = "0x0De38b8f9EdA78C0d8375A67C3cB359264cfbBA4";
+
+const ACCOUNT_PASSWORD = process.env.ACCOUNT_PASSWORD;
 
 export const companyInstance = async () => {
-  const { connector } = useWalletConnect();
+  // await Web3.eth.personal.unlockAccount(connector.accounts[0], ACCOUNT_PASSWORD);
 
   if (!connector.connected) {
     console.log("WalletConnect not connected");
     return;
   }
 
-  const provider = new Web3(connector.ethereum);
-  const accounts = await provider.eth.getAccounts();
+  // console.log("connector....", connector);s
+  const provider = new Web3("https://pre-rpc.bt.io/");
+  // console.log("Provider.....", provider);
+  // const accounts = await provider.getAccounts();
+  // console.log(accounts);
+  // const account = connector.accounts[0];
+
+  /* const transaction = {
+    from: connector.accounts[0],
+  };
+  const signer = provider.eth.accounts.signTransaction(transaction);
+  console.log("Signer------ ", signer); */
+
   const conn = new provider.eth.Contract(companyABI, COMPANY_ADDRESS, {
-    from: accounts[0],
+    from: connector.accounts[0],
+    to: COMPANY_ADDRESS,
   });
-  return conn;  
+  // console.log("Conn:",conn);
+
+  return conn;
 };
-
-/* export const daoInstance = async () => {
-  const { connector } = useWalletConnect();
-
-  if (!connector.connected) {
-    console.log("WalletConnect not connected");
-    return;
-  }
-};
-
-export const ercTokenInstance = async () => {
-  const { connector } = useWalletConnect();
-
-  if (!connector.connected) {
-    console.log("WalletConnect not connected");
-    return;
-  }
-}; */

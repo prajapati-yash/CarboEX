@@ -17,7 +17,7 @@ import * as ImagePicker from "expo-image-picker";
 import { companyInstance } from "../components/contract";
 import { useNavigation } from "@react-navigation/native";
 import ProfileDetails from "./profileDetails";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import { connector } from "../components/WalletConnectExperience";
 
 const select_country = [
   { label: "United States", value: "United States" },
@@ -31,8 +31,8 @@ let imageUri = "";
 
 export default function SignUP() {
   const navigation = useNavigation();
-  const { connector } = useWalletConnect();
-  console.log("connector export: ", connector);
+  // const { connector } = useWalletConnect();
+  // console.log("connector export: ", connector);
 
   const [countryIsFocus, countrySetIsFocus] = useState(false);
   const [countryValue, countrySetValue] = useState(null);
@@ -40,17 +40,7 @@ export default function SignUP() {
   const [username, setUsername] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
-  // const [logo, setLogo] = useState("");
   const [image, setImage] = useState(null);
-
-  const handleCreate = () => {
-    console.log("First Name", firstName);
-    console.log("User Name:", username);
-    console.log("Company Name:", companyName);
-    console.log("Email:", email);
-    console.log("Logo:", logo);
-    console.log("Country:", countryValue);
-  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -90,32 +80,27 @@ export default function SignUP() {
 
     let data = await response.json();
     console.log("data.cids : ", data.cid);
-    let cids = data.cid;
-    return cids;
+    return data.cid;
   };
 
   const createUserAccount = async () => {
     try {
-      console.log("createUserAccount imageUri: ", imageUri);
-      let cids = await uploadImage();
-      console.log("cids createUserAccount: ", cids);
-
-      console.log("connector: ", connector);
-      if (!connector.connected) {
+      if (connector.accounts[0] == null) {
         console.log("WalletConnect not connected");
         return;
       }
 
+      console.log(connector.accounts[0]);
+      console.log("createUserAccount imageUri: ", imageUri);
+      let cids = await uploadImage();
+      console.log("cids createUserAccount: ", cids);
+
       const con = await companyInstance();
       console.log("con cids ", cids);
-      const tx = await con.setUser(
-        firstName,
-        username,
-        countryValue,
-        email,
-        companyName,
-        cids
-      );
+      // console.log("con methods.. ", con.methods);
+      const tx = await con.methods
+        .setUser(firstName, username, companyName, email, countryValue, cids)
+        .send();
 
       console.log("tx: ", tx);
       await tx.wait();
@@ -207,42 +192,25 @@ export default function SignUP() {
                   countrySetIsFocus(false);
                 }}
               />
-              {/* <Button
-                id="uploadLogo"
-                title="Upload Logo"
-                loading={false}
-                loadingProps={{ size: "small", color: "white" }}
-                buttonStyle={{
-                  backgroundColor: "#1ba1b3",
-                  borderRadius: 10,
-                }}
-                titleStyle={{ fontWeight: "bold", fontSize: 17 }}
-                containerStyle={{
-                  width: responsiveWidth(50),
-                  marginVertical: "3%",
-                  marginHorizontal: "12%",
-                }}
-                onPress={this._pickDocument}
-              /> */}
               <View
                 style={{
-                  // flex: 1,
                   alignItems: "center",
-                  // justifyContent: "center",
                 }}
               >
                 {image && (
-                  <View>
-                    <Image
-                      source={{ uri: image }}
-                      style={{ width: 100, height: 100, marginBottom: 5 }}
-                    />
-                  </View>
+                  <Image
+                    source={{ uri: image }}
+                    style={{ width: 100, height: 100 }}
+                  />
                 )}
                 <Button
-                  style={{ flex: 1 }}
                   title="Pick an image"
                   onPress={pickImage}
+                  containerStyle={{
+                    width: responsiveWidth(50),
+                    marginHorizontal: "12%",
+                    marginTop: "4%",
+                  }}
                 />
               </View>
 
