@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   image1: {
     // flex: 1,
     width: responsiveWidth(90),
-    height: responsiveHeight(20),
+    height: responsiveHeight(18),
     opacity: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -104,22 +104,22 @@ const styles = StyleSheet.create({
   input_box: {
     height: responsiveHeight(4),
     width: responsiveWidth(72),
-    borderColor: "black",
-    borderWidth: 1,
+    backgroundColor: "#EFEFEF",
     marginTop: "3%",
     marginBottom: "3%",
     borderRadius: 8,
     paddingHorizontal: 8,
+    justifyContent: "center",
   },
   credit_input_box: {
     height: responsiveHeight(4),
     width: responsiveWidth(40),
-    borderColor: "black",
-    borderWidth: 1,
+    backgroundColor: "#EFEFEF",
     marginTop: "3%",
     marginBottom: "3%",
     borderRadius: 8,
     paddingHorizontal: 8,
+    justifyContent: "center",
   },
 
   /* my proposal screen */
@@ -151,7 +151,6 @@ const styles = StyleSheet.create({
     // marginTop: "5%",
     // marginBottom: "10%",
     // paddingTop: "5%",
-
   },
   view_proposal: {
     backgroundColor: "#EFEFEF",

@@ -25,7 +25,9 @@ const verifyUserAccount = async () => {
     console.log("Wallet Address", connector.accounts[0]);
     // console.log("Is Companies Added:",con.iscompaniesAdd());
     // con.options.from = connector.accounts[0]
-    let verifyTx = await con.methods.iscompaniesAdd(connector.accounts[0]).call();
+    let verifyTx = await con.methods
+      .iscompaniesAdd(connector.accounts[0])
+      .call();
 
     console.log("VerifyTx: ", verifyTx);
     return verifyTx;
@@ -47,13 +49,13 @@ export function DrawerContent(props) {
         }
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    verifyNavbar()
-  }, [isSignedIn])
+    verifyNavbar();
+  }, [isSignedIn]);
 
   return (
     <View style={{ flex: 1 }}>

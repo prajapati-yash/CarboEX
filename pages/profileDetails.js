@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -29,6 +29,7 @@ function EditProfileScreen() {
   const [logoImg, setLogoImg] = useState();
   const [companyName, setCompanyName] = useState();
   const [email, setEmail] = useState();
+  const [userName, setUserName] = useState();
 
   const getUserAccountDetails = async () => {
     try {
@@ -46,18 +47,21 @@ function EditProfileScreen() {
           .call();
 
         console.log(userData);
-        // console.log(userData[5])
-        // console.log(userData[5])
-        // setLogoImg(userData[5])
-        // setCompanyName(userData[3])
-        // setUserName(userData[1])
-        // setEmail(userData[2])
-        // return userData;
+        console.log(userData[5]);
+        setLogoImg(userData[5]);
+        setCompanyName(userData[3]);
+        setUserName(userData[1]);
+        setEmail(userData[2]);
+        return userData;
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    getUserAccountDetails();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -65,17 +69,18 @@ function EditProfileScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.centerView}
       >
+        <View>
+          <Text style={styles.main_view_text}>MY DASHBOARD</Text>
+        </View>
         <View style={styles.mainBox}>
           <View style={styles.boxBody}>
-            <View>
-              <Text>MY DASHBOARD</Text>
-            </View>
             <View style={styles.profileHeader}>
               <ImageBackground
                 style={styles.image1}
                 borderTopRightRadius={36}
                 borderTopLeftRadius={36}
-                source={require("../assets/calculatorAssets/HomeBg.jpg")}
+                backgroundColor="#5B9C7A"
+                source={{uri : "https://ipfs.io/ipfs/"+logoImg }}
               >
                 {/* <Text style={styles.header_text}>Traditional Energy</Text> */}
               </ImageBackground>
@@ -84,17 +89,23 @@ function EditProfileScreen() {
             <View style={styles.profileBody}>
               <View>
                 <Text style={styles.input_text}>Company Name</Text>
-                <Text style={styles.input_box}></Text>
+                <View style={styles.input_box}>
+                  <Text style={{}}>{companyName}</Text>
+                </View>
               </View>
 
               <View>
                 <Text style={styles.input_text}>Email</Text>
-                <Text style={styles.input_box}>{email}</Text>
+                <View style={styles.input_box}>
+                  <Text style={{}}>{email}</Text>
+                </View>
               </View>
 
               <View>
-                <Text style={styles.input_text}>Wallet Address</Text>
-                <Text style={styles.input_box} />
+                <Text style={styles.input_text}>Username</Text>
+                <View style={styles.input_box}>
+                  <Text style={{}}>{userName}</Text>
+                </View>
               </View>
 
               {/* <Button
@@ -130,7 +141,9 @@ function EditProfileScreen() {
               >
                 <View style={{ flex: 1 }}>
                   <Text style={styles.input_text}>Credits Available</Text>
-                  <Text style={styles.credit_input_box} />
+                  <View style={styles.credit_input_box}>
+                    <Text>0</Text>
+                  </View>
                 </View>
 
                 <Button
@@ -200,7 +213,7 @@ function MyProposalScreen() {
         contentContainerStyle={styles.centerView}
       >
         <View style={styles.main_view}>
-          <Text style={styles.main_view_text}>My Proposal</Text>
+          <Text style={styles.main_view_text}>MY PROPOSALS</Text>
 
           <View style={styles.view_details}>
             <View style={styles.view_proposal_data}>
@@ -320,7 +333,7 @@ function MyOrdersScreen() {
         contentContainerStyle={styles.centerView}
       >
         <View style={styles.main_view}>
-          <Text style={styles.main_view_text}>My orders</Text>
+          <Text style={styles.main_view_text}>MY ORDERS</Text>
 
           <View style={styles.view_details}>
             <View style={styles.view_proposal_data}>
