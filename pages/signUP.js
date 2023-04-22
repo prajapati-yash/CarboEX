@@ -31,8 +31,6 @@ const select_country = [
 let imageUri = "";
 export default function SignUP() {
   const navigation = useNavigation();
-  // const { connector } = useWalletConnect();
-  // console.log("connector export: ", connector);
 
   const [countryIsFocus, countrySetIsFocus] = useState(false);
   const [countryValue, countrySetValue] = useState(null);
@@ -124,15 +122,6 @@ export default function SignUP() {
         const finalTx = await signTx;
 
         console.log(finalTx);
-        // console.log("tx: ", tx);
-        // await tx.send({
-        //   'from': connector.accounts[0]
-        // })
-        // const signer = await provider.eth.accounts.signTransaction(tx);
-
-        // console.log(signer);
-        // await tx.wait();
-        // setbtnloading(false);
         navigation.navigate(ProfileDetails);
         // console.log("con: ", con);
       }

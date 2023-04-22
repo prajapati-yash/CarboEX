@@ -46,13 +46,13 @@ function EditProfileScreen() {
           .call();
 
         console.log(userData);
-        // console.log(userData[5])
-        // console.log(userData[5])
-        // setLogoImg(userData[5])
-        // setCompanyName(userData[3])
-        // setUserName(userData[1])
-        // setEmail(userData[2])
-        // return userData;
+        console.log(userData[5])
+        console.log(userData[5])
+        setLogoImg(userData[5])
+        setCompanyName(userData[3])
+        setUserName(userData[1])
+        setEmail(userData[2])
+        return userData;
       }
     } catch (error) {
       console.log(error);
