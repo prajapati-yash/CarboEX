@@ -28,7 +28,7 @@ function AboutTeam() {
       id: 4,
       src: 'assets/about/teamImages/abhishek.png',
       alt: 'GodFather097',
-      name:'Abhishek Rajput',
+      name: 'GodFather097',
       role:'App Developer'
     },
     {
