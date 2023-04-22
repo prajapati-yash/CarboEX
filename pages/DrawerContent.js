@@ -46,11 +46,11 @@ export function DrawerContent(props) {
     } catch (error) {
       console.log("Hello----",error)
     }
-  }
+  };
 
   useEffect(() => {
-    verifyNavbar()
-  }, [isSignedIn])
+    verifyNavbar();
+  }, [isSignedIn]);
 
   return (
     <View style={{ flex: 1 }}>
