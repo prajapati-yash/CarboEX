@@ -9,60 +9,34 @@ export const DAO_MEMBER_ADDRESS = "0x65ce02B7e5E6DdEF50Face194efA217572f2bb5b";
 export const ERC_TOKEN_ADDRESS = "0x0De38b8f9EdA78C0d8375A67C3cB359264cfbBA4";
 
 export const companyInstance = async () => {
-  // await Web3.eth.personal.unlockAccount(connector.accounts[0], ACCOUNT_PASSWORD);
 
   if (!connector.connected) {
     console.log("WalletConnect not connected");
     return;
   }
-
-  // let txObj = {
-  //   to: COMPANY_ADDRESS,
-  //   // data: data,
-  //   from: connector.accounts[0],
-  // };
-
-  // console.log("connector....", connector);
   const provider = new Web3('https://pre-rpc.bt.io/');
-  // console.log("Provider.....", provider);
-  // const signer = provider.eth.accounts.signTransaction();
-  // console.log("Signer------------",signer);
   const conn = new provider.eth.Contract(companyABI, COMPANY_ADDRESS);
-  // console.log("Conn:",conn);
   return conn;
 };
 
-// export const daoInstance = async () => {
+export const daoInstance = async () => {
 
-//   if (!connector.connected) {
-//     console.log("WalletConnect not connected");
-//     return;
-//   }
+  if (!connector.connected) {
+    console.log("WalletConnect not connected");
+    return;
+  }
+  const provider = new Web3('https://pre-rpc.bt.io/');
+  const conn = new provider.eth.Contract(daoABI, DAO_MEMBER_ADDRESS);
+  return conn;
+};
 
-//   // console.log("connector....", connector);
-//   const provider = new Web3('https://pre-rpc.bt.io/');
-//   console.log("Provider.....", provider);
-//   const signer = provider.eth.accounts.signTransaction();
-//   console.log("Signer------------",signer);
-//   const conn = new provider.eth.Contract(daoABI, DAO_MEMBER_ADDRESS,signer);
-//   console.log("Conn:",conn);
-//   return conn;
-// };
+export const ercTokenInstance = async () => {
 
-// export const ercTokenInstance = async () => {
-
-//   if (!connector.connected) {
-//     console.log("WalletConnect not connected");
-//     return;
-//   }
-
-//   // console.log("connector....", connector);
-//   const provider = new Web3('https://pre-rpc.bt.io/');
-//   console.log("Provider.....", provider);
-//   const signer = provider.eth.accounts.signTransaction();
-//   console.log("Signer------------",signer);
-//   const conn = new provider.eth.Contract(ercTokenABI, ERC_TOKEN_ADDRESS,signer);
-//   console.log("Conn:",conn);
-  
-//   return conn;
-// };
+  if (!connector.connected) {
+    console.log("WalletConnect not connected");
+    return;
+  }
+  const provider = new Web3('https://pre-rpc.bt.io/');
+  const conn = new provider.eth.Contract(ercTokenABI, ERC_TOKEN_ADDRESS);
+  return conn;
+};

@@ -14,8 +14,6 @@ const styles = StyleSheet.create({
   view_profile: {
     flex: 1,
     flexDirection: "row",
-    // justifyContent: "center",
-    // alignContent: "center",
   },
   view_logo: {
     margin: "3%",
