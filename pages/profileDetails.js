@@ -49,9 +49,9 @@ function EditProfileScreen() {
         console.log(userData);
         console.log(userData[5]);
         setLogoImg(userData[5]);
-        setCompanyName(userData[3]);
+        setCompanyName(userData[2]);
         setUserName(userData[1]);
-        setEmail(userData[2]);
+        setEmail(userData[3]);
         return userData;
       }
     } catch (error) {
