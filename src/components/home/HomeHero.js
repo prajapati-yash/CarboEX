@@ -77,7 +77,7 @@ function HomeHero() {
 
                             </div>
                             <div className='start-button-div py-sm-2 py-xl-4 '>
-                                <button className='btn btn-primary shadow-none border-0 start-button rounded-pill py-2'
+                                <button className='main-landing-button-gs btn btn-primary shadow-none border-0 start-button rounded-pill py-2'
                                     onClick={() => SignupWithWallet()} > GET STARTED</button>
 
                             </div>

@@ -6,7 +6,7 @@ import { ethers } from "ethers";
 
 function ProposalData() {
   const location = useLocation();
-  // console.log(location.state.data);
+  console.log(location.state.data);
   const proposal = location.state ? location.state.data : "";
   const [downvoteProposal, setDownvoteProposal] = useState();
   const [rejectbtnloading, setrejectbtnloading] = useState(false);
@@ -24,7 +24,8 @@ function ProposalData() {
         }
         const con = await daoInstance();
         const value = await con.getConfigs()
-        const upvoteProposal = await con.upvote(proposal[0], { value: String(value[1]) });
+        console.log(value[1]._hex)
+        const upvoteProposal = await con.upvote(proposal[0], { value: String(value[1]._hex) });
         // console.log(upvoteProposal)
         setapprovebtnloading(false);
       }
@@ -46,8 +47,8 @@ function ProposalData() {
         }
         const con = await daoInstance();
         const value = await con.getConfigs()
-        console.log(value[1])
-        const downvoteProposal = await con.downvote(proposal[0], { value: String(value[1]) });
+        console.log(value[1]._hex)
+        const downvoteProposal = await con.downvote(proposal[0], { value: String(value[1]._hex) });
         setrejectbtnloading(false);
         // console.log(downvoteProposal)
       }
@@ -57,6 +58,10 @@ function ProposalData() {
     }
   };
 
+  const data1 = () => {
+    console.log(proposal[0])
+    // console.log(value[1])
+  }
   const [showModal, setShowModal] = useState(false);
   const [enlargedImageSrc, setEnlargedImageSrc] = useState("0");
   const proposalValue = parseInt(proposal[4]._hex, 16);
@@ -122,14 +127,6 @@ function ProposalData() {
                               <div className="allproposalData">
                                 {proposalData.publicAddress}
                               </div>
-                              {/* <p className=" to-copy-pub-add">
-                                                            <div className='allproposalData'>
-                                                                {proposalData.publicAddress}</div> */}
-                              {/* <button class="copy-field-input-button" >
-                                                                <div class="copy-field-button-visible">
-                                                                    <i class="fa-solid fa-copy mr-1" style={{ color: '#2effaf' }} width="20px" height="20px" ></i>
-                                                                </div>
-                                                            </button> */}
                             </p>
                           </p>
                           <p className=" ">
@@ -191,7 +188,6 @@ function ProposalData() {
                         className="PData-reject-btn  rounded-pill"
                         onClick={daoProposalReject}
                       >
-
                         {rejectbtnloading ? (
                           <svg
                             className="animate-spin button-spin-svg-pic"
@@ -263,6 +259,7 @@ function ProposalData() {
             </div>
           </div>
         </div>
+        {/* <button onClick={data1}>click</button> */}
       </div>
     </>
   );

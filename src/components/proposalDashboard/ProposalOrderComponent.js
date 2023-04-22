@@ -83,13 +83,13 @@ function ProposalOrderComponent() {
                   </div>
 
                   <div className="">
-                    <span className="proposal-dash-label">Price Per Credit: </span>{" "}
-                    <p className="proposal-order-dash-output-Bg">{parseInt(details[2])}</p>
+                    <span className="proposal-dash-label">Price Per Credit (in ETH): </span>{" "}
+                    <p className="proposal-order-dash-output-Bg">{parseInt(details[2]) / Math.pow(10, 18)}</p>
                   </div>
-                  {/* <div className="">
-                    <span className="proposal-dash-label">Total Price:</span>{" "}
-                    <p className="proposal-order-dash-output-Bg">{details.totalPrice}</p>
-                  </div> */}
+                  <div className="">
+                    <span className="proposal-dash-label">Total Price (in ETH):</span>{" "}
+                    <p className="proposal-order-dash-output-Bg">{(parseInt(details[2]) / Math.pow(10, 18)) * parseInt(details[1])}</p>
+                  </div>
                   <div className="">
                     <span className="proposal-dash-label">Address:</span>{" "}
                     <p className="proposal-order-dash-output-Bg">{details[4]}</p>

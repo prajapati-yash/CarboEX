@@ -23,30 +23,6 @@ import MainProposalDashboard from "./pages/MainProposalDashboard";
 
 function App() {
 
-  // const [address, setAddress] = useState();
-  // async function getAddressFromMetaMask() {
-  //   // Check if MetaMask is installed
-  //   if (!window.ethereum) {
-  //     throw new Error("MetaMask is not installed");
-  //   }
-
-  //   // Request access to the user's accounts
-  //   await window.ethereum.request({ method: "eth_requestAccounts" });
-
-  //   // Create an Ethers.js provider with MetaMask as the signer
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-  //   // Get the user's address
-  //   const signer = provider.getSigner();
-  //   const address = await signer.getAddress();
-  //   // setAddress(address);
-  //   return address;
-  // }
-
-  // useEffect(() => {
-  //   getAddressFromMetaMask();
-  // }, []);
-
   return (
     <>
       {/* <h1 className="mt-5 text-center">Shree Ganeshay Namah</h1> */}

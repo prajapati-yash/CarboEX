@@ -17,7 +17,6 @@ function MemberLandingPage() {
   const [btndisable, setbtndisable] = useState(false);
 
 
-
   const ercTokenFunc = async () => {
     try {
       // toast.warn('Transaction is in Progress !', {

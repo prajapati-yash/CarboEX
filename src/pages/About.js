@@ -7,12 +7,12 @@ import AboutVision from '../components/about/AboutVision'
 function About() {
   return (
     <div>
-  
-      <AboutHero/>
-      <AboutVision/>
-      <AboutMission/>
-      <AboutTeam/>
-   
+
+      <AboutHero />
+      <AboutVision />
+      <AboutMission />
+      {/* <AboutTeam/> */}
+
     </div>
   )
 }

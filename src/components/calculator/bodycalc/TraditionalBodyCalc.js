@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import StoreCalculation from '../storecalculation/StoreCalculation';
 import '../../../styles/calculator/bodycalc/TraditionalBodyCalc.css';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-// import { useEffect } from 'react';
 
 
 function TraditionalBodyCalc({ onValueChange }) {
@@ -15,11 +13,11 @@ function TraditionalBodyCalc({ onValueChange }) {
         teCountry: null,
     });
 
-
     const apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMWU3MzVmMTgzYWJjYTkzMWIzMWM4NDNhMTFhZmYxMWM0MGQ4NzlmMDVjNzM0ZTMzMjQ5MzI5Y2MwZTkxYmUyMWYyNTVjZjIzYTRlMjBiNmYiLCJpYXQiOjE2ODE1NTg3OTUsIm5iZiI6MTY4MTU1ODc5NSwiZXhwIjoxNzEzMTgxMTk1LCJzdWIiOiI0MTM0Iiwic2NvcGVzIjpbXX0.ZVntnNAix7jwIa4YfecWb0IjI_KK4aDEp0ZTF1ihYxs-121_3lD2px_B3EVSW28hzHIjn3Ctz8gP-j9r_-f9gw";
+
     // console.log(apiKey)
     const teSubmitData = async () => {
-        // console.log(apiKey)
+        console.log(apiKey)
         const data = {
             consumption: teData.teConsumption,
             location: teData.teCountry,
@@ -51,10 +49,11 @@ function TraditionalBodyCalc({ onValueChange }) {
             const response = await axios.request(config);
             // console.log(response)
             const teResult = JSON.stringify(response.data.carbon);
+            alert(`Carbon Emission: ${teResult}`);
             console.log(teResult)
             const numbers = teResult.match(/\d+(\.\d+)?/g);
             const value = numbers[0];
-            alert(value)
+            // alert(value)
             setbtndisable(false)
             setbtnloading(false)
             onValueChange(value);

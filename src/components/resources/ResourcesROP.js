@@ -15,7 +15,7 @@ function ResourcesROP() {
                     </div>
 
                     <div className='d-lg-flex row pb-4 align-items-center resROP-about-text-content justify-content-around '>
-                        <NavLink className='resROPBtn' to="https://miro.com/app/board/uXjVPjG1soM=/" target='_blank'>
+                        <NavLink className='resROPBtn' to="https://miro.com/app/board/uXjVMUIpyYs=/" target='_blank'>
                             <img className='resROPImg' src="assets/resources/resourcesBtn.png" alt="Button" />
                             <div className='resROPBtn-text'>OUR RESEARCH</div>
                         </NavLink>

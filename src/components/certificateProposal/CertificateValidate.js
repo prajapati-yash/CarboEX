@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function CertificateValidate() {
   const navigate = useNavigate();
-  const [certificate, setCertificate] = useState("");
+  const [certificate, setCertificate] = useState(false);
   const [domain, setDomain] = useState();
   const [emission, setEmission] = useState("");
   const [proposal, setProposal] = useState("");
@@ -23,19 +23,12 @@ function CertificateValidate() {
   };
 
   // const handleDomainChange = (e) => {
-  //   if(e==="Emission"){
-  //     setDomain(true)
+  //   if (e === "Emission") {
+  //     setDomain(true);
+  //   } else if (e === "Offset") {
+  //     setDomain(false)
   //   }
-  //   setDomain(e.target.value);
   // };
-
-  const handleDomainChange = (e) => {
-    if (e === "Emission") {
-      setDomain(true);
-    } else if (e === "Offset") {
-      setDomain(false)
-    }
-  };
 
 
   const handleEmissionChange = (e) => {
@@ -123,6 +116,7 @@ function CertificateValidate() {
           console.log(value)
           console.log(proposal, cids, domain, emission)
           const CPTx = await conDAO.createProposal(proposal, cids, domain, emission, { value: String(value[0]) })
+          await CPTx.wait();
           setbtnloading(false)
           navigate("/dao-member-proposals")
           setbtndisable(false)
@@ -164,7 +158,7 @@ function CertificateValidate() {
                   if (e.target.value === "Emission") {
                     setDomain(true);
                   } else if (e.target.value === "Offset") {
-                    setDomain("")
+                    setDomain(false)
                   }
                 }}
                 defaultValue={domain}
@@ -220,7 +214,7 @@ function CertificateValidate() {
           </form>
         </div>
       </div>
-      <button onClick={handleSubmit}> Click to get true/false</button>
+      {/* <button onClick={handleSubmit}> Click to get true/false</button> */}
     </>
   );
 }

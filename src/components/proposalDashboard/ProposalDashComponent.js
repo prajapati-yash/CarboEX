@@ -25,7 +25,7 @@ function ProposalDashComponent() {
           console.log("Metamask is not installed, please install!");
         }
         const con = await daoInstance();
-        console.log(address)
+        // console.log(address)
         const getUserID = await con.getUserProposals(address);
         // console.log(getUserID.length)
         let arr = []
@@ -33,7 +33,7 @@ function ProposalDashComponent() {
           const getUserData = await con.getProposal(getUserID[i]._hex);
           arr.push(getUserData);
         }
-        console.log(arr)
+        // console.log(arr)
         setUserProp(arr);
         setAllData(getUserID);
         return getUserID
@@ -61,6 +61,7 @@ function ProposalDashComponent() {
         }
         const con = await daoInstance();
         const getResult = await con.getProposalResult(e);
+        await getResult.wait();
         window.location.reload();
         setbtnloading(false)
         return getResult
@@ -90,19 +91,26 @@ function ProposalDashComponent() {
   };
 
 
+  // function hexToTimestamp(hex) {
+  //   // const unixTimestamp = parseInt(hex, 16);
+  //   // const date = new Date(unixTimestamp * 1000);
+  //   // return date.toISOString().replace('T', ' ').replace('Z', '');
+  //   const unixTimestamp = parseInt(hex, 16);
+  //   const date = new Date(unixTimestamp * 1000);
+  //   const year = date.getUTCFullYear();
+  //   const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  //   const day = date.getUTCDate().toString().padStart(2, '0');
+  //   const hours = date.getUTCHours().toString().padStart(2, '0');
+  //   const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  //   const seconds = date.getUTCSeconds().toString().padStart(2, '0');
+  //   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  // }
+
   function hexToTimestamp(hex) {
-    // const unixTimestamp = parseInt(hex, 16);
-    // const date = new Date(unixTimestamp * 1000);
-    // return date.toISOString().replace('T', ' ').replace('Z', '');
     const unixTimestamp = parseInt(hex, 16);
     const date = new Date(unixTimestamp * 1000);
-    const year = date.getUTCFullYear();
-    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-    const day = date.getUTCDate().toString().padStart(2, '0');
-    const hours = date.getUTCHours().toString().padStart(2, '0');
-    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-    const seconds = date.getUTCSeconds().toString().padStart(2, '0');
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    const localDate = date.toLocaleString('en-US');
+    return localDate;
   }
 
   return (
@@ -150,7 +158,7 @@ function ProposalDashComponent() {
                   </div>
                   <div className="">
                     <span className="proposal-dash-label">Status: </span>{" "}
-                    <p className="proposal-dash-output-Bg">{details[10]}</p>
+                    <p className="proposal-dash-output-Bg">{details[10] ? details[10] : "pending"}</p>
                   </div>
                   <div className="">
                     <span className="proposal-dash-label">Proposed at:</span>{" "}
@@ -162,7 +170,7 @@ function ProposalDashComponent() {
                   </div>
                   <div className="">
                     <span className="proposal-dash-label">Result:</span>{" "}<br />
-                    <button className="btn btn-primary" style={{ width: "fit-content" }} key={key} onClick={() => getUserDataById(details[0], key)}>
+                    <button className="btn btn-primary" style={{ width: "30%" }} key={key} onClick={() => getUserDataById(details[0], key)}>
                       {btnloading && loadingIndex === key ? (
                         <svg
                           className="animate-spin button-spin-svg-pic"
@@ -173,7 +181,6 @@ function ProposalDashComponent() {
                           y="0px"
                           viewBox="0 0 100 100"
                           style={{ fill: "#fff", height: "30%", width: "30%" }}
-
                         >
                           <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
                         </svg>
