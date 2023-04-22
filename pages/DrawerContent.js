@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import "../global";
+
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, StatusBar } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Drawer } from "react-native-paper";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -7,11 +9,52 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import WalletConnectProvider from "@walletconnect/react-native-dapp";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import WalletConnectExperience from "../components/WalletConnectExperience";
+import { companyInstance } from "../components/contract";
+import { connector } from "../components/WalletConnectExperience";
 
 const SCHEME_FROM_APP_JSON = "walletconnect-example";
 
+const verifyUserAccount = async () => {
+  try {
+    if (!connector.connected) {
+      console.log("WalletConnect not connected");
+      return;
+    }
+
+    let con = await companyInstance();
+    console.log("Wallet Address", connector.accounts[0]);
+    // console.log("Is Companies Added:",con.iscompaniesAdd());
+    // con.options.from = connector.accounts[0]
+    let verifyTx = await con.methods.iscompaniesAdd(connector.accounts[0]).call();
+
+    console.log("VerifyTx: ", verifyTx);
+    return verifyTx;
+  } catch (error) {
+    console.log("Error:", error);
+  }
+};
+
 export function DrawerContent(props) {
   const [isSignedIn, setIsSignedIn] = useState(true);
+  const verifyNavbar = async () => {
+    try {
+      if (connector.accounts[0]) {
+        const tx = await verifyUserAccount();
+        if (tx) {
+          setIsSignedIn(true);
+        } else {
+          setIsSignedIn(false);
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    verifyNavbar()
+  }, [isSignedIn])
+
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -74,7 +117,7 @@ export function DrawerContent(props) {
           ) : (
             <>
               <View style={[styles.userInfoSection, { flexDirection: "row" }]}>
-                {/* <WalletConnectProvider
+                <WalletConnectProvider
                   redirectUrl={
                     Platform.OS === "web"
                       ? window.location.origin
@@ -86,9 +129,9 @@ export function DrawerContent(props) {
                 >
                   <View style={styles.container}>
                     <WalletConnectExperience />
-                    <StatusBar style="auto" />  
+                    <StatusBar style="auto" />
                   </View>
-                </WalletConnectProvider> */}
+                </WalletConnectProvider>
               </View>
               <Drawer.Section style={{ flex: 1, marginTop: 8 }}>
                 <DrawerItem

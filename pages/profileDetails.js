@@ -15,11 +15,50 @@ import {
   responsiveWidth,
 } from "react-native-responsive-dimensions";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Avatar } from "react-native-elements";
+import SellCredits from "./sellCredits";
+import { connector } from "../components/WalletConnectExperience";
+import Web3 from "web3";
+import { companyInstance } from "../components/contract";
 
 function EditProfileScreen() {
+  const navigation = useNavigation();
+
+  const [logoImg, setLogoImg] = useState();
+  const [companyName, setCompanyName] = useState();
+  const [email, setEmail] = useState();
+
+  const getUserAccountDetails = async () => {
+    try {
+      console.log("get user accounts....");
+      if (!connector.connected) {
+        console.log("WalletConnect not connected");
+        return;
+      }
+      if (connector.connected) {
+        const provider = new Web3("https://pre-rpc.bt.io/");
+
+        const con = await companyInstance();
+        const userData = await con.methods
+          .getUser(connector.accounts[0])
+          .call();
+
+        console.log(userData);
+        // console.log(userData[5])
+        // console.log(userData[5])
+        // setLogoImg(userData[5])
+        // setCompanyName(userData[3])
+        // setUserName(userData[1])
+        // setEmail(userData[2])
+        // return userData;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -28,6 +67,9 @@ function EditProfileScreen() {
       >
         <View style={styles.mainBox}>
           <View style={styles.boxBody}>
+            <View>
+              <Text>MY DASHBOARD</Text>
+            </View>
             <View style={styles.profileHeader}>
               <ImageBackground
                 style={styles.image1}
@@ -42,12 +84,12 @@ function EditProfileScreen() {
             <View style={styles.profileBody}>
               <View>
                 <Text style={styles.input_text}>Company Name</Text>
-                <Text style={styles.input_box} />
+                <Text style={styles.input_box}></Text>
               </View>
 
               <View>
                 <Text style={styles.input_text}>Email</Text>
-                <Text style={styles.input_box} />
+                <Text style={styles.input_box}>{email}</Text>
               </View>
 
               <View>
@@ -55,7 +97,7 @@ function EditProfileScreen() {
                 <Text style={styles.input_box} />
               </View>
 
-              <Button
+              {/* <Button
                 title="EDIT"
                 loading={false}
                 loadingProps={{ size: "small", color: "white" }}
@@ -75,7 +117,7 @@ function EditProfileScreen() {
                   marginBottom: "5%",
                 }}
                 onPress={() => console.log("aye")}
-              />
+              /> */}
 
               <View
                 style={{
@@ -94,18 +136,18 @@ function EditProfileScreen() {
                 <Button
                   title="SELL"
                   loading={false}
-                  type="outline"
+                  // type="outline"
                   loadingProps={{ size: "small", color: "white" }}
                   buttonStyle={{
-                    //   backgroundColor: "#5B9C7A",
+                    backgroundColor: "#5B9C7A",
                     borderRadius: 20,
-                    borderColor: "#5B9C7A",
-                    borderWidth: 2,
+                    // borderColor: "#5B9C7A",
+                    // borderWidth: 2,
                   }}
                   titleStyle={{
                     fontWeight: "bold",
                     fontSize: responsiveFontSize(1.7),
-                    color: "#5B9C7A",
+                    // color: "#5B9C7A",
                   }}
                   containerStyle={{
                     // marginHorizontal: "5%",
@@ -114,7 +156,7 @@ function EditProfileScreen() {
                     //   marginVertical: "2%",
                     marginTop: "4%",
                   }}
-                  onPress={() => console.log("aye")}
+                  onPress={() => navigation.navigate(SellCredits)}
                 />
               </View>
             </View>
@@ -344,39 +386,45 @@ const Tab = createBottomTabNavigator();
 
 export default function ProfileDetails() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      // screenOptions={{ headerShown: false }}
+      screenOptions={({ route }) => ({
+        ...{ headerShown: false },
+        tabBarIcon: ({ focused, size, color }) => {
+          let iconName;
+          if (route.name === "Profile") {
+            iconName = "user";
+            size = focused ? 25 : 20;
+            color = focused ? "#5B9C7A" : "#555";
+          } else if (route.name === "MyProposal") {
+            iconName = "list";
+            size = focused ? 25 : 20;
+            color = focused ? "#5B9C7A" : "#555";
+          } else if (route.name === "MyOrders") {
+            iconName = "shopping-cart";
+            size = focused ? 25 : 20;
+            color = focused ? "#5B9C7A" : "#555";
+          }
+          return <FontAwesome5 name={iconName} size={size} color={color} />;
+        },
+
+        tabBarActiveTintColor: "#5B9C7A",
+      })}
+    >
       <Tab.Screen
         name="Profile"
         component={EditProfileScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="user" size={20} color={"#5B9C7A"} />
-          ),
-          tabBarLabel: "Profile",
-          tabBarActiveTintColor: "#5B9C7A",
-        }}
+        options={{ tabBarLabel: "Profile" }}
       />
       <Tab.Screen
-        name="My proposal"
+        name="MyProposal"
         component={MyProposalScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="list" size={20} color={"#5B9C7A"} />
-          ),
-          tabBarLabel: "My Proposals",
-          tabBarActiveTintColor: "#5B9C7A",
-        }}
+        options={{ tabBarLabel: "My Proposals" }}
       />
       <Tab.Screen
-        name="My orders"
+        name="MyOrders"
         component={MyOrdersScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="shopping-cart" size={20} color={"#5B9C7A"} />
-          ),
-          tabBarLabel: "My Orders",
-          tabBarActiveTintColor: "#5B9C7A",
-        }}
+        options={{ tabBarLabel: "My Orders" }}
       />
     </Tab.Navigator>
   );

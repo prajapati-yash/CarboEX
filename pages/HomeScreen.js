@@ -103,31 +103,29 @@ export default function HomeScreen() {
   const [activeSections, setActiveSections] = useState([]);
 
   const verifyUserAccount = async () => {
-
-    try{
+    try {
       if (!connector.connected) {
         console.log("WalletConnect not connected");
         return;
       }
 
       let con = await companyInstance();
-      // console.log("Con:",con);
-      console.log("Wallet Address",connector.accounts[0]);
+      console.log("Wallet Address", connector.accounts[0]);
       // console.log("Is Companies Added:",con.iscompaniesAdd());
       // con.options.from = connector.accounts[0]
       let verifyTx = await con.methods.iscompaniesAdd(connector.accounts[0]).call();
-      console.log("verifyTx: ", verifyTx);    
-      return verifyTx;}
-      catch(error){
-        console.log("Error:",error);
-      }
-  };
 
+      console.log("VerifyTx: ", verifyTx);
+      return verifyTx;
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
 
   const SignupWithWallet = async () => {
     if (connector.accounts[0]) {
       const test = await verifyUserAccount();
-      console.log("Verified: ",test);
+      console.log("Verified: ", test);
       if (test) {
         navigation.navigate(ProfileDetails);
       } else {
@@ -174,7 +172,7 @@ export default function HomeScreen() {
                         },
                       ]}
                     >
-                      Welcome to CarboEx.
+                      Welcome to CarboEx.{" "}
                     </Text>
                     <Text
                       style={[
