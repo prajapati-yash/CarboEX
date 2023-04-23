@@ -257,8 +257,6 @@ export default function App() {
             ),
           }}
         />
-        <Drawer.Screen name="BuyCredit" component={BuyCredit} />
-        <Drawer.Screen name="SellCredit" component={SellCredit} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
