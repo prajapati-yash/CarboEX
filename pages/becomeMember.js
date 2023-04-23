@@ -1,11 +1,106 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { View, Text, ScrollView, TextInput } from "react-native";
 import styles from "../style/becomeMemberStyle";
 import { Button } from "@rneui/themed";
 import { responsiveFontSize, responsiveWidth } from "react-native-responsive-dimensions";
+import { daoInstance, ercTokenInstance, ERC_TOKEN_ADDRESS,DAO_MEMBER_ADDRESS } from "../components/contract";
+import ProposalDashboard from "./proposalDashboard";
+import { useNavigation } from "@react-navigation/native";
+import { connector } from "../components/WalletConnectExperience";
+import Web3 from "web3";
+import { log } from "react-native-reanimated";
 
 export default function BecomeMember() {
-  const [numberOfTokens, setNumberOfTokens] = useState(0);
+  const navigation = useNavigation();
+  const [numOfTokens, setNumOfTokens] = useState("0");
+  const [tknAmtResult, setTknAmtResult] = useState("");
+  const [tokenPrice, setTokenPrice] = useState("");
+
+  const ercTokenFunc = async () => {
+    try {
+      if (numOfTokens === null || numOfTokens <= 0) {
+       alert("'Oops! Number of Tokens must be greater than 0!'");
+      } else {
+
+        if (connector.connected) {
+          console.log("Connector---", connector);
+          const provider = new Web3("https://pre-rpc.bt.io/");
+
+          const conToken = await ercTokenInstance();
+          console.log("ConTokens",conToken);
+          const tokenPrice = await conToken.methods.gettokenPrice().call();
+          console.log("TokenPrice",tokenPrice);
+          const hexValue = tokenPrice._hex;
+          const decimalValue = parseInt(hexValue, 16);
+          setTokenPrice(decimalValue);
+          const conDAO = await daoInstance();
+          console.log("conDao",conDAO);
+          const addMemberFunc = await conDAO.methods.addmember(numOfTokens).call();
+
+          const gasPrice = await provider.eth.getGasPrice();
+          const gasLimit = 3000000;
+          const recipientDao = DAO_MEMBER_ADDRESS;
+          const nonce = await provider.eth.getTransactionCount(
+            connector.accounts[0],
+            "pending"
+          );
+       
+          const txOptionsDao = {
+            gasPrice,
+            gasLimit,
+            from: connector.accounts[0],
+            to: recipientDao,
+            data: numOfTokens,
+            nonce,
+          };
+
+          console.log("Number Of Tokens",numOfTokens);
+          console.log("After txOptions");
+          console.log("connector transaction", connector);
+          const signTxDao = await connector.sendTransaction(txOptionsDao);
+          const finalTxDao = await signTxDao;
+
+          navigation.navigate(ProposalDashboard);
+          console.log("Add Member Function",addMemberFunc);
+          console.log("Add Member Function Value",addMemberFunc.value);
+        }
+      }
+    } catch (error) {
+      console.log("ERCTokenFunction",error);
+    }
+  };
+
+  const getTokenPrice = async () => {
+    try {
+
+      if (connector.connected) {
+        console.log("Connector---", connector);
+       
+        const conToken = await ercTokenInstance();
+        const tokenPrice = await conToken.methods.gettokenPrice().call();
+        console.log("TokenPrice:",tokenPrice);
+        const hexValue = tokenPrice._hex;
+        console.log("HexValue",hexValue);
+        const decimalValue = parseInt(hexValue, 16);
+        console.log("Decimal Value",decimalValue);
+        setTokenPrice(decimalValue);
+      }
+    } catch (err) {
+      console.log("Hello---",err);
+    }
+  };
+
+  useEffect(() => {
+    setTknAmtResult(
+      numOfTokens ? (tokenPrice * numOfTokens) / Math.pow(10, 18) : "0"
+    );
+
+  }, [numOfTokens]);
+
+  useEffect(() => {
+    getTokenPrice();
+  }, []);
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -24,8 +119,9 @@ export default function BecomeMember() {
                 <TextInput
                   style={styles.input_box}
                   placeholder="Enter number of tokens"
-                  onChangeText={setNumberOfTokens}
-                ></TextInput>
+                  value={numOfTokens}
+                  onChangeText={(text) => setNumOfTokens(text)}
+                />
               </View>
             </View>
 
@@ -36,31 +132,11 @@ export default function BecomeMember() {
               <View>
                 <Text
                   style={styles.input_box}
-                  placeholder="Total amount will be displayed here."
-                >{numberOfTokens * 100}</Text>
+                >{tknAmtResult + " ETH"}</Text>
               </View>
             </View>
 
             <View style={styles.view_button}>
-            {/* <Button
-              title="Calculate Amount"
-              loading={false}
-              loadingProps={{ size: "small", color: "white" }}
-              buttonStyle={{
-                backgroundColor: "#C0E28E",
-                borderRadius: 15,
-              }}
-              titleStyle={{ fontWeight: "bold", fontSize: responsiveFontSize(2) }}
-              containerStyle={{
-                marginHorizontal: "15%",
-                // height: 50,
-                width: responsiveWidth(50),
-                marginVertical: "2%",
-                marginBottom: "5%",
-                
-              }}
-              onPress={() => console.log(numberOfTokens)}
-            /> */}
             <Button
               title="Buy Tokens"
               loading={false}
@@ -72,13 +148,12 @@ export default function BecomeMember() {
               titleStyle={{ fontWeight: "bold", fontSize: responsiveFontSize(2), }}
               containerStyle={{
                 marginHorizontal: "15%",
-                // height: 50,
                 width: responsiveWidth(50),
                 marginVertical: "2%",
                 marginBottom: "10%",
               }}
-              onPress={() => console.log("aye")}
-            />
+              onPress={ercTokenFunc}
+            ></Button>
             </View>
           </View>
         </View>
