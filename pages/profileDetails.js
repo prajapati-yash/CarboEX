@@ -80,7 +80,7 @@ function EditProfileScreen() {
                 borderTopRightRadius={36}
                 borderTopLeftRadius={36}
                 backgroundColor="#5B9C7A"
-                source={{uri : "https://ipfs.io/ipfs/"+logoImg }}
+                source={{ uri: "https://ipfs.io/ipfs/" + logoImg }}
               >
                 {/* <Text style={styles.header_text}>Traditional Energy</Text> */}
               </ImageBackground>

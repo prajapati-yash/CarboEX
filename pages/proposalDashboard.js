@@ -1,21 +1,37 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, ScrollView } from "react-native";
 import styles from "../style/proposalDashboardStyle";
 import { Button } from "@rneui/themed";
 import { responsiveWidth } from "react-native-responsive-dimensions";
+import { connector } from "../components/WalletConnectExperience";
+import Web3 from "web3";
+import { daoInstance } from "../components/contract";
 
 export default function ProposalDashboard() {
-  const proposalData = [
-    { name: "name1", description: "description1" },
-    { name: "name2", description: "description2" },
-    { name: "name3", description: "description3" },
-    { name: "name4", description: "description4" },
-    { name: "name5", description: "description5" },
-    { name: "name6", description: "description6" },
-    { name: "name7", description: "description7" },
-    { name: "name8", description: "description8" },
-    { name: "name8", description: "description8" },
-  ];
+  const [allProposalData, setAllProposalData] = useState([]);
+
+  const daoProposal = async () => {
+    try {
+      if (!connector.connected) {
+        console.log("WalletConnect not connected");
+        return;
+      }
+      if (connector.connected) {
+        const provider = new Web3("https://pre-rpc.bt.io/");
+
+        const con = await daoInstance();
+        const daoProposalData = await con.methods.getAllProposal().call();
+        setAllProposalData(daoProposalData);
+        console.log(allProposalData);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    daoProposal();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -28,16 +44,16 @@ export default function ProposalDashboard() {
 
           <View style={styles.view_details}>
             <View style={styles.view_proposal_data}>
-              {proposalData.map((proposal, index) => (
+              {allProposalData.map((proposal, index) => (
                 <View style={styles.view_proposal} key={index}>
                   <View style={styles.view_proposal_name}>
                     <Text style={styles.text_proposal_name}>
-                      Name: {proposal.name}
+                      Type: {proposal[3] ? 'Emission' : 'Offset'}
                     </Text>
                   </View>
                   <View style={styles.view_proposal_description}>
                     <Text style={styles.text_proposal_description}>
-                      Description: {proposal.description}
+                      Description: {proposal[1]}
                     </Text>
                   </View>
                   <View>
