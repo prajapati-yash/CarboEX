@@ -30,12 +30,10 @@ export default function BecomeMember() {
           console.log("ConTokens",conToken);
           const tokenPrice = await conToken.methods.gettokenPrice().call();
           console.log("TokenPrice",tokenPrice);
-          const hexValue = tokenPrice._hex;
-          const decimalValue = parseInt(hexValue, 16);
-          setTokenPrice(decimalValue);
+          setTokenPrice(tokenPrice);
           const conDAO = await daoInstance();
           console.log("conDao",conDAO);
-          const addMemberFunc = await conDAO.methods.addmember(numOfTokens).call();
+          const addMemberFunc = await conDAO.methods.addmember(numOfTokens * tokenPrice);
 
           const gasPrice = await provider.eth.getGasPrice();
           const gasLimit = 3000000;
@@ -62,6 +60,7 @@ export default function BecomeMember() {
 
           navigation.navigate(ProposalDashboard);
           console.log("Add Member Function",addMemberFunc);
+          
           console.log("Add Member Function Value",addMemberFunc.value);
         }
       }
@@ -79,11 +78,11 @@ export default function BecomeMember() {
         const conToken = await ercTokenInstance();
         const tokenPrice = await conToken.methods.gettokenPrice().call();
         console.log("TokenPrice:",tokenPrice);
-        const hexValue = tokenPrice._hex;
-        console.log("HexValue",hexValue);
-        const decimalValue = parseInt(hexValue, 16);
-        console.log("Decimal Value",decimalValue);
-        setTokenPrice(decimalValue);
+        // const hexValue = tokenPrice.toString(16);
+        // console.log("HexValue",hexValue);
+        // const decimalValue = parseInt(hexValue, 16);
+        // console.log("Decimal Value",decimalValue);
+        setTokenPrice(tokenPrice);
       }
     } catch (err) {
       console.log("Hello---",err);
@@ -117,6 +116,7 @@ export default function BecomeMember() {
               </View>
               <View>
                 <TextInput
+                  keyboardType="numeric"
                   style={styles.input_box}
                   placeholder="Enter number of tokens"
                   value={numOfTokens}

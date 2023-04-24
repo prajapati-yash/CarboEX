@@ -13,6 +13,7 @@ import { connector } from "../components/WalletConnectExperience";
 const SCHEME_FROM_APP_JSON = "walletconnect-example";
 
 const verifyUserAccount = async () => {
+
   try {
     if (!connector.connected) {
       console.log("WalletConnect not connected");

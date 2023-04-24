@@ -123,7 +123,6 @@ export default function SignUP() {
 
         console.log(finalTx);
         navigation.navigate(ProfileDetails);
-       
       }
     } catch (error) {
       console.log("error: ", error);

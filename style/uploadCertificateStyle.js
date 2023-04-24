@@ -65,6 +65,20 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 8,
   },
+  input_box_image: {
+    flex:1,
+    // height: responsiveHeight(6),
+    width: responsiveWidth(72),
+    borderColor: "black",
+    borderWidth: 1,
+    marginTop: "5%",
+    marginBottom: "5%",
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    backgroundColor:"#efefef",
+    justifyContent:"center",
+    paddingVertical:"3%"
+  },
   document_upload_button: {
     height: responsiveHeight(6),
     width: responsiveWidth(72),
