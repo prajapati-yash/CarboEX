@@ -12,6 +12,7 @@ export default function ProposalDashboard() {
 
   const daoProposal = async () => {
     try {
+      console.log("in try block");
       if (!connector.connected) {
         console.log("WalletConnect not connected");
         return;
@@ -21,8 +22,9 @@ export default function ProposalDashboard() {
 
         const con = await daoInstance();
         const daoProposalData = await con.methods.getAllProposal().call();
+        console.log("dao proposal");
         setAllProposalData(daoProposalData);
-        console.log("All proposals",allProposalData);
+        console.log("All proposals", allProposalData);
       }
     } catch (error) {
       console.log(error);

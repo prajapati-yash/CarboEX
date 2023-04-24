@@ -33,7 +33,7 @@ export default function BecomeMember() {
           const conDAO = await daoInstance();
           console.log("conDao",conDAO);
           const tokenPriceValue = numOfTokens * tokenPrice;
-          const addMemberFunc = await conDAO.methods.addmember(numOfTokens).encodeABI(tokenPriceValue);
+          const addMemberFunc = await conDAO.methods.addmember(numOfTokens).encodeABI();
 
           const gasPrice = await provider.eth.getGasPrice();
           const gasLimit = 3000000;
@@ -50,6 +50,7 @@ export default function BecomeMember() {
             to: recipientDao,
             data: addMemberFunc,
             nonce,
+            value: numOfTokens * tokenPrice// added value property
           };
 
           console.log("Number Of Tokens",numOfTokens);
