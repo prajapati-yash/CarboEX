@@ -124,7 +124,6 @@ export default function SignUP() {
         console.log("After transaction");
         console.log(signTx);
         navigation.navigate(ProfileDetails);
-       
       }
     } catch (error) {
       console.log("error: ", error);
