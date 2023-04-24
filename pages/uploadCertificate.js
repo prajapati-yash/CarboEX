@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { connector } from "../components/WalletConnectExperience";
 
 const select_domain = [
-  { label: "Carbon offset", value: "Carbon offset" },
+  { label: "Carbon Offset", value: "Carbon offset" },
   { label: "Carbon Emission", value: "Carbon Emission" },
 ];
 
@@ -26,7 +26,7 @@ export default function UploadCertificate() {
   const [emission, setEmission] = useState(null);
   const [proposal, setProposal] = useState(null);
   const [domainIsFocus, domainSetIsFocus] = useState(false);
-  const [domain, setDomain] = useState(null);
+  const [domain, setDomain] = useState(false);
   const [fileName, setFileName] = useState("");
 
   const handleSubmit = () => {
@@ -93,11 +93,12 @@ export default function UploadCertificate() {
           const value = await conDAO.methods.getConfigs().call();
           console.log("Value : ", value);
           console.log(proposal, cids, domain, emission);
-          const CPTx = await conDAO.methods
-            .createProposal(proposal, cids, domain, emission)
-            .encodeABI();
-          console.log("CPTx : ", CPTx);
-
+          console.log(value[0]);
+          let myString = value[0].toString();
+          console.log(myString);
+          const CPTx = await conDAO.methods.createProposal(proposal, cids, domain, emission).encodeABI(myString);
+          console.log("CPTx : ",CPTx);
+  
           const gasPrice = await provider.eth.getGasPrice();
           const gasLimit = 3000000;
           const recipient = DAO_MEMBER_ADDRESS; // replace with recipient address
@@ -152,11 +153,9 @@ export default function UploadCertificate() {
                 }}
                 onPress={this._pickDocument}
               />
-
-              {/* <Text style={styles.text_data}>Uploaded Certificate</Text> */}
-              <Text style={styles.input_box_image}>
-                {"Uploaded File: " + fileName}
-              </Text>
+              <Text
+                  style={styles.input_box_image}
+                >{"Uploaded File: "+fileName}</Text>
 
               <Dropdown
                 style={[
@@ -174,7 +173,11 @@ export default function UploadCertificate() {
                 onFocus={() => domainSetIsFocus(true)}
                 onBlur={() => domainSetIsFocus(false)}
                 onChange={(item) => {
-                  setDomain(item.value);
+                  if(item.value === "Carbon Emission"){
+                    setDomain(true);
+                  }else if(item.value == "Carbon Offset"){
+                    setDomain(false);
+                  }
                   domainSetIsFocus(false);
                 }}
               />

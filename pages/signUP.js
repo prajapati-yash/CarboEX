@@ -91,9 +91,7 @@ export default function SignUP() {
       if (connector.connected) {
         console.log("Connector---", connector);
         const provider = new Web3("https://pre-rpc.bt.io/");
-        // const signer = provider.eth.accounts.signTransaction();
-        // console.log("Connected");
-
+      
         console.log("Company Instance");
         const con = await companyInstance();
         console.log("con cids ", cids);
