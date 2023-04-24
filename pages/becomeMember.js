@@ -61,7 +61,7 @@ export default function BecomeMember() {
           navigation.navigate(ProposalDashboard);
           console.log("Add Member Function",addMemberFunc);
           
-          console.log("Add Member Function Value",addMemberFunc.value);
+          // console.log("Add Member Function Value",addMemberFunc.value);
         }
       }
     } catch (error) {
