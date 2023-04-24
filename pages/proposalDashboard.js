@@ -22,7 +22,7 @@ export default function ProposalDashboard() {
         const con = await daoInstance();
         const daoProposalData = await con.methods.getAllProposal().call();
         setAllProposalData(daoProposalData);
-        console.log(allProposalData);
+        console.log("All proposals",allProposalData);
       }
     } catch (error) {
       console.log(error);
