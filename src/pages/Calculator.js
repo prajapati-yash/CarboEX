@@ -10,7 +10,7 @@ import '../styles/calculator/calculator.css'
 import TraditionalBodyCalc from '../components/calculator/bodycalc/TraditionalBodyCalc';
 import PublicTransitCalc from '../components/calculator/bodycalc/PublicTransitCalc';
 import StoreCalculation from '../components/calculator/storecalculation/StoreCalculation';
-// import LandingCalc from '../components/calculator/bodycalc/LandingCalc'
+import LandingCalc from '../components/calculator/bodycalc/LandingCalc'
 
 function Calculator() {
 
@@ -20,11 +20,11 @@ function Calculator() {
         setValues([...values, value]);
     };
 
-    const [activeComponent, setActiveComponent] = useState('traditionalEnergy');
+    const [activeComponent, setActiveComponent] = useState('landingPage');
     const renderComponent = () => {
         switch (activeComponent) {
-            // case 'landingPage':
-            //     return <LandingCalc />;
+            case 'landingPage':
+                return <LandingCalc />;
             case 'traditionalEnergy':
                 return <TraditionalBodyCalc onValueChange={handleValueChange} />;
             case 'publicTransit':
@@ -54,6 +54,13 @@ function Calculator() {
                         <div className='lItems'>
                             <NavLink
                                 to='/calculator'
+                                isActive={() => activeComponent === 'landingPage'}
+                                onClick={() => setActiveComponent('landingPage')}
+                            >
+                                Home
+                            </NavLink>
+                            <NavLink
+                                to='/calculator/traditionalenergy'
                                 isActive={() => activeComponent === 'traditionalEnergy'}
                                 onClick={() => setActiveComponent('traditionalEnergy')}
                             >

@@ -68,7 +68,7 @@ function MemberLandingPage() {
           const addMemberFunc = await conDAO.addmember(numOfTokens, {
             value: numOfTokens * hexValue,
           });
-
+          console.log(addMemberFunc);
           setbtndisable(false)
           setbtnloading(false)
           // if(btnloading === false){  

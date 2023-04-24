@@ -6,7 +6,7 @@ import { companyInstance } from "../Contracts";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SellCredits() {
   const navigate = useNavigate();
@@ -67,8 +67,6 @@ function SellCredits() {
       setbtnloading(true)
     }
   }
-
-
 
   const handleCreditsChange = (event) => {
     setCredits(event.target.value);

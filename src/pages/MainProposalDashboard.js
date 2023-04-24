@@ -169,8 +169,7 @@ function MainProposalDashboard() {
                                 {/* <div className='DMember-db-btns-ES d-flex justify-content-center align-items-center'>
                                     <button
                                         className='DMember-edit-save-btn rounded-pill'
-                                        onClick={() => setIsEditing(!isEditing)}
-                                    >
+                                        onClick={() => setIsEditing(!isEditing)}>
                                         {isEditing ? 'SAVE' : 'EDIT'}
                                     </button>
                                 </div> */}

@@ -3,8 +3,10 @@ import "../../styles/DAOMember/ProposalData.css";
 import { useLocation } from "react-router-dom";
 import { daoInstance } from "../Contracts";
 import { ethers } from "ethers";
+import { useAccount } from 'wagmi';
 
 function ProposalData() {
+  const { address } = useAccount();
   const location = useLocation();
   console.log(location.state.data);
   const proposal = location.state ? location.state.data : "";
@@ -24,8 +26,10 @@ function ProposalData() {
         }
         const con = await daoInstance();
         const value = await con.getConfigs()
+        console.log(proposal[0])
         console.log(value[1]._hex)
-        const upvoteProposal = await con.upvote(proposal[0], { value: String(value[1]._hex) });
+        console.log(address)
+        const upvoteProposal = await con.upvote(proposal[0], { value: String(value[1]._hex, address) });
         // console.log(upvoteProposal)
         setapprovebtnloading(false);
       }
@@ -48,7 +52,7 @@ function ProposalData() {
         const con = await daoInstance();
         const value = await con.getConfigs()
         console.log(value[1]._hex)
-        const downvoteProposal = await con.downvote(proposal[0], { value: String(value[1]._hex) });
+        const downvoteProposal = await con.downvote(proposal[0], { value: String(value[1]._hex, address) });
         setrejectbtnloading(false);
         // console.log(downvoteProposal)
       }
@@ -170,9 +174,9 @@ function ProposalData() {
                                                         <span className="proposalInfoLabel">Type:</span> <p className="proposalInfoDataBg">{proposalData.type}</p>
                                                     </p> */}
                           <p className="proposal-value">
-                            <span className="proposalInfoLabel">Value:</span>{" "}
+                            <span className="proposalInfoLabel">Value of {proposalData.name}:</span>{" "}
                             <p className="proposalInfoDataBg">
-                              {proposalData.value}
+                              {proposalData.value} tons
                             </p>
                           </p>
                         </div>
