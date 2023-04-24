@@ -8,7 +8,6 @@ import ProposalDashboard from "./proposalDashboard";
 import { useNavigation } from "@react-navigation/native";
 import { connector } from "../components/WalletConnectExperience";
 import Web3 from "web3";
-import { log } from "react-native-reanimated";
 
 export default function BecomeMember() {
   const navigation = useNavigation();
@@ -33,7 +32,8 @@ export default function BecomeMember() {
           setTokenPrice(tokenPrice);
           const conDAO = await daoInstance();
           console.log("conDao",conDAO);
-          const addMemberFunc = await conDAO.methods.addmember(numOfTokens * tokenPrice);
+          const tokenPriceValue = numOfTokens * tokenPrice;
+          const addMemberFunc = await conDAO.methods.addmember(numOfTokens).encodeABI(tokenPriceValue);
 
           const gasPrice = await provider.eth.getGasPrice();
           const gasLimit = 3000000;
@@ -48,7 +48,7 @@ export default function BecomeMember() {
             gasLimit,
             from: connector.accounts[0],
             to: recipientDao,
-            data: numOfTokens,
+            data: addMemberFunc,
             nonce,
           };
 
@@ -56,12 +56,11 @@ export default function BecomeMember() {
           console.log("After txOptions");
           console.log("connector transaction", connector);
           const signTxDao = await connector.sendTransaction(txOptionsDao);
-          const finalTxDao = await signTxDao;
+          const finalTx = await signTxDao;
 
+          console.log(finalTx);
           navigation.navigate(ProposalDashboard);
           console.log("Add Member Function",addMemberFunc);
-          
-          console.log("Add Member Function Value",addMemberFunc.value);
         }
       }
     } catch (error) {
