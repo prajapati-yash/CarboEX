@@ -29,6 +29,7 @@ const select_country = [
 ];
 
 let imageUri = "";
+
 export default function SignUP() {
   const navigation = useNavigation();
 
@@ -119,9 +120,9 @@ export default function SignUP() {
         console.log("After txOptions");
         console.log("connector transaction", connector);
         const signTx = await connector.sendTransaction(txOptions);
-        const finalTx = await signTx;
-
-        console.log(finalTx);
+        // const finalTx = await signTx;
+        console.log("After transaction");
+        console.log(signTx);
         navigation.navigate(ProfileDetails);
        
       }

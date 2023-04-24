@@ -11,8 +11,6 @@ import ContactUs from "./pages/ContactUs";
 import { Image, StyleSheet, View, StatusBar } from "react-native";
 import Resources from "./pages/ResourcesScreen";
 import { TotalSum } from "./components/emissionCalculate";
-import BuyCredit from "./pages/BuyCredit";
-import SellCredit from "./pages/SellCredit";
 import ProposalDetails from "./pages/proposalDetails";
 import SignUP from "./pages/signUP";
 import UploadCertificate from "./pages/uploadCertificate";

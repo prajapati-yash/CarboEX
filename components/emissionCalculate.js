@@ -13,13 +13,9 @@ import {
 } from "react-native";
 import styles from "../style/emissionCalculateStyle";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import BuyCredit from "../pages/BuyCredit";
-import SellCredit from "../pages/SellCredit";
-
 
 var numbers = 0;
 var data = [];
-
 
 const Sector = (props) => {
   var data = JSON.stringify(
@@ -71,98 +67,102 @@ function addValues() {
 }
 
 export const TotalSum = (props) => {
-  
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(true);
   let sum = 0;
   for (let i = 0; i < data.length; i += 1) {
     sum += data[i];
   }
-  
-  if (sum<4000) {
-    sell=sum;
-  }
-  else if(sum>7000){
-    buy=sum;
-  }
-  else{
-    average=sum;
+
+  if (sum < 4000) {
+    sell = sum;
+  } else if (sum > 7000) {
+    buy = sum;
+  } else {
+    average = sum;
   }
 
   return (
-    
-      <Modal
-        visible={modalVisible}
-        transparent
-        animationType="fade"
-        hardwareAccelerated
-        style={styles.modal}>
-          <View style={styles.centered_view}>
-            <View style={styles.result_modal}>
-              <View style={styles.result_header}>
-                <View style={styles.result_header_title}>
-                  <Text style={styles.result_header_title_text}>RESULT</Text>
-                </View>
-                <View style={{left: 125}}>
-                  <FontAwesome5 
-                    name={'times'}
-                    size = {30}
-                    onPress={() => setModalVisible(false)}
-                  />
-                </View>
+    <Modal
+      visible={modalVisible}
+      transparent
+      animationType="fade"
+      hardwareAccelerated
+      style={styles.modal}
+    >
+      <View style={styles.centered_view}>
+        <View style={styles.result_modal}>
+          <View style={styles.result_header}>
+            <View style={styles.result_header_title}>
+              <Text style={styles.result_header_title_text}>RESULT</Text>
+            </View>
+            <View style={{ left: 125 }}>
+              <FontAwesome5
+                name={"times"}
+                size={30}
+                onPress={() => setModalVisible(false)}
+              />
+            </View>
+          </View>
+
+          {sum > 7000 ? (
+            <View>
+              <View style={styles.result_body}>
+                <Text style={styles.result_body_text}>
+                  Total Carbon Emitted : {sum}
+                </Text>
+                <Text style={styles.result_body_text}>
+                  You are eligible to buy carbon credit
+                </Text>
               </View>
 
-              
-                {sum > 7000 ?
-                ( <View>
-                  <View style={styles.result_body}>
-                    <Text style={styles.result_body_text}>Total Carbon Emitted : {sum}</Text>
-                    <Text style={styles.result_body_text}>You are eligible to buy carbon credit</Text>
-                  </View>
-                
-                  <View style={styles.resultFooter}>
-                  <Pressable
-                    style={styles.buy_button}
-                    android_ripple={{color:'#fff'}}
-                    disabled={sum < 7000}
-                    onPress={() => navigation.navigate(BuyCredit)}>
+              <View style={styles.resultFooter}>
+                <Pressable
+                  style={styles.buy_button}
+                  android_ripple={{ color: "#fff" }}
+                  disabled={sum < 7000}
+                  // onPress={() => navigation.navigate(BuyCredit)}
+                >
+                  <Text style={styles.result_button_text}>Buy</Text>
+                </Pressable>
+              </View>
+            </View>
+          ) : sum >= 0 && sum <= 4000 ? (
+            <View>
+              <View style={styles.result_body}>
+                <Text style={styles.result_body_text}>
+                  Total Carbon Emitted : {sum}
+                </Text>
+                <Text style={styles.result_body_text}>
+                  You are eligible to sell carbon credit
+                </Text>
+              </View>
 
-                    <Text style={styles.result_button_text}>Buy</Text>
-                  </Pressable>
-                  </View>
-                  </View>):sum >= 0 && sum<=4000 ?
-                (
-                  <View>
-                  <View style={styles.result_body}>
-                    <Text style={styles.result_body_text}>Total Carbon Emitted : {sum}</Text>
-                    <Text style={styles.result_body_text}>You are eligible to sell carbon credit</Text>
-                  </View>
-
-                  <View style={styles.resultFooter}>
-                  <Pressable
-                    style={styles.sell_button}
-                    android_ripple={{color:'#fff'}}
-                    disabled={sum > 4000}
-                    onPress={() => navigation.navigate(SellCredit)}>
-
-                    <Text style={styles.result_button_text}>Sell</Text>
-                    </Pressable>
-                    </View>
-                    </View>):(
-                  
-                      <View style={styles.result_body}>
-                        <Text style={styles.result_body_text}>Total Carbon Emitted : {sum}</Text>
-                        <Text style={styles.result_body_text}>You are emitted average amount of carbon</Text>
-                      </View>
-                    )}
-                    
-          </View>
-       </View>
-   
-      </Modal>
-);
-
-}
+              <View style={styles.resultFooter}>
+                <Pressable
+                  style={styles.sell_button}
+                  android_ripple={{ color: "#fff" }}
+                  disabled={sum > 4000}
+                  // onPress={() => navigation.navigate(SellCredit)}
+                >
+                  <Text style={styles.result_button_text}>Sell</Text>
+                </Pressable>
+              </View>
+            </View>
+          ) : (
+            <View style={styles.result_body}>
+              <Text style={styles.result_body_text}>
+                Total Carbon Emitted : {sum}
+              </Text>
+              <Text style={styles.result_body_text}>
+                You are emitted average amount of carbon
+              </Text>
+            </View>
+          )}
+        </View>
+      </View>
+    </Modal>
+  );
+};
 
 export default Sector;
-
