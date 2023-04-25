@@ -7,6 +7,7 @@ import { daoInstance } from "../Contracts";
 import { Web3Storage } from "web3.storage";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useAccount } from 'wagmi';
 
 
 function CertificateValidate() {
@@ -15,6 +16,7 @@ function CertificateValidate() {
   const [domain, setDomain] = useState();
   const [emission, setEmission] = useState("");
   const [proposal, setProposal] = useState("");
+  const { address } = useAccount();
   const [btnloading, setbtnloading] = useState(false);
   const [btndisable, setbtndisable] = useState(false);
 
@@ -115,6 +117,7 @@ function CertificateValidate() {
           const value = await conDAO.getConfigs()
           console.log(value)
           console.log(proposal, cids, domain, emission)
+          const isDAOMember = conDAO.isMember(address)
           const CPTx = await conDAO.createProposal(proposal, cids, domain, emission, { value: String(value[0]) })
           await CPTx.wait();
           setbtnloading(false)
@@ -127,6 +130,21 @@ function CertificateValidate() {
       console.log(error);
       setbtndisable(false)
       setbtnloading(false)
+    }
+  }
+
+  const checkDAOMember = async () => {
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      if (!provider) {
+        console.log("Metamask is not installed, please install!");
+      }
+      const conDAO = await daoInstance();
+      const isDAOMember = await conDAO.isMember(address)
+      console.log(isDAOMember)
+      return isDAOMember;
     }
   }
 
@@ -214,7 +232,7 @@ function CertificateValidate() {
           </form>
         </div>
       </div>
-      {/* <button onClick={handleSubmit}> Click to get true/false</button> */}
+      {/* <button onClick={() => checkDAOMember()}> Click to get true/false</button> */}
     </>
   );
 }
