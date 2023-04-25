@@ -51,7 +51,7 @@ export function DrawerContent(props) {
 
   useEffect(() => {
     verifyNavbar();
-  }, [isSignedIn]);
+  });
 
   return (
     <View style={{ flex: 1 }}>
@@ -231,5 +231,6 @@ const styles = StyleSheet.create({
     height: 100,
     justifyContent: "center",
     alignItems: "center",
+    marginTop:"-5%"
   },
 });

@@ -31,7 +31,7 @@ export default function ProposalDashboard() {
 
   useEffect(() => {
     daoProposal();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
