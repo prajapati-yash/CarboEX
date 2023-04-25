@@ -160,14 +160,16 @@ export default function ProposalDetails({ route }) {
                 onBackdropPress={() => setVisible1(null)}
               >
                 <Dialog.Title title="Your Certificate" />
+                <View style={{height: 300, alignItems: "center", justifyContent: "center"}}>
                 <Image
                   // source={require("../assets/calculatorAssets/HomeBg.jpg")}
                   source={{ uri: proposalData.certificateImage }}
                   style={{
                     width: "100%",
-                    height: "55%",
+                    height: "80%",
+                    resizeMode: "contain",
                   }}
-                ></Image>
+                ></Image></View>
               </Dialog>
 
               <Text style={styles.input_text}>Value of offset</Text>
