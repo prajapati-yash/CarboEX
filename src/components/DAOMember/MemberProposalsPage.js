@@ -11,7 +11,6 @@ function MemberProposalsPage() {
     const [allPData, setAllPData] = useState([]);
     const [currentDate, setCurrentDate] = useState(new Date())
     const localizedDate = currentDate;
-    // const localizedDate = currentDate.toLocaleString('en-US');
 
     const daoProposal = async () => {
         try {
@@ -96,6 +95,9 @@ function MemberProposalsPage() {
         // console.log("localdate " + localDate)
         // return localDate;
     }
+    const filteredData = allPData.filter((item) => {
+        return item[10] === "" && hexToTimestamp2(item[9]._hex) > localizedDate
+    });
 
     return (
         <>
@@ -107,20 +109,19 @@ function MemberProposalsPage() {
                     <div className='MPPage-content d-lg-flex row pb-4 align-items-center justify-content-around'>
                         <div className="MPPage-box-bg mb-lg-0 mb-sm-4 mb-4 align-self-stretch py-5 px-4">
                             <div className='MPPage-content-box row'>
-                                {allPData.filter((item) => {
-                                    return item[10] === "" && hexToTimestamp2(item[9]._hex) > localizedDate
-                                }).map((item, key) => (
-                                    <div className='MPPage-content-data  col-6 col-md-5 my-3' key={key} >
-                                        <label className='MPPage-Prop-Label'>Type:</label> <span>{item[3] ? "Emission" : "Offset"}</span>  <br />
-                                        <label className='MPPage-Prop-Label'>Description:</label> <span>{item[1]}</span><br />
-                                        <label className='MPPage-Prop-Label'>Proposal Expire time:</label> <span>{hexToTimestamp(item[9]._hex)}</span><br />
-
-                                        <div className='MPPage-VM-Btn-class d-flex justify-content-center'>
-                                            <button className='MPPage-VM-Btn mt-2' onClick={() => navigate("/proposalData", { state: { data: item } })}>Open</button>
+                                {filteredData.length > 0 ? (
+                                    filteredData.map((item, key) => (
+                                        <div className='MPPage-content-data  col-6 col-md-5 my-3' key={key} >
+                                            <label className='MPPage-Prop-Label'>Type:</label> <span>{item[3] ? "Emission" : "Offset"}</span>  <br />
+                                            <label className='MPPage-Prop-Label'>Description:</label> <span>{item[1]}</span><br />
+                                            <label className='MPPage-Prop-Label'>Proposal Expire time:</label> <span>{hexToTimestamp(item[9]._hex)}</span><br />
+                                            <div className='MPPage-VM-Btn-class d-flex justify-content-center'>
+                                                <button className='MPPage-VM-Btn mt-2' onClick={() => navigate("/proposalData", { state: { data: item } })}>Open</button>
+                                            </div>
                                         </div>
-
-                                    </div>
-                                ))}
+                                    ))) : (
+                                    <div>No Active Proposals</div>
+                                )}
                             </div>
                         </div>
                     </div>

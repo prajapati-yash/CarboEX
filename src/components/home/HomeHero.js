@@ -44,6 +44,7 @@ function HomeHero() {
             console.log(test)
             if (test) {
                 navigate("/user-dashboard")
+                // window.location.reload();
             }
             else {
                 navigate("/signup")

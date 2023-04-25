@@ -103,7 +103,9 @@ function BuyCredits() {
       <div className="buyBg">
         <div className="buyHead text-dark text-center">BUY CARBON CREDITS</div>
         <div className="companies">
-          {count &&
+
+          {userDetailsById.length > 0 ?
+            // count &&
             userDetailsById.map((company, key) => (
               <div key={key} className="company-wrapper">
                 <div className="company ">
@@ -129,12 +131,9 @@ function BuyCredits() {
                       </span>{" "}
                       <p className="allBuyBg">
                         {" "}
-                        {/* {parseInt(company[2]._hex, 16)} */}
                         {parseInt(company[2]._hex, 16) / Math.pow(10, 18)}
                       </p>
                     </p>
-
-
                     <p className="company-price">
                       <span className="companyInfoLabel">
                         Total (in ETH):
@@ -151,7 +150,6 @@ function BuyCredits() {
                       disabled={btndisable}
                       onClick={() =>
                         buyCreditsFunc(company[0], parseInt(company[1]._hex, 16), parseInt(company[2]._hex, 16))
-                        // buyCreditsFunc(company[0], parseInt(company[1]._hex, 16), String(parseInt(company[2]._hex, 16) / Math.pow(10, 18)))
                       }
                     >
                       {btnloading ? (
@@ -175,7 +173,13 @@ function BuyCredits() {
                   </div>
                 </div>
               </div>
-            ))}
+            )) :
+            <div className="BuyPage-box-bg mb-lg-0 mb-sm-4 mb-4 mx-auto align-self-stretch py-5 px-4">
+              <div className='BuyPage-content-box row'>
+                <div className="d-flex justify-content-center align-items-center">No Proposals to buy Carbon Credits</div>
+              </div>
+            </div>
+          }
         </div>
       </div >
       {/* <button onClick={sellingCredits}>click</button> */}

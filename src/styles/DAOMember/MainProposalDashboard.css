@@ -49,44 +49,45 @@
 .DMember-db-btns {
   margin: 1.5rem;
   padding: 0;
-  max-width: 25%;
 }
-
+.DMember-db-btns-ES {
+  width: 100%;
+}
 .DMember-db-btns-body {
   text-align: center;
 }
-.DMember-edit-save-btn {
+
+.DMember-token-btn {
+  width: 150px;
   background-color: #ffffff;
   color: #000000;
   border: none;
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   transition: all 550ms;
-  box-shadow: rgb(120, 169, 139) 0 -25px 18px -14px inset,
-    rgba(110, 141, 122, 0.719) 0 1px 2px, rgb(154, 174, 162) 0 2px 4px,
-    rgba(114, 142, 125, 0.736) 0 4px 8px, rgba(113, 159, 131, 0.571) 0 8px 16px,
-    rgba(158, 183, 168, 0.719) 0 16px 32px;
+  border-radius: 1rem;
+  box-shadow: 2px 5px 18px -2px rgba(0, 0, 0, 1);
 }
-.DMember-edit-save-btn:hover {
+
+.DMember-token-btn:hover {
   background-color: #000000;
   color: #ffffff;
-  box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset,
-    rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px,
-    rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
-    rgba(44, 187, 99, 0.25) 0 16px 32px;
-  transform: scale(1.05) rotate(-1deg);
+  box-shadow: rgba(199, 203, 201, 0.35) 0 -25px 18px -14px inset,
+    rgba(147, 187, 162, 0.25) 0 1px 2px, rgba(187, 199, 192, 0.25) 0 2px 4px,
+    rgba(163, 196, 176, 0.25) 0 4px 8px, rgba(150, 191, 166, 0.25) 0 8px 16px,
+    rgba(156, 192, 170, 0.25) 0 16px 32px;
+  /* transform: scale(1.05) rotate(-1deg); */
 }
 
 .PData-sell-btn {
+  width: 150px;
   background-color: #000000;
   color: #ffffff;
   border: none;
   padding: 0.5rem 1rem;
   transition: all 550ms;
-  box-shadow: rgb(45, 55, 49) 0 -25px 18px -14px inset,
-    rgba(99, 125, 109, 0.719) 0 1px 2px, rgb(154, 174, 162) 0 2px 4px,
-    rgba(114, 142, 125, 0.736) 0 4px 8px, rgba(113, 159, 131, 0.571) 0 8px 16px,
-    rgba(96, 133, 111, 0.766) 0 16px 32px;
+  border-radius: 1rem;
+  box-shadow: 2px 5px 18px -2px rgba(0, 0, 0, 1);
 }
 .PData-sell-btn:hover {
   background-color: #ffffff;
@@ -95,7 +96,7 @@
     rgba(144, 165, 152, 0.929) 0 1px 2px, rgb(123, 150, 133) 0 2px 4px,
     rgba(145, 171, 155, 0.879) 0 4px 8px, rgba(125, 160, 138, 0.885) 0 8px 16px,
     rgba(150, 180, 162, 0.918) 0 16px 32px;
-  transform: scale(1.04) rotate(-0.5deg);
+  /* transform: scale(1.04) rotate(-0.5deg); */
 }
 
 .Member-prop-orders-class {
@@ -133,7 +134,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: fit-content;
+  width: 140px;
 }
 
 .Member-prop-Btn:hover,
@@ -149,7 +150,6 @@
 @media only screen and (max-width: 767px) {
   .row {
     display: flex;
-    /* flex-direction: column; */
     align-items: center;
   }
 
@@ -171,25 +171,33 @@
   }
 
   .Member-prop-orders-Btns {
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
   }
 
   .Member-prop-Btn {
-    margin: auto;
+    margin-right: 12px;
     margin-bottom: 1rem;
   }
 }
 
 @media only screen and (max-width: 575px) {
-  .DMember-db-btns-body {
+  .DMember-db-btns {
+    margin: 1rem;
+    padding: 0;
+  }
+  .DMember-db-btns-ES {
     display: flex;
   }
-  .DMember-edit-save-btn {
+  .DMember-db-btns-body {
+    display: flex !important;
+  }
+  .DMember-token-btn {
     margin-right: 1rem;
+    margin-bottom: 0;
   }
   .u-dashboard-title-name {
     font-weight: bolder;
