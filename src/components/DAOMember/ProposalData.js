@@ -29,6 +29,8 @@ function ProposalData() {
         console.log(proposal[0])
         console.log(value[1]._hex)
         console.log(address)
+        const checkMember = con.isMember(address);
+        console.log(checkMember)
         const upvoteProposal = await con.upvote(proposal[0], { value: String(value[1]._hex, address) });
         // console.log(upvoteProposal)
         setapprovebtnloading(false);

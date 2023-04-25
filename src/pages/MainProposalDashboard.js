@@ -18,7 +18,6 @@ function MainProposalDashboard() {
     const [isEditing, setIsEditing] = useState(false);
     const { address } = useAccount();
     const [credits, setCredits] = useState();
-    const [zero, setZero] = useState(false);
 
     const MainPropPageData = {
         logo: logoImg,
@@ -83,9 +82,8 @@ function MainProposalDashboard() {
         getUserAccountDetails();
     }, [])
 
-    const handleNavigation = async ({ value }) => {
-        setZero(value > 0)
-        if (zero === false) {
+    const handleNavigation = async (value) => {
+        if (value > 0) {
             navigate("/sell-carbon-credits")
         } else {
             toast.error('Insufficient Carbon Credits', {

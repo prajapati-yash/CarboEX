@@ -138,7 +138,7 @@ function CertificateValidate() {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="certificate" className="form-label certiLabel">
-                Upload your certificate
+                Upload your certificate:
               </label>
               <input
                 type="file"
@@ -170,12 +170,12 @@ function CertificateValidate() {
             </div>
             <div className="mb-3">
               <label htmlFor="emission" className="form-label certiLabel">
-                Enter the value of emission/offset
+                Enter the value of Emission/Offset (in tons):
               </label>
               <input
                 type="text"
                 className="form-control certiInput emissionInput"
-                placeholder="tons"
+                placeholder="in tons"
                 id="emission"
                 onChange={handleEmissionChange}
                 value={emission}
