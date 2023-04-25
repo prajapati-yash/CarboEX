@@ -69,7 +69,7 @@ function ProposalDashComponent() {
         return getResult;
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error.reason);
       setbtnloading(false);
 
 

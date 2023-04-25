@@ -163,16 +163,18 @@ function MainProposalDashboard() {
 
                     <div className="col-lg-2 col-md-3 col-sm-4 d-flex justify-content-end">
                         <div className='DMember-db-btns d-flex justify-content-center align-items-center col-8 mx-auto'>
-                            <div className='DMember-db-btns-body '>
-                                {/* <div className='DMember-db-btns-ES d-flex justify-content-center align-items-center'>
-                                    <button
-                                        className='DMember-edit-save-btn rounded-pill'
-                                        onClick={() => setIsEditing(!isEditing)}>
-                                        {isEditing ? 'SAVE' : 'EDIT'}
-                                    </button>
-                                </div> */}
+                            <div className='DMember-db-btns-body d-flex justify-content-center align-items-center'>
                                 <div className='DMember-db-btns-ES'>
-                                    <button className='PData-sell-btn rounded-pill' onClick={() => handleNavigation(MainPropPageData.availableCredits)}>SELL</button>
+                                    <div className='DAOSELL-btn'>
+                                        <button
+                                            className='DMember-token-btn'
+                                            onClick={() => navigate("/become-member")}>
+                                            DAO MEMBER
+                                        </button>
+                                    </div>
+                                    <div className='DAOSELL-btn'>
+                                        <button className='PData-sell-btn' onClick={() => handleNavigation(MainPropPageData.availableCredits)}>SELL CREDITS</button>
+                                    </div>
                                     <ToastContainer />
                                 </div>
                             </div>
