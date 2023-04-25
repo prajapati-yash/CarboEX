@@ -15,8 +15,8 @@ function ProposalDashComponent() {
   const [allData, setAllData] = useState();
   const [userProp, setUserProp] = useState([]);
   const [disable, setdisable] = useState(false)
-// const [expDate, setExpDate] = useState(new Date());
-// const localDate1 = expDate;
+  // const [expDate, setExpDate] = useState(new Date());
+  // const localDate1 = expDate;
 
   const getUserIDs = async () => {
     try {
@@ -72,7 +72,7 @@ function ProposalDashComponent() {
       console.log(error.message);
       setbtnloading(false);
 
-    
+
     }
   };
 
@@ -94,23 +94,6 @@ function ProposalDashComponent() {
     display: showModal ? "block" : "none",
   };
 
-<<<<<<< HEAD
-  // function hexToTimestamp(hex) {
-  //   // const unixTimestamp = parseInt(hex, 16);
-  //   // const date = new Date(unixTimestamp * 1000);
-  //   // return date.toISOString().replace('T', ' ').replace('Z', '');
-  //   const unixTimestamp = parseInt(hex, 16);
-  //   const date = new Date(unixTimestamp * 1000);
-  //   const year = date.getUTCFullYear();
-  //   const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-  //   const day = date.getUTCDate().toString().padStart(2, '0');
-  //   const hours = date.getUTCHours().toString().padStart(2, '0');
-  //   const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-  //   const seconds = date.getUTCSeconds().toString().padStart(2, '0');
-  //   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-  // }
-=======
->>>>>>> a4f0ce2fdbf402a788ebfdcc6d92b2706149794b
 
   function hexToTimestamp(hex) {
     const unixTimestamp = parseInt(hex, 16);
@@ -124,21 +107,21 @@ function ProposalDashComponent() {
     // const localDate = date.toLocaleString("en-US");
     return date;
   }
-  function hexToTimestamp3(hex) {
-    const unixTimestamp = parseInt(hex, 16);
-    const date = new Date(unixTimestamp * 1000);
-    const year = date.getUTCFullYear();
-    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-    const day = date.getUTCDate().toString().padStart(2, '0');
-    const hours = date.getUTCHours().toString().padStart(2, '0');
-    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-    const seconds = date.getUTCSeconds().toString().padStart(2, '0');
-    const dateString = `${month}-${day}-${year} ${hours}:${minutes}:${seconds}`;
-    const istDateString = new Date(dateString).toLocaleString("en-US", { timeZone: "Asia/Kolkata", hour12: false });
-    return istDateString;
-  }
+  // function hexToTimestamp3(hex) {
+  //   const unixTimestamp = parseInt(hex, 16);
+  //   const date = new Date(unixTimestamp * 1000);
+  //   const year = date.getUTCFullYear();
+  //   const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  //   const day = date.getUTCDate().toString().padStart(2, '0');
+  //   const hours = date.getUTCHours().toString().padStart(2, '0');
+  //   const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  //   const seconds = date.getUTCSeconds().toString().padStart(2, '0');
+  //   const dateString = `${month}-${day}-${year} ${hours}:${minutes}:${seconds}`;
+  //   const istDateString = new Date(dateString).toLocaleString("en-US", { timeZone: "Asia/Kolkata", hour12: false });
+  //   return istDateString;
+  // }
 
- 
+
 
   return (
     <>
@@ -148,7 +131,7 @@ function ProposalDashComponent() {
         </div>
         <div className="proposalDetails">
           {userProp.map((details, key) => (
-            
+
             <div className="proposal-company-wrapper" key={key}>
               <div className="proposal-dash">
                 <div className="proposal-dash-info">
@@ -224,9 +207,9 @@ function ProposalDashComponent() {
                         // const difference = timestamp2- timestamp1;
                         // console.log(difference)
                         // const differenceInMinutes = ( difference / (1000 * 60));
-                      
+
                         const value1 = hexToTimestamp2(details[9]._hex) > new Date()
-                        if (value1) { 
+                        if (value1) {
                           setdisable(false)
                           console.log(Date())
                           toast.error(`You will be able to see the result after the proposal expires!`, {
@@ -239,9 +222,9 @@ function ProposalDashComponent() {
                             progress: undefined,
                             theme: "light",
                           });
-                        }else{
-                        // if (hexToTimestamp(details[9]._hex) <= Date()) {
-                          getUserDataById(details[0], key);                          
+                        } else {
+                          // if (hexToTimestamp(details[9]._hex) <= Date()) {
+                          getUserDataById(details[0], key);
                         }
                       }}
                     >
