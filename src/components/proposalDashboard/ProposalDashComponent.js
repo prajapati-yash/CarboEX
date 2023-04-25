@@ -2,21 +2,24 @@ import React, { useEffect, useState } from "react";
 import "../../styles/proposal/proposalDashboard.css";
 import { ethers } from "ethers";
 import { daoInstance } from "../Contracts";
-import { useAccount } from 'wagmi';
-
+import { useAccount } from "wagmi";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProposalDashComponent() {
   const [showModal, setShowModal] = useState(false);
   const [loadingIndex, setLoadingIndex] = useState(null);
   const [enlargedImageSrc, setEnlargedImageSrc] = useState("0");
-  const [btnloading, setbtnloading] = useState(false)
+  const [btnloading, setbtnloading] = useState(false);
   const { address } = useAccount();
   const [allData, setAllData] = useState();
   const [userProp, setUserProp] = useState([]);
+  const [disable, setdisable] = useState(false)
+// const [expDate, setExpDate] = useState(new Date());
+// const localDate1 = expDate;
 
   const getUserIDs = async () => {
     try {
-
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -28,7 +31,7 @@ function ProposalDashComponent() {
         // console.log(address)
         const getUserID = await con.getUserProposals(address);
         // console.log(getUserID.length)
-        let arr = []
+        let arr = [];
         for (let i = 0; i < getUserID.length; i++) {
           const getUserData = await con.getProposal(getUserID[i]._hex);
           arr.push(getUserData);
@@ -36,22 +39,21 @@ function ProposalDashComponent() {
         // console.log(arr)
         setUserProp(arr);
         setAllData(getUserID);
-        return getUserID
+        return getUserID;
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getUserIDs()
-  }, [])
-
+    getUserIDs();
+  }, []);
 
   const getUserDataById = async (e, key) => {
     try {
-      setLoadingIndex(key)
-      setbtnloading(true)
+      setLoadingIndex(key);
+      setbtnloading(true);
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -63,14 +65,16 @@ function ProposalDashComponent() {
         const getResult = await con.getProposalResult(e);
         await getResult.wait();
         window.location.reload();
-        setbtnloading(false)
-        return getResult
+        setbtnloading(false);
+        return getResult;
       }
     } catch (error) {
-      console.log(error);
-      setbtnloading(false)
+      console.log(error.message);
+      setbtnloading(false);
+
+    
     }
-  }
+  };
 
   // useEffect(() => {
   //   getUserDataById()
@@ -90,7 +94,6 @@ function ProposalDashComponent() {
     display: showModal ? "block" : "none",
   };
 
-
   // function hexToTimestamp(hex) {
   //   // const unixTimestamp = parseInt(hex, 16);
   //   // const date = new Date(unixTimestamp * 1000);
@@ -109,9 +112,30 @@ function ProposalDashComponent() {
   function hexToTimestamp(hex) {
     const unixTimestamp = parseInt(hex, 16);
     const date = new Date(unixTimestamp * 1000);
-    const localDate = date.toLocaleString('en-US');
+    const localDate = date.toLocaleString("en-US");
     return localDate;
   }
+  function hexToTimestamp2(hex) {
+    const unixTimestamp = parseInt(hex, 16);
+    const date = new Date(unixTimestamp * 1000);
+    // const localDate = date.toLocaleString("en-US");
+    return date;
+  }
+  function hexToTimestamp3(hex) {
+    const unixTimestamp = parseInt(hex, 16);
+    const date = new Date(unixTimestamp * 1000);
+    const year = date.getUTCFullYear();
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const hours = date.getUTCHours().toString().padStart(2, '0');
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    const seconds = date.getUTCSeconds().toString().padStart(2, '0');
+    const dateString = `${month}-${day}-${year} ${hours}:${minutes}:${seconds}`;
+    const istDateString = new Date(dateString).toLocaleString("en-US", { timeZone: "Asia/Kolkata", hour12: false });
+    return istDateString;
+  }
+
+ 
 
   return (
     <>
@@ -121,13 +145,16 @@ function ProposalDashComponent() {
         </div>
         <div className="proposalDetails">
           {userProp.map((details, key) => (
+            
             <div className="proposal-company-wrapper" key={key}>
               <div className="proposal-dash">
                 <div className="proposal-dash-info">
                   <div className="">
                     {" "}
                     <span className="proposal-dash-label">Type: </span>{" "}
-                    <p className="proposal-dash-output-Bg ">{details[3] ? "Emission" : "Offset"}</p>
+                    <p className="proposal-dash-output-Bg ">
+                      {details[3] ? "Emission" : "Offset"}
+                    </p>
                   </div>
                   <div className=" ">
                     <span className="proposal-dash-label">Description: </span>
@@ -144,7 +171,9 @@ function ProposalDashComponent() {
                       {" "}
                       <a
                         onClick={() => {
-                          handleImageClick({ image: `https://ipfs.io/ipfs/${details[2]}` })
+                          handleImageClick({
+                            image: `https://ipfs.io/ipfs/${details[2]}`,
+                          });
                         }}
                       >
                         <img
@@ -158,19 +187,61 @@ function ProposalDashComponent() {
                   </div>
                   <div className="">
                     <span className="proposal-dash-label">Status: </span>{" "}
-                    <p className="proposal-dash-output-Bg">{details[10] ? details[10] : "pending"}</p>
+                    <p className="proposal-dash-output-Bg">
+                      {details[10] ? details[10] : "pending"}
+
+                    </p>
                   </div>
                   <div className="">
                     <span className="proposal-dash-label">Proposed at:</span>{" "}
-                    <p className="proposal-dash-output-Bg">{hexToTimestamp(details[8]._hex)}</p>
+                    <p className="proposal-dash-output-Bg">
+                      {hexToTimestamp(details[8]._hex)}
+                    </p>
                   </div>
                   <div className="">
-                    <span className="proposal-dash-label">Proposal Expire Time:</span>{" "}
-                    <p className="proposal-dash-output-Bg">{hexToTimestamp(details[9]._hex)}</p>
+                    <span className="proposal-dash-label">
+                      Proposal Expire Time:
+                    </span>{" "}
+                    <p className="proposal-dash-output-Bg">
+                      {hexToTimestamp(details[9]._hex)}
+                    </p>
                   </div>
                   <div className="">
-                    <span className="proposal-dash-label">Result:</span>{" "}<br />
-                    <button className="btn btn-primary" style={{ width: "30%" }} key={key} onClick={() => getUserDataById(details[0], key)}>
+                    <span className="proposal-dash-label">Result:</span> <br />
+                    <button
+                      className="btn btn-primary"
+                      style={{ width: "30%" }}
+                      disabled={disable}
+                      key={key}
+                      onClick={() => {
+                        // const timestamp1 = hexToTimestamp(details[9]._hex)
+                        // console.log(timestamp1)
+                        // const timestamp2 = hexToTimestamp(details[8]._hex) 
+                        // console.log(timestamp2)
+                        // const difference = timestamp2- timestamp1;
+                        // console.log(difference)
+                        // const differenceInMinutes = ( difference / (1000 * 60));
+                      
+                        const value1 = hexToTimestamp2(details[9]._hex) > new Date()
+                        if (value1) { 
+                          setdisable(false)
+                          console.log(Date())
+                          toast.error(`You will be able to see the result after the proposal expires!`, {
+                            position: "top-left",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                          });
+                        }else{
+                        // if (hexToTimestamp(details[9]._hex) <= Date()) {
+                          getUserDataById(details[0], key);                          
+                        }
+                      }}
+                    >
                       {btnloading && loadingIndex === key ? (
                         <svg
                           className="animate-spin button-spin-svg-pic"
@@ -195,7 +266,7 @@ function ProposalDashComponent() {
             </div>
           ))}
           {/* ------ Onclick Enlarged Image ----- */}
-          <div className="modal" tabIndex="-1" role="dialog" style={modalStyle} >
+          <div className="modal" tabIndex="-1" role="dialog" style={modalStyle}>
             <div className="modal-dialog modal-dialog-centered" role="document">
               <div className="modal-content">
                 <div className="modal-body">
@@ -216,6 +287,7 @@ function ProposalDashComponent() {
           </div>
           {/* ----------Ends here ---------------- */}
           {/* <button onClick={getUserIDs}>Click</button> */}
+          <ToastContainer />
         </div>
       </div>
     </>

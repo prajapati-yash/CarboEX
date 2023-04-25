@@ -3,6 +3,12 @@
     padding: 5% 10%;
 }
 
+.info-text{
+    font-size: 1rem;
+    transform: 0.3s;
+}
+
+
 .certiBg{
     background-color: white;
     border-radius: 5rem;
@@ -12,7 +18,12 @@
 .certiHead{
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 3%;
+    /* margin-bottom: 3%; */
+}
+
+.certiSubHead{
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .certiInput{

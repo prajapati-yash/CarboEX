@@ -18,6 +18,7 @@ function CertificateValidate() {
   const [btnloading, setbtnloading] = useState(false);
   const [btndisable, setbtndisable] = useState(false);
 
+
   const handleCertificateChange = (e) => {
     setCertificate(e.target.value);
   };
@@ -127,6 +128,7 @@ function CertificateValidate() {
       console.log(error);
       setbtndisable(false)
       setbtnloading(false)
+      // if(error ==="")
     }
   }
 
@@ -134,7 +136,10 @@ function CertificateValidate() {
     <>
       <div className="certiPageBg">
         <div className="certiBg">
-          <div className="text-center certiHead">Certificate Validation</div>
+          <div className="text-center">
+            <p className="certiHead">Certificate Validation</p>
+          <p className="text-center certiSubHead ">You must be a DAO Member to upload the Certificate for Validation</p>
+          </div>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="certificate" className="form-label certiLabel">
