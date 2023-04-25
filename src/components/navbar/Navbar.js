@@ -79,7 +79,7 @@ function Navbar() {
       auth: true,
       submenu: [
         { title: "Become a DAO Member", link: "/become-member" },
-        { title: "Proposals", link: "/dao-member-proposals" },
+        { title: "All Proposals", link: "/dao-member-proposals" },
       ],
     },
     {
@@ -87,7 +87,7 @@ function Navbar() {
       link: "",
       auth: true,
       submenu: [
-        { title: "Validate Carbon Credits", link: "/certificate-validation-proposal" },
+        { title: "Add Your Proposal", link: "/certificate-validation-proposal" },
         { title: "Calculate Carbon Footprints", link: "/calculator" },
       ],
     },

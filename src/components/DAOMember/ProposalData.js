@@ -4,15 +4,34 @@ import { useLocation } from "react-router-dom";
 import { daoInstance } from "../Contracts";
 import { ethers } from "ethers";
 import { useAccount } from 'wagmi';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProposalData() {
   const { address } = useAccount();
   const location = useLocation();
   console.log(location.state.data);
   const proposal = location.state ? location.state.data : "";
-  const [downvoteProposal, setDownvoteProposal] = useState();
+  // const [downvoteProposal, setDownvoteProposal] = useState();
   const [rejectbtnloading, setrejectbtnloading] = useState(false);
   const [approvebtnloading, setapprovebtnloading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [enlargedImageSrc, setEnlargedImageSrc] = useState("0");
+
+  const checkDAOMember = async () => {
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      if (!provider) {
+        console.log("Metamask is not installed, please install!");
+      }
+      const conDAO = await daoInstance();
+      const isDAOMember = await conDAO.isMember(address)
+      console.log(isDAOMember)
+      return isDAOMember;
+    }
+  }
 
   const daoProposalApprove = async () => {
     try {
@@ -36,6 +55,20 @@ function ProposalData() {
     } catch (error) {
       console.log(error);
       setapprovebtnloading(false);
+      console.log(error.reason);
+      const ErrorReason = error.reason;
+      console.log(ErrorReason)
+      toast.error(`Error : ${ErrorReason}`, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setapprovebtnloading(false);
     }
   };
 
@@ -57,7 +90,20 @@ function ProposalData() {
         // console.log(downvoteProposal)
       }
     } catch (error) {
-      console.log(error);
+      setrejectbtnloading(false);
+      console.log(error.reason);
+      const ErrorReason = error.reason;
+      console.log(ErrorReason)
+      toast.error(`Error : ${ErrorReason}`, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setrejectbtnloading(false);
     }
   };
@@ -66,8 +112,7 @@ function ProposalData() {
     console.log(proposal[0])
     // console.log(value[1])
   }
-  const [showModal, setShowModal] = useState(false);
-  const [enlargedImageSrc, setEnlargedImageSrc] = useState("0");
+
   const proposalValue = parseInt(proposal[4]._hex, 16);
   const proposalData = {
     id: proposal[0],
@@ -262,6 +307,7 @@ function ProposalData() {
               </div>
             </div>
           </div>
+          <ToastContainer />
         </div>
         {/* <button onClick={data1}>click</button> */}
       </div>

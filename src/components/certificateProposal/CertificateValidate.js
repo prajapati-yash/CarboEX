@@ -7,6 +7,7 @@ import { daoInstance } from "../Contracts";
 import { Web3Storage } from "web3.storage";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useAccount } from 'wagmi';
 
 
 function CertificateValidate() {
@@ -15,6 +16,7 @@ function CertificateValidate() {
   const [domain, setDomain] = useState();
   const [emission, setEmission] = useState("");
   const [proposal, setProposal] = useState("");
+  const { address } = useAccount();
   const [btnloading, setbtnloading] = useState(false);
   const [btndisable, setbtndisable] = useState(false);
 
@@ -76,7 +78,7 @@ function CertificateValidate() {
 
   const createProposalMain = async () => {
     try {
-      console.log(domain)
+      console.log("domain " + domain)
       if (certificate === '' || domain === '' || emission === '' || proposal === '') {
         toast.error('Enter the required details', {
           position: "top-center",
@@ -116,6 +118,7 @@ function CertificateValidate() {
           const value = await conDAO.getConfigs()
           console.log(value)
           console.log(proposal, cids, domain, emission)
+          const isDAOMember = conDAO.isMember(address)
           const CPTx = await conDAO.createProposal(proposal, cids, domain, emission, { value: String(value[0]) })
           await CPTx.wait();
           setbtnloading(false)
@@ -132,6 +135,21 @@ function CertificateValidate() {
     }
   }
 
+  const checkDAOMember = async () => {
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      if (!provider) {
+        console.log("Metamask is not installed, please install!");
+      }
+      const conDAO = await daoInstance();
+      const isDAOMember = await conDAO.isMember(address)
+      console.log(isDAOMember)
+      return isDAOMember;
+    }
+  }
+
   return (
     <>
       <div className="certiPageBg">
@@ -143,7 +161,7 @@ function CertificateValidate() {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="certificate" className="form-label certiLabel">
-                Upload your certificate
+                Upload your certificate:
               </label>
               <input
                 type="file"
@@ -175,12 +193,12 @@ function CertificateValidate() {
             </div>
             <div className="mb-3">
               <label htmlFor="emission" className="form-label certiLabel">
-                Enter the value of emission/offset
+                Enter the value of Emission/Offset (in tons):
               </label>
               <input
                 type="text"
                 className="form-control certiInput emissionInput"
-                placeholder="tons"
+                placeholder="in tons"
                 id="emission"
                 onChange={handleEmissionChange}
                 value={emission}
@@ -199,7 +217,31 @@ function CertificateValidate() {
                 value={proposal}
               ></textarea>
             </div>
-            <button type="submit" className=" rounded-pill certiSubmit mt-3" disabled={btndisable} onClick={createProposalMain}>
+            <button type="submit" className=" rounded-pill certiSubmit mt-3"
+              disabled={btndisable}
+              onClick={async () => {
+                console.log("Button CLicked")
+                const isAllowed = await checkDAOMember();
+                console.log(isAllowed)
+                if (!isAllowed) {
+                  setbtndisable(false)
+                  toast.error(`You are not a DAO Member`, {
+                    position: "top-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                  });
+                } else {
+                  createProposalMain()
+                }
+              }
+
+
+              }>
               {btnloading ? (
                 <svg
                   className="animate-spin button-spin-svg-pic"
@@ -219,7 +261,7 @@ function CertificateValidate() {
           </form>
         </div>
       </div>
-      {/* <button onClick={handleSubmit}> Click to get true/false</button> */}
+      {/* <button onClick={() => checkDAOMember()}> Click to get true/false</button> */}
     </>
   );
 }
