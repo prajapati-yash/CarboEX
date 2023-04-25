@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   text_title: {
     fontSize: responsiveFontSize(4),
     fontWeight: "bold",
-    color: "#fff",
+    color: "#000",
   },
 
   mainBox: {
@@ -77,15 +77,15 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2),
   },
   input_box: {
-    height: responsiveHeight(4),
+    height: responsiveHeight(5),
     width: responsiveWidth(72),
-    paddingVertical: "1%",
     borderColor: "black",
-    borderWidth: 1,
     marginTop: "3%",
     marginBottom: "3%",
     borderRadius: 8,
     paddingHorizontal: 8,
+    backgroundColor:"#efefef",
+    justifyContent:"center"
   },
 });
 

@@ -19,15 +19,13 @@ import BecomeMember from "./pages/becomeMember";
 import ProposalDashboard from "./pages/proposalDashboard";
 import BuyTokensDashboard from "./pages/buyTokensDashboard";
 import ProfileDetails from "./pages/profileDetails";
-import WalletConnectProvider from "@walletconnect/react-native-dapp";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import WalletConnectExperience from "./components/WalletConnectExperience";
-
-const SCHEME_FROM_APP_JSON = "walletconnect-example";
+import { LogBox } from "react-native";
 
 const Drawer = createDrawerNavigator();
+LogBox.ignoreAllLogs();
 
 export default function App() {
+  console.warn = () => {};
   return (
     <NavigationContainer>
       <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>

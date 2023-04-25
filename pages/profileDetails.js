@@ -3,7 +3,6 @@ import {
   View,
   Text,
   ScrollView,
-  TextInput,
   ImageBackground,
   Image,
   TouchableOpacity,
@@ -12,16 +11,16 @@ import styles from "../style/profileDetailsStyle";
 import { Button, Dialog } from "@rneui/themed";
 import {
   responsiveFontSize,
+  responsiveHeight,
   responsiveWidth,
 } from "react-native-responsive-dimensions";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Avatar } from "react-native-elements";
 import SellCredits from "./sellCredits";
 import { connector } from "../components/WalletConnectExperience";
 import Web3 from "web3";
-import { companyInstance } from "../components/contract";
+import { companyInstance,COMPANY_ADDRESS, DAO_MEMBER_ADDRESS,daoInstance } from "../components/contract";
 
 function EditProfileScreen() {
   const navigation = useNavigation();
@@ -82,53 +81,31 @@ function EditProfileScreen() {
                 backgroundColor="#5B9C7A"
                 source={{ uri: "https://ipfs.io/ipfs/" + logoImg }}
               >
-                {/* <Text style={styles.header_text}>Traditional Energy</Text> */}
+               
               </ImageBackground>
             </View>
 
             <View style={styles.profileBody}>
               <View>
-                <Text style={styles.input_text}>Company Name</Text>
+                <Text style={styles.input_text}>Company Name:</Text>
                 <View style={styles.input_box}>
                   <Text style={{}}>{companyName}</Text>
                 </View>
               </View>
 
               <View>
-                <Text style={styles.input_text}>Email</Text>
+                <Text style={styles.input_text}>Email:</Text>
                 <View style={styles.input_box}>
                   <Text style={{}}>{email}</Text>
                 </View>
               </View>
 
               <View>
-                <Text style={styles.input_text}>Username</Text>
+                <Text style={styles.input_text}>Username:</Text>
                 <View style={styles.input_box}>
                   <Text style={{}}>{userName}</Text>
                 </View>
               </View>
-
-              {/* <Button
-                title="EDIT"
-                loading={false}
-                loadingProps={{ size: "small", color: "white" }}
-                buttonStyle={{
-                  backgroundColor: "#5B9C7A",
-                  borderRadius: 20,
-                }}
-                titleStyle={{
-                  fontWeight: "bold",
-                  fontSize: responsiveFontSize(2.7),
-                }}
-                containerStyle={{
-                  marginHorizontal: "15%",
-                  // height: 50,
-                  width: responsiveWidth(40),
-                  marginVertical: "2%",
-                  marginBottom: "5%",
-                }}
-                onPress={() => console.log("aye")}
-              /> */}
 
               <View
                 style={{
@@ -136,11 +113,10 @@ function EditProfileScreen() {
                   alignItems: "center",
                   marginLeft: "12%",
                   marginRight: "12%",
-                  //   justifyContent: "center",
                 }}
               >
                 <View style={{ flex: 1 }}>
-                  <Text style={styles.input_text}>Credits Available</Text>
+                  <Text style={styles.input_text}>Credits Available:</Text>
                   <View style={styles.credit_input_box}>
                     <Text>0</Text>
                   </View>
@@ -149,24 +125,17 @@ function EditProfileScreen() {
                 <Button
                   title="SELL"
                   loading={false}
-                  // type="outline"
                   loadingProps={{ size: "small", color: "white" }}
                   buttonStyle={{
                     backgroundColor: "#5B9C7A",
                     borderRadius: 20,
-                    // borderColor: "#5B9C7A",
-                    // borderWidth: 2,
                   }}
                   titleStyle={{
                     fontWeight: "bold",
                     fontSize: responsiveFontSize(1.7),
-                    // color: "#5B9C7A",
                   }}
                   containerStyle={{
-                    // marginHorizontal: "5%",
-                    // height: 50,
                     width: responsiveWidth(20),
-                    //   marginVertical: "2%",
                     marginTop: "4%",
                   }}
                   onPress={() => navigation.navigate(SellCredits)}
@@ -181,31 +150,95 @@ function EditProfileScreen() {
 }
 
 function MyProposalScreen() {
+
+  const [loadingIndex, setLoadingIndex] = useState(null);
+  const [allData, setAllData] = useState();
+  const [userProp, setUserProp] = useState([]);
   const [visible1, setVisible1] = useState(null);
+  const address = connector.accounts[0];
+
   const toggleDialog = (index) => {
-    // setSelectedImage(null);
     setVisible1(index);
   };
-  const myProposalData = [
-    {
-      sr_no: "name1",
-      title: "title1",
-      image: require("../assets/calculatorAssets/HomeBg.jpg"),
-      result: "result1",
-      stake: "stake1",
-      return_stake: "return stake1",
-      credit_issue: "credit issue1",
-    },
-    {
-      sr_no: "name2",
-      title: "title2",
-      image: require("../assets/calculatorAssets/FuelBg.jpg"),
-      result: "result2",
-      stake: "stake2",
-      return_stake: "return stake2",
-      credit_issue: "credit issue2",
-    },
-  ];
+
+  const getUserIDs = async () => {
+    try {
+      if (!connector.connected) {
+        console.log("WalletConnect not connected");
+        return;
+      }
+      if (connector.connected) {
+        const provider = new Web3("https://pre-rpc.bt.io/");
+
+        const con = await daoInstance();
+        // console.log(address)
+        const getUserID = await con.methods.getUserProposals(address).call();
+        console.log("Get User Id",getUserID);
+        let userIdLength = getUserID.length;
+        console.log("Get User ID Length",userIdLength)
+        let arr = [];
+        for (let i = 0; i < userIdLength; i++) {   
+          console.log("Temp");   
+          // console.log(getUserID[i]);
+          const getUserData = await con.methods.getProposal(getUserID[i]).call();
+          arr.push(getUserData);
+          console.log("Get user Data:",getUserData);
+        }
+        // console.log(arr)
+        setUserProp(arr);
+        setAllData(getUserID);
+        return getUserID;
+      }
+    } catch (error) {
+      console.log("GetUser Ids Error:",error);
+    }
+  };
+
+  useEffect(() => {
+    getUserIDs();
+  }, []);
+
+  const getUserDataById = async (e, key) => {
+    try {
+      setLoadingIndex(key);
+      if (connector.connected) {
+        console.log("Connector---", connector);
+        const provider = new Web3("https://pre-rpc.bt.io/");
+
+        const con = await daoInstance();
+        const getResult = await con.methods.getProposalResult(e).encodeABI();
+        console.log("Get Result:",getResult);
+        // await getResult.wait();
+
+        const gasPrice = await provider.eth.getGasPrice();
+        const gasLimit = 3000000;
+        const recipient = DAO_MEMBER_ADDRESS; // replace with recipient address
+        const nonce = await provider.eth.getTransactionCount(
+          connector.accounts[0],
+          "pending"
+        );
+        const txOptions = {
+          gasPrice,
+          gasLimit,
+          from: connector.accounts[0],
+          to: recipient,
+          data: getResult,
+          nonce,
+        };
+
+        console.log("After txOptions");
+        console.log("connector transaction", connector);
+        const signTx = await connector.sendTransaction(txOptions);
+        // const finalTx = await signTx;
+        console.log("After transaction");
+        console.log(signTx);
+        return getResult;
+      }
+    } catch (error) {
+      console.log("Get Result Error :",error.message);
+    }
+  };
+  
   return (
     <View style={styles.container}>
       <ScrollView
@@ -213,6 +246,124 @@ function MyProposalScreen() {
         contentContainerStyle={styles.centerView}
       >
         <View style={styles.main_view}>
+          <Text style={styles.main_view_text}>PROPOSAL MADE BY YOU</Text>
+
+            <View style={styles.view_proposal_data}>
+            {userProp.map((details, key) => (
+                <View style={styles.view_proposal} key={key}>
+
+                <View>
+                  <Text style={styles.input_text_orders}>Type:</Text>
+                  <View style={styles.input_box_orders}><Text>{details[3] ? "Emission" : "Offset"}</Text></View>
+                </View>
+
+                <View>
+                  <Text style={styles.input_text_orders}>Description:</Text>
+                  <View style={styles.input_box_orders}><Text>{details[1]}</Text></View>
+                </View>
+
+                
+                  <Text style={styles.input_text_orders_image}>Certificate:</Text>
+                
+                  <View
+                    style={[
+                      styles.view_proposal_description,
+                    ]}
+                  >
+                   
+                    <TouchableOpacity
+                      onPress={() => toggleDialog(key)}
+                      key={key}
+                    >
+                      <Image
+                        source={{uri:"https://ipfs.io/ipfs/" + details[2]}}
+                        style={{
+                          width: responsiveWidth(40),
+                          height: responsiveHeight(20),
+                          marginVertical: 10,
+                        }}
+                      ></Image>
+                    </TouchableOpacity>
+                    <Dialog
+                      isVisible={visible1 === key}
+                      onBackdropPress={() => setVisible1(null)}
+                      height="auto"
+                    >
+                      <Dialog.Title title="Your proposal image" />
+                      <View style={{ alignItems: 'center', justifyContent: 'center', height: 300 }}>
+                      <Image
+                        source={{uri:"https://ipfs.io/ipfs/" + details[2]}}
+                        style={{
+                          width: "100%",
+                          height:"80%",
+                          resizeMode: 'contain',
+                        }}
+                      ></Image>
+                      </View>
+                    </Dialog>
+                  </View> 
+
+                <View>
+                  <Text style={styles.input_text_orders}>Status:</Text>
+                  <View style={styles.input_box_orders}><Text>{details[10] ? details[10] : "pending"}</Text></View>
+                </View>
+
+                <View>
+                  <Text style={styles.input_text_orders}>Proposed at:</Text>
+                  <View style={styles.input_box_orders}><Text>{new Date(details[8] * 1000).toLocaleDateString()}</Text></View>
+                </View>
+
+                <View>
+                  <Text style={styles.input_text_orders}>Proposal Expire Time:</Text>
+                  <View style={styles.input_box_orders}><Text>{new Date(details[9] * 1000).toLocaleDateString()}</Text></View>
+                </View>
+
+                <Button
+                    title="Get Result"
+                    loading={false}
+                    loadingProps={{ size: "small", color: "white" }}
+                    buttonStyle={{
+                     
+                      borderRadius: 15,
+                    }}
+                    titleStyle={{
+                      fontWeight: "bold",
+                      color:"#fff",
+                      fontSize: responsiveFontSize(2.7),
+                      margin: "4%",
+                    }}
+                    containerStyle={{
+                      marginHorizontal: "15%",
+                      // height: 50,
+                      width: responsiveWidth(40),
+                      marginVertical: "4%",
+                      marginBottom: "4%",
+                    }}
+                    onPress={() => {
+                      console.log(("Button Clicked"));
+                      const value1 = details[9] > new Date();
+                      console.log("Value 1:",value1);
+                        if (value1) {
+                          console.log(Date());
+                          alert("You will be able to see the result after the proposal expires!");
+                        }else{
+                          getUserDataById(details[0], key);
+                        }
+                    }}
+                  />
+                </View>
+              ))}
+            </View>
+        </View>
+      </ScrollView>
+    </View>
+    
+    // <View style={styles.container}>
+    //   <ScrollView
+    //     showsVerticalScrollIndicator={false}
+    //     contentContainerStyle={styles.centerView}
+    //   >
+      /* <View style={styles.main_view}>
           <Text style={styles.main_view_text}>MY PROPOSALS</Text>
 
           <View style={styles.view_details}>
@@ -297,35 +448,50 @@ function MyProposalScreen() {
               ))}
             </View>
           </View>
-        </View>
-      </ScrollView>
-    </View>
+        </View> */
+  //     </ScrollView>
+  //   </View>
   );
 }
 
 function MyOrdersScreen() {
-  const myOrdersData = [
-    {
-      sr_no: "name1",
-      total_credits: "total credits",
-      price_per_credit: "price per credit",
-      total_price: "total price",
-      order_date: "order_date",
-      create: "create",
-      complete_date: "complete date",
-      status: "status",
-    },
-    {
-      sr_no: "name1",
-      total_credits: "total credits",
-      price_per_credit: "price per credit",
-      total_price: "total price",
-      order_date: "order_date",
-      create: "create",
-      complete_date: "complete date",
-      status: "status",
-    },
-  ];
+
+  const [userOrders, setUserOrders] = useState([]);
+  const address = connector.accounts[0];
+  console.log(address);
+
+  const ordersData = async () => {
+    try {
+      if (!connector.connected) {
+        console.log("WalletConnect not connected");
+        return;
+      }
+      if (connector.connected) {
+        const provider = new Web3("https://pre-rpc.bt.io/");
+
+        const con = await companyInstance();
+        console.log(address)
+        const getUserOrId = await con.methods.getUserOrders(address).call();
+        console.log(getUserOrId)
+
+        let arr = []
+        for (let i = 0; i < getUserOrId.length; i++) {
+          const getUserData = await con.methods.Orderstruct(getUserOrId[i]).call();
+          arr.push(getUserData);
+        }
+
+        setUserOrders(arr)
+        // console.log(userOrders)
+      }
+    } catch (error) {
+      console.log("OrdersData Error:",error);
+    }
+  }
+
+  useEffect(() => {
+    ordersData()
+  }, [])
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -335,60 +501,37 @@ function MyOrdersScreen() {
         <View style={styles.main_view}>
           <Text style={styles.main_view_text}>MY ORDERS</Text>
 
-          <View style={styles.view_details}>
             <View style={styles.view_proposal_data}>
-              {myOrdersData.map((orders, index) => (
-                <View style={styles.view_proposal} key={index}>
-                  <View style={styles.view_proposal_name}>
-                    <Text style={styles.text_proposal_name}>
-                      Sr. No: {orders.sr_no}
-                    </Text>
-                  </View>
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Total credits: {orders.total_credits}
-                    </Text>
-                  </View>
+              {userOrders.map((details, key) => (
+                <View style={styles.view_proposal} key={key}>
 
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Price per credit: {orders.price_per_credit}
-                    </Text>
-                  </View>
+                <View>
+                  <Text style={styles.input_text_orders}>Credits:</Text>
+                  <View style={styles.input_box_orders}><Text>{parseInt(details[1])}</Text></View>
+                </View>
 
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Total price: {orders.total_price}
-                    </Text>
-                  </View>
+                <View>
+                  <Text style={styles.input_text_orders}>Price Per Credit (in ETH):</Text>
+                  <View style={styles.input_box_orders}><Text>{parseInt(details[2]) / Math.pow(10, 18)}</Text></View>
+                </View>
 
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Order Date: {orders.order_date}
-                    </Text>
-                  </View>
+                <View>
+                  <Text style={styles.input_text_orders}>Total Price (in ETH):</Text>
+                  <View style={styles.input_box_orders}><Text>{(parseInt(details[2]) / Math.pow(10, 18)) * parseInt(details[1])}</Text></View>
+                </View>
 
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Create: {orders.create}
-                    </Text>
-                  </View>
+                <View>
+                  <Text style={styles.input_text_orders}>Address:</Text>
+                  <View style={styles.input_box_orders}><Text>{details[4]}</Text></View>
+                </View>
 
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Complete date: {orders.complete_date}
-                    </Text>
-                  </View>
-
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Status: {orders.status}
-                    </Text>
-                  </View>
+                <View>
+                  <Text style={styles.input_text_orders}>Status:</Text>
+                  <View style={styles.input_box_orders}><Text>{details[3] ? "true" : "false"}</Text></View>
+                </View>
                 </View>
               ))}
             </View>
-          </View>
         </View>
       </ScrollView>
     </View>
@@ -396,7 +539,6 @@ function MyOrdersScreen() {
 }
 
 const Tab = createBottomTabNavigator();
-
 export default function ProfileDetails() {
   return (
     <Tab.Navigator

@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   },
   text_company_name: {
     fontSize: responsiveFontSize(2),
+    fontWeight:"bold",
     margin: "2%",
   },
   text_email: {
@@ -90,14 +91,12 @@ const styles = StyleSheet.create({
   header_text: {
     fontSize: responsiveFontSize(4),
     fontWeight: "bold",
-    // alignItems: "center",
     textAlign: "center",
-    // marginTop: "11%",
-    // marginBottom: "11%",
     color: "#AEF5DC",
   },
   input_text: {
     fontSize: responsiveFontSize(2),
+    fontWeight:"bold"
   },
   input_box: {
     height: responsiveHeight(4),
@@ -144,17 +143,18 @@ const styles = StyleSheet.create({
   view_proposal_data: {
     marginLeft: "10%",
     marginRight: "10%",
-    marginTop: "10%",
     marginBottom: "7%",
-    // marginTop: "5%",
-    // marginBottom: "10%",
-    // paddingTop: "5%",
+
   },
   view_proposal: {
-    backgroundColor: "#EFEFEF",
+    backgroundColor: "#FFFFFF",
     borderRadius: 30,
     marginBottom: "5%",
     padding: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "6%",
+    width: responsiveWidth(80)
   },
   view_proposal_name: {
     marginBottom: "4%",
@@ -163,10 +163,32 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2),
   },
   view_proposal_description: {
-    marginBottom: "6%",
+    marginBottom: "4%",
+    marginLeft:"-45%"
   },
   text_proposal_description: {
     fontSize: responsiveFontSize(2),
+  },
+  input_text_orders: {
+    fontSize: responsiveFontSize(2),
+    fontWeight:"bold",
+    marginLeft:"2%"
+  },
+  input_text_orders_image: {
+    fontSize: responsiveFontSize(2),
+    fontWeight:"bold",
+    marginLeft:"-82%"
+  },
+  input_box_orders: {
+    height: responsiveHeight(5),
+    width: responsiveWidth(72),
+    borderColor: "black",
+    marginTop: "3%",
+    marginBottom: "3%",
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    backgroundColor:"#efefef",
+    justifyContent:"center"
   },
 });
 

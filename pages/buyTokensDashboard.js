@@ -1,40 +1,116 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   Text,
   ScrollView,
-  TextInput,
-  ImageBackground,
-  Pressable,
 } from "react-native";
 import styles from "../style/buyTokensDashboardStyle";
 import {
   responsiveFontSize,
-  responsiveHeight,
   responsiveWidth,
 } from "react-native-responsive-dimensions";
 import { Button } from "@rneui/themed";
+import { companyInstance, COMPANY_ADDRESS } from "../components/contract";
+import { connector } from "../components/WalletConnectExperience";
+import { useNavigation } from "@react-navigation/native";
+import Web3 from "web3";
+import ProfileDetails from "./profileDetails";
 
 export default function BuyTokensDashboard() {
-  const data = [
-    {
-      companyName: "Company 1",
-      description: "Description 1",
-      publicAddress: "Address 1",
-      credits: "Credits 1",
-      price: "Price 1",
-      image: require("../assets/calculatorAssets/HomeBg.jpg"),
-    },
-    {
-      companyName: "Company 2",
-      description: "Description 2",
-      publicAddress: "Address 2",
-      credits: "Credits 2",
-      price: "Price 2",
-      image: require("../assets/calculatorAssets/HomeBg.jpg"),
-    },
-    // add more data items here
-  ];
+  const navigation = useNavigation();
+  const [userDetailsById, setUserDetailsById] = useState([]);
+  const [count, setCount] = useState(1);
+
+  const address = connector.accounts[0];
+
+  const sellingCredits = async () => {
+    try {
+
+      if (!connector.connected) {
+        console.log("WalletConnect not connected");
+        return;
+      }
+      if (connector.connected) {
+        const provider = new Web3("https://pre-rpc.bt.io/");
+
+        const con = await companyInstance();
+        const getUserOrCount = await con.methods.orderCount().call();
+        const countOfUserOrder = parseInt(getUserOrCount, 16);
+        console.log("countOfUserOrder :",countOfUserOrder);
+
+        let arr = [];
+        for (let i = 1; i <= countOfUserOrder; i++) {
+          const getUserOrDetail = await con.methods.Orderstruct(i).call();
+          if (!getUserOrDetail[3]) {
+            arr.push(getUserOrDetail);
+          } else {
+            // console.log(getUserOrDetail);
+          }
+          // console.log(getUserOrDetail)
+        }
+        setUserDetailsById(arr);
+        // setbtnloading(false);
+      }
+    } catch (error) {
+      console.log("Selling Credits Error:",error);
+    }
+  };
+
+  useEffect(() => {
+    sellingCredits();
+  }, [count]);
+
+  const buyCreditsFunc = async (id, crd, prc) => {
+    try {
+
+      if (connector.connected) {
+        console.log("Connector---", connector);
+        const provider = new Web3("https://pre-rpc.bt.io/");
+
+        const con = await companyInstance();
+        // console.log(id)
+        console.log("Id :  crd :  prc :");
+        console.log(id, crd, prc)
+        const valueMul = crd * prc;
+        const valuePara = valueMul.toString();
+        const buyCredits = await con.methods.buycredit(id).encodeABI();
+        await buyCredits.wait();
+       
+        const gasPrice = await provider.eth.getGasPrice();
+        const gasLimit = 3000000;
+        const recipient = COMPANY_ADDRESS; // replace with recipient address
+        const nonce = await provider.eth.getTransactionCount(
+          connector.accounts[0],
+          "pending"
+        );
+        const txOptions = {
+          gasPrice,
+          gasLimit,
+          from: connector.accounts[0],
+          to: recipient,
+          data: txObject,
+          nonce,
+          value:valuePara
+        };
+
+        console.log("After txOptions");
+        console.log("connector transaction", connector);
+        const signTx = await connector.sendTransaction(txOptions);
+        // const finalTx = await signTx;
+        console.log("After transaction");
+        console.log(signTx);
+        setCount((prev) => prev + 1);
+
+        // sellingCredits()
+        // return buyCredits;
+        navigation.navigate(ProfileDetails);
+      }
+    } catch (error) {
+      console.log("Buy Credits Function Error :",error);
+    }
+  };
+
   return (
     <View>
       <ScrollView
@@ -43,47 +119,33 @@ export default function BuyTokensDashboard() {
       >
         <View style={styles.container}>
           <View style={styles.view_title}>
-            <Text style={styles.text_title}>Buy Tokens</Text>
+            <Text style={styles.text_title}>BUY CARBON CREDITS</Text>
           </View>
 
-          {data.map((item, index) => (
-            <View style={styles.mainBox} key={index}>
+          {count &&
+            userDetailsById.map((company, key) => (
+            <View style={styles.mainBox} key={key}>
               <View style={styles.boxBody}>
-                <View style={styles.header_view}>
-                  <ImageBackground
-                    style={styles.image1}
-                    borderTopRightRadius={36}
-                    borderTopLeftRadius={36}
-                    source={item.image}
-                  >
-                    {/* <Text style={styles.header_text}>Traditional Energy</Text> */}
-                  </ImageBackground>
-                </View>
 
                 <View style={styles.view_body}>
                   <View>
-                    <Text style={styles.input_text}>Company Name</Text>
-                    <Text style={styles.input_box}>{item.companyName}</Text>
+                    <Text style={styles.input_text}>Seller Address :</Text>
+                    <View style={styles.input_box}><Text>{company[4]}</Text></View>
                   </View>
 
                   <View>
-                    <Text style={styles.input_text}>Description</Text>
-                    <Text style={styles.input_box}>{item.description}</Text>
+                    <Text style={styles.input_text}>Credits:</Text>
+                    <View style={styles.input_box}><Text>{parseInt(company[1]._hex, 16)}</Text></View>
                   </View>
 
                   <View>
-                    <Text style={styles.input_text}>Public Address</Text>
-                    <Text style={styles.input_box}>{item.publicAddress}</Text>
+                    <Text style={styles.input_text}>Price per credits (in ETH):</Text>
+                    <View style={styles.input_box}><Text>{parseInt(company[2]._hex, 16) / Math.pow(10, 18)}</Text></View>
                   </View>
 
                   <View>
-                    <Text style={styles.input_text}>Credits</Text>
-                    <Text style={styles.input_box}>{item.credits}</Text>
-                  </View>
-
-                  <View>
-                    <Text style={styles.input_text}>Price</Text>
-                    <Text style={styles.input_box}>{item.price}</Text>
+                    <Text style={styles.input_text}>Total (in ETH):</Text>
+                    <View style={styles.input_box}><Text>{(parseInt(company[2]._hex, 16) / Math.pow(10, 18)) * parseInt(company[1]._hex, 16)}</Text></View>
                   </View>
 
                   <Button
@@ -91,22 +153,23 @@ export default function BuyTokensDashboard() {
                     loading={false}
                     loadingProps={{ size: "small", color: "white" }}
                     buttonStyle={{
-                      backgroundColor: "#AFF6FF",
+                      backgroundColor: "#000",
                       borderRadius: 15,
                     }}
                     titleStyle={{
                       fontWeight: "bold",
+                      color:"#fff",
                       fontSize: responsiveFontSize(2.7),
                       margin: "4%",
                     }}
                     containerStyle={{
                       marginHorizontal: "15%",
                       // height: 50,
-                      width: responsiveWidth(50),
+                      width: responsiveWidth(30),
                       marginVertical: "2%",
                       marginBottom: "5%",
                     }}
-                    onPress={() => console.log("aye")}
+                    onPress={buyCreditsFunc(company[0], parseInt(company[1]._hex, 16), parseInt(company[2]._hex, 16))}
                   />
                 </View>
               </View>
