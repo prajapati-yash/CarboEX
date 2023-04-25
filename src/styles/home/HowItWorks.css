@@ -1,0 +1,101 @@
+.work-box {
+    margin: 4% 0;
+}
+.fa-arrow-right{
+    font-size: 1.5rem!important;
+}
+
+.work-head {
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    /* margin-bottom: 3%; */
+    margin-top: 1%;
+}
+
+.main-works-box{
+    /* background-color: rgb(82, 201, 179);
+    padding: 2rem 0;
+    border-radius: 5rem; */
+    flex-direction: column;
+    /* background-color: white;
+    padding: 2rem 3rem 3rem 3rem;
+    border-radius: 3rem;
+    width: 80%;
+    margin: 0 auto; */
+}
+
+.work-instruction-div{
+    margin: 0 auto;
+    width: fit-content;
+    padding: 2rem 0 3rem 0;
+}
+
+.work-instruction{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    background-color: black;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    letter-spacing: 2px;
+    /* width: fit-content; */
+}
+
+.how-works-content{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.how-works-head{
+font-size: 1.5rem;
+font-weight: 650;
+}
+
+.how-works-sub-content{
+font-size: 1.3rem;
+}
+
+/* .how-works-mono-content{
+    background-color: aliceblue;
+    border-radius: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+} */
+@media only screen and (max-width:1250px) {
+   .how-works-content{
+    width: 85%;
+   }
+}
+@media only screen and (max-width:992px) {
+  .work-head{
+    margin-top:30px;
+  }
+}
+@media only screen and (max-width: 768px) {
+    .work-head {
+      font-size: 2rem;
+      letter-spacing: 3px;
+    }
+
+    .work-instruction-div{
+        padding: 1rem 0 2rem 0;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+   
+    .work-head {
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+    }
+    .how-works-content{
+        width: 100%;
+    }
+
+    .work-instruction{
+        font-size: 1.3rem;
+        padding:1rem 2rem;
+    }
+}

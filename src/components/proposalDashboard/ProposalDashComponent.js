@@ -94,7 +94,6 @@ function ProposalDashComponent() {
     display: showModal ? "block" : "none",
   };
 
-<<<<<<< HEAD
   // function hexToTimestamp(hex) {
   //   // const unixTimestamp = parseInt(hex, 16);
   //   // const date = new Date(unixTimestamp * 1000);
@@ -109,8 +108,6 @@ function ProposalDashComponent() {
   //   const seconds = date.getUTCSeconds().toString().padStart(2, '0');
   //   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   // }
-=======
->>>>>>> a4f0ce2fdbf402a788ebfdcc6d92b2706149794b
 
   function hexToTimestamp(hex) {
     const unixTimestamp = parseInt(hex, 16);

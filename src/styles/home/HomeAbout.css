@@ -8,6 +8,11 @@
   border-radius: 0 0 8rem 8rem;
 }
 
+.main-home-about{
+  background-color: #00DAF7;
+  margin-top: 3%;
+  border-radius: 8rem;
+}
 .about-image {
   width: 200%;
   height: 70%;
@@ -42,6 +47,9 @@
   .main-div {
     border-radius: 0 0 7rem 7rem;
   }
+  .main-home-about{
+    border-radius: 7rem;
+  }
   .box-bg {
     border-radius: 4rem;
   }
@@ -50,6 +58,9 @@
 @media only screen and (max-width: 992px) {
   .main-div {
     border-radius: 0 0 6rem 6rem;
+  }
+  .main-home-about{
+    border-radius: 6rem;
   }
   .box-bg {
     width: 85%;
@@ -66,6 +77,9 @@
   .main-div {
     border-radius: 0 0 5rem 5rem;
   }
+  .main-home-about{
+    border-radius: 5rem;
+  }
   .box-bg {
     width: 90%;
   }
@@ -79,6 +93,9 @@
     border-radius: 0 0 4rem 4rem;
     margin-top: -14%;
     padding-top: 19%;
+  }
+  .main-home-about{
+    border-radius: 4rem;
   }
 
   .box-bg {
