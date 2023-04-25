@@ -77,7 +77,7 @@ function CertificateValidate() {
 
   const createProposalMain = async () => {
     try {
-      console.log(domain)
+      console.log("domain " + domain)
       if (certificate === '' || domain === '' || emission === '' || proposal === '') {
         toast.error('Enter the required details', {
           position: "top-center",
@@ -212,7 +212,31 @@ function CertificateValidate() {
                 value={proposal}
               ></textarea>
             </div>
-            <button type="submit" className=" rounded-pill certiSubmit mt-3" disabled={btndisable} onClick={createProposalMain}>
+            <button type="submit" className=" rounded-pill certiSubmit mt-3"
+              disabled={btndisable}
+              onClick={async () => {
+                console.log("Button CLicked")
+                const isAllowed = await checkDAOMember();
+                console.log(isAllowed)
+                if (!isAllowed) {
+                  setbtndisable(false)
+                  toast.error(`You are not a DAO Member`, {
+                    position: "top-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                  });
+                } else {
+                  createProposalMain()
+                }
+              }
+
+
+              }>
               {btnloading ? (
                 <svg
                   className="animate-spin button-spin-svg-pic"

@@ -86,9 +86,9 @@ function MemberProposalsPage() {
     }
 
     function hexToTimestamp2(hex) {
-        console.log("hex " + hex)
+        // console.log("hex " + hex)
         const unixTimestamp = parseInt(hex, 16);
-        console.log("unix " + unixTimestamp)
+        // console.log("unix " + unixTimestamp)
         const date = new Date(unixTimestamp * 1000);
         return date
         // console.log("date " + date)
