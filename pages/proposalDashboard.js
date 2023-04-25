@@ -6,13 +6,16 @@ import { responsiveWidth } from "react-native-responsive-dimensions";
 import { connector } from "../components/WalletConnectExperience";
 import Web3 from "web3";
 import { daoInstance } from "../components/contract";
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function ProposalDashboard() {
+  const navigation = useNavigation();
   const [allProposalData, setAllProposalData] = useState([]);
 
   const daoProposal = async () => {
     try {
-      console.log("in try block");
+      // console.log("in try block");
       if (!connector.connected) {
         console.log("WalletConnect not connected");
         return;
@@ -22,9 +25,9 @@ export default function ProposalDashboard() {
 
         const con = await daoInstance();
         const daoProposalData = await con.methods.getAllProposal().call();
-        console.log("dao proposal");
+        // console.log("dao proposal");
         setAllProposalData(daoProposalData);
-        console.log("All proposals", allProposalData);
+        // console.log("All Proposal Data", allProposalData);
       }
     } catch (error) {
       console.log(error);
@@ -33,7 +36,7 @@ export default function ProposalDashboard() {
 
   useEffect(() => {
     daoProposal();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
@@ -50,7 +53,7 @@ export default function ProposalDashboard() {
                 <View style={styles.view_proposal} key={index}>
                   <View style={styles.view_proposal_name}>
                     <Text style={styles.text_proposal_name}>
-                      Type: {proposal[3] ? 'Emission' : 'Offset'}
+                      Type: {proposal[3] ? "Emission" : "Offset"}
                     </Text>
                   </View>
                   <View style={styles.view_proposal_description}>
@@ -59,7 +62,16 @@ export default function ProposalDashboard() {
                     </Text>
                   </View>
                   <View>
-                    <Button size="sm">View More</Button>
+                    <Button
+                      size="sm"
+                      onPress={() =>
+                        navigation.navigate("proposalDetails", {
+                          state: { data: proposal },
+                        })
+                      }
+                    >
+                      View More
+                    </Button>
                   </View>
                 </View>
               ))}

@@ -70,7 +70,6 @@ export default function SellCredits() {
 
           console.log(signTx);
           // await sellCreditsUser.wait();
-          // navigation.navigate(ProfileDetails);
           return sellCreditsUser;
         }
       }

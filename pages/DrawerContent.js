@@ -13,7 +13,6 @@ import { connector } from "../components/WalletConnectExperience";
 const SCHEME_FROM_APP_JSON = "walletconnect-example";
 
 const verifyUserAccount = async () => {
-
   try {
     if (!connector.connected) {
       console.log("WalletConnect not connected");
@@ -22,7 +21,9 @@ const verifyUserAccount = async () => {
 
     let con = await companyInstance();
     console.log("Wallet Address", connector.accounts[0]);
-    let verifyTx = await con.methods.iscompaniesAdd(connector.accounts[0]).call();
+    let verifyTx = await con.methods
+      .iscompaniesAdd(connector.accounts[0])
+      .call();
 
     console.log("VerifyTx: ", verifyTx);
     return verifyTx;
@@ -45,13 +46,13 @@ export function DrawerContent(props) {
         }
       }
     } catch (error) {
-      console.log("Hello----",error)
+      console.log("Hello----", error);
     }
   };
 
   useEffect(() => {
     verifyNavbar();
-  }, [isSignedIn]);
+  });
 
   return (
     <View style={{ flex: 1 }}>
@@ -180,7 +181,7 @@ export function DrawerContent(props) {
                 <DrawerItem
                   label="Sell Credits"
                   onPress={() => {
-                    props.navigation.navigate("sellCredits");
+                    props.navigation.navigate("SellCredits");
                   }}
                 />
 

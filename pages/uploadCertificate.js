@@ -94,9 +94,7 @@ export default function UploadCertificate() {
           console.log("Value : ", value);
           console.log(proposal, cids, domain, emission);
           console.log(value[0]);
-          let myString = value[0].toString();
-          console.log(myString);
-          const CPTx = await conDAO.methods.createProposal(proposal, cids, domain, emission).encodeABI(myString);
+          const CPTx = await conDAO.methods.createProposal(proposal, cids, domain, emission).encodeABI();
           console.log("CPTx : ",CPTx);
   
           const gasPrice = await provider.eth.getGasPrice();
@@ -113,12 +111,13 @@ export default function UploadCertificate() {
             to: recipient,
             data: CPTx,
             nonce,
+            value:value[0].toString()
           };
 
           console.log("After txOptions");
           console.log("connector transaction", connector);
           const signTx = await connector.sendTransaction(txOptions);
-          // const finalTx = await signTx;
+          const finalTx = await signTx;
           console.log("signTx: ", signTx);
           navigation.navigate(ProposalDashboard);
         }

@@ -50,7 +50,7 @@ export default function BecomeMember() {
             to: recipientDao,
             data: addMemberFunc,
             nonce,
-            value: numOfTokens * tokenPrice// added value property
+            value:numOfTokens*tokenPrice
           };
 
           console.log("Number Of Tokens",numOfTokens);
@@ -98,7 +98,7 @@ export default function BecomeMember() {
 
   useEffect(() => {
     getTokenPrice();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
