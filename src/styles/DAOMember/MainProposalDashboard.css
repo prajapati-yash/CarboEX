@@ -1,3 +1,54 @@
+.xmark-check-link-class {
+  color: white;
+  text-decoration: none;
+}
+.xmark-check-link-class:hover {
+  color: white;
+}
+.IMG-CHECK-class {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fa-xmark-sub-class {
+  background-color: red;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem;
+}
+
+.fa-check-sub-class {
+  background-color: rgb(4, 255, 0);
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem;
+}
+.fa-check {
+  font-size: 1.2rem;
+  /* font-weight: bold; */
+  /* margin-right: 10px; */
+}
+.fa-xmark {
+  font-size: 1.2rem;
+  /* font-weight: bold; */
+  /* margin-right: 10px; */
+  color: #ffffff;
+}
+
+.DAO-Check-Mark {
+  border-radius: 1rem;
+  background-color: #000000;
+  color: #ffffff;
+  align-items: center;
+  font-size: small;
+  display: flex;
+  padding: 0.8rem 1rem;
+}
+
 .u-dashboard-title {
   margin: 0.5rem;
 }
