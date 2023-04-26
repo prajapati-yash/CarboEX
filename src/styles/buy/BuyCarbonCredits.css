@@ -27,12 +27,38 @@
   border-radius: 3rem;
 }
 
-.buyHead {
-  color: white;
-  font-size: 3rem;
+.buy-head-text {
+  font-size: 2rem;
+  width: fit-content;
   font-weight: 600;
-  padding-top: 3%;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  /* padding-top: 3%; */
 }
+
+.buy-head-info {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #000;
+  border-radius: 1rem;
+}
+
+.buy-sub-text {
+    position: absolute;
+    font-size: 1.3rem;
+    font-weight: 500;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    opacity: 1;
+    border-radius: 0.5rem;
+    transition: 0.3s ease-in-out;
+}
+
 .buy-button:hover {
   background-color: #fff;
   color: #000;
@@ -108,6 +134,7 @@
   .BuyPage-content-box {
     height: fit-content;
   }
+ 
 }
 @media (max-width: 767px) {
   .BuyPage-box-bg {
@@ -127,9 +154,7 @@
   .companies {
     padding: 5% 8%;
   }
-  .buyHead {
-    padding-top: 5%;
-  }
+ 
 }
 
 @media (max-width: 768px) {
@@ -141,6 +166,14 @@
   .buy-button {
     letter-spacing: 1px;
   }
+  .buy-head-text {
+    font-size: 1.5rem;
+    width: fit-content;
+    font-weight: 600;
+    padding: 1rem 1rem;
+    border-radius: 1rem;
+    /* padding-top: 3%; */
+  }
 }
 
 @media (max-width: 576px) {
@@ -148,7 +181,17 @@
     font-size: 1.1rem;
   }
 
-  .buyHead {
-    font-size: 2.5rem;
+  .buy-head-text {
+    font-size: 1.3rem;
+    width: fit-content;
+    font-weight: 600;
+    padding: 0.8rem 1.3rem;
+    border-radius: 1rem;
+    /* padding-top: 3%; */
   }
+
+  .buy-sub-text{
+    width: 80%;
+  }
+ 
 }

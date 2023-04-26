@@ -4,22 +4,29 @@ import { ethers } from "ethers";
 import { companyInstance } from "../Contracts";
 import { useAccount } from "wagmi";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 function BuyCredits() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [userDetailsById, setUserDetailsById] = useState([]);
   const [count, setCount] = useState(1);
   const [btndisable, setbtndisable] = useState(false);
   const [btnloading, setbtnloading] = useState(false);
+  const [showText, setShowText] = useState(false);
+
+  const handleMouseEnter1 = () => {
+    setShowText(true);
+  };
+  const handleMouseLeave1 = () => {
+    setShowText(false);
+  };
 
   const address = useAccount();
 
   const sellingCredits = async () => {
     // console.log("first");
     try {
-
       const { ethereum } = window;
 
       if (ethereum) {
@@ -43,7 +50,6 @@ function BuyCredits() {
             // console.log(getUserOrDetail);
           }
           // console.log(getUserOrDetail)
-
         }
         setUserDetailsById(arr);
         // setbtnloading(false);
@@ -60,8 +66,8 @@ function BuyCredits() {
 
   const buyCreditsFunc = async (id, crd, prc) => {
     try {
-      setbtndisable(true)
-      toast.info('Process is in Progress', {
+      setbtndisable(true);
+      toast.info("Process is in Progress", {
         position: "top-left",
         autoClose: 5000,
         hideProgressBar: false,
@@ -71,7 +77,7 @@ function BuyCredits() {
         progress: undefined,
         theme: "light",
       });
-      setbtnloading(true)
+      setbtnloading(true);
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -81,30 +87,46 @@ function BuyCredits() {
         }
         const con = await companyInstance();
         // console.log(id)
-        console.log(id, crd, prc)
-        const buyCredits = await con.buycredit(id, { value: String(crd * prc) });
+        console.log(id, crd, prc);
+        const buyCredits = await con.buycredit(id, {
+          value: String(crd * prc),
+        });
         await buyCredits.wait();
         setCount((prev) => prev + 1);
         // sellingCredits()
-        setbtnloading(false)
-        setbtndisable(false)
+        setbtnloading(false);
+        setbtndisable(false);
         // return buyCredits;
-        navigate('/user-dashboard')
+        navigate("/user-dashboard");
       }
     } catch (error) {
       console.log(error);
-      setbtnloading(false)
-      setbtndisable(false)
+      setbtnloading(false);
+      setbtndisable(false);
     }
   };
 
   return (
     <>
       <div className="buyBg">
-        <div className="buyHead text-dark text-center">BUY CARBON CREDITS</div>
+        <div className="pb-5"></div>
+        <div className=" text-dark text-center d-flex justify-content-center align-items-center mx-auto">
+         <div className="buy-head-text bg-white"> BUY CARBON CREDITS</div> &nbsp;&nbsp;{" "}
+          <i
+            className="fas fa-info-circle buy-head-info"
+            onMouseEnter={handleMouseEnter1}
+            onMouseLeave={handleMouseLeave1}
+          >
+            {" "}
+          </i>
+        </div>
+        {showText && (
+            <div className="text-center d-flex justify-content-center align-items-center mb-3 mb-sm-4 buy-sub-text">
+              Here you can see the list of all the proposals made by sellers offering carbon credits for sale.  {" "}
+            </div>
+          )}
         <div className="companies">
-
-          {userDetailsById.length > 0 ?
+          {userDetailsById.length > 0 ? (
             // count &&
             userDetailsById.map((company, key) => (
               <div key={key} className="company-wrapper">
@@ -135,13 +157,12 @@ function BuyCredits() {
                       </p>
                     </p>
                     <p className="company-price">
-                      <span className="companyInfoLabel">
-                        Total (in ETH):
-                      </span>{" "}
+                      <span className="companyInfoLabel">Total (in ETH):</span>{" "}
                       <p className="allBuyBg">
                         {" "}
                         {/* {parseInt(company[2]._hex, 16)} */}
-                        {(parseInt(company[2]._hex, 16) / Math.pow(10, 18)) * parseInt(company[1]._hex, 16)}
+                        {(parseInt(company[2]._hex, 16) / Math.pow(10, 18)) *
+                          parseInt(company[1]._hex, 16)}
                       </p>
                     </p>
 
@@ -149,7 +170,11 @@ function BuyCredits() {
                       className=" rounded-pill buy-button mt-3"
                       disabled={btndisable}
                       onClick={() =>
-                        buyCreditsFunc(company[0], parseInt(company[1]._hex, 16), parseInt(company[2]._hex, 16))
+                        buyCreditsFunc(
+                          company[0],
+                          parseInt(company[1]._hex, 16),
+                          parseInt(company[2]._hex, 16)
+                        )
                       }
                     >
                       {btnloading ? (
@@ -173,15 +198,18 @@ function BuyCredits() {
                   </div>
                 </div>
               </div>
-            )) :
+            ))
+          ) : (
             <div className="BuyPage-box-bg mb-lg-0 mb-sm-4 mb-4 mx-auto align-self-stretch py-5 px-4">
-              <div className='BuyPage-content-box row'>
-                <div className="d-flex justify-content-center align-items-center">No Proposals to buy Carbon Credits</div>
+              <div className="BuyPage-content-box row">
+                <div className="d-flex justify-content-center align-items-center">
+                  No Proposals to buy Carbon Credits
+                </div>
               </div>
             </div>
-          }
+          )}
         </div>
-      </div >
+      </div>
       {/* <button onClick={sellingCredits}>click</button> */}
     </>
   );
