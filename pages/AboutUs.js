@@ -131,7 +131,7 @@ export default function AboutUs() {
                     <Text
                       style={[styles.text_image_subtext, { marginTop: "3%", marginBottom: "1%", fontWeight: 600, fontSize: responsiveFontSize(1.7) }]}
                     >
-                      Jay Patel
+                      jack212
                     </Text>
                     {/* </View> */}
                     <Text
@@ -154,7 +154,7 @@ export default function AboutUs() {
                   <Text
                     style={[styles.text_image_subtext, { marginTop: "3%", marginBottom: "1%", fontWeight: 600, fontSize: responsiveFontSize(1.7) }]}
                   >
-                    Purvi Vaghela
+                    pv_189
                   </Text>
                   <Text
                     style={[styles.text_image_subtext, { marginBottom: "4%" }]}
@@ -174,7 +174,7 @@ export default function AboutUs() {
                   <Text
                     style={[styles.text_image_subtext, { marginTop: "3%", marginBottom: "1%", fontWeight: 600, fontSize: responsiveFontSize(1.7) }]}
                   >
-                    Purvik Panchal
+                    peterparkar
                   </Text>
                   <Text
                     style={[styles.text_image_subtext, { marginBottom: "4%" }]}
@@ -192,7 +192,7 @@ export default function AboutUs() {
                   <Text
                     style={[styles.text_image_subtext, { marginTop: "3%", marginBottom: "1%", fontWeight: 600, fontSize: responsiveFontSize(1.7) }]}
                   >
-                    Yash Prajapati
+                    victorious
                   </Text>
                   <Text
                     style={[styles.text_image_subtext, { marginBottom: "4%" }]}
@@ -212,7 +212,7 @@ export default function AboutUs() {
                   <Text
                     style={[styles.text_image_subtext, { marginTop: "3%", marginBottom: "1%", fontWeight: 600, fontSize: responsiveFontSize(1.7) }]}
                   >
-                    Abhishek Rajput
+                    GodFather097
                   </Text>
                   <Text
                     style={[styles.text_image_subtext, { marginBottom: "4%" }]}
@@ -234,7 +234,7 @@ export default function AboutUs() {
                   <Text
                     style={[styles.text_image_subtext, { marginTop: "3%", marginBottom: "1%", fontWeight: 600, fontSize: responsiveFontSize(1.7) }]}
                   >
-                    Isha Mistry
+                    im_31
                   </Text>
                   <Text
                     style={[styles.text_image_subtext, { marginBottom: "4%" }]}

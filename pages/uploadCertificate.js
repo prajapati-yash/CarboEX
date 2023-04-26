@@ -3,7 +3,7 @@ import { Text, View, ScrollView, TextInput, Image } from "react-native";
 import styles from "../style/uploadCertificateStyle";
 import { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
-import { Button, Stack } from "@rneui/themed";
+import { Button, Stack, Dialog } from "@rneui/themed";
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import * as DocumentPicker from "expo-document-picker";
 import ProposalDashboard from "./proposalDashboard";
@@ -28,6 +28,11 @@ export default function UploadCertificate() {
   const [domainIsFocus, domainSetIsFocus] = useState(false);
   const [domain, setDomain] = useState(false);
   const [fileName, setFileName] = useState("");
+
+  const [visible1, setVisible1] = useState(null);
+  const toggleDialog = () => {
+    setVisible1();
+  };
 
   const handleSubmit = () => {
     console.log("Certificate", certificate);
@@ -94,9 +99,11 @@ export default function UploadCertificate() {
           console.log("Value : ", value);
           console.log(proposal, cids, domain, emission);
           console.log(value[0]);
-          const CPTx = await conDAO.methods.createProposal(proposal, cids, domain, emission).encodeABI();
-          console.log("CPTx : ",CPTx);
-  
+          const CPTx = await conDAO.methods
+            .createProposal(proposal, cids, domain, emission)
+            .encodeABI();
+          console.log("CPTx : ", CPTx);
+
           const gasPrice = await provider.eth.getGasPrice();
           const gasLimit = 3000000;
           const recipient = DAO_MEMBER_ADDRESS; // replace with recipient address
@@ -111,7 +118,7 @@ export default function UploadCertificate() {
             to: recipient,
             data: CPTx,
             nonce,
-            value:value[0].toString()
+            value: value[0].toString(),
           };
 
           console.log("After txOptions");
@@ -132,8 +139,46 @@ export default function UploadCertificate() {
       <View style={styles.container}>
         <View style={styles.centered_view}>
           <View style={styles.header}>
-            <Text style={styles.header_text}>Upload Certificate</Text>
+            <Text style={styles.header_text}>CERTIFICATE VALIDATION</Text>
           </View>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <Button
+              containerStyle={{
+                width: responsiveWidth(50),
+                marginBottom: "8%",
+              }}
+              onPress={() => toggleDialog()}
+            >
+              View Information
+            </Button>
+          </View>
+          <Dialog
+            isVisible={visible1}
+            onBackdropPress={() => setVisible1(null)}
+            height="auto"
+          >
+            {/* <Dialog.Title title="What is the use of Carbon Emission Calculator?" /> */}
+            <View>
+              {/* <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <Text>{"\u2022"}</Text> */}
+              <Text style={{ marginTop: "2%" }}>
+                {"\u2022"} Please provide all the details to verify the
+                certificate.
+              </Text>
+              {/* </View> */}
+              <Text style={{ marginTop: "4%" }}>
+                {"\u2022"} Once the user submits the certificate details, the
+                DAO members on the platform will review and validate the
+                certificate.
+              </Text>
+              <Text style={{ marginTop: "4%" }}>
+                {"\u2022"} If the certificate is found to be authentic and
+                compliant with relevant standards and regulations, it will be
+                approved.
+              </Text>
+            </View>
+          </Dialog>
+
           <View style={styles.mainBox}>
             <View style={styles.boxBody}>
               <Text style={styles.input_text}>Upload your certificate</Text>
@@ -152,9 +197,9 @@ export default function UploadCertificate() {
                 }}
                 onPress={this._pickDocument}
               />
-              <Text
-                  style={styles.input_box_image}
-                >{"Uploaded File: "+fileName}</Text>
+              <Text style={styles.input_box_image}>
+                {"Uploaded File: " + fileName}
+              </Text>
 
               <Dropdown
                 style={[
@@ -172,9 +217,9 @@ export default function UploadCertificate() {
                 onFocus={() => domainSetIsFocus(true)}
                 onBlur={() => domainSetIsFocus(false)}
                 onChange={(item) => {
-                  if(item.value === "Carbon Emission"){
+                  if (item.value === "Carbon Emission") {
                     setDomain(true);
-                  }else if(item.value == "Carbon Offset"){
+                  } else if (item.value == "Carbon Offset") {
                     setDomain(false);
                   }
                   domainSetIsFocus(false);

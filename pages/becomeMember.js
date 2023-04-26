@@ -1,9 +1,17 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, TextInput } from "react-native";
 import styles from "../style/becomeMemberStyle";
 import { Button } from "@rneui/themed";
-import { responsiveFontSize, responsiveWidth } from "react-native-responsive-dimensions";
-import { daoInstance, ercTokenInstance, ERC_TOKEN_ADDRESS,DAO_MEMBER_ADDRESS } from "../components/contract";
+import {
+  responsiveFontSize,
+  responsiveWidth,
+} from "react-native-responsive-dimensions";
+import {
+  daoInstance,
+  ercTokenInstance,
+  ERC_TOKEN_ADDRESS,
+  DAO_MEMBER_ADDRESS,
+} from "../components/contract";
 import ProposalDashboard from "./proposalDashboard";
 import { useNavigation } from "@react-navigation/native";
 import { connector } from "../components/WalletConnectExperience";
@@ -18,22 +26,23 @@ export default function BecomeMember() {
   const ercTokenFunc = async () => {
     try {
       if (numOfTokens === null || numOfTokens <= 0) {
-       alert("'Oops! Number of Tokens must be greater than 0!'");
+        alert("'Oops! Number of Tokens must be greater than 0!'");
       } else {
-
         if (connector.connected) {
           console.log("Connector---", connector);
           const provider = new Web3("https://pre-rpc.bt.io/");
 
           const conToken = await ercTokenInstance();
-          console.log("ConTokens",conToken);
+          console.log("ConTokens", conToken);
           const tokenPrice = await conToken.methods.gettokenPrice().call();
-          console.log("TokenPrice",tokenPrice);
+          console.log("TokenPrice", tokenPrice);
           setTokenPrice(tokenPrice);
           const conDAO = await daoInstance();
-          console.log("conDao",conDAO);
+          console.log("conDao", conDAO);
           const tokenPriceValue = numOfTokens * tokenPrice;
-          const addMemberFunc = await conDAO.methods.addmember(numOfTokens).encodeABI();
+          const addMemberFunc = await conDAO.methods
+            .addmember(numOfTokens)
+            .encodeABI();
 
           const gasPrice = await provider.eth.getGasPrice();
           const gasLimit = 3000000;
@@ -42,7 +51,7 @@ export default function BecomeMember() {
             connector.accounts[0],
             "pending"
           );
-       
+
           const txOptionsDao = {
             gasPrice,
             gasLimit,
@@ -50,10 +59,10 @@ export default function BecomeMember() {
             to: recipientDao,
             data: addMemberFunc,
             nonce,
-            value:numOfTokens*tokenPrice
+            value: numOfTokens * tokenPrice,
           };
 
-          console.log("Number Of Tokens",numOfTokens);
+          console.log("Number Of Tokens", numOfTokens);
           console.log("After txOptions");
           console.log("connector transaction", connector);
           const signTxDao = await connector.sendTransaction(txOptionsDao);
@@ -61,23 +70,22 @@ export default function BecomeMember() {
 
           console.log(finalTx);
           navigation.navigate(ProposalDashboard);
-          console.log("Add Member Function",addMemberFunc);
+          console.log("Add Member Function", addMemberFunc);
         }
       }
     } catch (error) {
-      console.log("ERCTokenFunction",error);
+      console.log("ERCTokenFunction", error);
     }
   };
 
   const getTokenPrice = async () => {
     try {
-
       if (connector.connected) {
         console.log("Connector---", connector);
-       
+
         const conToken = await ercTokenInstance();
         const tokenPrice = await conToken.methods.gettokenPrice().call();
-        console.log("TokenPrice:",tokenPrice);
+        console.log("TokenPrice:", tokenPrice);
         // const hexValue = tokenPrice.toString(16);
         // console.log("HexValue",hexValue);
         // const decimalValue = parseInt(hexValue, 16);
@@ -85,7 +93,7 @@ export default function BecomeMember() {
         setTokenPrice(tokenPrice);
       }
     } catch (err) {
-      console.log("Hello---",err);
+      console.log("Hello---", err);
     }
   };
 
@@ -93,7 +101,6 @@ export default function BecomeMember() {
     setTknAmtResult(
       numOfTokens ? (tokenPrice * numOfTokens) / Math.pow(10, 18) : "0"
     );
-
   }, [numOfTokens]);
 
   useEffect(() => {
@@ -107,7 +114,26 @@ export default function BecomeMember() {
         contentContainerStyle={styles.centerView}
       >
         <View style={styles.main_view}>
-          <Text style={styles.main_view_text}>BECOME A MEMBER</Text>
+          <Text style={styles.main_view_text}>BECOME A DAO MEMBER</Text>
+          <View
+            style={{
+              marginHorizontal: "10%",
+              marginBottom: "2%",
+              backgroundColor: "white",
+              borderRadius: 25,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: responsiveFontSize(2),
+                padding: "5%",
+                textAlign: "justify",
+              }}
+            >
+              DAO Members ensure compliance with standards and regulations,
+              transparency, security, and efficiency in carbon credit trading.
+            </Text>
+          </View>
 
           <View style={styles.view_details}>
             <View style={styles.view_data1_row1}>
@@ -130,30 +156,31 @@ export default function BecomeMember() {
                 <Text style={styles.text_data}>Total amount</Text>
               </View>
               <View>
-                <Text
-                  style={styles.input_box}
-                >{tknAmtResult + " ETH"}</Text>
+                <Text style={styles.input_box}>{tknAmtResult + " ETH"}</Text>
               </View>
             </View>
 
             <View style={styles.view_button}>
-            <Button
-              title="Buy Tokens"
-              loading={false}
-              loadingProps={{ size: "small", color: "white" }}
-              buttonStyle={{
-                backgroundColor: "#C0E28E",
-                borderRadius: 15,
-              }}
-              titleStyle={{ fontWeight: "bold", fontSize: responsiveFontSize(2), }}
-              containerStyle={{
-                marginHorizontal: "15%",
-                width: responsiveWidth(50),
-                marginVertical: "2%",
-                marginBottom: "10%",
-              }}
-              onPress={ercTokenFunc}
-            ></Button>
+              <Button
+                title="Buy Tokens"
+                loading={false}
+                loadingProps={{ size: "small", color: "white" }}
+                buttonStyle={{
+                  backgroundColor: "#C0E28E",
+                  borderRadius: 15,
+                }}
+                titleStyle={{
+                  fontWeight: "bold",
+                  fontSize: responsiveFontSize(2),
+                }}
+                containerStyle={{
+                  marginHorizontal: "15%",
+                  width: responsiveWidth(50),
+                  marginVertical: "2%",
+                  marginBottom: "10%",
+                }}
+                onPress={ercTokenFunc}
+              ></Button>
             </View>
           </View>
         </View>

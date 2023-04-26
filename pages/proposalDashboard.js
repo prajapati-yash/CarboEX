@@ -7,7 +7,7 @@ import { connector } from "../components/WalletConnectExperience";
 import Web3 from "web3";
 import { daoInstance } from "../components/contract";
 import { useNavigation } from "@react-navigation/native";
-
+import { responsiveFontSize } from "react-native-responsive-dimensions";
 
 export default function ProposalDashboard() {
   const navigation = useNavigation();
@@ -45,7 +45,25 @@ export default function ProposalDashboard() {
         contentContainerStyle={styles.centerView}
       >
         <View style={styles.main_view}>
-          <Text style={styles.main_view_text}>Proposal Dashboard</Text>
+          <Text style={styles.main_view_text}>PROPOSAL DASHBOARD</Text>
+          <View
+            style={{
+              marginHorizontal: "8%",
+              marginBottom: "6%",
+              backgroundColor: "white",
+              borderRadius: 25,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: responsiveFontSize(2),
+                padding: "5%",
+                textAlign: "justify",
+              }}
+            >
+              Here you can see all the active proposals made by DAO members.
+            </Text>
+          </View>
 
           <View style={styles.view_details}>
             <View style={styles.view_proposal_data}>
