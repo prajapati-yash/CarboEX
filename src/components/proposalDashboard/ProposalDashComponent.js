@@ -15,6 +15,7 @@ function ProposalDashComponent() {
   const [allData, setAllData] = useState();
   const [userProp, setUserProp] = useState([]);
   const [disable, setdisable] = useState(false)
+  const [isPageLoading, setIsPageLoading] = useState(true);
   // const [expDate, setExpDate] = useState(new Date());
   // const localDate1 = expDate;
 
@@ -46,8 +47,16 @@ function ProposalDashComponent() {
     }
   };
 
+  // useEffect(() => {
+  //   getUserIDs();
+  // }, []);
+
   useEffect(() => {
-    getUserIDs();
+    async function fetchData() {
+      await getUserIDs();
+      setIsPageLoading(false)
+    }
+    fetchData()
   }, []);
 
   const getUserDataById = async (e, key) => {
@@ -69,10 +78,20 @@ function ProposalDashComponent() {
         return getResult;
       }
     } catch (error) {
-      console.log(error.reason);
       setbtnloading(false);
-
-
+      console.log(error.reason);
+      const ErrorReason = error.reason;
+      console.log(ErrorReason)
+      toast.error(`${ErrorReason}`, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -104,24 +123,8 @@ function ProposalDashComponent() {
   function hexToTimestamp2(hex) {
     const unixTimestamp = parseInt(hex, 16);
     const date = new Date(unixTimestamp * 1000);
-    // const localDate = date.toLocaleString("en-US");
     return date;
   }
-  // function hexToTimestamp3(hex) {
-  //   const unixTimestamp = parseInt(hex, 16);
-  //   const date = new Date(unixTimestamp * 1000);
-  //   const year = date.getUTCFullYear();
-  //   const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-  //   const day = date.getUTCDate().toString().padStart(2, '0');
-  //   const hours = date.getUTCHours().toString().padStart(2, '0');
-  //   const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-  //   const seconds = date.getUTCSeconds().toString().padStart(2, '0');
-  //   const dateString = `${month}-${day}-${year} ${hours}:${minutes}:${seconds}`;
-  //   const istDateString = new Date(dateString).toLocaleString("en-US", { timeZone: "Asia/Kolkata", hour12: false });
-  //   return istDateString;
-  // }
-
-
 
   return (
     <>
@@ -130,127 +133,128 @@ function ProposalDashComponent() {
           <p className="myProposals-head-title-name">PROPOSALS MADE BY YOU</p>
         </div>
         <div className="proposalDetails">
-          {userProp.map((details, key) => (
+          {isPageLoading ?
+            (
+              <div className="BuyPage-box-bg mb-lg-0 mb-sm-4 mb-4 mx-auto align-self-stretch py-5 px-4">
+                <div className='BuyPage-content-box row'>
+                  <div className="d-flex justify-content-center align-items-center">Loading...</div>
+                </div>
+              </div>
+            ) :
 
-            <div className="proposal-company-wrapper" key={key}>
-              <div className="proposal-dash">
-                <div className="proposal-dash-info">
-                  <div className="">
-                    {" "}
-                    <span className="proposal-dash-label">Type: </span>{" "}
-                    <p className="proposal-dash-output-Bg ">
-                      {details[3] ? "Emission" : "Offset"}
-                    </p>
-                  </div>
-                  <div className=" ">
-                    <span className="proposal-dash-label">Description: </span>
-                    <p className="proposal-dash-output-Bg proposal-dash-title scroll-bar ">
-                      {details[1]}
-                    </p>
-                  </div>
-                  <div className="mb-3">
-                    <span className="proposal-dash-label">Certificate:</span>
-                    <div
-                      className="proposal-dash-output-Bg proposal-dash-image"
-                      style={{ width: "fit-content" }}
-                    >
+            userProp.map((details, key) => (
+
+              <div className="proposal-company-wrapper" key={key}>
+                <div className="proposal-dash">
+                  <div className="proposal-dash-info">
+                    <div className="">
                       {" "}
-                      <a
+                      <span className="proposal-dash-label">Type: </span>{" "}
+                      <p className="proposal-dash-output-Bg ">
+                        {details[3] ? "Emission" : "Offset"}
+                      </p>
+                    </div>
+                    <div className=" ">
+                      <span className="proposal-dash-label">Description: </span>
+                      <p className="proposal-dash-output-Bg proposal-dash-title scroll-bar ">
+                        {details[1]}
+                      </p>
+                    </div>
+                    <div className="mb-3">
+                      <span className="proposal-dash-label">Certificate:</span>
+                      <div
+                        className="proposal-dash-output-Bg proposal-dash-image"
+                        style={{ width: "fit-content" }}
+                      >
+                        {" "}
+                        <a
+                          onClick={() => {
+                            handleImageClick({
+                              image: `https://ipfs.io/ipfs/${details[2]}`,
+                            });
+                          }}
+                        >
+                          <img
+                            src={`https://ipfs.io/ipfs/${details[2]}`}
+                            className="img-thumbnail"
+                            alt="thumbnail"
+                            style={{ height: "150px", width: "150px" }}
+                          />
+                        </a>
+                      </div>
+                    </div>
+                    <div className="">
+                      <span className="proposal-dash-label">Status: </span>{" "}
+                      <p className="proposal-dash-output-Bg">
+                        {details[10] ? details[10] : "pending"}
+
+                      </p>
+                    </div>
+                    <div className="">
+                      <span className="proposal-dash-label">Proposed at:</span>{" "}
+                      <p className="proposal-dash-output-Bg">
+                        {hexToTimestamp(details[8]._hex)}
+                      </p>
+                    </div>
+                    <div className="">
+                      <span className="proposal-dash-label">
+                        Proposal Expire Time:
+                      </span>{" "}
+                      <p className="proposal-dash-output-Bg">
+                        {hexToTimestamp(details[9]._hex)}
+                      </p>
+                    </div>
+                    <div className="">
+                      <span className="proposal-dash-label">Result:</span> <br />
+                      <button
+                        className="btn btn-primary"
+                        style={{ width: "30%" }}
+                        disabled={disable}
+                        key={key}
                         onClick={() => {
-                          handleImageClick({
-                            image: `https://ipfs.io/ipfs/${details[2]}`,
-                          });
+                          const value1 = hexToTimestamp2(details[9]._hex) > new Date()
+                          if (value1) {
+                            setdisable(false)
+                            console.log(Date())
+                            toast.error(`You will be able to see the result after the proposal expires!`, {
+                              position: "top-left",
+                              autoClose: 5000,
+                              hideProgressBar: false,
+                              closeOnClick: true,
+                              pauseOnHover: true,
+                              draggable: true,
+                              progress: undefined,
+                              theme: "light",
+                            });
+                          } else {
+                            // if (hexToTimestamp(details[9]._hex) <= Date()) {
+                            getUserDataById(details[0], key);
+                          }
                         }}
                       >
-                        <img
-                          src={`https://ipfs.io/ipfs/${details[2]}`}
-                          className="img-thumbnail"
-                          alt="thumbnail"
-                          style={{ height: "150px", width: "150px" }}
-                        />
-                      </a>
+                        {btnloading && loadingIndex === key ? (
+                          <svg
+                            className="animate-spin button-spin-svg-pic"
+                            version="1.1"
+                            id="L9"
+                            xmlns="http://www.w3.org/2000/svg"
+                            x="0px"
+                            y="0px"
+                            viewBox="0 0 100 100"
+                            style={{ fill: "#fff", height: "30%", width: "30%" }}
+                          >
+                            <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+                          </svg>
+                        ) : (
+                          <>Get Result</>
+                        )}
+                      </button>
+                      {/* <button className=" btn btn-primary" onClick={""}>Result</button> */}
                     </div>
-                  </div>
-                  <div className="">
-                    <span className="proposal-dash-label">Status: </span>{" "}
-                    <p className="proposal-dash-output-Bg">
-                      {details[10] ? details[10] : "pending"}
-
-                    </p>
-                  </div>
-                  <div className="">
-                    <span className="proposal-dash-label">Proposed at:</span>{" "}
-                    <p className="proposal-dash-output-Bg">
-                      {hexToTimestamp(details[8]._hex)}
-                    </p>
-                  </div>
-                  <div className="">
-                    <span className="proposal-dash-label">
-                      Proposal Expire Time:
-                    </span>{" "}
-                    <p className="proposal-dash-output-Bg">
-                      {hexToTimestamp(details[9]._hex)}
-                    </p>
-                  </div>
-                  <div className="">
-                    <span className="proposal-dash-label">Result:</span> <br />
-                    <button
-                      className="btn btn-primary"
-                      style={{ width: "30%" }}
-                      disabled={disable}
-                      key={key}
-                      onClick={() => {
-                        // const timestamp1 = hexToTimestamp(details[9]._hex)
-                        // console.log(timestamp1)
-                        // const timestamp2 = hexToTimestamp(details[8]._hex) 
-                        // console.log(timestamp2)
-                        // const difference = timestamp2- timestamp1;
-                        // console.log(difference)
-                        // const differenceInMinutes = ( difference / (1000 * 60));
-
-                        const value1 = hexToTimestamp2(details[9]._hex) > new Date()
-                        if (value1) {
-                          setdisable(false)
-                          console.log(Date())
-                          toast.error(`You will be able to see the result after the proposal expires!`, {
-                            position: "top-left",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                          });
-                        } else {
-                          // if (hexToTimestamp(details[9]._hex) <= Date()) {
-                          getUserDataById(details[0], key);
-                        }
-                      }}
-                    >
-                      {btnloading && loadingIndex === key ? (
-                        <svg
-                          className="animate-spin button-spin-svg-pic"
-                          version="1.1"
-                          id="L9"
-                          xmlns="http://www.w3.org/2000/svg"
-                          x="0px"
-                          y="0px"
-                          viewBox="0 0 100 100"
-                          style={{ fill: "#fff", height: "30%", width: "30%" }}
-                        >
-                          <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-                        </svg>
-                      ) : (
-                        <>Get Result</>
-                      )}
-                    </button>
-                    {/* <button className=" btn btn-primary" onClick={""}>Result</button> */}
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
           {/* ------ Onclick Enlarged Image ----- */}
           <div className="modal" tabIndex="-1" role="dialog" style={modalStyle}>
             <div className="modal-dialog modal-dialog-centered" role="document">

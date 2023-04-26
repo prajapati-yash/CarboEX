@@ -29,7 +29,7 @@ function HomeHero() {
                 const verifyTx = await con.iscompaniesAdd(address)
                 // result = verifyTx
                 console.log(verifyTx)
-                console.log(con);
+                // console.log(con);
                 return verifyTx;
             }
         } catch (error) {
@@ -44,7 +44,7 @@ function HomeHero() {
             console.log(test)
             if (test) {
                 navigate("/user-dashboard")
-                // window.location.reload();
+                window.location.reload();
             }
             else {
                 navigate("/signup")

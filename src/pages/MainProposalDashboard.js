@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import '../styles/DAOMember/MainProposalDashboard.css'
 import ProposalDashboard from './ProposalDashboard';
 import ProposalOrders from './ProposalOrders';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ethers } from 'ethers';
-import { companyInstance } from '../components/Contracts';
+import { companyInstance, daoInstance } from '../components/Contracts';
 import { useAccount } from 'wagmi';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,6 +18,9 @@ function MainProposalDashboard() {
     const [isEditing, setIsEditing] = useState(false);
     const { address } = useAccount();
     const [credits, setCredits] = useState();
+    const [checkMember, setCheckMember] = useState(false);
+    const [isPageLoading, setIsPageLoading] = useState(true);
+    // const [isDAO, setIsDAO] = useState(false);
 
     const MainPropPageData = {
         logo: logoImg,
@@ -124,6 +127,30 @@ function MainProposalDashboard() {
 
     // const receivedData = getUserAccountDetails();
 
+    const checkDAOMember = async () => {
+        const { ethereum } = window;
+        if (ethereum) {
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner();
+            if (!provider) {
+                console.log("Metamask is not installed, please install!");
+            }
+            const conDAO = await daoInstance();
+            const isDAOMember = await conDAO.isMember(address)
+            console.log(isDAOMember)
+            return isDAOMember;
+        }
+    }
+
+    useEffect(() => {
+        async function fetchData() {
+            const isDAOMember = await checkDAOMember();
+            setCheckMember(isDAOMember);
+            setIsPageLoading(false);
+        }
+        fetchData();
+    }, []);
+
     return (
         <>
             <div className="container-fluid main-prop-dash-Main">
@@ -131,32 +158,68 @@ function MainProposalDashboard() {
                     <div className='u-dashboard-title d-flex justify-content-center'>
                         <p className='u-dashboard-title-name'>MY DASHBOARD</p>
                     </div> <hr />
-                    <div className="col-lg-2 col-md-3 col-sm-4 DAO-Member-logo-class">
-                        <img src={"https://ipfs.io/ipfs/" + logoImg} alt="Logo" className="DAO-Member-logo img-fluid" />
+                    <div className="col-lg-2 col-md-3 col-sm-4 DAO-Member-logo-class ">
+                        <div>
+                            <div className='IMG-CHECK-class'>
+                                <img src={"https://ipfs.io/ipfs/" + logoImg} alt="Logo" className="DAO-Member-logo img-fluid" />
+                            </div>
+                            <br />
+                            <div className='DAO-Check-Mark d-flex justify-content-center'>
+                                {isPageLoading ? (
+                                    <div>Loading...</div>
+                                ) : (
+                                    checkMember ? (
+                                        <div className='fa-check-main-class d-flex justify-content-center align-items-center'>
+                                            <div className='fa-check-sub-class mx-auto me-2'><i className="fa-solid fa-check mx-1" style={{ color: "#ffffff", }}></i></div>
+                                            <div><b>DAO MEMBER</b></div>
+                                        </div>
+                                    ) : (
+                                        <Link className='xmark-check-link-class' to={"/become-member"}><div className='fa-xmark-main-class d-flex justify-content-center align-items-center'>
+                                            <div className='fa-xmark-sub-class mx-auto me-2'><i className="fa-solid fa-xmark mx-1" style={{ color: "#ffffff", }}></i></div>
+                                            <div><b>DAO MEMBER</b></div>
+                                        </div></Link>
+                                    )
+                                )}
+                            </div>
+                        </div>
                     </div>
                     <div className="col-lg-8 col-md-6 col-sm-4 DaoMemberDetails-class">
                         <div className="row">
                             <div className="col-lg-6 col-md-12 mb-3">
                                 <label className="PropHeadLabel">Company Name:</label>
-                                <input type="text" className="form-control prop-dash-data-bg" value={companyName}
-                                    onChange={(e) => setCompanyName(e.target.value)}
-                                    readOnly={!isEditing} />
+                                <input type="text"
+                                    className="form-control prop-dash-data-bg"
+                                    value={isPageLoading ? (
+                                        'Loading...'
+                                    ) : (companyName)}
+                                    readOnly />
                             </div>
                             <div className="col-lg-6 col-md-12 mb-3">
                                 <label className="PropHeadLabel">Username:</label>
-                                <input type="text" className="form-control prop-dash-data-bg" value={userName}
-                                    onChange={(e) => setUserName(e.target.value)}
-                                    readOnly={!isEditing} />
+                                <input type="text"
+                                    className="form-control prop-dash-data-bg"
+                                    value={isPageLoading ? (
+                                        'Loading...'
+                                    ) : (userName)}
+                                    readOnly />
                             </div>
                             <div className="col-lg-6 col-md-12 mb-3">
                                 <label className="PropHeadLabel">Email:</label>
-                                <input type="email" className="form-control prop-dash-data-bg" value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    readOnly={!isEditing} />
+                                <input type="email"
+                                    className="form-control prop-dash-data-bg"
+                                    value={isPageLoading ? (
+                                        'Loading...'
+                                    ) : (email)}
+                                    readOnly />
                             </div>
                             <div className="col-lg-6 col-md-12 mb-3">
                                 <label className="PropHeadLabel">Credits Available:</label>
-                                <input type="text" className="form-control prop-dash-data-bg" value={MainPropPageData.availableCredits} readOnly />
+                                <input type="text"
+                                    className="form-control prop-dash-data-bg"
+                                    value={isPageLoading ? (
+                                        'Loading...'
+                                    ) : (MainPropPageData.availableCredits)}
+                                    readOnly />
                             </div>
                         </div>
                     </div>
@@ -168,12 +231,14 @@ function MainProposalDashboard() {
                                     <div className='DAOSELL-btn'>
                                         <button
                                             className='DMember-token-btn'
-                                            onClick={() => navigate("/become-member")}>
-                                            DAO MEMBER
+                                            onClick={() => navigate("/certificate-validation-proposal")}>
+                                            CREATE PROPOSAL
                                         </button>
                                     </div>
                                     <div className='DAOSELL-btn'>
-                                        <button className='PData-sell-btn' onClick={() => handleNavigation(MainPropPageData.availableCredits)}>SELL CREDITS</button>
+                                        <button className='PData-sell-btn' onClick={() => {
+                                            handleNavigation(MainPropPageData.availableCredits)
+                                        }}>SELL CREDITS</button>
                                     </div>
                                     <ToastContainer />
                                 </div>
@@ -191,8 +256,8 @@ function MainProposalDashboard() {
                 <>
                     {renderComponent()}
                 </>
-            </div>
-            {/* <button onClick={getUserCreditDetails}>Click to get data</button> */}
+            </div >
+            {/* <button onClick={checkDAOMember}>Click to get data</button> */}
             {/* {console.log(receivedData)} */}
         </>
     )

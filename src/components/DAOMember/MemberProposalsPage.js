@@ -9,7 +9,8 @@ function MemberProposalsPage() {
     const navigate = useNavigate();
     const [allResultData, setAllResultData] = useState([]);
     const [allPData, setAllPData] = useState([]);
-    const [currentDate, setCurrentDate] = useState(new Date())
+    const [currentDate, setCurrentDate] = useState(new Date());
+    const [isPageLoading, setIsPageLoading] = useState(true);
     const localizedDate = currentDate;
 
     const daoProposal = async () => {
@@ -32,7 +33,11 @@ function MemberProposalsPage() {
     }
 
     useEffect(() => {
-        daoProposal()
+        async function fetchData() {
+            await daoProposal();
+            setIsPageLoading(false)
+        }
+        fetchData()
     }, [])
 
 
@@ -109,19 +114,21 @@ function MemberProposalsPage() {
                     <div className='MPPage-content d-lg-flex row pb-4 align-items-center justify-content-around'>
                         <div className="MPPage-box-bg mb-lg-0 mb-sm-4 mb-4 align-self-stretch py-5 px-4">
                             <div className='MPPage-content-box row'>
-                                {filteredData.length > 0 ? (
-                                    filteredData.map((item, key) => (
-                                        <div className='MPPage-content-data  col-6 col-md-5 my-3' key={key} >
-                                            <label className='MPPage-Prop-Label'>Type:</label> <span>{item[3] ? "Emission" : "Offset"}</span>  <br />
-                                            <label className='MPPage-Prop-Label'>Description:</label> <span>{item[1]}</span><br />
-                                            <label className='MPPage-Prop-Label'>Proposal Expire time:</label> <span>{hexToTimestamp(item[9]._hex)}</span><br />
-                                            <div className='MPPage-VM-Btn-class d-flex justify-content-center'>
-                                                <button className='MPPage-VM-Btn mt-2' onClick={() => navigate("/proposalData", { state: { data: item } })}>Open</button>
+                                {isPageLoading ?
+                                    <div>Loading...</div> :
+                                    filteredData.length > 0 ? (
+                                        filteredData.map((item, key) => (
+                                            <div className='MPPage-content-data  col-6 col-md-5 my-3' key={key} >
+                                                <label className='MPPage-Prop-Label'>Type:</label> <span>{item[3] ? "Emission" : "Offset"}</span>  <br />
+                                                <label className='MPPage-Prop-Label'>Description:</label> <span>{item[1]}</span><br />
+                                                <label className='MPPage-Prop-Label'>Proposal Expire time:</label> <span>{hexToTimestamp(item[9]._hex)}</span><br />
+                                                <div className='MPPage-VM-Btn-class d-flex justify-content-center'>
+                                                    <button className='MPPage-VM-Btn mt-2' onClick={() => navigate("/proposalData", { state: { data: item } })}>Open</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))) : (
-                                    <div>No Active Proposals</div>
-                                )}
+                                        ))) : (
+                                        <div>No Active Proposals</div>
+                                    )}
                             </div>
                         </div>
                     </div>

@@ -68,20 +68,14 @@ function MemberLandingPage() {
           const addMemberFunc = await conDAO.addmember(numOfTokens, {
             value: numOfTokens * hexValue,
           });
+          await addMemberFunc.wait();
           console.log(addMemberFunc);
           setbtndisable(false)
           setbtnloading(false)
-          // if(btnloading === false){  
-          //   setbtndisable(false)
-          // }
-          navigate("/dao-member-proposals");
+          navigate("/user-dashboard");
+          window.location.reload();
           console.log(addMemberFunc);
-          // setTknAmtResult(decimalValue * numOfTokens)
           console.log(addMemberFunc.value);
-          // console.log(con);
-          // console.log(tokenPrice);
-          // console.log(tokenPrice._hex);
-          // console.log(decimalValue)
           // return decimalValue;
         }
       }
@@ -201,7 +195,7 @@ function MemberLandingPage() {
                           x="0px"
                           y="0px"
                           viewBox="0 0 100 100"
-                          style={{ width: "15%" }}
+                          style={{ width: "45%" }}
                         >
                           <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
                         </svg>

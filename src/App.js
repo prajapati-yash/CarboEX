@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import Resources from "./pages/Resources";
@@ -18,14 +18,47 @@ import SellCarbonCredits from "./pages/SellCarbonCredits";
 import ProposalDashboard from "./pages/ProposalDashboard";
 import ProposalOrders from "./pages/ProposalOrders";
 import MainProposalDashboard from "./pages/MainProposalDashboard";
+import { companyInstance } from "./components/Contracts";
+import { useAccount } from 'wagmi';
+import { useNavigate } from 'react-router-dom';
 // import { useState } from "react";
 
 
 function App() {
+  const { address } = useAccount();
+  // const navigate = useNavigate()
+  const verifyUserAccount = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+        const con = await companyInstance();
+        const verifyTx = await con.iscompaniesAdd(address)
+        // result = verifyTx
+        console.log(verifyTx)
+        // console.log(con);
+        return verifyTx;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // {
+  //   useEffect(() => {
+  //     if (!verifyUserAccount()) {
+  //       return navigate('/about')
+  //     }
+  //   })
+  // }
 
   return (
     <>
       {/* <h1 className="mt-5 text-center">Shree Ganeshay Namah</h1> */}
+
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -50,13 +83,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter >
-      {/* <Chat
-        account={address} //user address             
-        supportAddress="0xF80a1e20826EED14146d08f88E5557805d439d5f" //support address          
-      /> */}
     </>
-
-
   );
 }
 
