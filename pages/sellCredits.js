@@ -3,7 +3,10 @@ import { useState } from "react";
 import { Text, View, ScrollView, TextInput, Alert } from "react-native";
 import styles from "../style/sellCreditsStyles";
 import { Button, Stack } from "@rneui/themed";
-import { responsiveWidth } from "react-native-responsive-dimensions";
+import {
+  responsiveFontSize,
+  responsiveWidth,
+} from "react-native-responsive-dimensions";
 import { connector } from "../components/WalletConnectExperience";
 import Web3 from "web3";
 import { COMPANY_ADDRESS, companyInstance } from "../components/contract";
@@ -85,6 +88,27 @@ export default function SellCredits() {
           <View style={styles.header}>
             <Text style={styles.header_view_text}>Sell Credits</Text>
           </View>
+          <View
+            style={{
+              marginHorizontal: "10%",
+              marginBottom: "6%",
+              backgroundColor: "black",
+              borderRadius: 25,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: responsiveFontSize(2),
+                padding: "5%",
+                textAlign: "justify",
+                color: "white"
+              }}
+            >
+              Here you can Sell carbon credits from wallet by setting amount and
+              price.
+            </Text>
+          </View>
+
           <View style={styles.mainBox}>
             <View style={styles.boxBody}>
               <View>

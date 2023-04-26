@@ -15,7 +15,9 @@ import { Dropdown } from "react-native-element-dropdown";
 import Sector from "../components/emissionCalculate";
 import { TotalSum } from "../components/emissionCalculate";
 import styles from "../style/calculatorStyle";
+import { Button, Dialog } from "@rneui/themed";
 import { connector } from "../components/WalletConnectExperience";
+import { responsiveWidth } from "react-native-responsive-dimensions";
 
 const te_data = [
   { label: "USA", value: "USA" },
@@ -127,6 +129,11 @@ export default function Calculator() {
   const [flCalculate, setFlCalculate] = useState(false);
   const [result, setResult] = useState(false);
 
+  const [visible1, setVisible1] = useState(null);
+  const toggleDialog = () => {
+    setVisible1();
+  };
+
   console.log(connector.accounts[0]);
 
   return (
@@ -138,6 +145,51 @@ export default function Calculator() {
         <View style={styles.title_text_view}>
           <Text style={styles.title_text}>CARBON FOOTPRINT CALCULATOR</Text>
         </View>
+        <View style={styles.title_subtext_view}>
+          <Text style={styles.title_subtext}>
+            Measure emissions to reduce emissions and transition to cleaner
+            energy sources.
+          </Text>
+        </View>
+
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Button
+            containerStyle={{
+              width: responsiveWidth(50),
+              margin: "5%",
+            }}
+            onPress={() => toggleDialog()}
+          >
+            View Instructions
+          </Button>
+        </View>
+        <Dialog
+          isVisible={visible1}
+          onBackdropPress={() => setVisible1(null)}
+          height="auto"
+        >
+          <Dialog.Title title="What is the use of Carbon Emission Calculator?" />
+          <View>
+            <Text style={{marginTop: "2%"}}>
+              1. Individual can use the calculator to identify areas to reduce
+              their carbon emissions.
+            </Text>
+            <Text style={{marginTop: "4%"}}>
+              2. Calculator helps users estimate CO2 emissions based on input
+              details.
+            </Text>
+            <Text style={{marginTop: "4%"}}>
+              3. User inputs details to calculate estimated CO2 emissions in kg.
+            </Text>
+            <Text style={{marginTop: "4%"}}>
+              4. The result field provides an estimate of safe CO2 emissions.
+            </Text>
+            <Text style={{marginTop: "4%"}}>
+              5. The user can compare their emissions to the global limit to
+              determine if they are contributing to the environment.
+            </Text>
+          </View>
+        </Dialog>
 
         <View style={styles.centered_view}>
           <View style={styles.calculateBox}>

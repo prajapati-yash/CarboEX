@@ -118,7 +118,26 @@ export default function BecomeMember() {
         contentContainerStyle={styles.centerView}
       >
         <View style={styles.main_view}>
-          <Text style={styles.main_view_text}>BECOME A MEMBER</Text>
+          <Text style={styles.main_view_text}>BECOME A DAO MEMBER</Text>
+          <View
+            style={{
+              marginHorizontal: "10%",
+              marginBottom: "2%",
+              backgroundColor: "white",
+              borderRadius: 25,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: responsiveFontSize(2),
+                padding: "5%",
+                textAlign: "justify",
+              }}
+            >
+              DAO Members ensure compliance with standards and regulations,
+              transparency, security, and efficiency in carbon credit trading.
+            </Text>
+          </View>
 
           <View style={styles.view_details}>
             <View style={styles.view_data1_row1}>

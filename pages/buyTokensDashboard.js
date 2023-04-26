@@ -119,6 +119,11 @@ export default function BuyTokensDashboard() {
           <View style={styles.view_title}>
             <Text style={styles.text_title}>BUY CARBON CREDITS</Text>
           </View>
+          <View style={{ marginHorizontal: "10%", marginBottom: "2%", backgroundColor: "white", borderRadius: 25 }}>
+            <Text style={{fontSize: responsiveFontSize(2), padding: "5%", textAlign: "justify"}}>
+            Here you can see the list of all the proposals made by sellers offering carbon credits for sale. 
+            </Text>
+          </View>
 
           {count &&
             userDetailsById.map((company, key) => (

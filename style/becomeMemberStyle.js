@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(4),
     color: "#fff",
     marginTop: "10%",
-    marginBottom: "10%",
+    marginBottom: "5%",
     marginLeft: "3%",
     marginRight: "3%",
     fontWeight: "bold",

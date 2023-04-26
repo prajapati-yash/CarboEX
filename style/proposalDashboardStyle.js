@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(4),
     color: "#000",
     marginTop: "10%",
-    marginBottom: "10%",
+    marginBottom: "5%",
     marginLeft: "3%",
     marginRight: "3%",
     fontWeight: "bold",
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     margin: "10%",
     // marginTop: "5%",
     // marginBottom: "10%",
-
   },
   view_proposal: {
     backgroundColor: "#EFEFEF",

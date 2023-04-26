@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     paddingBottom: "8%",
   },
   header: {
-    marginBottom: "10%",
+    marginBottom: "5%",
     alignItems: "center",
   },
   boxBody: {
@@ -48,6 +48,8 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(4),
     fontWeight: "bold",
     color: "#000",
+    paddingRight: "3%",
+    paddingLeft: "3%",
   },
   input_text: {
     marginLeft: "2%",
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   input_box_image: {
-    flex:1,
+    flex: 1,
     // height: responsiveHeight(6),
     width: responsiveWidth(72),
     borderColor: "black",
@@ -75,9 +77,9 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
     borderRadius: 8,
     paddingHorizontal: 8,
-    backgroundColor:"#efefef",
-    justifyContent:"center",
-    paddingVertical:"3%"
+    backgroundColor: "#efefef",
+    justifyContent: "center",
+    paddingVertical: "3%",
   },
   document_upload_button: {
     height: responsiveHeight(6),

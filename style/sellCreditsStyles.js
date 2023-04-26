@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     paddingBottom: "8%",
   },
   header: {
-    marginBottom: "10%",
+    marginBottom: "8%",
     alignItems: "center",
   },
   boxBody: {
