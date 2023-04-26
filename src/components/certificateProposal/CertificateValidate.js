@@ -19,6 +19,14 @@ function CertificateValidate() {
   const { address } = useAccount();
   const [btnloading, setbtnloading] = useState(false);
   const [btndisable, setbtndisable] = useState(false);
+  const [showText, setShowText] = useState(false);
+
+  const handleMouseEnter1 = () => {
+    setShowText(true);
+  };
+  const handleMouseLeave1 = () => {
+    setShowText(false);
+  };
 
 
   const handleCertificateChange = (e) => {
@@ -155,7 +163,10 @@ function CertificateValidate() {
       <div className="certiPageBg">
         <div className="certiBg">
           <div className="text-center">
-            <p className="certiHead">Certificate Validation</p>
+            <div className="d-flex justify-content-center align-items-center">
+            <p className="certiHead">Certificate Validation</p> 
+      
+          </div>
           <p className="text-center certiSubHead ">You must be a DAO Member to upload the Certificate for Validation</p>
           </div>
           <form onSubmit={handleSubmit}>

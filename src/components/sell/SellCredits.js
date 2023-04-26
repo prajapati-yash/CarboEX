@@ -16,6 +16,14 @@ function SellCredits() {
   const [total, setTotal] = useState(0);
   const [btndisable, setbtndisable] = useState(false);
   const { address } = useAccount();
+  const [showText, setShowText] = useState(false);
+
+  const handleMouseEnter1 = () => {
+    setShowText(true);
+  };
+  const handleMouseLeave1 = () => {
+    setShowText(false);
+  };
 
   const sellingCredits = async () => {
     try {
@@ -86,7 +94,22 @@ function SellCredits() {
   return (
     <>
       <div className="sellBg">
-        <div className="text-center mb-4 mb-sm-5  sellHead">SELL CARBON CREDITS</div>
+      <div className="pb-5"></div>
+        <div className=" text-dark text-center d-flex justify-content-center align-items-center mx-auto">
+         <div className="buy-head-text bg-white"> BUY CARBON CREDITS</div> &nbsp;&nbsp;{" "}
+          <i
+            className="fas fa-info-circle buy-head-info"
+            onMouseEnter={handleMouseEnter1}
+            onMouseLeave={handleMouseLeave1}
+          >
+            {" "}
+          </i>
+        </div>
+        {showText && (
+            <div className="text-center d-flex justify-content-center align-items-center mb-3 mb-sm-4 buy-sub-text">
+              Here you can Sell carbon credits from wallet by setting amount and price.  {" "}
+            </div>
+          )}
         <div className="row sellContainerBg justify-content-center">
           <div className="col-md-6">
             <div className="form-group mb-3 mb-sm-4">

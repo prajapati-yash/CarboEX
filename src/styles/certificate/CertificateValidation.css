@@ -1,102 +1,119 @@
-.certiPageBg{
-    background-color: #AFF6FF;
-    padding: 5% 10%;
+.certiPageBg {
+  background-color: #aff6ff;
+  padding: 5% 10%;
 }
 
-.info-text{
-    font-size: 1rem;
-    transform: 0.3s;
+.info-text {
+  font-size: 1rem;
+  transform: 0.3s;
 }
 
-
-.certiBg{
-    background-color: white;
-    border-radius: 5rem;
-    padding: 3% 10%;
+.certiBg {
+  background-color: white;
+  border-radius: 5rem;
+  padding: 3% 10%;
 }
 
-.certiHead{
-    font-size: 2rem;
-    font-weight: 600;
-    /* margin-bottom: 3%; */
+.certiHead {
+  font-size: 2rem;
+  font-weight: 600;
+  /* margin-bottom: 3%; */
 }
 
-.certiSubHead{
-    font-size: 1rem;
-    font-weight: 600;
+.certiSubHead {
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-.certiInput{
-    background-color: #f3f3f3;
+.certiInput {
+  background-color: #f3f3f3;
 }
 
 .emissionInput input[type="text"]::placeholder {
-    text-align: right;
-    padding-right: 100px;
+  text-align: right;
+  padding-right: 100px;
 }
 
-.certiLabel, .proposalText{
-    font-size: 1.2rem;
-    font-weight: 600;
+.certiLabel,
+.proposalText {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
-.certiSubmit{
-    background-color: #000;
-    color: #fff;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    width: 25%;
-    padding: 0.5rem 0;
-    transition: ease-in-out 0.4s;
-  }
+.certiSubmit {
+  background-color: #000;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: 25%;
+  padding: 0.5rem 0;
+  transition: ease-in-out 0.4s;
+}
 
-  .certiSubmit:hover{
-    background-color: #fff;
-    color: #000;
-    border: 2px solid black;
-  }
+.certiSubmit:hover {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid black;
+}
+
+.certi-sub-text {
+    position: absolute;
+    font-size: 1.3rem;
+    font-weight: 500;
+    /* top: 35%; */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    opacity: 1;
+    border-radius: 0.5rem;
+    transition: 0.3s ease-in-out;
+}
+
 @media (max-width: 992px) {
-    .certiBg{
-        border-radius: 4rem;
-        padding: 5% 10%;
-    }
+  .certiBg {
+    border-radius: 4rem;
+    padding: 5% 10%;
+  }
 
-    .certiHead{
-        margin-bottom: 5%;
-    }
+  /* .certiHead {
+    margin-bottom: 5%;
+  } */
 
-    .certiSubmit{
-        width: 30%;
-    }
+  .certiSubmit {
+    width: 30%;
+  }
 }
 
-@media (max-width:768px){
-    .certiSubmit{
-        letter-spacing: 1px;
-        width: 35%;
-      }
+@media (max-width: 768px) {
+  .certiSubmit {
+    letter-spacing: 1px;
+    width: 35%;
+  }
 }
 
-@media (max-width:576px){
-    .certiPageBg{
-        padding: 8% 8%;
-    }
-    .certiBg{
-        border-radius: 4rem;
-        padding: 7% 10%;
-    } 
+@media (max-width: 576px) {
+  .certiPageBg {
+    padding: 8% 8%;
+  }
+  .certiBg {
+    border-radius: 4rem;
+    padding: 7% 10%;
+  }
 
-    .certiHead{
-        font-size: 1.4rem;
-    }
+  .certiHead {
+    font-size: 1.4rem;
+  }
 
-    .certiLabel, .proposalText{
-        font-size: 1rem;
-        font-weight: 600;
-    }
-    .certiSubmit{
-        width: 50%;
-    }
-
+  .certiLabel,
+  .proposalText {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .certiSubmit {
+    width: 50%;
+  }
 }

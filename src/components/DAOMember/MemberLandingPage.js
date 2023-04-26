@@ -5,17 +5,24 @@ import { daoInstance, ercTokenInstance } from "../Contracts";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 // import { Toast } from "react-toastify/dist/components";
 
 function MemberLandingPage() {
   const navigate = useNavigate();
-  const [numOfTokens, setNumOfTokens] = useState("0");
+  const [numOfTokens, setNumOfTokens] = useState("");
   const [tknAmtResult, setTknAmtResult] = useState("");
   const [tokenPrice, setTokenPrice] = useState("");
   const [btnloading, setbtnloading] = useState(false);
   const [btndisable, setbtndisable] = useState(false);
+  const [showText, setShowText] = useState(false);
 
+  const handleMouseEnter1 = () => {
+    setShowText(true);
+  };
+  const handleMouseLeave1 = () => {
+    setShowText(false);
+  };
 
   const ercTokenFunc = async () => {
     try {
@@ -24,7 +31,7 @@ function MemberLandingPage() {
       // });
 
       if (numOfTokens === null || numOfTokens <= 0) {
-        toast.error('Oops! Number of Tokens must be greater than 0!', {
+        toast.error("Oops! Number of Tokens must be greater than 0!", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -34,12 +41,11 @@ function MemberLandingPage() {
           progress: undefined,
           theme: "light",
         });
-
       } else {
-        setbtndisable(true)
-        setbtnloading(true)
+        setbtndisable(true);
+        setbtnloading(true);
 
-        toast.info('Process is in Progress', {
+        toast.info("Process is in Progress", {
           position: "top-left",
           autoClose: 5000,
           hideProgressBar: false,
@@ -52,7 +58,6 @@ function MemberLandingPage() {
 
         const { ethereum } = window;
         if (ethereum) {
-
           const provider = new ethers.providers.Web3Provider(ethereum);
           const signer = provider.getSigner();
           if (!provider) {
@@ -80,16 +85,14 @@ function MemberLandingPage() {
         }
       }
     } catch (error) {
-      setbtndisable(false)
+      setbtndisable(false);
       console.log(error);
-      setbtnloading(false)
-
+      setbtnloading(false);
     }
   };
 
   const getTokenPrice = async () => {
     try {
-
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -130,9 +133,26 @@ function MemberLandingPage() {
     <>
       <div className="container-fluid MLPageBg">
         <div className="MLPage-content pb-4">
-          <div className="MLPage-head py-3 py-sm-4 d-flex justify-content-center">
-            <p>BECOME A DAO MEMBER</p>
+          <div className="MLPage-head pb-3 pb-sm-4 d-flex justify-content-center align-items-center">
+            <div className="bg-white become-member-head text-center">
+              BECOME A DAO MEMBER{" "}
+            </div>{" "}
+            &nbsp;{" "}
+            <i
+              className="fas fa-info-circle become-member-info"
+              onMouseEnter={handleMouseEnter1}
+              onMouseLeave={handleMouseLeave1}
+            >
+              {" "}
+            </i>
+
           </div>
+          {showText && (
+            <div className="text-center d-flex justify-content-center align-items-center mb-3 mb-sm-4 become-member-sub-text">
+              DAO Members ensure compliance with standards and regulations,
+              transparency, security, and efficiency in carbon credit trading.{" "}
+            </div>
+          )}
           <div className="d-lg-flex row pb-4 align-items-center MLPage-form-content justify-content-around">
             <div className="MLPage-box-bg mb-lg-0 mb-sm-4 mb-4 align-self-stretch py-5 px-4">
               <form className="MLPage-form-main">
