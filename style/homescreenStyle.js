@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
     // height: responsiveHeight(15.6),
     // justifyContent: "center",
     // alignItems: "center",
-    paddingTop: "5%",
-    paddingBottom: "5%",
+    paddingTop: "10%",
+    paddingBottom: "10%",
   },
   modal_button: {
     flex: 1,
@@ -211,6 +211,11 @@ const styles = StyleSheet.create({
     // borderBottomLeftRadius:20,
     // borderBottomRightRadius:20
   },
+  view_button: {
+    justifyContent: "center",
+    flex: 1,
+    alignItems: "center",
+  }
 });
 
 export default styles;

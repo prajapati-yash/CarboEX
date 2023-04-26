@@ -18,6 +18,8 @@ import { connector } from "../components/WalletConnectExperience";
 import SignUP from "./signUP";
 import ProfileDetails from "./profileDetails";
 import { companyInstance } from "../components/contract";
+import { Button } from "@rneui/themed";
+import { responsiveWidth } from "react-native-responsive-dimensions";
 
 const faqItems = [
   {
@@ -98,6 +100,9 @@ const renderFaqContent = (item, index, isActive) => {
 };
 
 export default function HomeScreen() {
+
+  const [isLoading, setIsLoading] = useState(false);
+  
   const navigation = useNavigation();
 
   const [activeSections, setActiveSections] = useState([]);
@@ -121,6 +126,7 @@ export default function HomeScreen() {
   };
 
   const SignupWithWallet = async () => {
+    setIsLoading(true);
     if (connector.accounts[0]) {
       const test = await verifyUserAccount();
       console.log("Verified: ", test);
@@ -132,6 +138,7 @@ export default function HomeScreen() {
     } else {
       alert("Wallet Is Not Connected! Please Connect");
     }
+    setIsLoading(false);
   };
 
   const handleAccordionSectionToggle = (sections) => {
@@ -193,17 +200,27 @@ export default function HomeScreen() {
                       borderBottomLeftRadius: 35,
                       overflow: "hidden",
                       width: "100%",
+                      backgroundColor:"white"
                     }}
                   >
-                    <Pressable
-                      style={styles.modal_button}
-                      onPress={SignupWithWallet}
-                      android_ripple={{
-                        color: "#3C84AB",
-                      }}
-                    >
-                      <Text style={styles.modal_button_text}>Get Started</Text>
-                    </Pressable>
+            <Button
+             title={isLoading ? "Loading..." : "GET STARTED"}
+             loading={isLoading}
+             loadingProps={{ size: "small", color: "white" }}
+              buttonStyle={{
+                backgroundColor: "#4de9ff",
+                borderRadius: 15,
+              }}
+              titleStyle={{ fontWeight: "bold", fontSize: responsiveFontSize(2),color:"white" }}
+              containerStyle={{
+                marginHorizontal: "15%",
+                width: responsiveWidth(50),
+                marginVertical: "2%",
+                marginBottom: "5%",
+                marginTop:"5%"
+              }}
+              onPress={SignupWithWallet}
+            ></Button>
                   </View>
                 </View>
               </View>

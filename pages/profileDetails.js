@@ -20,7 +20,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SellCredits from "./sellCredits";
 import { connector } from "../components/WalletConnectExperience";
 import Web3 from "web3";
-import { companyInstance,COMPANY_ADDRESS, DAO_MEMBER_ADDRESS,daoInstance } from "../components/contract";
+import {
+  companyInstance,
+  COMPANY_ADDRESS,
+  DAO_MEMBER_ADDRESS,
+  daoInstance,
+} from "../components/contract";
 
 function EditProfileScreen() {
   const navigation = useNavigation();
@@ -80,9 +85,7 @@ function EditProfileScreen() {
                 borderTopLeftRadius={36}
                 backgroundColor="#5B9C7A"
                 source={{ uri: "https://ipfs.io/ipfs/" + logoImg }}
-              >
-               
-              </ImageBackground>
+              ></ImageBackground>
             </View>
 
             <View style={styles.profileBody}>
@@ -123,7 +126,7 @@ function EditProfileScreen() {
                 </View>
 
                 <Button
-                  title="SELL"
+                  title={"SELL"}
                   loading={false}
                   loadingProps={{ size: "small", color: "white" }}
                   buttonStyle={{
@@ -150,7 +153,7 @@ function EditProfileScreen() {
 }
 
 function MyProposalScreen() {
-
+  const [isLoading, setIsLoading] = useState(false);
   const [loadingIndex, setLoadingIndex] = useState(null);
   const [allData, setAllData] = useState();
   const [userProp, setUserProp] = useState([]);
@@ -173,16 +176,18 @@ function MyProposalScreen() {
         const con = await daoInstance();
         // console.log(address)
         const getUserID = await con.methods.getUserProposals(address).call();
-        console.log("Get User Id",getUserID);
+        console.log("Get User Id", getUserID);
         let userIdLength = getUserID.length;
-        console.log("Get User ID Length",userIdLength)
+        console.log("Get User ID Length", userIdLength);
         let arr = [];
-        for (let i = 0; i < userIdLength; i++) {   
-          console.log("Temp");   
+        for (let i = 0; i < userIdLength; i++) {
+          console.log("Temp");
           // console.log(getUserID[i]);
-          const getUserData = await con.methods.getProposal(getUserID[i]).call();
+          const getUserData = await con.methods
+            .getProposal(getUserID[i])
+            .call();
           arr.push(getUserData);
-          console.log("Get user Data:",getUserData);
+          console.log("Get user Data:", getUserData);
         }
         // console.log(arr)
         setUserProp(arr);
@@ -190,7 +195,7 @@ function MyProposalScreen() {
         return getUserID;
       }
     } catch (error) {
-      console.log("GetUser Ids Error:",error);
+      console.log("GetUser Ids Error:", error);
     }
   };
 
@@ -202,12 +207,13 @@ function MyProposalScreen() {
     try {
       setLoadingIndex(key);
       if (connector.connected) {
+        setIsLoading(true);
         console.log("Connector---", connector);
         const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await daoInstance();
         const getResult = await con.methods.getProposalResult(e).encodeABI();
-        console.log("Get Result:",getResult);
+        console.log("Get Result:", getResult);
         // await getResult.wait();
 
         const gasPrice = await provider.eth.getGasPrice();
@@ -229,16 +235,18 @@ function MyProposalScreen() {
         console.log("After txOptions");
         console.log("connector transaction", connector);
         const signTx = await connector.sendTransaction(txOptions);
+        setIsLoading(false);
         // const finalTx = await signTx;
         console.log("After transaction");
         console.log(signTx);
         return getResult;
       }
     } catch (error) {
-      console.log("Get Result Error :",error.message);
+      console.log("Get Result Error :", error.message);
+      setIsLoading(false);
     }
   };
-  
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -248,122 +256,134 @@ function MyProposalScreen() {
         <View style={styles.main_view}>
           <Text style={styles.main_view_text}>PROPOSAL MADE BY YOU</Text>
 
-            <View style={styles.view_proposal_data}>
+          <View style={styles.view_proposal_data}>
             {userProp.map((details, key) => (
-                <View style={styles.view_proposal} key={key}>
-
+              <View style={styles.view_proposal} key={key}>
                 <View>
                   <Text style={styles.input_text_orders}>Type:</Text>
-                  <View style={styles.input_box_orders}><Text>{details[3] ? "Emission" : "Offset"}</Text></View>
+                  <View style={styles.input_box_orders}>
+                    <Text>{details[3] ? "Emission" : "Offset"}</Text>
+                  </View>
                 </View>
 
                 <View>
                   <Text style={styles.input_text_orders}>Description:</Text>
-                  <View style={styles.input_box_orders}><Text>{details[1]}</Text></View>
+                  <View style={styles.input_box_orders}>
+                    <Text>{details[1]}</Text>
+                  </View>
                 </View>
 
-                
-                  <Text style={styles.input_text_orders_image}>Certificate:</Text>
-                
-                  <View
-                    style={[
-                      styles.view_proposal_description,
-                    ]}
+                <Text style={styles.input_text_orders_image}>Certificate:</Text>
+
+                <View style={[styles.view_proposal_description]}>
+                  <TouchableOpacity onPress={() => toggleDialog(key)} key={key}>
+                    <Image
+                      source={{ uri: "https://ipfs.io/ipfs/" + details[2] }}
+                      style={{
+                        width: responsiveWidth(40),
+                        height: responsiveHeight(20),
+                        marginVertical: 10,
+                      }}
+                    ></Image>
+                  </TouchableOpacity>
+                  <Dialog
+                    isVisible={visible1 === key}
+                    onBackdropPress={() => setVisible1(null)}
+                    height="auto"
                   >
-                   
-                    <TouchableOpacity
-                      onPress={() => toggleDialog(key)}
-                      key={key}
+                    <Dialog.Title title="Your proposal image" />
+                    <View
+                      style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: 300,
+                      }}
                     >
                       <Image
-                        source={{uri:"https://ipfs.io/ipfs/" + details[2]}}
-                        style={{
-                          width: responsiveWidth(40),
-                          height: responsiveHeight(20),
-                          marginVertical: 10,
-                        }}
-                      ></Image>
-                    </TouchableOpacity>
-                    <Dialog
-                      isVisible={visible1 === key}
-                      onBackdropPress={() => setVisible1(null)}
-                      height="auto"
-                    >
-                      <Dialog.Title title="Your proposal image" />
-                      <View style={{ alignItems: 'center', justifyContent: 'center', height: 300 }}>
-                      <Image
-                        source={{uri:"https://ipfs.io/ipfs/" + details[2]}}
+                        source={{ uri: "https://ipfs.io/ipfs/" + details[2] }}
                         style={{
                           width: "100%",
-                          height:"80%",
-                          resizeMode: 'contain',
+                          height: "80%",
+                          resizeMode: "contain",
                         }}
                       ></Image>
-                      </View>
-                    </Dialog>
-                  </View> 
+                    </View>
+                  </Dialog>
+                </View>
 
                 <View>
                   <Text style={styles.input_text_orders}>Status:</Text>
-                  <View style={styles.input_box_orders}><Text>{details[10] ? details[10] : "pending"}</Text></View>
+                  <View style={styles.input_box_orders}>
+                    <Text>{details[10] ? details[10] : "pending"}</Text>
+                  </View>
                 </View>
 
                 <View>
                   <Text style={styles.input_text_orders}>Proposed at:</Text>
-                  <View style={styles.input_box_orders}><Text>{new Date(details[8] * 1000).toLocaleDateString()}</Text></View>
+                  <View style={styles.input_box_orders}>
+                    <Text>
+                      {new Date(details[8] * 1000).toLocaleDateString()}
+                    </Text>
+                  </View>
                 </View>
 
                 <View>
-                  <Text style={styles.input_text_orders}>Proposal Expire Time:</Text>
-                  <View style={styles.input_box_orders}><Text>{new Date(details[9] * 1000).toLocaleDateString()}</Text></View>
+                  <Text style={styles.input_text_orders}>
+                    Proposal Expire Time:
+                  </Text>
+                  <View style={styles.input_box_orders}>
+                    <Text>
+                      {new Date(details[9] * 1000).toLocaleDateString()}
+                    </Text>
+                  </View>
                 </View>
 
                 <Button
-                    title="Get Result"
-                    loading={false}
-                    loadingProps={{ size: "small", color: "white" }}
-                    buttonStyle={{
-                     
-                      borderRadius: 15,
-                    }}
-                    titleStyle={{
-                      fontWeight: "bold",
-                      color:"#fff",
-                      fontSize: responsiveFontSize(2.7),
-                      margin: "4%",
-                    }}
-                    containerStyle={{
-                      marginHorizontal: "15%",
-                      // height: 50,
-                      width: responsiveWidth(40),
-                      marginVertical: "4%",
-                      marginBottom: "4%",
-                    }}
-                    onPress={() => {
-                      console.log(("Button Clicked"));
-                      const value1 = details[9] > new Date();
-                      console.log("Value 1:",value1);
-                        if (value1) {
-                          console.log(Date());
-                          alert("You will be able to see the result after the proposal expires!");
-                        }else{
-                          getUserDataById(details[0], key);
-                        }
-                    }}
-                  />
-                </View>
-              ))}
-            </View>
+                  title={isLoading ? "Loading..." : "GET RESULT"}
+                  loading={isLoading}
+                  loadingProps={{ size: "small", color: "white" }}
+                  buttonStyle={{
+                    borderRadius: 15,
+                  }}
+                  titleStyle={{
+                    fontWeight: "bold",
+                    color: "#fff",
+                    fontSize: responsiveFontSize(2.7),
+                    margin: "4%",
+                  }}
+                  containerStyle={{
+                    marginHorizontal: "15%",
+                    // height: 50,
+                    width: responsiveWidth(40),
+                    marginVertical: "4%",
+                    marginBottom: "4%",
+                  }}
+                  onPress={() => {
+                    const value1 = details[9] > new Date();
+                    console.log("Value 1:", value1);
+                    if (value1) {
+                      console.log(Date());
+                      alert(
+                        "You will be able to see the result after the proposal expires!"
+                      );
+                    } else {
+                      getUserDataById(details[0], key);
+                    }
+                  }}
+                />
+              </View>
+            ))}
+          </View>
         </View>
       </ScrollView>
     </View>
-    
+
     // <View style={styles.container}>
     //   <ScrollView
     //     showsVerticalScrollIndicator={false}
     //     contentContainerStyle={styles.centerView}
     //   >
-      /* <View style={styles.main_view}>
+    /* <View style={styles.main_view}>
           <Text style={styles.main_view_text}>MY PROPOSALS</Text>
 
           <View style={styles.view_details}>
@@ -449,13 +469,12 @@ function MyProposalScreen() {
             </View>
           </View>
         </View> */
-  //     </ScrollView>
-  //   </View>
+    //     </ScrollView>
+    //   </View>
   );
 }
 
 function MyOrdersScreen() {
-
   const [userOrders, setUserOrders] = useState([]);
   const address = connector.accounts[0];
   console.log(address);
@@ -470,27 +489,29 @@ function MyOrdersScreen() {
         const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await companyInstance();
-        console.log(address)
+        console.log(address);
         const getUserOrId = await con.methods.getUserOrders(address).call();
-        console.log(getUserOrId)
+        console.log(getUserOrId);
 
-        let arr = []
+        let arr = [];
         for (let i = 0; i < getUserOrId.length; i++) {
-          const getUserData = await con.methods.Orderstruct(getUserOrId[i]).call();
+          const getUserData = await con.methods
+            .Orderstruct(getUserOrId[i])
+            .call();
           arr.push(getUserData);
         }
 
-        setUserOrders(arr)
+        setUserOrders(arr);
         // console.log(userOrders)
       }
     } catch (error) {
-      console.log("OrdersData Error:",error);
+      console.log("OrdersData Error:", error);
     }
-  }
+  };
 
   useEffect(() => {
-    ordersData()
-  }, [])
+    ordersData();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -501,37 +522,53 @@ function MyOrdersScreen() {
         <View style={styles.main_view}>
           <Text style={styles.main_view_text}>MY ORDERS</Text>
 
-            <View style={styles.view_proposal_data}>
-              {userOrders.map((details, key) => (
-                <View style={styles.view_proposal} key={key}>
-
+          <View style={styles.view_proposal_data}>
+            {userOrders.map((details, key) => (
+              <View style={styles.view_proposal} key={key}>
                 <View>
                   <Text style={styles.input_text_orders}>Credits:</Text>
-                  <View style={styles.input_box_orders}><Text>{parseInt(details[1])}</Text></View>
+                  <View style={styles.input_box_orders}>
+                    <Text>{parseInt(details[1])}</Text>
+                  </View>
                 </View>
 
                 <View>
-                  <Text style={styles.input_text_orders}>Price Per Credit (in ETH):</Text>
-                  <View style={styles.input_box_orders}><Text>{parseInt(details[2]) / Math.pow(10, 18)}</Text></View>
+                  <Text style={styles.input_text_orders}>
+                    Price Per Credit (in ETH):
+                  </Text>
+                  <View style={styles.input_box_orders}>
+                    <Text>{parseInt(details[2]) / Math.pow(10, 18)}</Text>
+                  </View>
                 </View>
 
                 <View>
-                  <Text style={styles.input_text_orders}>Total Price (in ETH):</Text>
-                  <View style={styles.input_box_orders}><Text>{(parseInt(details[2]) / Math.pow(10, 18)) * parseInt(details[1])}</Text></View>
+                  <Text style={styles.input_text_orders}>
+                    Total Price (in ETH):
+                  </Text>
+                  <View style={styles.input_box_orders}>
+                    <Text>
+                      {(parseInt(details[2]) / Math.pow(10, 18)) *
+                        parseInt(details[1])}
+                    </Text>
+                  </View>
                 </View>
 
                 <View>
                   <Text style={styles.input_text_orders}>Address:</Text>
-                  <View style={styles.input_box_orders}><Text>{details[4]}</Text></View>
+                  <View style={styles.input_box_orders}>
+                    <Text>{details[4]}</Text>
+                  </View>
                 </View>
 
                 <View>
                   <Text style={styles.input_text_orders}>Status:</Text>
-                  <View style={styles.input_box_orders}><Text>{details[3] ? "true" : "false"}</Text></View>
+                  <View style={styles.input_box_orders}>
+                    <Text>{details[3] ? "true" : "false"}</Text>
+                  </View>
                 </View>
-                </View>
-              ))}
-            </View>
+              </View>
+            ))}
+          </View>
         </View>
       </ScrollView>
     </View>

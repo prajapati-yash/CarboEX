@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   centerView: {
     alignItems: "center",
-    backgroundColor: "#AFF6FF",
+    // backgroundColor: "#AFF6FF",
   },
   view_title: {
     flex: 1,

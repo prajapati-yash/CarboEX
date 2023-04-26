@@ -16,8 +16,9 @@ import { connector } from "../components/WalletConnectExperience";
 import Web3 from "web3";
 
 export default function ProposalDetails({ route }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingReject, setIsLoadingReject] = useState(false);
   const [visible1, setVisible1] = useState(null);
-  const [downvoteProposal, setDownvoteProposal] = useState();
   const toggleDialog = () => {
     // setSelectedImage(null);
     setVisible1();
@@ -39,6 +40,7 @@ export default function ProposalDetails({ route }) {
   const daoProposalApprove = async () => {
     try {
       if (connector.connected) {
+        setIsLoading(true);
         console.log("Connector---", connector);
         const provider = new Web3("https://pre-rpc.bt.io/");
 
@@ -58,8 +60,6 @@ export default function ProposalDetails({ route }) {
           connector.accounts[0],
           "pending"
         );
-        let value1 = value[1].toString();
-        let value2 = connector.accounts[0];
         const txOptions = {
           gasPrice,
           gasLimit,
@@ -67,7 +67,7 @@ export default function ProposalDetails({ route }) {
           to: recipient,
           data: upvoteProposal,
           nonce,
-          value: [value1, value2],
+          value: value[1].toString(),
           // value: connector.accounts[0],
         };
 
@@ -75,15 +75,18 @@ export default function ProposalDetails({ route }) {
         console.log("connector transaction", connector);
         const signTx = await connector.sendTransaction(txOptions);
         console.log("signTx: ", signTx);
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
   const daoProposalReject = async () => {
     try {
       if (connector.connected) {
+        setIsLoadingReject(true);
         console.log("Connector---", connector);
         const provider = new Web3("https://pre-rpc.bt.io/");
 
@@ -110,7 +113,7 @@ export default function ProposalDetails({ route }) {
           to: recipient,
           data: downvoteProposal,
           nonce,
-          value: [value[1], connector.accounts[0]].toString(),
+          value: value[1].toString(),
           // value: connector.accounts[0],
         };
 
@@ -118,9 +121,11 @@ export default function ProposalDetails({ route }) {
         console.log("connector transaction", connector);
         const signTx = await connector.sendTransaction(txOptions);
         console.log("signTx: ", signTx);
+        setIsLoadingReject(false);
       }
     } catch (error) {
       console.log(error);
+      setIsLoadingReject(false);
     }
   };
 
@@ -160,16 +165,23 @@ export default function ProposalDetails({ route }) {
                 onBackdropPress={() => setVisible1(null)}
               >
                 <Dialog.Title title="Your Certificate" />
-                <View style={{height: 300, alignItems: "center", justifyContent: "center"}}>
-                <Image
-                  // source={require("../assets/calculatorAssets/HomeBg.jpg")}
-                  source={{ uri: proposalData.certificateImage }}
+                <View
                   style={{
-                    width: "100%",
-                    height: "80%",
-                    resizeMode: "contain",
+                    height: 300,
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
-                ></Image></View>
+                >
+                  <Image
+                    // source={require("../assets/calculatorAssets/HomeBg.jpg")}
+                    source={{ uri: proposalData.certificateImage }}
+                    style={{
+                      width: "100%",
+                      height: "80%",
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
+                </View>
               </Dialog>
 
               <Text style={styles.input_text}>Value of offset</Text>
@@ -177,8 +189,8 @@ export default function ProposalDetails({ route }) {
             </View>
             <View style={{ flexDirection: "row" }}>
               <Button
-                title="Accept"
-                loading={false}
+                title={isLoading ? "Loading..." : "ACCEPT"}
+                loading={isLoading}
                 loadingProps={{ size: "small", color: "white" }}
                 buttonStyle={{
                   backgroundColor: "#7ff57f",
@@ -194,8 +206,8 @@ export default function ProposalDetails({ route }) {
               />
 
               <Button
-                title="Reject"
-                loading={false}
+                title={isLoadingReject ? "Loading..." : "REJECT"}
+                loading={isLoadingReject}
                 loadingProps={{ size: "small", color: "white" }}
                 buttonStyle={{
                   backgroundColor: "#db5656",

@@ -1,6 +1,6 @@
 import "../global";
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, StatusBar } from "react-native";
+import { View, StyleSheet, StatusBar,Text  } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Drawer } from "react-native-paper";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import WalletConnectExperience from "../components/WalletConnectExperience";
 import { companyInstance } from "../components/contract";
 import { connector } from "../components/WalletConnectExperience";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const SCHEME_FROM_APP_JSON = "walletconnect-example";
 
@@ -34,7 +35,27 @@ const verifyUserAccount = async () => {
 };
 
 export function DrawerContent(props) {
+
+  const [showSubMenusKnowMore, setShowSubMenusKnowMore] = useState(false);
+
+  const toggleSubMenusKnowMore = () => {
+    setShowSubMenusKnowMore(!showSubMenusKnowMore);
+  };
+
+  const [showSubMenusMember, setShowSubMenusMember] = useState(false);
+
+  const toggleSubMenusMember = () => {
+    setShowSubMenusMember(!showSubMenusMember);
+  };
+
+  const [showSubMenusOurApproach, setShowSubMenusOurApproach] = useState(false);
+
+  const toggleSubMenusOurApproach = () => {
+    setShowSubMenusOurApproach(!showSubMenusOurApproach);
+  };
+
   const [isSignedIn, setIsSignedIn] = useState(false);
+  
   const verifyNavbar = async () => {
     try {
       if (connector.accounts[0]) {
@@ -77,31 +98,51 @@ export function DrawerContent(props) {
                 </WalletConnectProvider>
               </View>
               <Drawer.Section style={{ flex: 1, marginTop: 8 }}>
-                <DrawerItem
+              <DrawerItem
                   label="Home"
                   onPress={() => {
                     props.navigation.navigate("Home");
                   }}
+                  labelStyle={{ color: "black" }}
                 />
-                <DrawerItem
-                  label="Resources"
-                  onPress={() => {
-                    props.navigation.navigate("Resources");
-                  }}
-                />
+
                 <DrawerItem
                   label="Contact Us"
                   onPress={() => {
                     props.navigation.navigate("ContactUs");
                   }}
+                  labelStyle={{ color: "black" }}
                 />
 
                 <DrawerItem
-                  label="About Us"
-                  onPress={() => {
-                    props.navigation.navigate("AboutUs");
-                  }}
+                  label={() => (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ flex: 1 }}>Know More</Text>
+                    <Icon name={showSubMenusKnowMore ? 'angle-up' : 'angle-down'} />
+                  </View>
+                  )}
+                  onPress={toggleSubMenusKnowMore}
                 />
+
+                {showSubMenusKnowMore && (
+                <DrawerItem
+                label="Resources"
+                onPress={() => {
+                  props.navigation.navigate("Resources");
+                }}
+                />
+                )}
+
+                {showSubMenusKnowMore && (
+                 <DrawerItem
+                 label="About Us"
+                 onPress={() => {
+                   props.navigation.navigate("AboutUs");
+                 }}
+                 
+                 />
+                )}
+
               </Drawer.Section>
               <Drawer.Section
                 style={{ flex: 1, marginTop: 8, flexDirection: "row" }}
@@ -136,12 +177,7 @@ export function DrawerContent(props) {
                   onPress={() => {
                     props.navigation.navigate("Home");
                   }}
-                />
-                <DrawerItem
-                  label="Resources"
-                  onPress={() => {
-                    props.navigation.navigate("Resources");
-                  }}
+                  labelStyle={{ color: "black" }}
                 />
 
                 <DrawerItem
@@ -149,67 +185,116 @@ export function DrawerContent(props) {
                   onPress={() => {
                     props.navigation.navigate("ContactUs");
                   }}
+                  labelStyle={{ color: "black" }}
                 />
 
                 <DrawerItem
-                  label="About Us"
-                  onPress={() => {
-                    props.navigation.navigate("AboutUs");
-                  }}
+                  label={() => (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ flex: 1 }}>Know More</Text>
+                    <Icon name={showSubMenusKnowMore ? 'angle-up' : 'angle-down'} />
+                  </View>
+                  )}
+                  onPress={toggleSubMenusKnowMore}
                 />
+
+                {showSubMenusKnowMore && (
+                <DrawerItem
+                label="Resources"
+                onPress={() => {
+                  props.navigation.navigate("Resources");
+                }}
+                />
+                )}
+
+                {showSubMenusKnowMore && (
+                 <DrawerItem
+                 label="About Us"
+                 onPress={() => {
+                   props.navigation.navigate("AboutUs");
+                 }}
+                 
+                 />
+                )}
+
               </Drawer.Section>
               <Drawer.Section style={{ flex: 1, marginTop: 8 }}>
+            
                 <DrawerItem
-                  label="SignUp"
-                  onPress={() => {
-                    props.navigation.navigate("signUP");
-                  }}
-                />
-                <DrawerItem
-                  label="Upload Certificate"
-                  onPress={() => {
-                    props.navigation.navigate("uploadCertificate");
-                  }}
-                />
-
-                <DrawerItem
-                  label="Proposal Details"
-                  onPress={() => {
-                    props.navigation.navigate("proposalDetails");
-                  }}
-                />
-                <DrawerItem
-                  label="Sell Credits"
-                  onPress={() => {
-                    props.navigation.navigate("SellCredits");
-                  }}
-                />
-
-                <DrawerItem
-                  label="Become a member"
-                  onPress={() => {
-                    props.navigation.navigate("BecomeMember");
-                  }}
-                />
-                <DrawerItem
-                  label="Proposal Dashboard"
-                  onPress={() => {
-                    props.navigation.navigate("ProposalDashboard");
-                  }}
-                />
-
-                <DrawerItem
-                  label="Buy Tokens Dashboard"
-                  onPress={() => {
-                    props.navigation.navigate("BuyTokensDashboard");
-                  }}
-                />
-                <DrawerItem
-                  label="Profile Details"
+                  label="Dashboard"
                   onPress={() => {
                     props.navigation.navigate("ProfileDetails");
                   }}
+                  labelStyle={{ color: "black" }}
                 />
+
+                <DrawerItem
+                  label="Explore"
+                  onPress={() => {
+                    props.navigation.navigate("BuyTokensDashboard");
+                  }}
+                  labelStyle={{ color: "black" }}
+                />
+
+                <DrawerItem
+                  label={() => (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ flex: 1 }}>Member</Text>
+                    <Icon name={showSubMenusMember ? 'angle-up' : 'angle-down'} />
+                  </View>
+                  )}
+                  onPress={toggleSubMenusMember}
+                />
+
+                {showSubMenusMember && (
+                                <DrawerItem
+                                label="Become a Dao member"
+                                onPress={() => {
+                                  props.navigation.navigate("BecomeMember");
+                                }}
+                                
+                              />
+                )}
+
+                {showSubMenusMember && (
+                <DrawerItem
+                label="All Proposals"
+                onPress={() => {
+                  props.navigation.navigate("ProposalDashboard");
+                }}
+               
+              />
+                )}
+
+              <DrawerItem
+                  label={() => (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ flex: 1 }}>Our Approach</Text>
+                    <Icon name={showSubMenusOurApproach ? 'angle-up' : 'angle-down'} />
+                  </View>
+                  )}
+                  onPress={toggleSubMenusOurApproach}
+                />
+
+                {showSubMenusOurApproach && (
+                 <DrawerItem
+                 label="Add Your Proposal"
+                 onPress={() => {
+                   props.navigation.navigate("uploadCertificate");
+                 }}
+                 
+               />
+                )}
+
+                {showSubMenusOurApproach && (
+                              <DrawerItem
+                              label="Calculate Carbon Footprints"
+                              onPress={() => {
+                                props.navigation.navigate("Calculator");
+                              }}
+                              
+                            />
+                )}
               </Drawer.Section>
               <Drawer.Section
                 style={{ flex: 1, marginTop: 8, flexDirection: "row" }}

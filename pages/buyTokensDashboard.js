@@ -1,10 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-} from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import styles from "../style/buyTokensDashboardStyle";
 import {
   responsiveFontSize,
@@ -18,6 +14,7 @@ import Web3 from "web3";
 import ProfileDetails from "./profileDetails";
 
 export default function BuyTokensDashboard() {
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
   const [userDetailsById, setUserDetailsById] = useState([]);
   const [count, setCount] = useState(1);
@@ -26,7 +23,6 @@ export default function BuyTokensDashboard() {
 
   const sellingCredits = async () => {
     try {
-
       if (!connector.connected) {
         console.log("WalletConnect not connected");
         return;
@@ -36,8 +32,9 @@ export default function BuyTokensDashboard() {
 
         const con = await companyInstance();
         const getUserOrCount = await con.methods.orderCount().call();
+        // console.log("getUserOrCount :",getUserOrCount);
         const countOfUserOrder = parseInt(getUserOrCount, 16);
-        console.log("countOfUserOrder :",countOfUserOrder);
+        console.log("countOfUserOrder :", countOfUserOrder);
 
         let arr = [];
         for (let i = 1; i <= countOfUserOrder; i++) {
@@ -53,7 +50,7 @@ export default function BuyTokensDashboard() {
         // setbtnloading(false);
       }
     } catch (error) {
-      console.log("Selling Credits Error:",error);
+      console.log("Selling Credits Error:", error);
     }
   };
 
@@ -63,20 +60,20 @@ export default function BuyTokensDashboard() {
 
   const buyCreditsFunc = async (id, crd, prc) => {
     try {
-
       if (connector.connected) {
+        setIsLoading(true);
         console.log("Connector---", connector);
         const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await companyInstance();
         // console.log(id)
         console.log("Id :  crd :  prc :");
-        console.log(id, crd, prc)
+        console.log(id, crd, prc);
         const valueMul = crd * prc;
         const valuePara = valueMul.toString();
         const buyCredits = await con.methods.buycredit(id).encodeABI();
         await buyCredits.wait();
-       
+
         const gasPrice = await provider.eth.getGasPrice();
         const gasLimit = 3000000;
         const recipient = COMPANY_ADDRESS; // replace with recipient address
@@ -91,7 +88,7 @@ export default function BuyTokensDashboard() {
           to: recipient,
           data: txObject,
           nonce,
-          value:valuePara
+          value: valuePara,
         };
 
         console.log("After txOptions");
@@ -101,18 +98,19 @@ export default function BuyTokensDashboard() {
         console.log("After transaction");
         console.log(signTx);
         setCount((prev) => prev + 1);
-
+        setIsLoading(false);
         // sellingCredits()
         // return buyCredits;
         navigation.navigate(ProfileDetails);
       }
     } catch (error) {
-      console.log("Buy Credits Function Error :",error);
+      console.log("Buy Credits Function Error :", error);
+      setIsLoading(false);
     }
   };
 
   return (
-    <View>
+    <View style={{ backgroundColor: "#AFF6FF", flex: 1 }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.centerView}
@@ -124,57 +122,75 @@ export default function BuyTokensDashboard() {
 
           {count &&
             userDetailsById.map((company, key) => (
-            <View style={styles.mainBox} key={key}>
-              <View style={styles.boxBody}>
+              <View style={styles.mainBox} key={key}>
+                <View style={styles.boxBody}>
+                  <View style={styles.view_body}>
+                    <View>
+                      <Text style={styles.input_text}>Seller Address :</Text>
+                      <View style={styles.input_box}>
+                        <Text>{company[4]}</Text>
+                      </View>
+                    </View>
 
-                <View style={styles.view_body}>
-                  <View>
-                    <Text style={styles.input_text}>Seller Address :</Text>
-                    <View style={styles.input_box}><Text>{company[4]}</Text></View>
+                    <View>
+                      <Text style={styles.input_text}>Credits:</Text>
+                      <View style={styles.input_box}>
+                        <Text>{parseInt(company[1]._hex, 16)}</Text>
+                      </View>
+                    </View>
+
+                    <View>
+                      <Text style={styles.input_text}>
+                        Price per credits (in ETH):
+                      </Text>
+                      <View style={styles.input_box}>
+                        <Text>
+                          {parseInt(company[2]._hex, 16) / Math.pow(10, 18)}
+                        </Text>
+                      </View>
+                    </View>
+
+                    <View>
+                      <Text style={styles.input_text}>Total (in ETH):</Text>
+                      <View style={styles.input_box}>
+                        <Text>
+                          {(parseInt(company[2]._hex, 16) / Math.pow(10, 18)) *
+                            parseInt(company[1]._hex, 16)}
+                        </Text>
+                      </View>
+                    </View>
+
+                    <Button
+                      title={isLoading ? "Loading..." : "BUY"}
+                      loading={isLoading}
+                      loadingProps={{ size: "small", color: "white" }}
+                      buttonStyle={{
+                        backgroundColor: "#000",
+                        borderRadius: 15,
+                      }}
+                      titleStyle={{
+                        fontWeight: "bold",
+                        color: "#fff",
+                        fontSize: responsiveFontSize(2.7),
+                        margin: "4%",
+                      }}
+                      containerStyle={{
+                        marginHorizontal: "15%",
+                        // height: 50,
+                        width: responsiveWidth(30),
+                        marginVertical: "2%",
+                        marginBottom: "5%",
+                      }}
+                      onPress={buyCreditsFunc(
+                        company[0],
+                        parseInt(company[1]._hex, 16),
+                        parseInt(company[2]._hex, 16)
+                      )}
+                    />
                   </View>
-
-                  <View>
-                    <Text style={styles.input_text}>Credits:</Text>
-                    <View style={styles.input_box}><Text>{parseInt(company[1]._hex, 16)}</Text></View>
-                  </View>
-
-                  <View>
-                    <Text style={styles.input_text}>Price per credits (in ETH):</Text>
-                    <View style={styles.input_box}><Text>{parseInt(company[2]._hex, 16) / Math.pow(10, 18)}</Text></View>
-                  </View>
-
-                  <View>
-                    <Text style={styles.input_text}>Total (in ETH):</Text>
-                    <View style={styles.input_box}><Text>{(parseInt(company[2]._hex, 16) / Math.pow(10, 18)) * parseInt(company[1]._hex, 16)}</Text></View>
-                  </View>
-
-                  <Button
-                    title="BUY"
-                    loading={false}
-                    loadingProps={{ size: "small", color: "white" }}
-                    buttonStyle={{
-                      backgroundColor: "#000",
-                      borderRadius: 15,
-                    }}
-                    titleStyle={{
-                      fontWeight: "bold",
-                      color:"#fff",
-                      fontSize: responsiveFontSize(2.7),
-                      margin: "4%",
-                    }}
-                    containerStyle={{
-                      marginHorizontal: "15%",
-                      // height: 50,
-                      width: responsiveWidth(30),
-                      marginVertical: "2%",
-                      marginBottom: "5%",
-                    }}
-                    onPress={buyCreditsFunc(company[0], parseInt(company[1]._hex, 16), parseInt(company[2]._hex, 16))}
-                  />
                 </View>
               </View>
-            </View>
-          ))}
+            ))}
         </View>
       </ScrollView>
     </View>

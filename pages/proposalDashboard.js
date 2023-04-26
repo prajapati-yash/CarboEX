@@ -45,7 +45,7 @@ export default function ProposalDashboard() {
         contentContainerStyle={styles.centerView}
       >
         <View style={styles.main_view}>
-          <Text style={styles.main_view_text}>Proposal Dashboard</Text>
+          <Text style={styles.main_view_text}>ACTIVE PROPOSAL</Text>
 
           <View style={styles.view_details}>
             <View style={styles.view_proposal_data}>

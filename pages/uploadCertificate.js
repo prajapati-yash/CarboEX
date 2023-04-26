@@ -22,6 +22,7 @@ let documentUri = "";
 export default function UploadCertificate() {
   const navigation = useNavigation();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [certificate, setCertificate] = useState(null);
   const [emission, setEmission] = useState(null);
   const [proposal, setProposal] = useState(null);
@@ -29,12 +30,12 @@ export default function UploadCertificate() {
   const [domain, setDomain] = useState(false);
   const [fileName, setFileName] = useState("");
 
-  const handleSubmit = () => {
-    console.log("Certificate", certificate);
-    console.log("Domain:", domain);
-    console.log("Emission Value:", emission);
-    console.log("Proposal Value:", proposal);
-  };
+  // const handleSubmit = () => {
+  //   console.log("Certificate", certificate);
+  //   console.log("Domain:", domain);
+  //   console.log("Emission Value:", emission);
+  //   console.log("Proposal Value:", proposal);
+  // };
 
   _pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({});
@@ -81,6 +82,7 @@ export default function UploadCertificate() {
       ) {
         alert("Enter The Required Details");
       } else {
+        setIsLoading(true);
         const c = await uploadImage();
         const cids = c;
         console.log("Cids :", cids);
@@ -94,9 +96,11 @@ export default function UploadCertificate() {
           console.log("Value : ", value);
           console.log(proposal, cids, domain, emission);
           console.log(value[0]);
-          const CPTx = await conDAO.methods.createProposal(proposal, cids, domain, emission).encodeABI();
-          console.log("CPTx : ",CPTx);
-  
+          const CPTx = await conDAO.methods
+            .createProposal(proposal, cids, domain, emission)
+            .encodeABI();
+          console.log("CPTx : ", CPTx);
+
           const gasPrice = await provider.eth.getGasPrice();
           const gasLimit = 3000000;
           const recipient = DAO_MEMBER_ADDRESS; // replace with recipient address
@@ -111,7 +115,7 @@ export default function UploadCertificate() {
             to: recipient,
             data: CPTx,
             nonce,
-            value:value[0].toString()
+            value: value[0].toString(),
           };
 
           console.log("After txOptions");
@@ -119,11 +123,13 @@ export default function UploadCertificate() {
           const signTx = await connector.sendTransaction(txOptions);
           const finalTx = await signTx;
           console.log("signTx: ", signTx);
+          setIsLoading(false);
           navigation.navigate(ProposalDashboard);
         }
       }
     } catch (error) {
       console.log("Create Proposal Main : ", error);
+      setIsLoading(false);
     }
   };
 
@@ -152,9 +158,9 @@ export default function UploadCertificate() {
                 }}
                 onPress={this._pickDocument}
               />
-              <Text
-                  style={styles.input_box_image}
-                >{"Uploaded File: "+fileName}</Text>
+              <Text style={styles.input_box_image}>
+                {"Uploaded File: " + fileName}
+              </Text>
 
               <Dropdown
                 style={[
@@ -172,9 +178,9 @@ export default function UploadCertificate() {
                 onFocus={() => domainSetIsFocus(true)}
                 onBlur={() => domainSetIsFocus(false)}
                 onChange={(item) => {
-                  if(item.value === "Carbon Emission"){
+                  if (item.value === "Carbon Emission") {
                     setDomain(true);
-                  }else if(item.value == "Carbon Offset"){
+                  } else if (item.value == "Carbon Offset") {
                     setDomain(false);
                   }
                   domainSetIsFocus(false);
@@ -209,8 +215,8 @@ export default function UploadCertificate() {
 
             <View style={{ alignItems: "center" }}>
               <Button
-                title="Submit"
-                loading={false}
+                title={isLoading ? "Loading..." : "SUBMIT"}
+                loading={isLoading}
                 loadingProps={{ size: "small", color: "white" }}
                 buttonStyle={{
                   backgroundColor: "#1ba1b3",

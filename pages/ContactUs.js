@@ -14,6 +14,12 @@ import {
   Linking,
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { Button } from "@rneui/themed";
+import {
+  responsiveFontSize,
+  responsiveWidth,
+  responsiveHeight,
+} from "react-native-responsive-dimensions";
 import { proc } from "react-native-reanimated";
 
 const handleCallPress = (phoneNumber) => {
@@ -32,6 +38,8 @@ const handleLocationClick = () => {
 };
 
 export default function ContactUs() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const phone_number = process.env.PHONE_NUMBER;
   const email = process.env.EMAIL;
   const [inputData, setInputData] = useState({
@@ -43,6 +51,7 @@ export default function ContactUs() {
   });
 
   const handleSendMessage = async () => {
+    setIsLoading(true);
     const { fname, lname, email, phone, message } = inputData;
 
     const messageBody = {
@@ -52,21 +61,21 @@ export default function ContactUs() {
       phone: `${phone}`,
       message: `${message}`,
     };
-    try{
-    let response = await fetch("http://process.env.IP_ADDR:5000/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify(messageBody),
-    });
-    // console.log(response.json());
-    // alert(response.json().status);
-    alert(response);
-    // console.log(response);
-  }
-    catch(err){
-      console.log("Error: ", err)
+    try {
+      let response = await fetch("http://process.env.IP_ADDR:5000/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(messageBody),
+      });
+      // console.log(response.json());
+      // alert(response.json().status);
+      alert(response);
+      setIsLoading(false);
+      // console.log(response);
+    } catch (err) {
+      console.log("Error: ", err);
     }
   };
 
@@ -243,13 +252,35 @@ export default function ContactUs() {
             </View>
 
             <View style={styles.view_button}>
-              <Pressable
+              {/* <Pressable
                 style={styles.send_button}
                 android_ripple={{ color: "#ff0000" }}
                 onPress={handleSendMessage}
               >
                 <Text style={styles.send_button_text}>SEND MESSAGE</Text>
-              </Pressable>
+              </Pressable> */}
+              <Button
+                title={isLoading ? "Loading..." : "SEND MESSAGE"}
+                loading={isLoading}
+                loadingProps={{ size: "small", color: "white" }}
+                buttonStyle={{
+                  backgroundColor: "#16172E",
+                  borderRadius: 15,
+                }}
+                titleStyle={{
+                  fontWeight: "bold",
+                  fontSize: responsiveFontSize(2.5),
+                  color: "white",
+                }}
+                containerStyle={{
+                  marginHorizontal: "15%",
+                  width: responsiveWidth(65),
+                  marginVertical: "2%",
+                  marginBottom: "5%",
+                  marginTop: "5%",
+                }}
+                onPress={handleSendMessage}
+              ></Button>
             </View>
           </View>
         </View>
