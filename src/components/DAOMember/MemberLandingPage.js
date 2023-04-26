@@ -184,7 +184,7 @@ function MemberLandingPage() {
                         type="text"
                         class="form-control-plaintext"
                         id="formGroupExampleInput2"
-                        value={tknAmtResult + " ETH"}
+                        value={tknAmtResult + " BTT"}
                         readOnly
                       />
                     ) : (

@@ -172,7 +172,7 @@ function BuyCredits() {
                         </p>
                         <p className="company-price">
                           <span className="companyInfoLabel">
-                            Price per credits (in ETH):
+                            Price per credits (in BTT):
                           </span>{" "}
                           <p className="allBuyBg">
                             {" "}
@@ -181,7 +181,7 @@ function BuyCredits() {
                         </p>
                         <p className="company-price">
                           <span className="companyInfoLabel">
-                            Total (in ETH):
+                            Total (in BTT):
                           </span>{" "}
                           <p className="allBuyBg">
                             {" "}

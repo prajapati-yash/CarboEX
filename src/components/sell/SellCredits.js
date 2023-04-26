@@ -94,9 +94,9 @@ function SellCredits() {
   return (
     <>
       <div className="sellBg">
-      <div className="pb-5"></div>
-        <div className=" text-dark text-center d-flex justify-content-center align-items-center mx-auto">
-         <div className="buy-head-text bg-white"> BUY CARBON CREDITS</div> &nbsp;&nbsp;{" "}
+        <div className="pb-5"></div>
+        <div className=" text-dark text-center d-flex justify-content-center align-items-center mx-auto sell-head-text">
+          <div className="buy-head-text bg-white"> SELL CARBON CREDITS</div> &nbsp;&nbsp;{" "}
           <i
             className="fas fa-info-circle buy-head-info"
             onMouseEnter={handleMouseEnter1}
@@ -106,10 +106,10 @@ function SellCredits() {
           </i>
         </div>
         {showText && (
-            <div className="text-center d-flex justify-content-center align-items-center mb-3 mb-sm-4 buy-sub-text">
-              Here you can Sell carbon credits from wallet by setting amount and price.  {" "}
-            </div>
-          )}
+          <div className="text-center d-flex justify-content-center align-items-center mb-3 mb-sm-4 buy-sub-text">
+            Here you can Sell carbon credits from wallet by setting amount and price.  {" "}
+          </div>
+        )}
         <div className="row sellContainerBg justify-content-center">
           <div className="col-md-6">
             <div className="form-group mb-3 mb-sm-4">
@@ -123,7 +123,7 @@ function SellCredits() {
               />
             </div>
             <div className="form-group mb-3 mb-sm-4" >
-              <label htmlFor="price" className="mb-sm-2 sellLabel">Price per Credit (in ETH):</label>
+              <label htmlFor="price" className="mb-sm-2 sellLabel">Price per Credit (in BTT):</label>
               <input
                 type="number"
                 className="form-control"
@@ -133,7 +133,7 @@ function SellCredits() {
               />
             </div>
             <div className="form-group" >
-              <label htmlFor="total" className="mb-sm-2 sellLabel">Total (in ETH):</label>
+              <label htmlFor="total" className="mb-sm-2 sellLabel">Total (in BTT):</label>
               <input
                 type="number"
                 className="form-control"
