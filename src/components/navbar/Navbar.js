@@ -88,7 +88,7 @@ function Navbar() {
       auth: true,
       submenu: [
         { title: "Add Your Proposal", link: "/certificate-validation-proposal" },
-        { title: "Calculate Carbon Footprints", link: "/calculator" },
+        { title: "Calculate Carbon Footprints", link: "/calculator/home" },
       ],
     },
     // {

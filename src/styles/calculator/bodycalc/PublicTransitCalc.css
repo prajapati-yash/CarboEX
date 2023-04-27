@@ -40,6 +40,9 @@
   cursor: pointer;
   /* width: fit-content; */
 }
+.pTbtn {
+  width: 20%;
+}
 .pTbtn .publicT-form__button:hover {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
@@ -60,4 +63,15 @@
 }
 .traditionalCountry-dd {
   padding: 10px;
+}
+
+.cTbtn {
+  width: 30%;
+}
+.flTbtn {
+  width: 30%;
+}
+
+.mkBtn {
+  width: 30%;
 }

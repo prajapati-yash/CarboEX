@@ -40,10 +40,14 @@
   cursor: pointer;
   /* width: fit-content; */
 }
+
+.traditionalbtn {
+  width: 20%;
+}
+
 .traditionalbtn .house-form__button:hover {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
-  /* width: fit-content; */
 }
 .form-content1 {
   justify-content: center;
@@ -59,4 +63,12 @@
 }
 .traditionalCountry-dd {
   padding: 10px;
+}
+
+/* .house-form__button primary {
+  width: 20%;
+} */
+.title-te-class-main {
+  font-size: 1.5rem;
+  border-bottom: 3px solid white;
 }

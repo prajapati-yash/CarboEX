@@ -21,6 +21,7 @@ import MainProposalDashboard from "./pages/MainProposalDashboard";
 import { companyInstance } from "./components/Contracts";
 import { useAccount } from 'wagmi';
 import { useNavigate } from 'react-router-dom';
+import TraditionalBodyCalc from "./components/calculator/bodycalc/TraditionalBodyCalc";
 // import { useState } from "react";
 
 
@@ -58,7 +59,6 @@ function App() {
   return (
     <>
       {/* <h1 className="mt-5 text-center">Shree Ganeshay Namah</h1> */}
-
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -66,7 +66,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/resources' element={<Resources />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/calculator' element={<Calculator />} />
+          <Route path='/calculator/home' element={<Calculator />} />
           <Route path='/calculator/*' element={<Calculator />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/buy-carbon-credits' element={<BuyCarbonCredits />} />

@@ -141,120 +141,124 @@ function ProposalDashComponent() {
                 </div>
               </div>
             ) :
-
-            userProp.map((details, key) => (
-
-              <div className="proposal-company-wrapper" key={key}>
-                <div className="proposal-dash">
-                  <div className="proposal-dash-info">
-                    <div className="">
-                      {" "}
-                      <span className="proposal-dash-label">Type: </span>{" "}
-                      <p className="proposal-dash-output-Bg ">
-                        {details[3] ? "Emission" : "Offset"}
-                      </p>
-                    </div>
-                    <div className=" ">
-                      <span className="proposal-dash-label">Description: </span>
-                      <p className="proposal-dash-output-Bg proposal-dash-title scroll-bar ">
-                        {details[1]}
-                      </p>
-                    </div>
-                    <div className="mb-3">
-                      <span className="proposal-dash-label">Certificate:</span>
-                      <div
-                        className="proposal-dash-output-Bg proposal-dash-image"
-                        style={{ width: "fit-content" }}
-                      >
+            userProp.length > 0 ?
+              userProp.map((details, key) => (
+                <div className="proposal-company-wrapper" key={key}>
+                  <div className="proposal-dash">
+                    <div className="proposal-dash-info">
+                      <div className="">
                         {" "}
-                        <a
+                        <span className="proposal-dash-label">Type: </span>{" "}
+                        <p className="proposal-dash-output-Bg ">
+                          {details[3] ? "Emission" : "Offset"}
+                        </p>
+                      </div>
+                      <div className=" ">
+                        <span className="proposal-dash-label">Description: </span>
+                        <p className="proposal-dash-output-Bg proposal-dash-title scroll-bar ">
+                          {details[1]}
+                        </p>
+                      </div>
+                      <div className="mb-3">
+                        <span className="proposal-dash-label">Certificate:</span>
+                        <div
+                          className="proposal-dash-output-Bg proposal-dash-image"
+                          style={{ width: "fit-content" }}
+                        >
+                          {" "}
+                          <a
+                            onClick={() => {
+                              handleImageClick({
+                                image: `https://ipfs.io/ipfs/${details[2]}`,
+                              });
+                            }}
+                          >
+                            <img
+                              src={`https://ipfs.io/ipfs/${details[2]}`}
+                              className="img-thumbnail"
+                              alt="thumbnail"
+                              style={{ height: "150px", width: "150px" }}
+                            />
+                          </a>
+                        </div>
+                      </div>
+                      <div className="">
+                        <span className="proposal-dash-label">Status: </span>{" "}
+                        <p className="proposal-dash-output-Bg">
+                          {details[10] ? details[10] : "pending"}
+
+                        </p>
+                      </div>
+                      <div className="">
+                        <span className="proposal-dash-label">Proposed at:</span>{" "}
+                        <p className="proposal-dash-output-Bg">
+                          {hexToTimestamp(details[8]._hex)}
+                        </p>
+                      </div>
+                      <div className="">
+                        <span className="proposal-dash-label">
+                          Proposal Expire Time:
+                        </span>{" "}
+                        <p className="proposal-dash-output-Bg">
+                          {hexToTimestamp(details[9]._hex)}
+                        </p>
+                      </div>
+                      <div className="">
+                        <span className="proposal-dash-label">Result:</span> <br />
+                        <button
+                          className="btn btn-primary"
+                          style={{ width: "30%" }}
+                          disabled={disable}
+                          key={key}
                           onClick={() => {
-                            handleImageClick({
-                              image: `https://ipfs.io/ipfs/${details[2]}`,
-                            });
+                            const value1 = hexToTimestamp2(details[9]._hex) > new Date()
+                            if (value1) {
+                              setdisable(false)
+                              console.log(Date())
+                              toast.error(`You will be able to see the result after the proposal expires!`, {
+                                position: "top-left",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                              });
+                            } else {
+                              // if (hexToTimestamp(details[9]._hex) <= Date()) {
+                              getUserDataById(details[0], key);
+                            }
                           }}
                         >
-                          <img
-                            src={`https://ipfs.io/ipfs/${details[2]}`}
-                            className="img-thumbnail"
-                            alt="thumbnail"
-                            style={{ height: "150px", width: "150px" }}
-                          />
-                        </a>
+                          {btnloading && loadingIndex === key ? (
+                            <svg
+                              className="animate-spin button-spin-svg-pic"
+                              version="1.1"
+                              id="L9"
+                              xmlns="http://www.w3.org/2000/svg"
+                              x="0px"
+                              y="0px"
+                              viewBox="0 0 100 100"
+                              style={{ fill: "#fff", height: "30%", width: "30%" }}
+                            >
+                              <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+                            </svg>
+                          ) : (
+                            <>Get Result</>
+                          )}
+                        </button>
+                        {/* <button className=" btn btn-primary" onClick={""}>Result</button> */}
                       </div>
-                    </div>
-                    <div className="">
-                      <span className="proposal-dash-label">Status: </span>{" "}
-                      <p className="proposal-dash-output-Bg">
-                        {details[10] ? details[10] : "pending"}
-
-                      </p>
-                    </div>
-                    <div className="">
-                      <span className="proposal-dash-label">Proposed at:</span>{" "}
-                      <p className="proposal-dash-output-Bg">
-                        {hexToTimestamp(details[8]._hex)}
-                      </p>
-                    </div>
-                    <div className="">
-                      <span className="proposal-dash-label">
-                        Proposal Expire Time:
-                      </span>{" "}
-                      <p className="proposal-dash-output-Bg">
-                        {hexToTimestamp(details[9]._hex)}
-                      </p>
-                    </div>
-                    <div className="">
-                      <span className="proposal-dash-label">Result:</span> <br />
-                      <button
-                        className="btn btn-primary"
-                        style={{ width: "30%" }}
-                        disabled={disable}
-                        key={key}
-                        onClick={() => {
-                          const value1 = hexToTimestamp2(details[9]._hex) > new Date()
-                          if (value1) {
-                            setdisable(false)
-                            console.log(Date())
-                            toast.error(`You will be able to see the result after the proposal expires!`, {
-                              position: "top-left",
-                              autoClose: 5000,
-                              hideProgressBar: false,
-                              closeOnClick: true,
-                              pauseOnHover: true,
-                              draggable: true,
-                              progress: undefined,
-                              theme: "light",
-                            });
-                          } else {
-                            // if (hexToTimestamp(details[9]._hex) <= Date()) {
-                            getUserDataById(details[0], key);
-                          }
-                        }}
-                      >
-                        {btnloading && loadingIndex === key ? (
-                          <svg
-                            className="animate-spin button-spin-svg-pic"
-                            version="1.1"
-                            id="L9"
-                            xmlns="http://www.w3.org/2000/svg"
-                            x="0px"
-                            y="0px"
-                            viewBox="0 0 100 100"
-                            style={{ fill: "#fff", height: "30%", width: "30%" }}
-                          >
-                            <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-                          </svg>
-                        ) : (
-                          <>Get Result</>
-                        )}
-                      </button>
-                      {/* <button className=" btn btn-primary" onClick={""}>Result</button> */}
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )) :
+              (<div className="BuyPage-box-bg mb-lg-0 mb-sm-4 mb-4 mx-auto align-self-stretch py-5 px-4">
+                <div className='BuyPage-content-box row'>
+                  <div className="d-flex justify-content-center align-items-center">No Proposals Made</div>
+                </div>
+              </div>)}
           {/* ------ Onclick Enlarged Image ----- */}
           <div className="modal" tabIndex="-1" role="dialog" style={modalStyle}>
             <div className="modal-dialog modal-dialog-centered" role="document">
