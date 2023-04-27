@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/navbar/Navbar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import ConnectButtonCustom from "../ConnectButtonCustom";
 import { useAccount } from 'wagmi';
 import { ethers } from "ethers";
 import { companyInstance } from "../Contracts";
-import { useNavigate } from "react-router-dom";
+import { link, useNavigate } from "react-router-dom";
 import SignUp from "../../pages/SignUp";
 
 function Navbar() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { address, isConnected } = useAccount();
+  const location  = useLocation();
+  const isMember = location.pathname === '/become-member'
 
   const verifyUserAccount = async () => {
     try {
@@ -60,9 +62,10 @@ function Navbar() {
   useEffect(() => {
     verifyNavbar()
   }, [isAuthenticated])
+  const title = "member"
+  const verify =  "member"? true: false;
 
-
-  const navigation = [
+  const navi= [
     // {
     //   title: "Resources",
     //   link: "/Resources",
@@ -72,32 +75,34 @@ function Navbar() {
       title: "Explore",
       link: "/buy-carbon-credits",
       auth: true,
+      // isActive:"${isExplo ? 'active':''}",
+      className:"explore"
     },
     {
       title: "Member",
       link: "",
       auth: true,
+      isActive:`${navi.title[2] === "Member"?'notMember':'mainMember'}`,
+      className:"member",
       submenu: [
-        { title: "Become a Member", link: "/become-member" },
-        { title: "Proposals", link: "/dao-member-proposals" },
+        { title: "Become a DAO Member", link: "/become-member", className:"member" },
+        { title: "All Proposals", link: "/dao-member-proposals", className:"member"},
       ],
     },
     {
       title: "Our Approach",
       link: "",
+      className:"approach",
       auth: true,
       submenu: [
-        { title: "Validate Carbon Credits", link: "/certificate-validation-proposal" },
+        { title: "Add Your Proposal", link: "/certificate-validation-proposal" },
         { title: "Calculate Carbon Footprints", link: "/calculator" },
       ],
     },
-    // {
-    //   title: "Market",
-    //   link: "/market",
-    // },
     {
       title: "Know More",
       link: "",
+      className:"knowMore",
       submenu: [
         {
           title: "About Us",
@@ -112,11 +117,13 @@ function Navbar() {
     {
       title: "Contact",
       link: "/contact",
+      className:"contact"
     },
     {
       title: "Dashboard",
       link: "/user-dashboard",
       auth: true,
+      className:"dashboard"
     },
   ];
 
@@ -175,7 +182,7 @@ function Navbar() {
                     {hasSubmenu(item) ? (
                       <div className="dropdown">
                         <NavLink
-                          className="nav-link dropdown-toggle p-0 active"
+                          className={"nav-link dropdown-toggle p-0  " + `${item.isActive}`}
                           aria-current="page"
                           to={item.link}
                           id={`nav-link-${index}`}
@@ -203,12 +210,7 @@ function Navbar() {
                         >
                           {item.submenu.map((subitem, subindex) => (
                             <li key={subindex}>
-                              <NavLink
-                                className="sub-item dropdown-item p-0 active"
-                                aria-current="page"
-                                // key={subindex}
-                                to={subitem.link}
-                              >
+                              <NavLink aria-current="page" to={subitem.link} className={"sub-item dropdown-item p-0 " + `${subitem.className}`}>
                                 {subitem.title}
                               </NavLink>
                             </li>
@@ -216,7 +218,7 @@ function Navbar() {
                         </ul>
                       </div>
                     ) : (
-                      <NavLink to={item.link} className="nav-link">
+                      <NavLink to={item.link} className={"nav-link " + `${item.className} ${item.isActive}`}>
                         {item.title}
                       </NavLink>
                     )}

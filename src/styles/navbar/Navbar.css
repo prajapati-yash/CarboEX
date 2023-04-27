@@ -34,10 +34,24 @@
     color: black;
     font-size: 1.2rem;
 }
-
+/* .member.active{
+    border-bottom: blue;
+} */
+.notMember{
+    border-bottom: 2px solid blue;
+}
 .nav-link:hover{
     color: #038b97!important;
 }
+.approach.active{
+    border-bottom: #038b97;
+}
+.explore.active, .contact.active, .dashboard.active{
+    border-bottom: 2px solid blue;
+}
+/* .member.active{
+    border-bottom: 2px solid blue;
+} */
 
  .navbar-toggler {
     width: 20px;

@@ -8,71 +8,70 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function MotorBikeCalc({ onValueChange, props }) {
     const [btnloading, setbtnloading] = useState(false)
-
+    const [btndisable, setbtndisable] = useState(false);
     const [mbData1, setMbData] = useState({
         mbDistance: null,
         mbType: null
     })
 
-    var data = {
-        type: mbData1.mbType,
-        distance: mbData1.mbDistance,
-    };
-    // var data = JSON.stringify(`{\n      "distance": ${mbData1.mbDistance},\n      "type": ${mbData1.mbType}\n      }: ''`);
     const apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMWU3MzVmMTgzYWJjYTkzMWIzMWM4NDNhMTFhZmYxMWM0MGQ4NzlmMDVjNzM0ZTMzMjQ5MzI5Y2MwZTkxYmUyMWYyNTVjZjIzYTRlMjBiNmYiLCJpYXQiOjE2ODE1NTg3OTUsIm5iZiI6MTY4MTU1ODc5NSwiZXhwIjoxNzEzMTgxMTk1LCJzdWIiOiI0MTM0Iiwic2NvcGVzIjpbXX0.ZVntnNAix7jwIa4YfecWb0IjI_KK4aDEp0ZTF1ihYxs-121_3lD2px_B3EVSW28hzHIjn3Ctz8gP-j9r_-f9gw";
-    var config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `https://app.trycarbonapi.com/api/motorBike?distance=${mbData1.mbDistance}&type=${mbData1.mbType}`,
-        headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: data
-    };
 
 
     // useEffect(() => {
     //     console.log(mbData1);
     // }, [mbData1]);
 
-
     const fSubmitData = async () => {
+        var data = {
+            type: mbData1.mbType,
+            distance: mbData1.mbDistance,
+        };
+        var config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: `https://app.trycarbonapi.com/api/motorBike?distance=${mbData1.mbDistance}&type=${mbData1.mbType}`,
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            data: data
+        };
         // console.log(`${mbData1.mbDistance} ${mbData1.mbType}`)
         // console.log(`${data.distance} ${data.type}`)
         // const ftcResult2 = await console.log(ftcResult);
         // console.log(ftcResult2)
-        await axios(config)
-        toast.info('Calculating', {
-            position: "top-left",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-        setbtnloading(true)
-            .then(function (response) {
-                const ftcResult = JSON.stringify(response.data);
-                // alert(`Carbon: ${ftcResult}`);
-                console.log(`Carbon: ${ftcResult}`);
-                const numbers = ftcResult.match(/\d+(\.\d+)?/g);
-                // console.log(numbers[0]);
-                const demo = numbers[0];
-                alert(demo)
-                setbtnloading(false)
-                console.log(demo)
-
-                // const value = ftcResult
-                const value = demo
-                onValueChange(value);
-            })
-            .catch(function (error) {
-                console.log(error);
-                setbtnloading(false)
+        try {
+            setbtndisable(true)
+            toast.info('Calculating', {
+                position: "top-left",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
             });
+            setbtnloading(true)
+            const response = await axios.request(config);
+            const ftcResult = JSON.stringify(response.data.carbon);
+            alert(`Carbon Emission: ${ftcResult}`);
+            console.log(`Carbon: ${ftcResult}`);
+            const numbers = ftcResult.match(/\d+(\.\d+)?/g);
+            // console.log(numbers[0]);
+            const demo = numbers[0];
+            // alert(demo)
+            setbtnloading(false)
+            console.log(demo)
+
+            // const value = ftcResult
+            const value = demo
+            onValueChange(value);
+        } catch (error) {
+            console.log(error);
+            setbtnloading(false)
+            setbtndisable(false)
+        }
     };
 
     return (

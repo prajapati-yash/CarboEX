@@ -7,28 +7,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function CleanEnergyCalc({ onValueChange, props }) {
     const [btnloading, setbtnloading] = useState(false)
+    const [btndisable, setbtndisable] = useState(false);
     const [ceData1, setCeData] = useState({
         ceEnergy: null,
         ceConsumption: null
     })
 
-    var data = {
-        energy: ceData1.ceEnergy,
-        consumption: ceData1.ceConsumption,
-    };
+
     // var data = JSON.stringify(`{\n      "energy": ${ceData1.ceEnergy},\n      "consumption": ${ceData1.ceConsumption}\n      }: ''`);
     const apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMWU3MzVmMTgzYWJjYTkzMWIzMWM4NDNhMTFhZmYxMWM0MGQ4NzlmMDVjNzM0ZTMzMjQ5MzI5Y2MwZTkxYmUyMWYyNTVjZjIzYTRlMjBiNmYiLCJpYXQiOjE2ODE1NTg3OTUsIm5iZiI6MTY4MTU1ODc5NSwiZXhwIjoxNzEzMTgxMTk1LCJzdWIiOiI0MTM0Iiwic2NvcGVzIjpbXX0.ZVntnNAix7jwIa4YfecWb0IjI_KK4aDEp0ZTF1ihYxs-121_3lD2px_B3EVSW28hzHIjn3Ctz8gP-j9r_-f9gw";
-    var config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `https://app.trycarbonapi.com/api/cleanHydro?energy=${ceData1.ceEnergy}&consumption=${ceData1.ceConsumption}`,
-        headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: data
-    };
-
 
     // useEffect(() => {
     //     console.log(ceData1);
@@ -36,41 +23,53 @@ function CleanEnergyCalc({ onValueChange, props }) {
 
 
     const ceSubmitData = async () => {
-        console.log(`${ceData1.ceEnergy} ${ceData1.ceConsumption}`)
-        // const ceResult2 = await console.log(ceResult);
-        // console.log(ceResult2)
-        await axios(config)
-        toast.info('Calculating', {
-            position: "top-left",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-        setbtnloading(true)
-            .then(function (response) {
-                const ceResult = JSON.stringify(response.data);
-                // alert(`Carbon: ${ceResult}`);
-                console.log(`Carbon: ${ceResult}`);
-                const numbers = ceResult.match(/\d+(\.\d+)?/g);
-                // console.log(numbers[0]);
-                const demo = numbers[0];
-                alert(demo)
-                setbtnloading(false)
-                toast.success("Calculation Successful");
-                console.log(demo)
-
-                // const value = ceResult
-                const value = demo
-                onValueChange(value);
-            })
-            .catch(function (error) {
-                console.log(error);
-                setbtnloading(false)
+        var data = {
+            energy: ceData1.ceEnergy,
+            consumption: ceData1.ceConsumption,
+        };
+        var config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: `https://app.trycarbonapi.com/api/cleanHydro?energy=${ceData1.ceEnergy}&consumption=${ceData1.ceConsumption}`,
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            data: data
+        };
+        try {
+            setbtndisable(true)
+            toast.info('Calculating', {
+                position: "top-left",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
             });
+            setbtnloading(true)
+            const response = await axios.request(config);
+            const ceResult = JSON.stringify(response.data.carbon);
+            alert(`Carbon Emission: ${ceResult}`);
+            console.log(`Carbon: ${ceResult}`);
+            const numbers = ceResult.match(/\d+(\.\d+)?/g);
+            // console.log(numbers[0]);
+            const demo = numbers[0];
+            // alert(demo)
+            setbtnloading(false)
+            toast.success("Calculation Successful");
+            console.log(demo)
+
+            // const value = ceResult
+            const value = demo
+            onValueChange(value);
+        } catch (error) {
+            console.log(error);
+            setbtnloading(false)
+            setbtndisable(false)
+        }
     };
 
     return (

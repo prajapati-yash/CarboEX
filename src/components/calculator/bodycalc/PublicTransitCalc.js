@@ -7,69 +7,66 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function PublicTransitCalc({ onValueChange, props }) {
     const [btnloading, setbtnloading] = useState(false)
-
+    const [btndisable, setbtndisable] = useState(false);
     const [ptData1, setPtData] = useState({
         ptDistance: null,
         ptType: null
     })
 
-    var data = {
-        distance: ptData1.ptDistance,
-        type: ptData1.ptType,
-    };
-    // var data = JSON.stringify(`{\n      "distance": ${ptData1.ptDistance},\n      "type": ${ptData1.ptType}\n      }: ''`);
     const apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMWU3MzVmMTgzYWJjYTkzMWIzMWM4NDNhMTFhZmYxMWM0MGQ4NzlmMDVjNzM0ZTMzMjQ5MzI5Y2MwZTkxYmUyMWYyNTVjZjIzYTRlMjBiNmYiLCJpYXQiOjE2ODE1NTg3OTUsIm5iZiI6MTY4MTU1ODc5NSwiZXhwIjoxNzEzMTgxMTk1LCJzdWIiOiI0MTM0Iiwic2NvcGVzIjpbXX0.ZVntnNAix7jwIa4YfecWb0IjI_KK4aDEp0ZTF1ihYxs-121_3lD2px_B3EVSW28hzHIjn3Ctz8gP-j9r_-f9gw";
-    var config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `https://app.trycarbonapi.com/api/publicTransit?distance=${ptData1.ptDistance}&type=${ptData1.ptType}`,
-        headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: data
-    };
-
 
     // useEffect(() => {
     //     console.log(ptData1);
     // }, [ptData1]);
 
-
     const ptSubmitData = async () => {
-        // console.log(`${ptData1.ptDistance} ${ptData1.ptType}`)
-        // const ptResult2 = await console.log(ptResult);
-        // console.log(ptResult2)
-        await axios(config)
-        toast.info('Calculating', {
-            position: "top-left",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-        setbtnloading(true)
-            .then(function (response) {
-                const ptResult = JSON.stringify(response.data.carbon);
-                // alert(`Carbon: ${ptResult}`);
-                // console.log(`Carbon: ${ptResult}`);
-                const numbers = ptResult.match(/\d+(\.\d+)?/g);
-                // console.log(numbers[0]);
-                const demo = numbers[0];
-                alert(demo)
-                setbtnloading(false)
-                console.log(demo)
-                // const value = ptResult
-                const value = demo
-                onValueChange(value);
-            })
-            .catch(function (error) {
-                console.log(error);
-                setbtnloading(false)
+        var data = {
+            distance: ptData1.ptDistance,
+            type: ptData1.ptType,
+        };
+
+        var config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: `https://app.trycarbonapi.com/api/publicTransit?distance=${ptData1.ptDistance}&type=${ptData1.ptType}`,
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            data: data
+        };
+        try {
+            setbtndisable(true)
+            toast.info('Calculating', {
+                position: "top-left",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
             });
+            setbtnloading(true)
+            const response = await axios.request(config);
+            const ptResult = JSON.stringify(response.data.carbon);
+            alert(`Carbon Emission: ${ptResult}`);
+            // console.log(`Carbon: ${ptResult}`);
+            const numbers = ptResult.match(/\d+(\.\d+)?/g);
+            // console.log(numbers[0]);
+            const demo = numbers[0];
+            // alert(demo)
+            setbtndisable(false)
+            setbtnloading(false)
+            console.log(demo)
+            // const value = ptResult
+            const value = demo
+            onValueChange(value);
+        } catch (error) {
+            console.log(error);
+            setbtnloading(false)
+            setbtndisable(false)
+        }
     };
 
     return (

@@ -3,14 +3,35 @@ import "../../styles/DAOMember/ProposalData.css";
 import { useLocation } from "react-router-dom";
 import { daoInstance } from "../Contracts";
 import { ethers } from "ethers";
+import { useAccount } from 'wagmi';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProposalData() {
+  const { address } = useAccount();
   const location = useLocation();
-  // console.log(location.state.data);
+  console.log(location.state.data);
   const proposal = location.state ? location.state.data : "";
-  const [downvoteProposal, setDownvoteProposal] = useState();
+  // const [downvoteProposal, setDownvoteProposal] = useState();
   const [rejectbtnloading, setrejectbtnloading] = useState(false);
   const [approvebtnloading, setapprovebtnloading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [enlargedImageSrc, setEnlargedImageSrc] = useState("0");
+
+  const checkDAOMember = async () => {
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      if (!provider) {
+        console.log("Metamask is not installed, please install!");
+      }
+      const conDAO = await daoInstance();
+      const isDAOMember = await conDAO.isMember(address)
+      console.log(isDAOMember)
+      return isDAOMember;
+    }
+  }
 
   const daoProposalApprove = async () => {
     try {
@@ -24,12 +45,29 @@ function ProposalData() {
         }
         const con = await daoInstance();
         const value = await con.getConfigs()
-        const upvoteProposal = await con.upvote(proposal[0], { value: String(value[1]) });
+        console.log(proposal[0])
+        console.log(value[1]._hex)
+        console.log(address)
+        const upvoteProposal = await con.upvote(proposal[0], { value: String(value[1]._hex, address) });
         // console.log(upvoteProposal)
         setapprovebtnloading(false);
       }
     } catch (error) {
       console.log(error);
+      setapprovebtnloading(false);
+      console.log(error.reason);
+      const ErrorReason = error.reason;
+      console.log(ErrorReason)
+      toast.error(`Error : ${ErrorReason}`, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setapprovebtnloading(false);
     }
   };
@@ -46,18 +84,34 @@ function ProposalData() {
         }
         const con = await daoInstance();
         const value = await con.getConfigs()
-        const downvoteProposal = await con.downvote(proposal[0], { value: String(value[1]) });
+        console.log(value[1]._hex)
+        const downvoteProposal = await con.downvote(proposal[0], { value: String(value[1]._hex, address) });
         setrejectbtnloading(false);
-        // console.log(downvoteProposal)
       }
     } catch (error) {
-      console.log(error);
+      setrejectbtnloading(false);
+      console.log(error.reason);
+      const ErrorReason = error.reason;
+      console.log(ErrorReason)
+      toast.error(`Error : ${ErrorReason}`, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setrejectbtnloading(false);
     }
   };
 
-  const [showModal, setShowModal] = useState(false);
-  const [enlargedImageSrc, setEnlargedImageSrc] = useState("0");
+  const data1 = () => {
+    console.log(proposal[0])
+    // console.log(value[1])
+  }
+
   const proposalValue = parseInt(proposal[4]._hex, 16);
   const proposalData = {
     id: proposal[0],
@@ -121,14 +175,6 @@ function ProposalData() {
                               <div className="allproposalData">
                                 {proposalData.publicAddress}
                               </div>
-                              {/* <p className=" to-copy-pub-add">
-                                                            <div className='allproposalData'>
-                                                                {proposalData.publicAddress}</div> */}
-                              {/* <button class="copy-field-input-button" >
-                                                                <div class="copy-field-button-visible">
-                                                                    <i class="fa-solid fa-copy mr-1" style={{ color: '#2effaf' }} width="20px" height="20px" ></i>
-                                                                </div>
-                                                            </button> */}
                             </p>
                           </p>
                           <p className=" ">
@@ -172,9 +218,9 @@ function ProposalData() {
                                                         <span className="proposalInfoLabel">Type:</span> <p className="proposalInfoDataBg">{proposalData.type}</p>
                                                     </p> */}
                           <p className="proposal-value">
-                            <span className="proposalInfoLabel">Value:</span>{" "}
+                            <span className="proposalInfoLabel">Value of {proposalData.name}:</span>{" "}
                             <p className="proposalInfoDataBg">
-                              {proposalData.value}
+                              {proposalData.value} tons
                             </p>
                           </p>
                         </div>
@@ -190,7 +236,6 @@ function ProposalData() {
                         className="PData-reject-btn  rounded-pill"
                         onClick={daoProposalReject}
                       >
-
                         {rejectbtnloading ? (
                           <svg
                             className="animate-spin button-spin-svg-pic"
@@ -200,7 +245,7 @@ function ProposalData() {
                             x="0px"
                             y="0px"
                             viewBox="0 0 100 100"
-                            style={{ width: "10%", fill: "#fff" }}
+                            style={{ width: "30%", fill: "#fff" }}
 
                           >
                             <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
@@ -226,7 +271,7 @@ function ProposalData() {
                             x="0px"
                             y="0px"
                             viewBox="0 0 100 100"
-                            style={{ width: "10%", fill: "#fff" }}
+                            style={{ width: "30%", fill: "#fff" }}
                           >
                             <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
                           </svg>
@@ -261,7 +306,9 @@ function ProposalData() {
               </div>
             </div>
           </div>
+          <ToastContainer />
         </div>
+        {/* <button onClick={data1}>click</button> */}
       </div>
     </>
   );

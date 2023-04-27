@@ -12,6 +12,7 @@
   position: relative;
   width: 90%;
   height: 100%;
+  /* min-height: 80vh; */
 }
 
 .lItems {
@@ -62,6 +63,7 @@
   }
   .mainCalclass1 {
     border-radius: 4rem;
+    padding: 20px;
   }
 }
 

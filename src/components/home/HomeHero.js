@@ -29,7 +29,7 @@ function HomeHero() {
                 const verifyTx = await con.iscompaniesAdd(address)
                 // result = verifyTx
                 console.log(verifyTx)
-                console.log(con);
+                // console.log(con);
                 return verifyTx;
             }
         } catch (error) {
@@ -44,6 +44,7 @@ function HomeHero() {
             console.log(test)
             if (test) {
                 navigate("/user-dashboard")
+                window.location.reload();
             }
             else {
                 navigate("/signup")
@@ -77,7 +78,7 @@ function HomeHero() {
 
                             </div>
                             <div className='start-button-div py-sm-2 py-xl-4 '>
-                                <button className='btn btn-primary shadow-none border-0 start-button rounded-pill py-2'
+                                <button className='main-landing-button-gs btn btn-primary shadow-none border-0 start-button rounded-pill py-2'
                                     onClick={() => SignupWithWallet()} > GET STARTED</button>
 
                             </div>

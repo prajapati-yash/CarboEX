@@ -7,73 +7,71 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function CarTravelCalc({ onValueChange, props }) {
     const [btnloading, setbtnloading] = useState(false)
-
+    const [btndisable, setbtndisable] = useState(false);
     const [ctData1, setCtData] = useState({
         ctDistance: null,
         ctVehicle: null
     })
 
-    var data = {
-        vehicle: ctData1.ctVehicle,
-        distance: ctData1.ctDistance,
-    };
-    // var data = JSON.stringify(`{\n      "dictance": ${ctData1.ctDistance},\n      "vehicle": ${ctData1.ctVehicle}\n      }: ''`);
     const apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMWU3MzVmMTgzYWJjYTkzMWIzMWM4NDNhMTFhZmYxMWM0MGQ4NzlmMDVjNzM0ZTMzMjQ5MzI5Y2MwZTkxYmUyMWYyNTVjZjIzYTRlMjBiNmYiLCJpYXQiOjE2ODE1NTg3OTUsIm5iZiI6MTY4MTU1ODc5NSwiZXhwIjoxNzEzMTgxMTk1LCJzdWIiOiI0MTM0Iiwic2NvcGVzIjpbXX0.ZVntnNAix7jwIa4YfecWb0IjI_KK4aDEp0ZTF1ihYxs-121_3lD2px_B3EVSW28hzHIjn3Ctz8gP-j9r_-f9gw";
-    var config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `https://app.trycarbonapi.com/api/carTravel?distance=${ctData1.ctDistance}&vehicle=${ctData1.ctVehicle}`,
-        headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: data
-    };
 
 
     // useEffect(() => {
     //     console.log(ctData1);
     // }, [ctData1]);
 
-
     const ftcSubmitData = async () => {
         // console.log(`${ctData1.ctDistance} ${ctData1.ctVehicle}`)
         // console.log(`${data.distance} ${data.vehicle}`)
         // const ftcResult2 = await console.log(ftcResult);
         // console.log(ftcResult2)
+        var data = {
+            vehicle: ctData1.ctVehicle,
+            distance: ctData1.ctDistance,
+        };
+        var config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: `https://app.trycarbonapi.com/api/carTravel?distance=${ctData1.ctDistance}&vehicle=${ctData1.ctVehicle}`,
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            data: data
+        };
 
-        await axios(config)
-        toast.info('Calculating', {
-            position: "top-left",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-        setbtnloading(true)
-            .then(function (response) {
-                const ftcResult = JSON.stringify(response.data);
-                // alert(`Carbon: ${ftcResult}`);
-                console.log(`Carbon: ${ftcResult}`);
-                const numbers = ftcResult.match(/\d+(\.\d+)?/g);
-                // console.log(numbers[0]);
-                const demo = numbers[0];
-                alert(demo)
-                console.log(demo)
-                // const value = ftcResult
-                const value = demo
-                onValueChange(value);
-                setbtnloading(false)
-            })
-            .catch(function (error) {
-                console.log(error);
-                setbtnloading(false)
+
+        try {
+            setbtndisable(true)
+            toast.info('Calculating', {
+                position: "top-left",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
             });
-
-
+            setbtnloading(true)
+            const response = await axios.request(config);
+            const ftcResult = JSON.stringify(response.data.carbon);
+            alert(`Carbon Emission: ${ftcResult}`);
+            console.log(`Carbon Emission: ${ftcResult}`);
+            const numbers = ftcResult.match(/\d+(\.\d+)?/g);
+            // console.log(numbers[0]);
+            const demo = numbers[0];
+            // alert(demo)
+            console.log(demo)
+            // const value = ftcResult
+            const value = demo
+            onValueChange(value);
+            setbtnloading(false)
+        } catch (error) {
+            console.log(error);
+            setbtnloading(false)
+            setbtndisable(false)
+        }
     };
 
     return (

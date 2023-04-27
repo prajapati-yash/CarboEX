@@ -7,42 +7,42 @@ function AboutTeam() {
       id: 1,
       src: 'assets/about/teamImages/jay.png',
       alt: 'Image 1',
-      name:'Jay Patel',
+      name:'jack212',
       role:'Backend Developer'
     },
     {
       id: 2,
       src: 'assets/about/teamImages/purvi.jpeg',
       alt: 'Image 2',
-      name:'Purvi Vaghela',
+      name:'pv_189',
       role:'Backend Developer'
     },
     {
       id: 3,
       src: 'assets/about/teamImages/isha.jpeg',
       alt: 'Image 3',
-      name:'Isha Mistry',
+      name:'im_31',
       role:'App Developer'
     },
     {
       id: 4,
       src: 'assets/about/teamImages/abhishek.png',
-      alt: 'Image 4',
-      name:'Abhishek Rajput',
+      alt: 'GodFather097',
+      name: 'GodFather097',
       role:'App Developer'
     },
     {
       id: 5,
       src: 'assets/about/teamImages/purvik.jpeg',
       alt: 'Image 5',
-      name:'Purvik Panchal',
+      name:'peterparker',
       role:'Web Developer'
     },
     {
       id: 6,
       src: 'assets/about/teamImages/yash.jpg',
       alt: 'Image 6',
-      name:'Yash Prajapati',
+      name:'victorious',
       role:'Web Developer'
     },
   ];

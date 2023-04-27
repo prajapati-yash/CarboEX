@@ -2,9 +2,9 @@ import { ethers } from "ethers";
 import companyABI from "../../src/contract/artifacts/Companyabi.json"
 import daoABI from "../../src/contract/artifacts/Daoabi.json"
 import ercTokenABI from "../../src/contract/artifacts/ErcTokenabi.json"
-export const COMPANY_ADDRESS = "0x9BF762b943b0eBdC0413C4B4eE73407D659fe7dD";
-export const DAO_MEMBER_ADDRESS = "0xF526be3099084401103e9ef205f0D08749A0ce2B";
-export const ERC_TOKEN_ADDRESS = "0x211e127c03AbE404744EA333D45FBE4177c2EEF4";
+export const COMPANY_ADDRESS = "0x41057cB44bdcc927a0e9FeA6e0C5da47F9c5B97E";
+export const DAO_MEMBER_ADDRESS = "0x9b324829D71ffD688Eb4C8B61e3583E247dB1420";
+export const ERC_TOKEN_ADDRESS = "0xa44CD252520891cf84c8f555dd06D3cfe3c8893E";
 
 export const companyInstance = async () => {
     const { ethereum } = window;

@@ -111,6 +111,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  width: 125px;
   /* width: fit-content; */
 }
 
@@ -123,12 +124,43 @@
   transform: scale(1.05) rotate(-1deg);
 }
 
+.become-member-head {
+  border-radius: 1rem;
+  position: relative;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+}
+.become-member-sub-text {
+  position: absolute;
+  font-size: 1.3rem;
+  font-weight: 500;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  opacity: 1;
+  border-radius: 0.5rem;
+  /* transition:  0.3s ease-in-out; */
+}
+
+.become-member-info {
+  font-size: 1.5rem;
+  cursor: pointer;
+  /* background-color: #fff; */
+  color: #000;
+  border-radius: 1rem;
+  fill: #fff;
+}
+
 @media (max-width: 400px) {
   .MLPage-head p {
     font-size: 1rem;
     font-weight: bolder !important;
   }
 }
+
 
 @media (max-width: 650px) {
   .MLPage-head p {
@@ -172,7 +204,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
   .MLPage-head {
     font-size: 1.8rem;
     font-weight: 600;
@@ -190,8 +222,26 @@
     font-size: 1.3rem;
     font-weight: 600;
   }
-}
 
+  .become-member-head {
+    border-radius: 1rem;
+    position: relative;
+    padding: 1rem 1rem;
+    font-size: 1.5rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .become-member-head{
+    font-size: 1.3rem!important;
+    font-weight: 600;
+    padding: 0.8rem 1.3rem;
+    border-radius: 1rem;
+  }
+
+  .become-member-sub-text{
+    width: 80%;
+  }
+}
 @media (max-width: 850px) {
   .MLPage-head {
     font-size: 2rem;
