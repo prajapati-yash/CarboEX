@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Text, View, ScrollView, TextInput, Image } from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  TextInput,
+  Image,
+  ToastAndroid,
+} from "react-native";
 import styles from "../style/uploadCertificateStyle";
 import { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
@@ -128,12 +135,24 @@ export default function UploadCertificate() {
           const signTx = await connector.sendTransaction(txOptions);
           const finalTx = await signTx;
           console.log("signTx: ", signTx);
+          let receipt = null;
+          while (receipt === null) {
+            receipt = await provider.eth.getTransactionReceipt(signTxDao);
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
+          }
+          // console.log("Receipt Status", receipt.status);
+          if (receipt && receipt.status) {
+            ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
+          } else {
+            ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
+          }
           setIsLoading(false);
           navigation.navigate(ProposalDashboard);
         }
       }
     } catch (error) {
       console.log("Create Proposal Main : ", error);
+      ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
       setIsLoading(false);
     }
   };

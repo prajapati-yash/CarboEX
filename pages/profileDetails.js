@@ -6,6 +6,7 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  ToastAndroid
 } from "react-native";
 import styles from "../style/profileDetailsStyle";
 import { Button, Dialog } from "@rneui/themed";
@@ -65,7 +66,7 @@ function EditProfileScreen() {
 
   useEffect(() => {
     getUserAccountDetails();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
@@ -235,14 +236,26 @@ function MyProposalScreen() {
         console.log("After txOptions");
         console.log("connector transaction", connector);
         const signTx = await connector.sendTransaction(txOptions);
-        setIsLoading(false);
-        // const finalTx = await signTx;
+        const finalTx = await signTx;
         console.log("After transaction");
         console.log(signTx);
+        setIsLoading(false);
+        let receipt = null;
+          while (receipt === null) {
+            receipt = await provider.eth.getTransactionReceipt(signTx);
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
+          }
+          // console.log("Receipt Status", receipt.status);
+          if (receipt && receipt.status) {
+            ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
+          } else {
+            ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
+          }
         return getResult;
       }
     } catch (error) {
       console.log("Get Result Error :", error.message);
+      ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
       setIsLoading(false);
     }
   };
@@ -268,47 +281,53 @@ function MyProposalScreen() {
 
                 <View>
                   <Text style={styles.input_text_orders}>Description:</Text>
-                  <View style={styles.input_box_orders}>
+                  <View style={styles.input_box_description}>
                     <Text>{details[1]}</Text>
                   </View>
                 </View>
 
-                <Text style={styles.input_text_orders_image}>Certificate:</Text>
-
-                <View style={[styles.view_proposal_description]}>
-                  <TouchableOpacity onPress={() => toggleDialog(key)} key={key}>
-                    <Image
-                      source={{ uri: "https://ipfs.io/ipfs/" + details[2] }}
-                      style={{
-                        width: responsiveWidth(40),
-                        height: responsiveHeight(20),
-                        marginVertical: 10,
-                      }}
-                    ></Image>
-                  </TouchableOpacity>
-                  <Dialog
-                    isVisible={visible1 === key}
-                    onBackdropPress={() => setVisible1(null)}
-                    height="auto"
-                  >
-                    <Dialog.Title title="Your proposal image" />
-                    <View
-                      style={{
-                        alignItems: "center",
-                        justifyContent: "center",
-                        height: 300,
-                      }}
+                <View>
+                  <View>
+                    <Text style={styles.input_text_orders}>Certificate:</Text>
+                  </View>
+                  <View style={[styles.view_proposal_description]}>
+                    <TouchableOpacity
+                      onPress={() => toggleDialog(key)}
+                      key={key}
                     >
                       <Image
                         source={{ uri: "https://ipfs.io/ipfs/" + details[2] }}
                         style={{
-                          width: "100%",
-                          height: "80%",
-                          resizeMode: "contain",
+                          width: responsiveWidth(40),
+                          height: responsiveHeight(20),
+                          marginVertical: 10,
                         }}
                       ></Image>
-                    </View>
-                  </Dialog>
+                    </TouchableOpacity>
+                    <Dialog
+                      isVisible={visible1 === key}
+                      onBackdropPress={() => setVisible1(null)}
+                      height="auto"
+                    >
+                      <Dialog.Title title="Your proposal image" />
+                      <View
+                        style={{
+                          alignItems: "center",
+                          justifyContent: "center",
+                          height: 300,
+                        }}
+                      >
+                        <Image
+                          source={{ uri: "https://ipfs.io/ipfs/" + details[2] }}
+                          style={{
+                            width: "100%",
+                            height: "80%",
+                            resizeMode: "contain",
+                          }}
+                        ></Image>
+                      </View>
+                    </Dialog>
+                  </View>
                 </View>
 
                 <View>
@@ -338,39 +357,39 @@ function MyProposalScreen() {
                   </View>
                 </View>
 
-                <Button
-                  title={isLoading ? "Loading..." : "GET RESULT"}
-                  loading={isLoading}
-                  loadingProps={{ size: "small", color: "white" }}
-                  buttonStyle={{
-                    borderRadius: 15,
-                  }}
-                  titleStyle={{
-                    fontWeight: "bold",
-                    color: "#fff",
-                    fontSize: responsiveFontSize(2.7),
-                    margin: "4%",
-                  }}
-                  containerStyle={{
-                    marginHorizontal: "15%",
-                    // height: 50,
-                    width: responsiveWidth(40),
-                    marginVertical: "4%",
-                    marginBottom: "4%",
-                  }}
-                  onPress={() => {
-                    const value1 = details[9] > new Date();
-                    console.log("Value 1:", value1);
-                    if (value1) {
-                      console.log(Date());
-                      alert(
-                        "You will be able to see the result after the proposal expires!"
-                      );
-                    } else {
-                      getUserDataById(details[0], key);
-                    }
-                  }}
-                />
+                <View style={{ alignItems: "center" }}>
+                  <Button
+                    title={isLoading ? "Loading..." : "GET RESULT"}
+                    loading={isLoading}
+                    loadingProps={{ size: "small", color: "white" }}
+                    buttonStyle={{
+                      borderRadius: 15,
+                    }}
+                    titleStyle={{
+                      fontWeight: "bold",
+                      color: "#fff",
+                      fontSize: responsiveFontSize(2.7),
+                      margin: "4%",
+                    }}
+                    containerStyle={{
+                      width: responsiveWidth(40),
+                      alignItems: "center",
+                      marginTop: "5%",
+                    }}
+                    onPress={() => {
+                      const value1 = details[9] > new Date();
+                      console.log("Value 1:", value1);
+                      if (value1) {
+                        console.log(Date());
+                        alert(
+                          "You will be able to see the result after the proposal expires!"
+                        );
+                      } else {
+                        getUserDataById(details[0], key);
+                      }
+                    }}
+                  />
+                </View>
               </View>
             ))}
           </View>

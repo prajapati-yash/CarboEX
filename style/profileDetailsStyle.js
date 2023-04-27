@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   text_company_name: {
     fontSize: responsiveFontSize(2),
-    fontWeight:"bold",
+    fontWeight: "bold",
     margin: "2%",
   },
   text_email: {
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   input_text: {
     fontSize: responsiveFontSize(2),
-    fontWeight:"bold"
+    fontWeight: "bold",
   },
   input_box: {
     height: responsiveHeight(4),
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     marginLeft: "3%",
     marginRight: "3%",
     fontWeight: "bold",
-    textAlign: "center",
+    // textAlign: "center",
   },
   view_details: {
     backgroundColor: "#fff",
@@ -144,17 +144,19 @@ const styles = StyleSheet.create({
     marginLeft: "10%",
     marginRight: "10%",
     marginBottom: "7%",
-
   },
   view_proposal: {
     backgroundColor: "#FFFFFF",
     borderRadius: 30,
     marginBottom: "5%",
-    padding: "10%",
-    justifyContent: "center",
-    alignItems: "center",
+    paddingTop: "10%",
+    paddingBottom: "10%",
+    paddingLeft: "5%",
+    paddingRight: "5%",
+    // justifyContent: "center",
+    // alignItems: "center",
     marginTop: "6%",
-    width: responsiveWidth(80)
+    width: responsiveWidth(80),
   },
   view_proposal_name: {
     marginBottom: "4%",
@@ -164,20 +166,20 @@ const styles = StyleSheet.create({
   },
   view_proposal_description: {
     marginBottom: "4%",
-    marginLeft:"-45%"
   },
   text_proposal_description: {
     fontSize: responsiveFontSize(2),
   },
   input_text_orders: {
     fontSize: responsiveFontSize(2),
-    fontWeight:"bold",
-    marginLeft:"2%"
+    fontWeight: "bold",
+    marginLeft: "2%",
+    textAlign: "left",
   },
   input_text_orders_image: {
     fontSize: responsiveFontSize(2),
-    fontWeight:"bold",
-    marginLeft:"-82%"
+    fontWeight: "bold",
+    marginLeft: "-67%",
   },
   input_box_orders: {
     height: responsiveHeight(5),
@@ -187,8 +189,19 @@ const styles = StyleSheet.create({
     marginBottom: "3%",
     borderRadius: 8,
     paddingHorizontal: 8,
-    backgroundColor:"#efefef",
-    justifyContent:"center"
+    backgroundColor: "#efefef",
+    justifyContent: "center",
+  },
+  input_box_description: {
+    // flex: 1,
+    width: responsiveWidth(72),
+    borderColor: "black",
+    marginTop: "3%",
+    marginBottom: "3%",
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    backgroundColor: "#efefef",
+    // justifyContent: "center",
   },
 });
 

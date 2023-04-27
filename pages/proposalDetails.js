@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  ToastAndroid,
 } from "react-native";
 import styles from "../style/proposalDetailsStyle";
 import { Button, Dialog } from "@rneui/themed";
@@ -74,11 +75,24 @@ export default function ProposalDetails({ route }) {
         console.log("After txOptions");
         console.log("connector transaction", connector);
         const signTx = await connector.sendTransaction(txOptions);
+        const finalTx = await signTx;
         console.log("signTx: ", signTx);
+        let receipt = null;
+        while (receipt === null) {
+          receipt = await provider.eth.getTransactionReceipt(signTxDao);
+          await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
+        }
+        // console.log("Receipt Status", receipt.status);
+        if (receipt && receipt.status) {
+          ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
+        } else {
+          ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
+        }
         setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
+      ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
       setIsLoading(false);
     }
   };
@@ -120,7 +134,19 @@ export default function ProposalDetails({ route }) {
         console.log("After txOptions");
         console.log("connector transaction", connector);
         const signTx = await connector.sendTransaction(txOptions);
+        const finalTx = await signTxDao;
         console.log("signTx: ", signTx);
+        let receipt = null;
+        while (receipt === null) {
+          receipt = await provider.eth.getTransactionReceipt(signTxDao);
+          await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
+        }
+        // console.log("Receipt Status", receipt.status);
+        if (receipt && receipt.status) {
+          ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
+        } else {
+          ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
+        }
         setIsLoadingReject(false);
       }
     } catch (error) {
