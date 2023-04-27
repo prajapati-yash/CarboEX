@@ -65,7 +65,7 @@ function Navbar() {
   const title = "member"
   const verify =  "member"? true: false;
 
-  const navi= [
+  const navigation= [
     // {
     //   title: "Resources",
     //   link: "/Resources",
@@ -82,7 +82,7 @@ function Navbar() {
       title: "Member",
       link: "",
       auth: true,
-      isActive:`${navi.title[2] === "Member"?'notMember':'mainMember'}`,
+      // isActive:`auth === "Member"?'notMember':'mainMember'}`,
       className:"member",
       submenu: [
         { title: "Become a DAO Member", link: "/become-member", className:"member" },
