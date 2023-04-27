@@ -1,6 +1,13 @@
 import * as React from "react";
 import { useState } from "react";
-import { Text, View, ScrollView, TextInput, Alert } from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  TextInput,
+  Alert,
+  ToastAndroid,
+} from "react-native";
 import styles from "../style/sellCreditsStyles";
 import { Button, Stack } from "@rneui/themed";
 import {
@@ -69,15 +76,25 @@ export default function SellCredits() {
           console.log("After txOptions");
           console.log("connector transaction", connector);
           const signTx = await connector.sendTransaction(txOptions);
-          // const finalTx = await signTx;
-
+          const finalTx = await signTx;
           console.log(signTx);
-          // await sellCreditsUser.wait();
+          let receipt = null;
+          while (receipt === null) {
+            receipt = await provider.eth.getTransactionReceipt(signTxDao);
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
+          }
+          // console.log("Receipt Status", receipt.status);
+          if (receipt && receipt.status) {
+            ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
+          } else {
+            ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
+          }
           return sellCreditsUser;
         }
       }
     } catch (error) {
       console.log(error);
+      ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
     }
   };
 
@@ -101,7 +118,7 @@ export default function SellCredits() {
                 fontSize: responsiveFontSize(2),
                 padding: "5%",
                 textAlign: "justify",
-                color: "white"
+                color: "white",
               }}
             >
               Here you can Sell carbon credits from wallet by setting amount and

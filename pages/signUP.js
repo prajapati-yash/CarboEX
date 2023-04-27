@@ -7,6 +7,7 @@ import {
   TextInput,
   ImageBackground,
   KeyboardAvoidingView,
+  ToastAndroid,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { useState } from "react";
@@ -91,7 +92,7 @@ export default function SignUP() {
       if (connector.connected) {
         console.log("Connector---", connector);
         const provider = new Web3("https://pre-rpc.bt.io/");
-      
+
         console.log("Company Instance");
         const con = await companyInstance();
         console.log("con cids ", cids);
@@ -118,13 +119,25 @@ export default function SignUP() {
         console.log("After txOptions");
         console.log("connector transaction", connector);
         const signTx = await connector.sendTransaction(txOptions);
-        // const finalTx = await signTx;
+        const finalTx = await signTx;
         console.log("After transaction");
         console.log(signTx);
+        let receipt = null;
+        while (receipt === null) {
+          receipt = await provider.eth.getTransactionReceipt(signTxDao);
+          await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
+        }
+        // console.log("Receipt Status", receipt.status);
+        if (receipt && receipt.status) {
+          ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
+        } else {
+          ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
+        }
         navigation.navigate(ProfileDetails);
       }
     } catch (error) {
       console.log("error: ", error);
+      ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
     }
   };
 

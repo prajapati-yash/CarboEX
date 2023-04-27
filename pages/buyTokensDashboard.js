@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, ToastAndroid } from "react-native";
 import styles from "../style/buyTokensDashboardStyle";
 import {
   responsiveFontSize,
@@ -94,9 +94,20 @@ export default function BuyTokensDashboard() {
         console.log("After txOptions");
         console.log("connector transaction", connector);
         const signTx = await connector.sendTransaction(txOptions);
-        // const finalTx = await signTx;
+        const finalTx = await signTx;
         console.log("After transaction");
         console.log(signTx);
+        let receipt = null;
+        while (receipt === null) {
+          receipt = await provider.eth.getTransactionReceipt(signTx);
+          await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
+        }
+        // console.log("Receipt Status", receipt.status);
+        if (receipt && receipt.status) {
+          ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
+        } else {
+          ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
+        }
         setCount((prev) => prev + 1);
         setIsLoading(false);
         // sellingCredits()
@@ -105,6 +116,7 @@ export default function BuyTokensDashboard() {
       }
     } catch (error) {
       console.log("Buy Credits Function Error :", error);
+      ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
       setIsLoading(false);
     }
   };
@@ -119,9 +131,23 @@ export default function BuyTokensDashboard() {
           <View style={styles.view_title}>
             <Text style={styles.text_title}>BUY CARBON CREDITS</Text>
           </View>
-          <View style={{ marginHorizontal: "10%", marginBottom: "2%", backgroundColor: "white", borderRadius: 25 }}>
-            <Text style={{fontSize: responsiveFontSize(2), padding: "5%", textAlign: "justify"}}>
-            Here you can see the list of all the proposals made by sellers offering carbon credits for sale. 
+          <View
+            style={{
+              marginHorizontal: "10%",
+              marginBottom: "2%",
+              backgroundColor: "white",
+              borderRadius: 25,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: responsiveFontSize(2),
+                padding: "5%",
+                textAlign: "justify",
+              }}
+            >
+              Here you can see the list of all the proposals made by sellers
+              offering carbon credits for sale.
             </Text>
           </View>
 

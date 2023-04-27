@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView, TextInput } from "react-native";
+import { View, Text, ScrollView, TextInput, ToastAndroid } from "react-native";
 import styles from "../style/becomeMemberStyle";
 import { Button } from "@rneui/themed";
 import {
@@ -71,13 +71,26 @@ export default function BecomeMember() {
           const signTxDao = await connector.sendTransaction(txOptionsDao);
           const finalTx = await signTxDao;
           setIsLoading(false);
-          console.log(finalTx);
+          console.log("signTxDao", signTxDao);
+          // console.log("Demo:", signTxDao.transactionHash);
+          let receipt = null;
+          while (receipt === null) {
+            receipt = await provider.eth.getTransactionReceipt(signTxDao);
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
+          }
+          // console.log("Receipt Status", receipt.status);
+          if (receipt && receipt.status) {
+            ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
+          } else {
+            ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
+          }
           navigation.navigate(ProposalDashboard);
           console.log("Add Member Function", addMemberFunc);
         }
       }
     } catch (error) {
       console.log("ERCTokenFunction", error);
+      ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
       setIsLoading(false);
     }
   };
@@ -90,10 +103,7 @@ export default function BecomeMember() {
         const conToken = await ercTokenInstance();
         const tokenPrice = await conToken.methods.gettokenPrice().call();
         console.log("TokenPrice:", tokenPrice);
-        // const hexValue = tokenPrice.toString(16);
-        // console.log("HexValue",hexValue);
-        // const decimalValue = parseInt(hexValue, 16);
-        // console.log("Decimal Value",decimalValue);
+
         setTokenPrice(tokenPrice);
       }
     } catch (err) {
