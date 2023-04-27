@@ -258,6 +258,7 @@ function MyProposalScreen() {
 
           <View style={styles.view_proposal_data}>
             {userProp.map((details, key) => (
+              
               <View style={styles.view_proposal} key={key}>
                 <View>
                   <Text style={styles.input_text_orders}>Type:</Text>

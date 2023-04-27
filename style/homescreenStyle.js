@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   section2_title: {
     alignItems: "center",
-    marginTop: "15%",
+    // marginTop: "8%",
   },
   section2_text: {
     fontSize: responsiveFontSize(3),
@@ -215,7 +215,29 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
     alignItems: "center",
-  }
+  },
+  instructions_title: {
+    alignItems: "center",
+    marginTop: "15%",
+  },
+  instructions_text: {
+    fontSize: responsiveFontSize(3),
+    color: "#fff",
+    fontWeight: "bold",
+    backgroundColor: "#000",
+    paddingVertical: "3%",
+    paddingHorizontal: "5%",
+    borderRadius: 20,
+  },
+  instructions_description: {
+    margin: "8%",
+  },
+  view_instruction1: {
+    marginVertical: "1%",
+  },
+  text_instruction1: {
+    fontSize: responsiveFontSize(2),
+  },
 });
 
 export default styles;

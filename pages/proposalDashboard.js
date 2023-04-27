@@ -65,35 +65,45 @@ export default function ProposalDashboard() {
             </Text>
           </View>
 
-          <View style={styles.view_details}>
-            <View style={styles.view_proposal_data}>
-              {allProposalData.map((proposal, index) => (
-                <View style={styles.view_proposal} key={index}>
-                  <View style={styles.view_proposal_name}>
-                    <Text style={styles.text_proposal_name}>
-                      Type: {proposal[3] ? "Emission" : "Offset"}
-                    </Text>
-                  </View>
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Description: {proposal[1]}
-                    </Text>
-                  </View>
+          <View style={styles.view_proposal_data}>
+            {allProposalData.map((proposal, index) => (
+              <View style={styles.view_proposal} key={index}>
+                <View style={styles.view_proposal_name}>
                   <View>
-                    <Button
-                      size="sm"
-                      onPress={() =>
-                        navigation.navigate("proposalDetails", {
-                          state: { data: proposal },
-                        })
-                      }
-                    >
-                      View More
-                    </Button>
+                    <Text style={styles.text_proposal_name}>Type</Text>
+                  </View>
+                  <View style={styles.view_proposal_name_value}>
+                    <Text style={styles.text_proposal_name_value}>
+                      {proposal[3] ? "Emission" : "Offset"}
+                    </Text>
                   </View>
                 </View>
-              ))}
-            </View>
+                <View style={styles.view_proposal_description}>
+                  <View>
+                    <Text style={styles.text_proposal_description}>
+                      Description
+                    </Text>
+                  </View>
+                  <View style={styles.view_proposal_name_value}>
+                    <Text style={styles.text_proposal_name_value}>
+                      {proposal[1]}
+                    </Text>
+                  </View>
+                </View>
+                <View>
+                  <Button
+                    size="sm"
+                    onPress={() =>
+                      navigation.navigate("proposalDetails", {
+                        state: { data: proposal },
+                      })
+                    }
+                  >
+                    View More
+                  </Button>
+                </View>
+              </View>
+            ))}
           </View>
         </View>
       </ScrollView>

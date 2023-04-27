@@ -100,9 +100,8 @@ const renderFaqContent = (item, index, isActive) => {
 };
 
 export default function HomeScreen() {
-
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const navigation = useNavigation();
 
   const [activeSections, setActiveSections] = useState([]);
@@ -116,7 +115,9 @@ export default function HomeScreen() {
 
       let con = await companyInstance();
       console.log("Wallet Address", connector.accounts[0]);
-      let verifyTx = await con.methods.iscompaniesAdd(connector.accounts[0]).call();
+      let verifyTx = await con.methods
+        .iscompaniesAdd(connector.accounts[0])
+        .call();
 
       console.log("VerifyTx: ", verifyTx);
       return verifyTx;
@@ -200,27 +201,31 @@ export default function HomeScreen() {
                       borderBottomLeftRadius: 35,
                       overflow: "hidden",
                       width: "100%",
-                      backgroundColor:"white"
+                      backgroundColor: "white",
                     }}
                   >
-            <Button
-             title={isLoading ? "Loading..." : "GET STARTED"}
-             loading={isLoading}
-             loadingProps={{ size: "small", color: "white" }}
-              buttonStyle={{
-                backgroundColor: "#4de9ff",
-                borderRadius: 15,
-              }}
-              titleStyle={{ fontWeight: "bold", fontSize: responsiveFontSize(2),color:"white" }}
-              containerStyle={{
-                marginHorizontal: "15%",
-                width: responsiveWidth(50),
-                marginVertical: "2%",
-                marginBottom: "5%",
-                marginTop:"5%"
-              }}
-              onPress={SignupWithWallet}
-            ></Button>
+                    <Button
+                      title={isLoading ? "Loading..." : "GET STARTED"}
+                      loading={isLoading}
+                      loadingProps={{ size: "small", color: "white" }}
+                      buttonStyle={{
+                        backgroundColor: "#4de9ff",
+                        borderRadius: 15,
+                      }}
+                      titleStyle={{
+                        fontWeight: "bold",
+                        fontSize: responsiveFontSize(2),
+                        color: "white",
+                      }}
+                      containerStyle={{
+                        marginHorizontal: "15%",
+                        width: responsiveWidth(50),
+                        marginVertical: "2%",
+                        marginBottom: "5%",
+                        marginTop: "5%",
+                      }}
+                      onPress={SignupWithWallet}
+                    ></Button>
                   </View>
                 </View>
               </View>
@@ -234,6 +239,131 @@ export default function HomeScreen() {
             source={require("../assets/homeScreenAssets/BG2.png")}
           >
             <View>
+              <View style={styles.instructions_title}>
+                <Text style={styles.instructions_text}>INSTRUCTIONS</Text>
+              </View>
+
+              <View style={styles.instructions_description}>
+                <View>
+                  <View style={styles.view_instruction1}>
+                    <Text style={{ flexDirection: "row" }}>
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: responsiveFontSize(2),
+                        }}
+                      >
+                        {"\u2192"} Connect your wallet:{" "}
+                      </Text>{" "}
+                      <Text style={styles.text_instruction1}>
+                        Connecting your wallet is the first step to using
+                        CarboEx.
+                      </Text>
+                    </Text>
+                  </View>
+
+                  <View style={styles.view_instruction1}>
+                    <Text style={{ flexDirection: "row" }}>
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: responsiveFontSize(2),
+                        }}
+                      >
+                        {"\u2192"} Get started:{" "}
+                      </Text>{" "}
+                      <Text style={styles.text_instruction1}>
+                        Click on the 'Get Started' button to be redirected to
+                        the sign-up page.
+                      </Text>
+                    </Text>
+                  </View>
+
+                  <View style={styles.view_instruction1}>
+                    <Text style={{ flexDirection: "row" }}>
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: responsiveFontSize(2),
+                        }}
+                      >
+                        {"\u2192"} Sign Up:{" "}
+                      </Text>{" "}
+                      <Text style={styles.text_instruction1}>
+                        {" "}
+                        Fill in all the required information and click on the
+                        'Submit' button to be redirected to the user dashboard.
+                      </Text>
+                    </Text>
+                  </View>
+
+                  <View style={styles.view_instruction1}>
+                    <Text style={{ flexDirection: "row" }}>
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: responsiveFontSize(2),
+                        }}
+                      >
+                        {"\u2192"} User dashboard:{" "}
+                      </Text>{" "}
+                      <Text style={styles.text_instruction1}>
+                        {" "}
+                        The user dashboard provides access to proposals, orders,
+                        credits, and other important information.
+                      </Text>
+                    </Text>
+                  </View>
+
+                  <View style={styles.view_instruction1}>
+                    <Text style={{ flexDirection: "row" }}>
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: responsiveFontSize(2),
+                        }}
+                      >
+                        {"\u2192"} Become a DAO member:{" "}
+                      </Text>{" "}
+                      <Text style={styles.text_instruction1}>
+                        {" "}
+                        Become a DAO member to make a proposal or validate a
+                        certificate of carbon emission and offset.
+                      </Text>
+                    </Text>
+                  </View>
+
+                  <View style={styles.view_instruction1}>
+                    <Text style={{ flexDirection: "row" }}>
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: responsiveFontSize(2),
+                        }}
+                      >
+                        {"\u2192"} Buy and sell carbon credits:{" "}
+                      </Text>{" "}
+                      <Text style={styles.text_instruction1}>
+                        {" "}
+                        After becoming a DAO member, user can buy and sell
+                        carbon credits by clicking the ‘Buy’ or ‘Sell’ buttons.
+                      </Text>
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </ImageBackground>
+
+          <View
+            style={{
+              backgroundColor: "#4de9ff",
+              width: responsiveWidth(100),
+              marginTop: "10%",
+              borderRadius: 80,
+            }}
+          >
+            <View style={{ marginVertical: "8%" }}>
               <View style={styles.section2_title}>
                 <Text style={styles.section2_text}>ABOUT PROJECT</Text>
               </View>
@@ -271,7 +401,7 @@ export default function HomeScreen() {
                 </View>
               </View>
             </View>
-          </ImageBackground>
+          </View>
 
           <ImageBackground
             style={styles.image3}
