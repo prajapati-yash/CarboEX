@@ -62,10 +62,9 @@ function Navbar() {
   useEffect(() => {
     verifyNavbar()
   }, [isAuthenticated])
-  const title = "member"
-  const verify =  "member"? true: false;
+  const verify = isMember ? true: false;
 
-  const navigation= [
+  const navigation = [
     // {
     //   title: "Resources",
     //   link: "/Resources",
@@ -82,8 +81,8 @@ function Navbar() {
       title: "Member",
       link: "",
       auth: true,
-      // isActive:`auth === "Member"?'notMember':'mainMember'}`,
-      className:"member",
+      isActive:`${verify?'notMember':'mainMember'}`,
+      className:"member", 
       submenu: [
         { title: "Become a DAO Member", link: "/become-member", className:"member" },
         { title: "All Proposals", link: "/dao-member-proposals", className:"member"},
