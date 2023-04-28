@@ -3,9 +3,10 @@ import axios from 'axios';
 import '../../../styles/calculator/bodycalc/TraditionalBodyCalc.css';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useNavigate } from "react-router-dom";
 
 function TraditionalBodyCalc({ onValueChange }) {
+    const navigate = useNavigate();
     const [btnloading, setbtnloading] = useState(false)
     const [btndisable, setbtndisable] = useState(false);
     const [teData, setTeData] = useState({
@@ -50,6 +51,7 @@ function TraditionalBodyCalc({ onValueChange }) {
             // console.log(response)
             const teResult = JSON.stringify(response.data.carbon);
             alert(`Carbon Emission: ${teResult}`);
+            navigate('/calculator/publictransit')
             console.log(teResult)
             const numbers = teResult.match(/\d+(\.\d+)?/g);
             const value = numbers[0];
@@ -69,7 +71,9 @@ function TraditionalBodyCalc({ onValueChange }) {
         <>
             <div className='house-form'>
                 <div className='form-content1'>
-                    <label className='house-form__label'>Traditional Energy</label>
+                    {/* <label className='house-form__label'> */}
+                    <b className='title-te-class-main'>Traditional Energy</b>
+                    {/* </label> */}
                     <div className='formMain'>
                         <div className='form-group bottom35'>
                             <label className='house-form__label1'>Calculate CO2e from the use of traditional hydro provider.</label>
@@ -100,24 +104,26 @@ function TraditionalBodyCalc({ onValueChange }) {
                                 </div>
                             </div>
                         </div>
-                        <div className='traditionalbtn col-sm-12 mt-4'>
-                            <button type='submit' className='house-form__button primary p-2' id='submit_btn' disabled={btndisable} style={{ width: 'fit-content' }} onClick={() => teSubmitData()}>
-                                {btnloading ? (
-                                    <svg
-                                        className="animate-spin button-spin-svg-pic"
-                                        version="1.1"
-                                        id="L9"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        x="0px"
-                                        y="0px"
-                                        viewBox="0 0 100 100"
-                                        style={{ width: "10%" }}
-                                    >
-                                        <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-                                    </svg>
-                                ) : (<>Calculate</>)}
-                            </button>
-                            <ToastContainer />
+                        <div className='d-flex justify-content-center align-items-center'>
+                            <div className='traditionalbtn col-sm-12 mt-4'>
+                                <button type='submit' className='house-form__button primary p-2' id='submit_btn' disabled={btndisable} style={{ width: 'fit-content' }} onClick={() => teSubmitData()}>
+                                    {btnloading ? (
+                                        <svg
+                                            className="animate-spin button-spin-svg-pic"
+                                            version="1.1"
+                                            id="L9"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            x="0px"
+                                            y="0px"
+                                            viewBox="0 0 100 100"
+                                            style={{ width: "40%" }}
+                                        >
+                                            <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+                                        </svg>
+                                    ) : (<>Calculate</>)}
+                                </button>
+                                <ToastContainer />
+                            </div>
                         </div>
                     </div>
                 </div>

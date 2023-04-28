@@ -14,15 +14,9 @@ function ResourcesCalComp() {
                     <div className="resCC-about-head py-3 py-sm-4 d-flex justify-content-center">
                         <p>CALCULATOR</p>
                     </div>
-                    {/* <div className="resCC-about-head py-3 py-sm-4 d-flex justify-content-center">
-                        <p>Calculate your carbon emissions and make small changes for a big impact.</p>
-                    </div> */}
-
                     <div className='d-lg-flex  row pb-4 align-items-center resCC-about-text-content justify-content-around '>
-                        {/* <div className=" resCC-box-bg mb-lg-0 mb-sm-4 mb-4 align-self-stretch py-5 px-4" > */}
                         <p className='resCC-head text-center mb-lg-0 mb-sm-4 align-self-stretch py-5 px-4'>Calculate your carbon emissions and make small changes for a big impact.</p>
-                        <button className='resourcesCalcBtn' onClick={() => navigate("/calculator")}> Calculate</button>
-                        {/* </div> */}
+                        <button className='resourcesCalcBtn' onClick={() => navigate("/calculator/home")}> Calculate</button>
                     </div>
                 </div>
             </div>

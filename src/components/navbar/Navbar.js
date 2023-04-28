@@ -12,7 +12,7 @@ function Navbar() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { address, isConnected } = useAccount();
-  const location  = useLocation();
+  const location = useLocation();
   const isMember = location.pathname === '/become-member'
 
   const verifyUserAccount = async () => {
@@ -62,7 +62,8 @@ function Navbar() {
   useEffect(() => {
     verifyNavbar()
   }, [isAuthenticated])
-  const verify = isMember ? true: false;
+  const title = "member"
+  const verify = "member" ? true : false;
 
   const navigation = [
     // {
@@ -75,23 +76,23 @@ function Navbar() {
       link: "/buy-carbon-credits",
       auth: true,
       // isActive:"${isExplo ? 'active':''}",
-      className:"explore"
+      className: "explore"
     },
     {
       title: "Member",
       link: "",
       auth: true,
-      isActive:`${verify?'notMember':'mainMember'}`,
-      className:"member", 
+      // isActive:`auth === "Member"?'notMember':'mainMember'}`,
+      className: "member",
       submenu: [
-        { title: "Become a DAO Member", link: "/become-member", className:"member" },
-        { title: "All Proposals", link: "/dao-member-proposals", className:"member"},
+        { title: "Become a DAO Member", link: "/become-member", className: "member" },
+        { title: "All Proposals", link: "/dao-member-proposals", className: "member" },
       ],
     },
     {
       title: "Our Approach",
       link: "",
-      className:"approach",
+      className: "approach",
       auth: true,
       submenu: [
         { title: "Add Your Proposal", link: "/certificate-validation-proposal" },
@@ -101,7 +102,7 @@ function Navbar() {
     {
       title: "Know More",
       link: "",
-      className:"knowMore",
+      className: "knowMore",
       submenu: [
         {
           title: "About Us",
@@ -116,13 +117,13 @@ function Navbar() {
     {
       title: "Contact",
       link: "/contact",
-      className:"contact"
+      className: "contact"
     },
     {
       title: "Dashboard",
       link: "/user-dashboard",
       auth: true,
-      className:"dashboard"
+      className: "dashboard"
     },
   ];
 
