@@ -59,6 +59,7 @@ function App() {
   return (
     <>
       {/* <h1 className="mt-5 text-center">Shree Ganeshay Namah</h1> */}
+
       <BrowserRouter>
         <Navbar />
         <Routes>

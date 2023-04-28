@@ -31,9 +31,11 @@ function LandingCalc() {
                 </div>
                 <button
                     className='start-calc-btn-main'
-                    // style="vertical-align:middle"
-                    onClick={() => navigate("/calculator/traditionalenergy")}><span> Start </span></button>
-            </div>
+                    onClick={() => navigate("/calculator/traditionalenergy")}
+                >
+                    <span> Start </span>
+                </button>
+            </div >
         </>
     )
 }
