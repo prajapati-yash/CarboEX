@@ -40,6 +40,10 @@
 .notMember{
     border-bottom: 2px solid blue;
 }
+
+.mainMember{
+    border-bottom: 0px;
+}
 .nav-link:hover{
     color: #038b97!important;
 }

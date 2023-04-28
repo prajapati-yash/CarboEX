@@ -17,6 +17,8 @@ import ProposalDataMain from "./pages/ProposalDataMain";
 import SellCarbonCredits from "./pages/SellCarbonCredits";
 import ProposalDashboard from "./pages/ProposalDashboard";
 import ProposalOrders from "./pages/ProposalOrders";
+// import DemoNavbar from "./pages/DemoNavbar";
+import NewNavbar from "./components/navbar/NewNavbar";
 import MainProposalDashboard from "./pages/MainProposalDashboard";
 import { companyInstance } from "./components/Contracts";
 import { useAccount } from 'wagmi';
@@ -61,7 +63,8 @@ function App() {
       {/* <h1 className="mt-5 text-center">Shree Ganeshay Namah</h1> */}
 
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
+        <NewNavbar/>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
@@ -81,6 +84,8 @@ function App() {
           <Route path="/proposal-orders" element={<ProposalOrders />} />
           <Route path="/user-dashboard" element={<MainProposalDashboard />} />
           <Route path="/user-dashboard/*" element={<MainProposalDashboard />} />
+          {/* <Route path="/navbar" element={<DemoNavbar/>} /> */}
+          
         </Routes>
         <Footer />
       </BrowserRouter >
