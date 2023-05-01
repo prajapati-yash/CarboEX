@@ -398,14 +398,22 @@ function MyProposalScreen() {
                 </View>
               ))
             ) : (
-              <View style={{ backgroundColor: "#fff", borderRadius: 40 }}>
+              <View
+                style={{
+                  backgroundColor: "#fff",
+                  borderRadius: 50,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  elevation: 20,
+                }}
+              >
                 <Text
                   style={{
-                    fontSize: responsiveFontSize(3),
+                    fontSize: responsiveFontSize(2.5),
                     fontWeight: "bold",
-                    margin: "6%",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    marginVertical: "8%",
+                    marginHorizontal: "10%",
+                    // padding:"3%",
                   }}
                 >
                   No proposals made
@@ -515,14 +523,21 @@ function MyOrdersScreen() {
                 </View>
               ))
             ) : (
-              <View style={{ backgroundColor: "#fff", borderRadius: 40 }}>
+              <View
+                style={{
+                  backgroundColor: "#fff",
+                  borderRadius: 50,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  elevation: 20,
+                }}
+              >
                 <Text
                   style={{
-                    fontSize: responsiveFontSize(3),
+                    fontSize: responsiveFontSize(2.5),
                     fontWeight: "bold",
-                    margin: "6%",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    marginVertical: "8%",
+                    marginHorizontal: "10%",
                   }}
                 >
                   No Orders Made

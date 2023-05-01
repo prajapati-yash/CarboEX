@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     marginLeft: "3%",
     marginRight: "3%",
     fontWeight: "bold",
-    // textAlign: "center",
+    textAlign: "center",
   },
   view_details: {
     backgroundColor: "#fff",

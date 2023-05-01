@@ -134,24 +134,42 @@ export default function ProposalDetails({ route }) {
         console.log("After txOptions");
         console.log("connector transaction", connector);
         const signTx = await connector.sendTransaction(txOptions);
-        const finalTx = await signTxDao;
+        const finalTx = await signTx;
         console.log("signTx: ", signTx);
         let receipt = null;
         while (receipt === null) {
-          receipt = await provider.eth.getTransactionReceipt(signTxDao);
+          receipt = await provider.eth.getTransactionReceipt(signTx);
           await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
         }
         // console.log("Receipt Status", receipt.status);
         if (receipt && receipt.status) {
           ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
         } else {
+          console.log("receipt: ", receipt);
+          console.log("status: ", receipt.status);
           ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
+          // throw new Error();
         }
         setIsLoadingReject(false);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error in catch", error);
       setIsLoadingReject(false);
+      // console.log(error.reason);
+      // const ErrorReason = error.reason;
+      // console.log(ErrorReason);
+      // ToastAndroid.show(`Error : ${ErrorReason}`, ToastAndroid.LONG);
+    }
+  };
+
+  const checkDAOMember = async () => {
+    if (connector.connected) {
+      const conDAO = await daoInstance();
+      const isDAOMember = await conDAO.methods
+        .isMember(connector.accounts[0])
+        .call();
+      console.log(isDAOMember);
+      return isDAOMember;
     }
   };
 
@@ -228,7 +246,20 @@ export default function ProposalDetails({ route }) {
                   width: responsiveWidth(30),
                   marginVertical: "3%",
                 }}
-                onPress={daoProposalApprove}
+                onPress={async () => {
+                  console.log("Button CLicked");
+                  const isAllowed = await checkDAOMember();
+                  console.log(isAllowed);
+                  if (!isAllowed) {
+                    // setbtndisable(false);
+                    ToastAndroid.show(
+                      "You are not DAO member so you can't accept the proposal",
+                      ToastAndroid.LONG
+                    );
+                  } else {
+                    daoProposalApprove();
+                  }
+                }}
               />
 
               <Button
@@ -245,7 +276,20 @@ export default function ProposalDetails({ route }) {
                   width: responsiveWidth(30),
                   marginVertical: "3%",
                 }}
-                onPress={daoProposalReject}
+                onPress={async () => {
+                  console.log("Button CLicked");
+                  const isAllowed = await checkDAOMember();
+                  console.log(isAllowed);
+                  if (!isAllowed) {
+                    // setbtndisable(false);
+                    ToastAndroid.show(
+                      "You are not DAO member so you can't reject the proposal",
+                      ToastAndroid.LONG
+                    );
+                  } else {
+                    daoProposalReject();
+                  }
+                }}
               />
             </View>
           </View>
