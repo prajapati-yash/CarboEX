@@ -62,7 +62,7 @@ function Navbar() {
   
   
   const handleTabClick = (tab) => {
-      setActiveTab(tab);
+      // setActiveTab(tab);
       setDropdownVisible(false);
       setApproachDropDown(false);
       setMemberDropDown(false);
@@ -70,19 +70,20 @@ function Navbar() {
 
     };
 
-  const getOurApproachActiveClass = () => {
-    // return  currentPath.startsWith("certificate-validate" || "calculator") ? "active" : '' ;
-    // return  currentPath.includes("/certificate") ? "active" : "/calculator"? "active":'' ;
-    return  activeTab.startsWith("our-approach") ? "active" : '' ;
-    // console.log(hello)
-  };
-  const getMemberActiveClass = () => {
-    return  activeTab.startsWith("member") ? "active" : '' ;
-    // return  currentPath.includes("/member") ? "active" : '' ;
-  };
-  const getKnowMoreActiveClass = () => {
-    return  activeTab.startsWith("know") ? "active" : '' ;
-  };
+  // const getOurApproachActiveClass = () => {
+  //   return  currentPath.startsWith("certificate-validate" || "calculator") ? "active" : '' ;
+  //   return  currentPath.includes("/approach") ? "active" :'' ;
+  //   return  activeTab.startsWith("our-approach") ? "active" : '' ;
+  //   console.log(hello)
+  // };
+  // const getMemberActiveClass = () => {
+  //   return  activeTab.startsWith("member") ? "active" : '' ;
+  //   return  currentPath.includes("/member") ? "active" : '' ;
+  // };
+  // const getKnowMoreActiveClass = () => {
+  //   return  activeTab.startsWith("know") ? "active" : '' ;
+  //   return  currentPath.includes("/know-more") ? "active" : '' ;
+  // };
 
   const handleMenuClick = () => {
     setMenuVisible(!menuVisible);
@@ -134,7 +135,7 @@ const hideKnowMoreDropDown = () =>{
       {isAuthenticated ? (
        <> 
         <li
-          className={`Navbar__item ${activeTab === "explore" ? "active" : ""}`}
+          className={`Navbar__item ${currentPath.includes("/buy-carbon-credits") ? "active" :''}`}
           onClick={() => handleTabClick("explore")}
         >
           <NavLink to="/buy-carbon-credits" className="linkStyle">Explore</NavLink>
@@ -142,7 +143,7 @@ const hideKnowMoreDropDown = () =>{
         
         
         {/* -------- Our Approach --------------  */}
-        <li className={`Navbar__item ${getOurApproachActiveClass()} approachClass `}
+        <li className={`Navbar__item ${currentPath.includes("/approach") ? "active" :''} approachClass `}
           onMouseEnter={showApproachDropDown}
           onMouseLeave={hideApproachDropDown}
           
@@ -152,52 +153,50 @@ const hideKnowMoreDropDown = () =>{
           <div className="navDropDown approachDropDown p-3 text-center" onMouseEnter={showApproachDropDown} onMouseLeave={hideApproachDropDown}
           >
             <div className={`Navbar__dropdown-item pb-2 ${activeTab === 'our-approach-validate-certificate' ? 'active' : ''}`} onClick={() => handleTabClick('our-approach-validate-certificate')}>
-            <NavLink to="/certificate-validation-proposal" className="linkStyle">Validate Certificate</NavLink>
+            <NavLink to="/approach/certificate-validation-proposal" className="linkStyle">Validate Certificate</NavLink>
             </div>
             <div className={`Navbar__dropdown-item ${activeTab === 'our-approach-see-our-calculator' ? 'active' : ''}`} onClick={() => handleTabClick('our-approach-see-our-calculator')}>
-            <NavLink to="/calculator" className="linkStyle"> See Our Calculator  </NavLink> 
+            <NavLink to="/approach/calculator" className="linkStyle"> See Our Calculator  </NavLink> 
             </div>
           </div>)}  </li>
 
 {/* ---------------------------
   Member 
   ------------------------------- */}
-        <li className={`Navbar__item ${getMemberActiveClass()} memberClass `}onMouseEnter={showMemberDropDown} onMouseLeave={hideMemberDropDown}>
+        <li className={`Navbar__item ${currentPath.includes("/member") ? "active" :''} memberClass `}onMouseEnter={showMemberDropDown} onMouseLeave={hideMemberDropDown}>
           Member <i class="fa-solid fa-angle-down"></i>
        
 
           {memberDropDown &&(
           <div className="navDropDown memberDropDown p-3 " onMouseEnter={showMemberDropDown} onMouseLeave={hideMemberDropDown}>
             <div className={`Navbar__dropdown-item pb-2 ${activeTab === 'member-validate-certificate' ? 'active' : ''}`} onClick={() => handleTabClick('member-become-dao-member')}>
-            <NavLink to="/become-member" className="linkStyle">Become a DAO Member</NavLink>
+            <NavLink to="/member/become-member" className="linkStyle">Become a DAO Member</NavLink>
             </div>
             <div className={`Navbar__dropdown-item ${activeTab === 'member-see-our-calculator' ? 'active' : ''}`} onClick={() => handleTabClick('member-proposals')}>
-            <NavLink to="/dao-member-proposals" className="linkStyle"> All Proposals </NavLink>
+            <NavLink to="/member/dao-member-proposals" className="linkStyle"> All Proposals </NavLink>
             </div>
           </div>)}  </li>
 {/* ---------------------------
   Know More 
   ------------------------------- */}
-        <li className={`Navbar__item ${getKnowMoreActiveClass()} knowMoreClass `}onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
+        <li className={`Navbar__item ${currentPath.includes("/know-more") ? "active" :''} knowMoreClass `}onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
           Know More <i class="fa-solid fa-angle-down"></i>
        
 
           {knowMoreDropDown &&(
           <div className="navDropDown knowMoreDropDown p-3 " onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
             <div className={`Navbar__dropdown-item ${activeTab === 'know-about' ? 'active' : ''} pb-2`} onClick={() => handleTabClick('know-about-us')}>
-            <NavLink to="/about" className="linkStyle">About Us</NavLink>
+            <NavLink to="/know-more/about" className="linkStyle">About Us</NavLink>
             </div>
             <div className={`Navbar__dropdown-item ${activeTab === 'know-resources' ? 'active' : ''}`} onClick={() => handleTabClick('know-resources')}>
-            <NavLink to="/resources" className="linkStyle"> Resources </NavLink>
+            <NavLink to="/know-more/resources" className="linkStyle"> Resources </NavLink>
             </div>
           </div>)}  </li>
 {/* {--------------
 Dashboard
 -----------------} */}
           <li
-          className={`Navbar__item ${
-            activeTab === "dashboard" ? "active" : ""
-          }`}
+          className={`Navbar__item ${currentPath.includes("/user-dashboard") ? "active" :''}`}
           onClick={() => handleTabClick("dashboard")}
         >
           <NavLink to="/user-dashboard" className="linkStyle"> Dashboard</NavLink>
@@ -206,7 +205,7 @@ Dashboard
 Contact
 -----------------} */}
           <li
-          className={`Navbar__item ${activeTab === "contact" ? "active" : ""}`}
+          className={`Navbar__item ${currentPath.includes("/contact") ? "active" :''}`}
           onClick={() => handleTabClick("contact")}
         >
          <NavLink to="/contact" className="linkStyle"> Contact </NavLink>
@@ -224,7 +223,7 @@ Contact
     {/* ---------------------------
   Know More 
   ------------------------------- */}
-        <li className={`Navbar__item ${getKnowMoreActiveClass()} knowMoreClass `}onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
+        <li className={`Navbar__item ${currentPath.includes("/know-more") ? "active" :''} knowMoreClass `}onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
           Know More <i class="fa-solid fa-angle-down"></i>
        
 
@@ -242,7 +241,7 @@ Contact
 Contact
 -----------------} */}
           <li
-          className={`Navbar__item ${activeTab === "contact" ? "active" : ""}`}
+          className={`Navbar__item ${currentPath.includes("/contact") ? "active" :''}`}
           onClick={() => handleTabClick("contact")}
         >
          <NavLink to="/contact" className="linkStyle"> Contact </NavLink>
