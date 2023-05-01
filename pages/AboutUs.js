@@ -108,7 +108,7 @@ export default function AboutUs() {
           </View>
         </View>
 
-        <ImageBackground
+        {/* <ImageBackground
           style={styles.image2}
           borderTopLeftRadius={50}
           borderTopRightRadius={50}
@@ -127,13 +127,13 @@ export default function AboutUs() {
                     style={styles.team_image}
                   ></Image>
                   <View style={[styles.view_image_subtext]}>
-                    {/* <View style={{ flex: 1 }}> */}
+                   
                     <Text
                       style={[styles.text_image_subtext, { marginTop: "3%", marginBottom: "1%", fontWeight: 600, fontSize: responsiveFontSize(1.7) }]}
                     >
                       jack212
                     </Text>
-                    {/* </View> */}
+                   
                     <Text
                       style={[
                         styles.text_image_subtext,
@@ -245,7 +245,7 @@ export default function AboutUs() {
               </View>
             </View>
           </View>
-        </ImageBackground>
+        </ImageBackground> */}
       </ScrollView>
     </View>
   );

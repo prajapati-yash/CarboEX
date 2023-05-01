@@ -79,7 +79,7 @@ export default function ProposalDetails({ route }) {
         console.log("signTx: ", signTx);
         let receipt = null;
         while (receipt === null) {
-          receipt = await provider.eth.getTransactionReceipt(signTxDao);
+          receipt = await provider.eth.getTransactionReceipt(signTx);
           await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
         }
         // console.log("Receipt Status", receipt.status);

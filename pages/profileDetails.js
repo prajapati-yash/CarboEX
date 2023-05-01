@@ -6,7 +6,7 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
-  ToastAndroid
+  ToastAndroid,
 } from "react-native";
 import styles from "../style/profileDetailsStyle";
 import { Button, Dialog } from "@rneui/themed";
@@ -160,6 +160,8 @@ function MyProposalScreen() {
   const [userProp, setUserProp] = useState([]);
   const [visible1, setVisible1] = useState(null);
   const address = connector.accounts[0];
+  // const [currentDate, setCurrentDate] = useState(new Date());
+  // const localizedDate = currentDate;
 
   const toggleDialog = (index) => {
     setVisible1(index);
@@ -241,16 +243,16 @@ function MyProposalScreen() {
         console.log(signTx);
         setIsLoading(false);
         let receipt = null;
-          while (receipt === null) {
-            receipt = await provider.eth.getTransactionReceipt(signTx);
-            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
-          }
-          // console.log("Receipt Status", receipt.status);
-          if (receipt && receipt.status) {
-            ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
-          } else {
-            ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
-          }
+        while (receipt === null) {
+          receipt = await provider.eth.getTransactionReceipt(signTx);
+          await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
+        }
+        // console.log("Receipt Status", receipt.status);
+        if (receipt && receipt.status) {
+          ToastAndroid.show("Transaction Successful", ToastAndroid.LONG);
+        } else {
+          ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
+        }
         return getResult;
       }
     } catch (error) {
@@ -270,227 +272,150 @@ function MyProposalScreen() {
           <Text style={styles.main_view_text}>PROPOSAL MADE BY YOU</Text>
 
           <View style={styles.view_proposal_data}>
-            {userProp.map((details, key) => (
-              
-              <View style={styles.view_proposal} key={key}>
-                <View>
-                  <Text style={styles.input_text_orders}>Type:</Text>
-                  <View style={styles.input_box_orders}>
-                    <Text>{details[3] ? "Emission" : "Offset"}</Text>
-                  </View>
-                </View>
-
-                <View>
-                  <Text style={styles.input_text_orders}>Description:</Text>
-                  <View style={styles.input_box_description}>
-                    <Text>{details[1]}</Text>
-                  </View>
-                </View>
-
-                <View>
+            {userProp.length > 0 ? (
+              userProp.map((details, key) => (
+                <View style={styles.view_proposal} key={key}>
                   <View>
-                    <Text style={styles.input_text_orders}>Certificate:</Text>
+                    <Text style={styles.input_text_orders}>Type:</Text>
+                    <View style={styles.input_box_orders}>
+                      <Text>{details[3] ? "Emission" : "Offset"}</Text>
+                    </View>
                   </View>
-                  <View style={[styles.view_proposal_description]}>
-                    <TouchableOpacity
-                      onPress={() => toggleDialog(key)}
-                      key={key}
-                    >
-                      <Image
-                        source={{ uri: "https://ipfs.io/ipfs/" + details[2] }}
-                        style={{
-                          width: responsiveWidth(40),
-                          height: responsiveHeight(20),
-                          marginVertical: 10,
-                        }}
-                      ></Image>
-                    </TouchableOpacity>
-                    <Dialog
-                      isVisible={visible1 === key}
-                      onBackdropPress={() => setVisible1(null)}
-                      height="auto"
-                    >
-                      <Dialog.Title title="Your proposal image" />
-                      <View
-                        style={{
-                          alignItems: "center",
-                          justifyContent: "center",
-                          height: 300,
-                        }}
+
+                  <View>
+                    <Text style={styles.input_text_orders}>Description:</Text>
+                    <View style={styles.input_box_description}>
+                      <Text>{details[1]}</Text>
+                    </View>
+                  </View>
+
+                  <View>
+                    <View>
+                      <Text style={styles.input_text_orders}>Certificate:</Text>
+                    </View>
+                    <View style={[styles.view_proposal_description]}>
+                      <TouchableOpacity
+                        onPress={() => toggleDialog(key)}
+                        key={key}
                       >
                         <Image
                           source={{ uri: "https://ipfs.io/ipfs/" + details[2] }}
                           style={{
-                            width: "100%",
-                            height: "80%",
-                            resizeMode: "contain",
+                            width: responsiveWidth(40),
+                            height: responsiveHeight(20),
+                            marginVertical: 10,
                           }}
                         ></Image>
-                      </View>
-                    </Dialog>
+                      </TouchableOpacity>
+                      <Dialog
+                        isVisible={visible1 === key}
+                        onBackdropPress={() => setVisible1(null)}
+                        height="auto"
+                      >
+                        <Dialog.Title title="Your proposal image" />
+                        <View
+                          style={{
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: 300,
+                          }}
+                        >
+                          <Image
+                            source={{
+                              uri: "https://ipfs.io/ipfs/" + details[2],
+                            }}
+                            style={{
+                              width: "100%",
+                              height: "80%",
+                              resizeMode: "contain",
+                            }}
+                          ></Image>
+                        </View>
+                      </Dialog>
+                    </View>
                   </View>
-                </View>
 
-                <View>
-                  <Text style={styles.input_text_orders}>Status:</Text>
-                  <View style={styles.input_box_orders}>
-                    <Text>{details[10] ? details[10] : "pending"}</Text>
+                  <View>
+                    <Text style={styles.input_text_orders}>Status:</Text>
+                    <View style={styles.input_box_orders}>
+                      <Text>{details[10] ? details[10] : "pending"}</Text>
+                    </View>
                   </View>
-                </View>
 
-                <View>
-                  <Text style={styles.input_text_orders}>Proposed at:</Text>
-                  <View style={styles.input_box_orders}>
-                    <Text>
-                      {new Date(details[8] * 1000).toLocaleDateString()}
+                  <View>
+                    <Text style={styles.input_text_orders}>Proposed at:</Text>
+                    <View style={styles.input_box_orders}>
+                      <Text>
+                        {new Date(details[8] * 1000).toLocaleDateString()}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <View>
+                    <Text style={styles.input_text_orders}>
+                      Proposal Expire Time:
                     </Text>
+                    <View style={styles.input_box_orders}>
+                      <Text>
+                        {new Date(details[9] * 1000).toLocaleDateString()}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <View style={{ alignItems: "center" }}>
+                    <Button
+                      title={isLoading ? "Loading..." : "GET RESULT"}
+                      loading={isLoading}
+                      loadingProps={{ size: "small", color: "white" }}
+                      buttonStyle={{
+                        borderRadius: 15,
+                      }}
+                      titleStyle={{
+                        fontWeight: "bold",
+                        color: "#fff",
+                        fontSize: responsiveFontSize(2.7),
+                        margin: "4%",
+                      }}
+                      containerStyle={{
+                        width: responsiveWidth(40),
+                        alignItems: "center",
+                        marginTop: "5%",
+                      }}
+                      onPress={() => {
+                        const value1 = details[9] > new Date();
+                        console.log("Value 1:", value1);
+                        if (value1) {
+                          console.log(Date());
+                          alert(
+                            "You will be able to see the result after the proposal expires!"
+                          );
+                        } else {
+                          getUserDataById(details[0], key);
+                        }
+                      }}
+                    />
                   </View>
                 </View>
-
-                <View>
-                  <Text style={styles.input_text_orders}>
-                    Proposal Expire Time:
-                  </Text>
-                  <View style={styles.input_box_orders}>
-                    <Text>
-                      {new Date(details[9] * 1000).toLocaleDateString()}
-                    </Text>
-                  </View>
-                </View>
-
-                <View style={{ alignItems: "center" }}>
-                  <Button
-                    title={isLoading ? "Loading..." : "GET RESULT"}
-                    loading={isLoading}
-                    loadingProps={{ size: "small", color: "white" }}
-                    buttonStyle={{
-                      borderRadius: 15,
-                    }}
-                    titleStyle={{
-                      fontWeight: "bold",
-                      color: "#fff",
-                      fontSize: responsiveFontSize(2.7),
-                      margin: "4%",
-                    }}
-                    containerStyle={{
-                      width: responsiveWidth(40),
-                      alignItems: "center",
-                      marginTop: "5%",
-                    }}
-                    onPress={() => {
-                      const value1 = details[9] > new Date();
-                      console.log("Value 1:", value1);
-                      if (value1) {
-                        console.log(Date());
-                        alert(
-                          "You will be able to see the result after the proposal expires!"
-                        );
-                      } else {
-                        getUserDataById(details[0], key);
-                      }
-                    }}
-                  />
-                </View>
+              ))
+            ) : (
+              <View style={{ backgroundColor: "#fff", borderRadius: 40 }}>
+                <Text
+                  style={{
+                    fontSize: responsiveFontSize(3),
+                    fontWeight: "bold",
+                    margin: "6%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  No proposals made
+                </Text>
               </View>
-            ))}
+            )}
           </View>
         </View>
       </ScrollView>
     </View>
-
-    // <View style={styles.container}>
-    //   <ScrollView
-    //     showsVerticalScrollIndicator={false}
-    //     contentContainerStyle={styles.centerView}
-    //   >
-    /* <View style={styles.main_view}>
-          <Text style={styles.main_view_text}>MY PROPOSALS</Text>
-
-          <View style={styles.view_details}>
-            <View style={styles.view_proposal_data}>
-              {myProposalData.map((proposal, index) => (
-                <View style={styles.view_proposal} key={index}>
-                  <View style={styles.view_proposal_name}>
-                    <Text style={styles.text_proposal_name}>
-                      Sr. No: {proposal.sr_no}
-                    </Text>
-                  </View>
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Title: {proposal.title}
-                    </Text>
-                  </View>
-
-                  <View
-                    style={[
-                      styles.view_proposal_description,
-                      { flexDirection: "row", alignItems: "center" },
-                    ]}
-                  >
-                    <Text style={styles.text_proposal_description}>Image:</Text>
-                    <TouchableOpacity
-                      onPress={() => toggleDialog(index)}
-                      key={index}
-                    >
-                      <Image
-                        source={proposal.image}
-                        // source={require("../assets/calculatorAssets/HomeBg.jpg")}
-                        style={{
-                          width: 80,
-                          height: 80,
-                          marginVertical: 10,
-                          marginLeft: "6%",
-                        }}
-                      ></Image>
-                    </TouchableOpacity>
-                    <Dialog
-                      isVisible={visible1 === index}
-                      onBackdropPress={() => setVisible1(null)}
-                    >
-                      <Dialog.Title title="Your proposal image" />
-                      <Image
-                        // source={require("../assets/calculatorAssets/HomeBg.jpg")}
-                        source={proposal.image}
-                        style={{
-                          width: "100%",
-                          // height: 100,
-                          // marginVertical: 10,
-                          // margin: "3%",
-                        }}
-                      ></Image>
-                    </Dialog>
-                  </View>
-
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Result: {proposal.result}
-                    </Text>
-                  </View>
-
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Stake: {proposal.stake}
-                    </Text>
-                  </View>
-
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Return Stake: {proposal.return_stake}
-                    </Text>
-                  </View>
-
-                  <View style={styles.view_proposal_description}>
-                    <Text style={styles.text_proposal_description}>
-                      Credit issue: {proposal.credit_issue}
-                    </Text>
-                  </View>
-                </View>
-              ))}
-            </View>
-          </View>
-        </View> */
-    //     </ScrollView>
-    //   </View>
   );
 }
 
@@ -543,51 +468,67 @@ function MyOrdersScreen() {
           <Text style={styles.main_view_text}>MY ORDERS</Text>
 
           <View style={styles.view_proposal_data}>
-            {userOrders.map((details, key) => (
-              <View style={styles.view_proposal} key={key}>
-                <View>
-                  <Text style={styles.input_text_orders}>Credits:</Text>
-                  <View style={styles.input_box_orders}>
-                    <Text>{parseInt(details[1])}</Text>
+            {userOrders.length > 0 ? (
+              userOrders.map((details, key) => (
+                <View style={styles.view_proposal} key={key}>
+                  <View>
+                    <Text style={styles.input_text_orders}>Credits:</Text>
+                    <View style={styles.input_box_orders}>
+                      <Text>{parseInt(details[1])}</Text>
+                    </View>
                   </View>
-                </View>
 
-                <View>
-                  <Text style={styles.input_text_orders}>
-                    Price Per Credit (in ETH):
-                  </Text>
-                  <View style={styles.input_box_orders}>
-                    <Text>{parseInt(details[2]) / Math.pow(10, 18)}</Text>
-                  </View>
-                </View>
-
-                <View>
-                  <Text style={styles.input_text_orders}>
-                    Total Price (in ETH):
-                  </Text>
-                  <View style={styles.input_box_orders}>
-                    <Text>
-                      {(parseInt(details[2]) / Math.pow(10, 18)) *
-                        parseInt(details[1])}
+                  <View>
+                    <Text style={styles.input_text_orders}>
+                      Price Per Credit (in ETH):
                     </Text>
+                    <View style={styles.input_box_orders}>
+                      <Text>{parseInt(details[2]) / Math.pow(10, 18)}</Text>
+                    </View>
                   </View>
-                </View>
 
-                <View>
-                  <Text style={styles.input_text_orders}>Address:</Text>
-                  <View style={styles.input_box_orders}>
-                    <Text>{details[4]}</Text>
+                  <View>
+                    <Text style={styles.input_text_orders}>
+                      Total Price (in ETH):
+                    </Text>
+                    <View style={styles.input_box_orders}>
+                      <Text>
+                        {(parseInt(details[2]) / Math.pow(10, 18)) *
+                          parseInt(details[1])}
+                      </Text>
+                    </View>
                   </View>
-                </View>
 
-                <View>
-                  <Text style={styles.input_text_orders}>Status:</Text>
-                  <View style={styles.input_box_orders}>
-                    <Text>{details[3] ? "true" : "false"}</Text>
+                  <View>
+                    <Text style={styles.input_text_orders}>Address:</Text>
+                    <View style={styles.input_box_orders}>
+                      <Text>{details[4]}</Text>
+                    </View>
+                  </View>
+
+                  <View>
+                    <Text style={styles.input_text_orders}>Status:</Text>
+                    <View style={styles.input_box_orders}>
+                      <Text>{details[3] ? "true" : "false"}</Text>
+                    </View>
                   </View>
                 </View>
+              ))
+            ) : (
+              <View style={{ backgroundColor: "#fff", borderRadius: 40 }}>
+                <Text
+                  style={{
+                    fontSize: responsiveFontSize(3),
+                    fontWeight: "bold",
+                    margin: "6%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  No Orders Made
+                </Text>
               </View>
-            ))}
+            )}
           </View>
         </View>
       </ScrollView>

@@ -12,6 +12,8 @@ import { responsiveFontSize } from "react-native-responsive-dimensions";
 export default function ProposalDashboard() {
   const navigation = useNavigation();
   const [allProposalData, setAllProposalData] = useState([]);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const localizedDate = currentDate;
 
   const daoProposal = async () => {
     try {
@@ -36,6 +38,21 @@ export default function ProposalDashboard() {
 
   useEffect(() => {
     daoProposal();
+  });
+
+  function hexToTimestamp2(hex) {
+    // console.log("hex " + hex)
+    // const unixTimestamp = parseInt(hex, 16);
+    // console.log("unix " + unixTimestamp)
+    const date = new Date(hex * 1000);
+    return date;
+    // console.log("date " + date)
+    // const localDate = date.toLocaleString('en-US');
+    // console.log("localdate " + localDate)
+    // return localDate;
+  }
+  const filteredData = allProposalData.filter((item) => {
+    return item[10] === "" && hexToTimestamp2(item[9]) > localizedDate;
   });
 
   return (
@@ -66,44 +83,60 @@ export default function ProposalDashboard() {
           </View>
 
           <View style={styles.view_proposal_data}>
-            {allProposalData.map((proposal, index) => (
-              <View style={styles.view_proposal} key={index}>
-                <View style={styles.view_proposal_name}>
+            {filteredData.length > 0 ? (
+              filteredData.map((proposal, index) => (
+                <View style={styles.view_proposal} key={index}>
+                  <View style={styles.view_proposal_name}>
+                    <View>
+                      <Text style={styles.text_proposal_name}>Type</Text>
+                    </View>
+                    <View style={styles.view_proposal_name_value}>
+                      <Text style={styles.text_proposal_name_value}>
+                        {proposal[3] ? "Emission" : "Offset"}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.view_proposal_description}>
+                    <View>
+                      <Text style={styles.text_proposal_description}>
+                        Description
+                      </Text>
+                    </View>
+                    <View style={styles.view_proposal_name_value}>
+                      <Text style={styles.text_proposal_name_value}>
+                        {proposal[1]}
+                      </Text>
+                    </View>
+                  </View>
                   <View>
-                    <Text style={styles.text_proposal_name}>Type</Text>
-                  </View>
-                  <View style={styles.view_proposal_name_value}>
-                    <Text style={styles.text_proposal_name_value}>
-                      {proposal[3] ? "Emission" : "Offset"}
-                    </Text>
-                  </View>
-                </View>
-                <View style={styles.view_proposal_description}>
-                  <View>
-                    <Text style={styles.text_proposal_description}>
-                      Description
-                    </Text>
-                  </View>
-                  <View style={styles.view_proposal_name_value}>
-                    <Text style={styles.text_proposal_name_value}>
-                      {proposal[1]}
-                    </Text>
+                    <Button
+                      size="sm"
+                      onPress={() =>
+                        navigation.navigate("proposalDetails", {
+                          state: { data: proposal },
+                        })
+                      }
+                    >
+                      View More
+                    </Button>
                   </View>
                 </View>
-                <View>
-                  <Button
-                    size="sm"
-                    onPress={() =>
-                      navigation.navigate("proposalDetails", {
-                        state: { data: proposal },
-                      })
-                    }
-                  >
-                    View More
-                  </Button>
-                </View>
+              ))
+            ) : (
+              <View style={{ backgroundColor: "#fff", borderRadius:40 }}>
+                <Text
+                  style={{
+                    fontSize: responsiveFontSize(3),
+                    fontWeight: "bold",
+                    margin: "6%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  No Active proposals
+                </Text>
               </View>
-            ))}
+            )}
           </View>
         </View>
       </ScrollView>

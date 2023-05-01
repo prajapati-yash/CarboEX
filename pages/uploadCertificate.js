@@ -36,6 +36,7 @@ export default function UploadCertificate() {
   const [domainIsFocus, domainSetIsFocus] = useState(false);
   const [domain, setDomain] = useState(false);
   const [fileName, setFileName] = useState("");
+  const [btndisable, setbtndisable] = useState(false);
 
   const [visible1, setVisible1] = useState(null);
   const toggleDialog = () => {
@@ -137,7 +138,7 @@ export default function UploadCertificate() {
           console.log("signTx: ", signTx);
           let receipt = null;
           while (receipt === null) {
-            receipt = await provider.eth.getTransactionReceipt(signTxDao);
+            receipt = await provider.eth.getTransactionReceipt(signTx);
             await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
           }
           // console.log("Receipt Status", receipt.status);
@@ -154,6 +155,15 @@ export default function UploadCertificate() {
       console.log("Create Proposal Main : ", error);
       ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
       setIsLoading(false);
+    }
+  };
+
+  const checkDAOMember = async () => {
+    if (connector.connected) {
+      const conDAO = await daoInstance();
+      const isDAOMember = await conDAO.methods.isMember(connector.accounts[0]);
+      console.log(isDAOMember);
+      return isDAOMember;
     }
   };
 
@@ -277,6 +287,7 @@ export default function UploadCertificate() {
 
             <View style={{ alignItems: "center" }}>
               <Button
+                disabled={btndisable}
                 title={isLoading ? "Loading..." : "SUBMIT"}
                 loading={isLoading}
                 loadingProps={{ size: "small", color: "white" }}
@@ -293,7 +304,20 @@ export default function UploadCertificate() {
                   width: responsiveWidth(30),
                   marginVertical: "3%",
                 }}
-                onPress={createProposalMain}
+                onPress={async () => {
+                  console.log("Button CLicked");
+                  const isAllowed = await checkDAOMember();
+                  console.log(isAllowed);
+                  if (!isAllowed) {
+                    setbtndisable(false);
+                    ToastAndroid.show(
+                      "You are not DAO member",
+                      ToastAndroid.LONG
+                    );
+                  } else {
+                    createProposalMain();
+                  }
+                }}
               />
             </View>
           </View>

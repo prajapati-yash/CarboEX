@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   },
   centerView: {
     alignItems: "center",
+    marginBottom: "4%",
   },
   image1: {
     width: responsiveWidth(85),
@@ -23,7 +24,6 @@ const styles = StyleSheet.create({
   },
   blurImage: {
     width: responsiveWidth(20),
-
   },
   blurView: {
     flex: 1,

@@ -346,7 +346,7 @@ export default function HomeScreen() {
                       <Text style={styles.text_instruction1}>
                         {" "}
                         After becoming a DAO member, user can buy and sell
-                        carbon credits by clicking the ‘Buy’ or ‘Sell’ buttons.
+                        carbon credits by clicking the 'Buy' or 'Sell' buttons.
                       </Text>
                     </Text>
                   </View>
