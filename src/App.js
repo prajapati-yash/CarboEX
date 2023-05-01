@@ -67,18 +67,18 @@ function App() {
         <NewNavbar/>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/resources' element={<Resources />} />
+          <Route path='/know-more/about' element={<About />} />
+          <Route path='/know-more/resources' element={<Resources />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/calculator/home' element={<Calculator />} />
-          <Route path='/calculator/*' element={<Calculator />} />
+          <Route path='/approach/calculator/home' element={<Calculator />} />
+          <Route path='/approach/calculator/*' element={<Calculator />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/buy-carbon-credits' element={<BuyCarbonCredits />} />
           <Route path='/sell-carbon-credits' element={<SellCarbonCredits />} />
-          <Route path='/certificate-validation-proposal' element={<CertificateValidationProposal />} />
+          <Route path='/approach/certificate-validation-proposal' element={<CertificateValidationProposal />} />
           <Route path='/*' element={<Home />} />
-          <Route path="/become-member" element={<BecomeMember />} />
-          <Route path="/dao-member-proposals" element={<DAOMemberProposals />} />
+          <Route path="/member/become-member" element={<BecomeMember />} />
+          <Route path="/member/dao-member-proposals" element={<DAOMemberProposals />} />
           <Route path="/proposalData" element={<ProposalDataMain />} />
           <Route path="/proposal-dashboard" element={<ProposalDashboard />} />
           <Route path="/proposal-orders" element={<ProposalOrders />} />
