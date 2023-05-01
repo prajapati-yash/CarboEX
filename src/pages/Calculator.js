@@ -22,28 +22,28 @@ function Calculator() {
     const location = useLocation();
     useEffect(() => {
         switch (window.location.pathname) {
-            case '/calculator/traditionalenergy':
+            case '/approach/calculator/traditionalenergy':
                 setActiveComponent('traditionalEnergy');
                 break;
-            case '/calculator/publictransit':
+            case '/approach/calculator/publictransit':
                 setActiveComponent('publicTransit');
                 break;
-            case '/calculator/cleanenergy':
+            case '/approach/calculator/cleanenergy':
                 setActiveComponent('cleanEnergy');
                 break;
-            case '/calculator/fueltoco2':
+            case '/approach/calculator/fueltoco2':
                 setActiveComponent('fuelToCo2');
                 break;
-            case '/calculator/cartravel':
+            case '/approach/calculator/cartravel':
                 setActiveComponent('carTravel');
                 break;
-            case '/calculator/flight':
+            case '/approach/calculator/flight':
                 setActiveComponent('flight');
                 break;
-            case '/calculator/motorbike':
+            case '/approach/calculator/motorbike':
                 setActiveComponent('motorBike');
                 break;
-            case '/calculator/result':
+            case '/approach/calculator/result':
                 setActiveComponent('calcResult');
                 break;
             default:
@@ -84,28 +84,28 @@ function Calculator() {
                     <ul className='navigation-list'>
                         <div className='lItems'>
                             <NavLink
-                                to='/calculator/home'
+                                to='/approach/calculator/home'
                                 className="HomeCalc"
                                 isActive={() => activeComponent === 'landingPage'}
                                 onClick={() => setActiveComponent('landingPage')}
                             >
-                                Home
+                                Home <span >🛈</span>
                             </NavLink>
                             <NavLink
-                                to='/calculator/traditionalenergy'
+                                to='/approach/calculator/traditionalenergy'
                                 className="TraditionalCalc"
                                 isActive={() => activeComponent === 'traditionalEnergy'}
                                 onClick={() => setActiveComponent('traditionalEnergy')}
                             >
-                                Traditional Energy
+                                Traditional Energy⚡
                             </NavLink>
                             <NavLink
-                                to='/calculator/publictransit'
+                                to='/approach/calculator/publictransit'
                                 className="PublicCalc"
                                 isActive={() => activeComponent === 'publicTransit'}
                                 onClick={() => setActiveComponent('publicTransit')}
                             >
-                                Public Transit
+                                Public Transit🚌
                             </NavLink>
                             {/* <NavLink
                                 to='/calculator/cleanenergy'
@@ -116,44 +116,44 @@ function Calculator() {
                                 Clean Energy
                             </NavLink> */}
                             <NavLink
-                                to='/calculator/fueltoco2'
+                                to='/approach/calculator/fueltoco2'
                                 className="FuelCalc"
                                 isActive={() => activeComponent === 'fuelToCo2'}
                                 onClick={() => setActiveComponent('fuelToCo2')}
                             >
-                                Fuel to CO2
+                                Fuel to CO2⛽
                             </NavLink>
                             <NavLink
-                                to='/calculator/cartravel'
+                                to='/approach/calculator/cartravel'
                                 className="CarCalc"
                                 isActive={() => activeComponent === 'carTravel'}
                                 onClick={() => setActiveComponent('carTravel')}
                             >
-                                Car Travel
+                                Car Travel🚗
                             </NavLink>
                             <NavLink
-                                to='/calculator/flight'
+                                to='/approach/calculator/flight'
                                 className="FlightCalc"
                                 isActive={() => activeComponent === 'flight'}
                                 onClick={() => setActiveComponent('flight')}
                             >
-                                Flight
+                                Flight✈️
                             </NavLink>
                             <NavLink
-                                to='/calculator/motorbike'
+                                to='/approach/calculator/motorbike'
                                 className="MotorBikeCalc"
                                 isActive={() => activeComponent === 'motorBike'}
                                 onClick={() => setActiveComponent('motorBike')}
                             >
-                                Motorbike
+                                Motorbike🏍️
                             </NavLink>
                             <NavLink
-                                to='/calculator/result'
+                                to='/approach/calculator/result'
                                 className="ResultCalc"
                                 isActive={() => activeComponent === 'calcResult'}
                                 onClick={() => setActiveComponent('calcResult')}
                             >
-                                Result
+                                Result📝
                             </NavLink>
                         </div>
                     </ul>

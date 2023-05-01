@@ -46,7 +46,7 @@ function Footer() {
                 <div className='col-3 col-md-4'>
                     <NavLink className="navbar-brand" to="/">
                         <img
-                            src="../assets/logo/carboEx_Logo.png"
+                            src="../../assets/logo/carboEx_Logo.png"
                             height="100px"
                             width="130px"
                             className="img-fluid d-inline-block align-top justify-content-between"

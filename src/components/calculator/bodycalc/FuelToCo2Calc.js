@@ -57,7 +57,7 @@ function FuelToCo2Calc({ onValueChange, props }) {
             const response = await axios.request(config);
             const ftcResult = JSON.stringify(response.data.carbon);
             alert(`Carbon Emission: ${ftcResult}`);
-            navigate('/calculator/cartravel')
+            navigate('/approach/calculator/cartravel')
             console.log(`Carbon Emission: ${ftcResult}`);
             const numbers = ftcResult.match(/\d+(\.\d+)?/g);
             // console.log(numbers[0]);

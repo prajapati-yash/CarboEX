@@ -73,7 +73,7 @@ function ProposalOrderComponent() {
           <p>ORDERS</p>
         </div> */}
         <div className="myProposals-head-title py-sm-4 d-flex justify-content-center">
-          <p className="myProposals-head-title-name">ORDERS</p>
+          <p className="myProposals-head-title-name">ORDERS MADE BY YOU 🗊</p>
         </div>
         <div className="orderDetails">
           {isPageLoading ?

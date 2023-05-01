@@ -130,7 +130,7 @@ function ProposalDashComponent() {
     <>
       <div className="proposalContainer">
         <div className="myProposals-head-title py-sm-4 d-flex justify-content-center">
-          <p className="myProposals-head-title-name">PROPOSALS MADE BY YOU</p>
+          <p className="myProposals-head-title-name">PROPOSALS MADE BY YOU 🗊</p>
         </div>
         <div className="proposalDetails">
           {isPageLoading ?

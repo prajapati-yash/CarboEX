@@ -58,7 +58,7 @@ function MotorBikeCalc({ onValueChange, props }) {
             const response = await axios.request(config);
             const ftcResult = JSON.stringify(response.data.carbon);
             alert(`Carbon Emission: ${ftcResult}`);
-            navigate('/calculator/result')
+            navigate('/approach/calculator/result')
             console.log(`Carbon: ${ftcResult}`);
             const numbers = ftcResult.match(/\d+(\.\d+)?/g);
             // console.log(numbers[0]);

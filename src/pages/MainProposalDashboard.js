@@ -174,7 +174,7 @@ function MainProposalDashboard() {
                                             <div><b>DAO MEMBER</b></div>
                                         </div>
                                     ) : (
-                                        <Link className='xmark-check-link-class' to={"/become-member"}><div className='fa-xmark-main-class d-flex justify-content-center align-items-center'>
+                                        <Link className='xmark-check-link-class' to={"/member/become-member"}><div className='fa-xmark-main-class d-flex justify-content-center align-items-center'>
                                             <div className='fa-xmark-sub-class mx-auto me-2'><i className="fa-solid fa-xmark mx-1" style={{ color: "#ffffff", }}></i></div>
                                             <div><b>DAO MEMBER</b></div>
                                         </div></Link>
@@ -231,7 +231,7 @@ function MainProposalDashboard() {
                                     <div className='DAOSELL-btn'>
                                         <button
                                             className='DMember-token-btn'
-                                            onClick={() => navigate("/certificate-validation-proposal")}>
+                                            onClick={() => navigate("/approach/certificate-validation-proposal")}>
                                             CREATE PROPOSAL
                                         </button>
                                     </div>
@@ -249,7 +249,7 @@ function MainProposalDashboard() {
                 <hr />
                 <div className='Member-prop-orders-class'>
                     <div className="Member-prop-orders-Btns row">
-                        <button type="button" className="Member-prop-Btn col-12 col-md-5" onClick={handleProposalClick}>My proposals</button>
+                        <button type="button" className="Member-prop-Btn col-12 col-md-5" onClick={handleProposalClick}>My proposals </button>
                         <button type="button" className="Member-orders-Btn col-12 col-md-5" onClick={handleOrdersClick}>My orders</button>
                     </div>
                 </div>

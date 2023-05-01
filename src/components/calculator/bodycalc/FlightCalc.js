@@ -60,7 +60,7 @@ function FlightCalc({ onValueChange, props }) {
             const ftcResult = JSON.stringify(response.data.carbon);
             alert(`Carbon Emisson: ${ftcResult}`);
 
-            navigate('/calculator/motorbike')
+            navigate('/approach/calculator/motorbike')
             console.log(`Carbon Emission: ${ftcResult}`);
             const numbers = ftcResult.match(/\d+(\.\d+)?/g);
             // console.log(numbers[0]);

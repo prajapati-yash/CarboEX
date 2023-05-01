@@ -51,7 +51,7 @@ function TraditionalBodyCalc({ onValueChange }) {
             // console.log(response)
             const teResult = JSON.stringify(response.data.carbon);
             alert(`Carbon Emission: ${teResult}`);
-            navigate('/calculator/publictransit')
+            navigate('/approach/calculator/publictransit')
             console.log(teResult)
             const numbers = teResult.match(/\d+(\.\d+)?/g);
             const value = numbers[0];

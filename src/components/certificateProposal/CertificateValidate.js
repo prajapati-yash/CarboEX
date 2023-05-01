@@ -130,7 +130,7 @@ function CertificateValidate() {
           const CPTx = await conDAO.createProposal(proposal, cids, domain, emission, { value: String(value[0]) })
           await CPTx.wait();
           setbtnloading(false)
-          navigate("/dao-member-proposals")
+          navigate("/member/dao-member-proposals")
           setbtndisable(false)
           console.log(CPTx)
         }
@@ -164,10 +164,10 @@ function CertificateValidate() {
         <div className="certiBg">
           <div className="text-center">
             <div className="d-flex justify-content-center align-items-center">
-            <p className="certiHead">Certificate Validation</p> 
-      
-          </div>
-          <p className="text-center certiSubHead ">You must be a DAO Member to upload the Certificate for Validation</p>
+              <p className="certiHead">Certificate Validation</p>
+
+            </div>
+            <p className="text-center certiSubHead ">You must be a DAO Member to upload the Certificate for Validation</p>
           </div>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">

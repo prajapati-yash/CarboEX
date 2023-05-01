@@ -12,7 +12,7 @@ import { companyInstance } from '../../Contracts';
 
 function ResultCalculation({ sum, onClose }) {
     const navigate = useNavigate();
-    let message, button;
+    let message, button, message2, message3;
 
     const { address } = useAccount();
     const { openConnectModal } = useConnectModal();
@@ -59,8 +59,8 @@ function ResultCalculation({ sum, onClose }) {
     if (sum === 0) {
         message = "Please calculate your emission first.";
     } else if (sum > 1000) {
-        message = `You emitted total ${sum} KG CO2. You exceed the global limit. Here in our platform you can buy carbon credits and contribute towards greener environment.`;
-        button = <button className='button-32' onClick={buyOrSignup}>Buy</button>;
+        message = <> You emitted total {sum} KG CO2. <br /> Your carbon emissions are higher than the global limit, simply click on the <span style={{ borderBottom: "2px solid red" }}><b>Buy Credits</b></span> button below to purchase carbon credits and offset your carbon footprint. These credits are verified and certified, and your purchase will contribute to a more sustainable future.<br /> Let's work together to protect our Planet! 🌏</>;
+        button = <button className='button-32' onClick={buyOrSignup}>Buy Credits</button>;
     }
     else if (sum < 1000 && sum > 0) {
         message = `You emitted total ${sum} KG CO2. Your Carbon Emission is under global limit. `;

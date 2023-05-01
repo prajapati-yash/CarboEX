@@ -53,7 +53,7 @@ function PublicTransitCalc({ onValueChange, props }) {
             const response = await axios.request(config);
             const ptResult = JSON.stringify(response.data.carbon);
             alert(`Carbon Emission: ${ptResult}`);
-            navigate('/calculator/fueltoco2')
+            navigate('/approach/calculator/fueltoco2')
             // console.log(`Carbon: ${ptResult}`);
             const numbers = ptResult.match(/\d+(\.\d+)?/g);
             // console.log(numbers[0]);

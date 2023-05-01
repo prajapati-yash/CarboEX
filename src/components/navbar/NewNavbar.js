@@ -58,15 +58,15 @@ function Navbar() {
   useEffect(() => {
     verifyNavbar()
   }, [isAuthenticated])
-  
-  
-  
+
+
+
   const handleTabClick = (tab) => {
-      // setActiveTab(tab);
-      setDropdownVisible(false);
-      setApproachDropDown(false);
-      setMemberDropDown(false);
-      setKnowMoreDropDown(false);
+    // setActiveTab(tab);
+    setDropdownVisible(false);
+    setApproachDropDown(false);
+    setMemberDropDown(false);
+    setKnowMoreDropDown(false);
 
   };
 
@@ -117,7 +117,7 @@ function Navbar() {
           <div>
             <NavLink className="navbar-brand" to="/">
               <img
-                src="../assets/logo/carboEx_Logo.png"
+                src="../../assets/logo/carboEx_Logo.png"
                 height="100px"
                 width="150px"
                 className="img-fluid d-inline-block align-top justify-content-between brand__logo"
@@ -130,93 +130,94 @@ function Navbar() {
             <i className={`fas ${menuVisible ? "fa-bars" : "fa-times"}`}></i>
           </div>
         </div>
-       
-      
-      <ul className={`Navbar__list d-flex justify-content-center align-items-center ${menuVisible ?  "notvisible": ""}`} >
-      {isAuthenticated ? (
-       <> 
-        <li
-          className={`Navbar__item ${currentPath.includes("/buy-carbon-credits") ? "active" :''}`}
-          onClick={() => handleTabClick("explore")}
-        >
-          <NavLink to="/buy-carbon-credits" className="linkStyle">Explore</NavLink>
-        </li>
-        
-        
-        {/* -------- Our Approach --------------  */}
-        <li className={`Navbar__item ${currentPath.includes("/approach") ? "active" :''} approachClass `}
-          onMouseEnter={showApproachDropDown}
-          onMouseLeave={hideApproachDropDown}
-          
-        >
-          Our Approach <i class="fa-solid fa-angle-down"></i>
-          {approachDropDown &&(
-          <div className="navDropDown approachDropDown p-3 text-center" onMouseEnter={showApproachDropDown} onMouseLeave={hideApproachDropDown}
-          >
-            <div className={`Navbar__dropdown-item pb-2 ${activeTab === 'our-approach-validate-certificate' ? 'active' : ''}`} onClick={() => handleTabClick('our-approach-validate-certificate')}>
-            <NavLink to="/approach/certificate-validation-proposal" className="linkStyle">Validate Certificate</NavLink>
-            </div>
-            <div className={`Navbar__dropdown-item ${activeTab === 'our-approach-see-our-calculator' ? 'active' : ''}`} onClick={() => handleTabClick('our-approach-see-our-calculator')}>
-            <NavLink to="/approach/calculator" className="linkStyle"> See Our Calculator  </NavLink> 
-            </div>
-          </div>)}  </li>
+
+
+        <ul className={`Navbar__list d-flex justify-content-center align-items-center ${menuVisible ? "notvisible" : ""}`} >
+          {isAuthenticated ? (
+            <>
+              <li
+                className={`Navbar__item ${currentPath.includes("/buy-carbon-credits") ? "active" : ''}`}
+                onClick={() => handleTabClick("explore")}
+              >
+                <NavLink to="/buy-carbon-credits" className="linkStyle">Explore</NavLink>
+              </li>
+
+
+              {/* -------- Our Approach --------------  */}
+              <li className={`Navbar__item ${currentPath.includes("/approach") ? "active" : ''} approachClass `}
+                onMouseEnter={showApproachDropDown}
+                onMouseLeave={hideApproachDropDown}
+
+              >
+                Our Approach <i class="fa-solid fa-angle-down"></i>
+                {approachDropDown && (
+                  <div className="navDropDown approachDropDown p-3 text-center" onMouseEnter={showApproachDropDown} onMouseLeave={hideApproachDropDown}
+                  >
+                    <div className={`Navbar__dropdown-item pb-2 ${activeTab === 'our-approach-validate-certificate' ? 'active' : ''}`} onClick={() => handleTabClick('our-approach-validate-certificate')}>
+                      <NavLink to="/approach/certificate-validation-proposal" className="linkStyle">Validate Certificate</NavLink>
+                    </div>
+                    <div className={`Navbar__dropdown-item ${activeTab === 'our-approach-see-our-calculator' ? 'active' : ''}`} onClick={() => handleTabClick('our-approach-see-our-calculator')}>
+                      <NavLink to="/approach/calculator/home" className="linkStyle"> See Our Calculator  </NavLink>
+                    </div>
+                  </div>)}  </li>
 
               {/* ---------------------------
   Member 
   ------------------------------- */}
-        <li className={`Navbar__item ${currentPath.includes("/member") ? "active" :''} memberClass `}onMouseEnter={showMemberDropDown} onMouseLeave={hideMemberDropDown}>
-          Member <i class="fa-solid fa-angle-down"></i>
-       
+              <li className={`Navbar__item ${currentPath.includes("/member") ? "active" : ''} memberClass `} onMouseEnter={showMemberDropDown} onMouseLeave={hideMemberDropDown}>
+                Member <i class="fa-solid fa-angle-down"></i>
 
-          {memberDropDown &&(
-          <div className="navDropDown memberDropDown p-3 " onMouseEnter={showMemberDropDown} onMouseLeave={hideMemberDropDown}>
-            <div className={`Navbar__dropdown-item pb-2 ${activeTab === 'member-validate-certificate' ? 'active' : ''}`} onClick={() => handleTabClick('member-become-dao-member')}>
-            <NavLink to="/member/become-member" className="linkStyle">Become a DAO Member</NavLink>
-            </div>
-            <div className={`Navbar__dropdown-item ${activeTab === 'member-see-our-calculator' ? 'active' : ''}`} onClick={() => handleTabClick('member-proposals')}>
-            <NavLink to="/member/dao-member-proposals" className="linkStyle"> All Proposals </NavLink>
-            </div>
-          </div>)}  </li>
-{/* ---------------------------
+
+                {memberDropDown && (
+                  <div className="navDropDown memberDropDown p-3 " onMouseEnter={showMemberDropDown} onMouseLeave={hideMemberDropDown}>
+                    <div className={`Navbar__dropdown-item pb-2 ${activeTab === 'member-validate-certificate' ? 'active' : ''}`} onClick={() => handleTabClick('member-become-dao-member')}>
+                      <NavLink to="/member/become-member" className="linkStyle">Become a DAO Member</NavLink>
+                    </div>
+                    <div className={`Navbar__dropdown-item ${activeTab === 'member-see-our-calculator' ? 'active' : ''}`} onClick={() => handleTabClick('member-proposals')}>
+                      <NavLink to="/member/dao-member-proposals" className="linkStyle"> All Proposals </NavLink>
+                    </div>
+                  </div>)}  </li>
+              {/* ---------------------------
   Know More 
   ------------------------------- */}
-        <li className={`Navbar__item ${currentPath.includes("/know-more") ? "active" :''} knowMoreClass `}onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
-          Know More <i class="fa-solid fa-angle-down"></i>
-       
+              <li className={`Navbar__item ${currentPath.includes("/know-more") ? "active" : ''} knowMoreClass `} onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
+                Know More <i class="fa-solid fa-angle-down"></i>
 
-          {knowMoreDropDown &&(
-          <div className="navDropDown knowMoreDropDown p-3 " onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
-            <div className={`Navbar__dropdown-item ${activeTab === 'know-about' ? 'active' : ''} pb-2`} onClick={() => handleTabClick('know-about-us')}>
-            <NavLink to="/know-more/about" className="linkStyle">About Us</NavLink>
-            </div>
-            <div className={`Navbar__dropdown-item ${activeTab === 'know-resources' ? 'active' : ''}`} onClick={() => handleTabClick('know-resources')}>
-            <NavLink to="/know-more/resources" className="linkStyle"> Resources </NavLink>
-            </div>
-          </div>)}  </li>
-{/* {--------------
-Dashboard
------------------} */}
-          <li
-          className={`Navbar__item ${currentPath.includes("/user-dashboard") ? "active" :''}`}
-          onClick={() => handleTabClick("dashboard")}
-        >
-          <NavLink to="/user-dashboard" className="linkStyle"> Dashboard</NavLink>
-        </li>
-{/* {--------------
+
+                {knowMoreDropDown && (
+                  <div className="navDropDown knowMoreDropDown p-3 " onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
+                    <div className={`Navbar__dropdown-item ${activeTab === 'know-about' ? 'active' : ''} pb-2`} onClick={() => handleTabClick('know-about-us')}>
+                      <NavLink to="/know-more/about" className="linkStyle">About Us</NavLink>
+                    </div>
+                    <div className={`Navbar__dropdown-item ${activeTab === 'know-resources' ? 'active' : ''}`} onClick={() => handleTabClick('know-resources')}>
+                      <NavLink to="/know-more/resources" className="linkStyle"> Resources </NavLink>
+                    </div>
+                  </div>)}  </li>
+
+              {/* {--------------
 Contact
 -----------------} */}
-          <li
-          className={`Navbar__item ${currentPath.includes("/contact") ? "active" :''}`}
-          onClick={() => handleTabClick("contact")}
-        >
-         <NavLink to="/contact" className="linkStyle"> Contact </NavLink>
-        </li>
-     
-      <div className="ps-lg-3 ps-4 d-flex align-items-center justify-content-center">
-              <ConnectButtonCustom />
-      </div>
-      </>
-      ):(<>
+              <li
+                className={`Navbar__item ${currentPath.includes("/contact") ? "active" : ''}`}
+                onClick={() => handleTabClick("contact")}
+              >
+                <NavLink to="/contact" className="linkStyle"> Contact </NavLink>
+              </li>
+              {/* {--------------
+Dashboard
+-----------------} */}
+              <li
+                className={`Navbar__item ${currentPath.includes("/user-dashboard") ? "active" : ''}`}
+                onClick={() => handleTabClick("dashboard")}
+              >
+                <NavLink to="/user-dashboard" className="linkStyle"> Dashboard</NavLink>
+              </li>
+
+              <div className="ps-lg-3 ps-4 d-flex align-items-center justify-content-center">
+                <ConnectButtonCustom />
+              </div>
+            </>
+          ) : (<>
 
 
             {/* When user is not logged In! */}
@@ -224,8 +225,8 @@ Contact
             {/* ---------------------------
   Know More 
   ------------------------------- */}
-        <li className={`Navbar__item ${currentPath.includes("/know-more") ? "active" :''} knowMoreClass `}onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
-          Know More <i class="fa-solid fa-angle-down"></i>
+            <li className={`Navbar__item ${currentPath.includes("/know-more") ? "active" : ''} knowMoreClass `} onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
+              Know More <i class="fa-solid fa-angle-down"></i>
               {knowMoreDropDown && (
                 <div className="navDropDown knowMoreDropDown p-3 " onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
                   <div className={`Navbar__dropdown-item ${activeTab === 'know-about' ? 'active' : ''} pb-2`} onClick={() => handleTabClick('know-about-us')}>
@@ -236,16 +237,16 @@ Contact
                   </div>
                 </div>)}  </li>
 
-{/* {--------------
+            {/* {--------------
 Contact
 -----------------} */}
-          <li
-          className={`Navbar__item ${currentPath.includes("/contact") ? "active" :''}`}
-          onClick={() => handleTabClick("contact")}
-        >
-         <NavLink to="/contact" className="linkStyle"> Contact </NavLink>
-        </li>
-     
+            <li
+              className={`Navbar__item ${currentPath.includes("/contact") ? "active" : ''}`}
+              onClick={() => handleTabClick("contact")}
+            >
+              <NavLink to="/contact" className="linkStyle"> Contact </NavLink>
+            </li>
+
 
             <div className="ps-lg-3 ps-4 d-flex align-items-center justify-content-center">
               <ConnectButtonCustom />
