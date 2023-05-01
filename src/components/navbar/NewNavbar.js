@@ -230,10 +230,10 @@ Dashboard
               {knowMoreDropDown && (
                 <div className="navDropDown knowMoreDropDown p-3 " onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
                   <div className={`Navbar__dropdown-item ${activeTab === 'know-about' ? 'active' : ''} pb-2`} onClick={() => handleTabClick('know-about-us')}>
-                    <NavLink to="/about" className="linkStyle">About Us</NavLink>
+                    <NavLink to="/know-more/about" className="linkStyle">About Us</NavLink>
                   </div>
                   <div className={`Navbar__dropdown-item ${activeTab === 'know-resources' ? 'active' : ''}`} onClick={() => handleTabClick('know-resources')}>
-                    <NavLink to="/resources" className="linkStyle"> Resources </NavLink>
+                    <NavLink to="/know-more/resources" className="linkStyle"> Resources </NavLink>
                   </div>
                 </div>)}  </li>
 
