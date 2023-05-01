@@ -75,7 +75,7 @@ function App() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/buy-carbon-credits' element={<BuyCarbonCredits />} />
           <Route path='/sell-carbon-credits' element={<SellCarbonCredits />} />
-          <Route path='/approach/certificate-validation-proposal' element={<CertificateValidationProposal />} />
+          <Route path='/certificate-validation-proposal' element={<CertificateValidationProposal />} />
           <Route path='/*' element={<Home />} />
           <Route path="/become-member" element={<BecomeMember />} />
           <Route path="/dao-member-proposals" element={<DAOMemberProposals />} />
