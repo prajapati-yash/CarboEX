@@ -47,6 +47,8 @@ function StoreCalculation({ values }) {
     return (
         <>
             <div className='storeCalc'>
+                Hello, Based on a global limit (1000 tons) you will get the option whether you can buy credits or not.<br />
+                Your total emission till now, {values} KG CO2.
                 <ul>
                     {/* <div>Sum value: {sum}</div> */}
                     <button className='storeCalcBtn' onClick={calculateSum} >Result</button>
