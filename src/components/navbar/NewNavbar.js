@@ -19,8 +19,8 @@ function Navbar() {
   const currentPath = location.pathname;
   console.log(currentPath)
 
-   
-  
+
+
   const verifyUserAccount = async () => {
     try {
       const { ethereum } = window;
@@ -68,7 +68,7 @@ function Navbar() {
       setMemberDropDown(false);
       setKnowMoreDropDown(false);
 
-    };
+  };
 
   // const getOurApproachActiveClass = () => {
   //   return  currentPath.startsWith("certificate-validate" || "calculator") ? "active" : '' ;
@@ -90,46 +90,47 @@ function Navbar() {
   };
 
 
-const showApproachDropDown = () =>{
-  setApproachDropDown(true)
-}
-const hideApproachDropDown = () =>{
-  setApproachDropDown(false)
-}
-const showMemberDropDown = () =>{
-  setMemberDropDown(true)
-}
-const hideMemberDropDown = () =>{
-  setMemberDropDown(false)
-}
-const showKnowMoreDropDown = () =>{
-  setKnowMoreDropDown(true)
-}
-const hideKnowMoreDropDown = () =>{
-  setKnowMoreDropDown(false)
-}
+  const showApproachDropDown = () => {
+    setApproachDropDown(true)
+  }
+  const hideApproachDropDown = () => {
+    setApproachDropDown(false)
+  }
+  const showMemberDropDown = () => {
+    setMemberDropDown(true)
+  }
+  const hideMemberDropDown = () => {
+    setMemberDropDown(false)
+  }
+  const showKnowMoreDropDown = () => {
+    setKnowMoreDropDown(true)
+  }
+  const hideKnowMoreDropDown = () => {
+    setKnowMoreDropDown(false)
+  }
 
   return (
     <nav className={`Navbar  `}>
-    <div id="container" className="container-fluid mainNavContainer px-4 px-md-5  d-flex justify-content-between align-items-center">
-      <div className="Navbar__header ">
-        {/* <div className="Navbar__logo">MyLogo</div> */}
-        <div>
-        <NavLink className="navbar-brand" to="/">
-            <img
-              src="../assets/logo/carboEx_Logo.png"
-              height="100px"
-              width="150px"
-              className="img-fluid d-inline-block align-top justify-content-between brand__logo"
-              alt=""
-              style={{ }}
-            />
-          </NavLink>
+      <div id="container" className="container-fluid mainNavContainer px-4 px-md-5  d-flex justify-content-between align-items-center">
+        <div className="Navbar__header ">
+          {/* <div className="Navbar__logo">MyLogo</div> */}
+          <div>
+            <NavLink className="navbar-brand" to="/">
+              <img
+                src="../assets/logo/carboEx_Logo.png"
+                height="100px"
+                width="150px"
+                className="img-fluid d-inline-block align-top justify-content-between brand__logo"
+                alt=""
+                style={{}}
+              />
+            </NavLink>
           </div>
-        <div className={`Navbar__menu-icon `} onClick={handleMenuClick}>
-          <i className={`fas ${menuVisible ? "fa-bars" : "fa-times"}`}></i>
+          <div className={`Navbar__menu-icon `} onClick={handleMenuClick}>
+            <i className={`fas ${menuVisible ? "fa-bars" : "fa-times"}`}></i>
+          </div>
         </div>
-       </div>
+       
       
       <ul className={`Navbar__list d-flex justify-content-center align-items-center ${menuVisible ?  "notvisible": ""}`} >
       {isAuthenticated ? (
@@ -160,7 +161,7 @@ const hideKnowMoreDropDown = () =>{
             </div>
           </div>)}  </li>
 
-{/* ---------------------------
+              {/* ---------------------------
   Member 
   ------------------------------- */}
         <li className={`Navbar__item ${currentPath.includes("/member") ? "active" :''} memberClass `}onMouseEnter={showMemberDropDown} onMouseLeave={hideMemberDropDown}>
@@ -218,25 +219,23 @@ Contact
       ):(<>
 
 
-{/* When user is not logged In! */}
+            {/* When user is not logged In! */}
 
-    {/* ---------------------------
+            {/* ---------------------------
   Know More 
   ------------------------------- */}
         <li className={`Navbar__item ${currentPath.includes("/know-more") ? "active" :''} knowMoreClass `}onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
           Know More <i class="fa-solid fa-angle-down"></i>
-       
+              {knowMoreDropDown && (
+                <div className="navDropDown knowMoreDropDown p-3 " onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
+                  <div className={`Navbar__dropdown-item ${activeTab === 'know-about' ? 'active' : ''} pb-2`} onClick={() => handleTabClick('know-about-us')}>
+                    <NavLink to="/about" className="linkStyle">About Us</NavLink>
+                  </div>
+                  <div className={`Navbar__dropdown-item ${activeTab === 'know-resources' ? 'active' : ''}`} onClick={() => handleTabClick('know-resources')}>
+                    <NavLink to="/resources" className="linkStyle"> Resources </NavLink>
+                  </div>
+                </div>)}  </li>
 
-          {knowMoreDropDown &&(
-          <div className="navDropDown knowMoreDropDown p-3 " onMouseEnter={showKnowMoreDropDown} onMouseLeave={hideKnowMoreDropDown}>
-            <div className={`Navbar__dropdown-item ${activeTab === 'know-about' ? 'active' : ''} pb-2`} onClick={() => handleTabClick('know-about-us')}>
-            <NavLink to="/about" className="linkStyle">About Us</NavLink>
-            </div>
-            <div className={`Navbar__dropdown-item ${activeTab === 'know-resources' ? 'active' : ''}`} onClick={() => handleTabClick('know-resources')}>
-            <NavLink to="/resources" className="linkStyle"> Resources </NavLink>
-            </div>
-          </div>)}  </li>
-      
 {/* {--------------
 Contact
 -----------------} */}
@@ -247,15 +246,16 @@ Contact
          <NavLink to="/contact" className="linkStyle"> Contact </NavLink>
         </li>
      
-      <div className="ps-lg-3 ps-4 d-flex align-items-center justify-content-center">
-              <ConnectButtonCustom />
-      </div>
-      </>
 
-      )}
-      </ul>
-      {/* } */}
-    </div>
+            <div className="ps-lg-3 ps-4 d-flex align-items-center justify-content-center">
+              <ConnectButtonCustom />
+            </div>
+          </>
+
+          )}
+        </ul>
+        {/* } */}
+      </div>
     </nav>
   );
 }
