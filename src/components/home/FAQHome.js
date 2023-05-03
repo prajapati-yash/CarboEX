@@ -60,7 +60,7 @@ function FAQHome() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="accordion-item accordion-box-border">
+                            <div className="accordion-item mb-3 accordion-box-border">
                                 <h2 className="accordion-header" id="headingFive">
                                     <button className="accordion-button shadow-none collapsed accordion-box-border" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                         What are the benefits of using CarboEx?
@@ -72,11 +72,42 @@ function FAQHome() {
                                     </div>
                                 </div>
                             </div>
+                            <div className="accordion-item accordion-box-border mb-3" >
+                                <h2 className="accordion-header" id="headingSix">
+                                    <button className="accordion-button shadow-none collapsed accordion-box-border rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        On CarboEx Platform how to Become DAO Member, Validate Certificate, Buy and Sell Carbon Credits?
+                                    </button>
+                                </h2>
+                                <div id="collapseSix" className="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                                    <div className="accordion-body text-center">
+                                        <div className="embed-responsive embed-responsive-16by9">
+                                            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/EzSsrDWyRPw" allowFullScreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <div className="accordion" id="accordionTwo">
+                            <div className="accordion-item mb-3 accordion-box-border">
+                                <h2 className="accordion-header" id="headingSix">
+                                    <button className="accordion-button shadow-none collapsed accordion-box-border" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        On CarboEx Platform how to Become DAO Member, Validate Certificate, Buy and Sell Carbon Credits?
+                                    </button>
+                                </h2>
+                                <div id="collapseSix" className="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                                    <div className="accordion-body text-center">
+                                        <div className="embed-responsive embed-responsive-16by9">
+                                            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/EzSsrDWyRPw" allowFullScreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div> */}
+
                             <div className=''> &nbsp;</div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
