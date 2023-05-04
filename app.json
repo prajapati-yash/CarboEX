@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "CarboEx",
-    "slug": "wallet-connect-expo",
+    "slug": "carboex",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,7 +22,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.walletconnectexpo"
     },
     "android": {
       "adaptiveIcon": {
@@ -36,7 +37,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "64b6a40d-8b75-4bbe-81a9-6a15cc9975ec"
+        "projectId": "50ce4b9f-a3ab-47dc-b0cc-0487409dda5e"
       }
     }
   }

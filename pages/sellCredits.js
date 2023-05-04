@@ -19,7 +19,6 @@ import Web3 from "web3";
 import { COMPANY_ADDRESS, companyInstance } from "../components/contract";
 import PropTypes from "prop-types";
 import { useNavigation } from "@react-navigation/native";
-import ProfileDetails from "./profileDetails";
 
 TextInput.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
