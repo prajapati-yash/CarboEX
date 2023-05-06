@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import "./global";
 
 import * as React from "react";
@@ -28,6 +29,7 @@ export default function App() {
   console.warn = () => {};
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor="#000000" />
       <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen
           name="Home"

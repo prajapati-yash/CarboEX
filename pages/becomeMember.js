@@ -84,7 +84,7 @@ export default function BecomeMember() {
           } else {
             ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
           }
-          navigation.navigate(ProposalDashboard);
+          navigation.navigate("ProposalDashboard");
           console.log("Add Member Function", addMemberFunc);
         }
       }

@@ -143,7 +143,7 @@ export default function ContactUs() {
                     style={styles.text_mail}
                     onPress={() => handleEmailPress(email, "Support Request")}
                   >
-                    lamprostech@gmail.com
+                    carboex@gmail.com
                   </Text>
                 </View>
               </View>
@@ -161,8 +161,7 @@ export default function ContactUs() {
                     style={styles.text_address}
                     onPress={() => handleLocationClick()}
                   >
-                    Shilp Epitome, 1211, behind Rajpath Rangoli Road, Bodakdev,
-                    Ahmedabad, Gujarat 380054
+                    1211, behind Rajpath Road, 380054
                   </Text>
                 </View>
               </View>

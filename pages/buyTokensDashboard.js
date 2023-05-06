@@ -112,7 +112,7 @@ export default function BuyTokensDashboard() {
         setIsLoading(false);
         // sellingCredits()
         // return buyCredits;
-        navigation.navigate(ProfileDetails);
+        navigation.navigate("ProfileDetails");
       }
     } catch (error) {
       console.log("Buy Credits Function Error :", error);

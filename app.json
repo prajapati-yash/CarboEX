@@ -1,15 +1,13 @@
 {
   "expo": {
     "name": "CarboEx",
-    "slug": "carboex",
+    "slug": "CarboEx",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo/carboex.png",
     "userInterfaceStyle": "light",
     "scheme": "walletconnect-example",
-    "plugins": [
-      "./app.plugin"
-    ],
+    "plugins": ["./app.plugin"],
     "splash": {
       "image": "./assets/carboex.png",
       "resizeMode": "contain",
@@ -18,26 +16,24 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.walletconnectexpo"
+      "bundleIdentifier": "com.carboex"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/logo/carboex.png",
+        "backgroundColor": "#000"
       },
-      "package": "com.walletconnectexpo"
+      "package": "com.carboex"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "50ce4b9f-a3ab-47dc-b0cc-0487409dda5e"
+        "projectId": "77ce727b-d5aa-404f-817f-8eaa6ea154d1"
       }
     }
   }

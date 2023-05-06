@@ -109,7 +109,9 @@ export default function UploadCertificate() {
           console.log("Value : ", value);
           console.log(proposal, cids, domain, emission);
           console.log(value[0]);
-          const isDAOMember = await conDAO.methods.isMember(connector.accounts[0]).call();
+          const isDAOMember = await conDAO.methods
+            .isMember(connector.accounts[0])
+            .call();
           console.log("isDaoMember: ", isDAOMember);
           const CPTx = await conDAO.methods
             .createProposal(proposal, cids, domain, emission)
@@ -150,7 +152,7 @@ export default function UploadCertificate() {
             ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
           }
           setIsLoading(false);
-          navigation.navigate(ProposalDashboard);
+          navigation.navigate("ProposalDashboard");
         }
       }
     } catch (error) {
@@ -163,7 +165,9 @@ export default function UploadCertificate() {
   const checkDAOMember = async () => {
     if (connector.connected) {
       const conDAO = await daoInstance();
-      const isDAOMember = await conDAO.methods.isMember(connector.accounts[0]).call();
+      const isDAOMember = await conDAO.methods
+        .isMember(connector.accounts[0])
+        .call();
       console.log(isDAOMember);
       return isDAOMember;
     }

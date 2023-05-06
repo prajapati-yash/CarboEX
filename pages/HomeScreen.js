@@ -1,6 +1,5 @@
 import {
   ImageBackground,
-  Pressable,
   ScrollView,
   TouchableOpacity,
   Text,
@@ -130,16 +129,17 @@ export default function HomeScreen() {
     setIsLoading(true);
     if (connector.accounts[0]) {
       const test = await verifyUserAccount();
-      console.log("Verified: ", test);
+      console.log("Verified: " + test);
       if (test) {
-        navigation.navigate(ProfileDetails);
+        navigation.navigate("ProfileDetails");
+        setIsLoading(false);
       } else {
-        navigation.navigate(SignUP);
+        navigation.navigate("SignUP");
+        setIsLoading(false);
       }
     } else {
       alert("Wallet Is Not Connected! Please Connect");
     }
-    setIsLoading(false);
   };
 
   const handleAccordionSectionToggle = (sections) => {

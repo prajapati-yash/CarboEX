@@ -1,17 +1,18 @@
 {
   "cli": {
-    "version": ">= 0.52.0"
+    "version": ">= 3.10.2"
   },
   "build": {
     "development": {
-      "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "gradleCommand": ":app:assembleDebug"
+      },
+      "ios": {
+        "buildConfiguration": "Debug"
+      }
     },
     "preview": {
-      "android": {
-        "buildType": "apk",
-        "image": "ubuntu-18.04-jdk-11-ndk-r19c"
-      },
       "distribution": "internal"
     },
     "production": {}

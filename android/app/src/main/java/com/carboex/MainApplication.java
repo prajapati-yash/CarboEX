@@ -1,4 +1,4 @@
-package com.walletconnectexpo;
+package com.carboex;
 
 import android.app.Application;
 import android.content.res.Configuration;

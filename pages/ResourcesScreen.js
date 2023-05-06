@@ -134,7 +134,7 @@ export default function Resource() {
             <View style={styles.section4_button_view}>
               <Pressable
                 style={styles.section4_description_button}
-                onPress={() => navigation.navigate(Calculator)}
+                onPress={() => navigation.navigate("Calculator")}
                 android_ripple={{
                   color: "#3C84AB",
                 }}

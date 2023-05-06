@@ -11,7 +11,7 @@ async function setCustomConfigAsync(
   config,
   androidManifest
 ){
-  const myAppName = "com.walletconnectexpo"
+  const myAppName = "com.carboex"
   const rest = androidManifest.manifest
   
   return {

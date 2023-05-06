@@ -133,7 +133,7 @@ export default function SignUP() {
         } else {
           ToastAndroid.show("Transaction Failed", ToastAndroid.LONG);
         }
-        navigation.navigate(ProfileDetails);
+        navigation.navigate("ProfileDetails");
       }
     } catch (error) {
       console.log("error: ", error);
