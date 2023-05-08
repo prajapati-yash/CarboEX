@@ -17,7 +17,7 @@ const quickLink = [
     },
     {
         title: "Privacy Policy",
-        link: "#"
+        link: "/privacy-policy"
     },
 ]
 

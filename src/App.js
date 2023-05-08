@@ -24,6 +24,7 @@ import { companyInstance } from "./components/Contracts";
 import { useAccount } from 'wagmi';
 import { useNavigate } from 'react-router-dom';
 import TraditionalBodyCalc from "./components/calculator/bodycalc/TraditionalBodyCalc";
+import PrivacyPolicy from "./components/privacyPolicy/PrivacyPolicy";
 // import { useState } from "react";
 
 
@@ -64,7 +65,7 @@ function App() {
 
       <BrowserRouter>
         {/* <Navbar /> */}
-        <NewNavbar/>
+        <NewNavbar />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/know-more/about' element={<About />} />
@@ -84,8 +85,9 @@ function App() {
           <Route path="/proposal-orders" element={<ProposalOrders />} />
           <Route path="/user-dashboard" element={<MainProposalDashboard />} />
           <Route path="/user-dashboard/*" element={<MainProposalDashboard />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* <Route path="/navbar" element={<DemoNavbar/>} /> */}
-          
+
         </Routes>
         <Footer />
       </BrowserRouter >
