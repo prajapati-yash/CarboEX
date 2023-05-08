@@ -4,7 +4,6 @@
     "slug": "CarboEx",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo/carboex.png",
     "userInterfaceStyle": "light",
     "scheme": "walletconnect-example",
     "plugins": ["./app.plugin"],
@@ -22,10 +21,7 @@
       "bundleIdentifier": "com.carboex"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/logo/carboex.png",
-        "backgroundColor": "#000"
-      },
+      "icon": "./assets/logo/carboex.png",
       "package": "com.carboex"
     },
     "web": {

@@ -1,6 +1,13 @@
 import "../global";
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, StatusBar,Text  } from "react-native";
+import {
+  View,
+  StyleSheet,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Drawer } from "react-native-paper";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -35,7 +42,6 @@ const verifyUserAccount = async () => {
 };
 
 export function DrawerContent(props) {
-
   const [showSubMenusKnowMore, setShowSubMenusKnowMore] = useState(false);
 
   const toggleSubMenusKnowMore = () => {
@@ -55,7 +61,7 @@ export function DrawerContent(props) {
   };
 
   const [isSignedIn, setIsSignedIn] = useState(false);
-  
+
   const verifyNavbar = async () => {
     try {
       if (connector.accounts[0]) {
@@ -98,7 +104,7 @@ export function DrawerContent(props) {
                 </WalletConnectProvider>
               </View>
               <Drawer.Section style={{ flex: 1, marginTop: 8 }}>
-              <DrawerItem
+                <DrawerItem
                   label="Home"
                   onPress={() => {
                     props.navigation.navigate("Home");
@@ -116,33 +122,35 @@ export function DrawerContent(props) {
 
                 <DrawerItem
                   label={() => (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ flex: 1 }}>Know More</Text>
-                    <Icon name={showSubMenusKnowMore ? 'angle-up' : 'angle-down'} />
-                  </View>
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Text style={{ flex: 1 }}>Know More</Text>
+                      <Icon
+                        name={showSubMenusKnowMore ? "angle-up" : "angle-down"}
+                      />
+                    </View>
                   )}
                   onPress={toggleSubMenusKnowMore}
                 />
 
                 {showSubMenusKnowMore && (
-                <DrawerItem
-                label="Resources"
-                onPress={() => {
-                  props.navigation.navigate("Resources");
-                }}
-                />
+                  <DrawerItem
+                    label="Resources"
+                    onPress={() => {
+                      props.navigation.navigate("Resources");
+                    }}
+                  />
                 )}
 
                 {showSubMenusKnowMore && (
-                 <DrawerItem
-                 label="About Us"
-                 onPress={() => {
-                   props.navigation.navigate("AboutUs");
-                 }}
-                 
-                 />
+                  <DrawerItem
+                    label="About Us"
+                    onPress={() => {
+                      props.navigation.navigate("AboutUs");
+                    }}
+                  />
                 )}
-
               </Drawer.Section>
               <Drawer.Section
                 style={{ flex: 1, marginTop: 8, flexDirection: "row" }}
@@ -190,36 +198,37 @@ export function DrawerContent(props) {
 
                 <DrawerItem
                   label={() => (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ flex: 1 }}>Know More</Text>
-                    <Icon name={showSubMenusKnowMore ? 'angle-up' : 'angle-down'} />
-                  </View>
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Text style={{ flex: 1 }}>Know More</Text>
+                      <Icon
+                        name={showSubMenusKnowMore ? "angle-up" : "angle-down"}
+                      />
+                    </View>
                   )}
                   onPress={toggleSubMenusKnowMore}
                 />
 
                 {showSubMenusKnowMore && (
-                <DrawerItem
-                label="Resources"
-                onPress={() => {
-                  props.navigation.navigate("Resources");
-                }}
-                />
+                  <DrawerItem
+                    label="Resources"
+                    onPress={() => {
+                      props.navigation.navigate("Resources");
+                    }}
+                  />
                 )}
 
                 {showSubMenusKnowMore && (
-                 <DrawerItem
-                 label="About Us"
-                 onPress={() => {
-                   props.navigation.navigate("AboutUs");
-                 }}
-                 
-                 />
+                  <DrawerItem
+                    label="About Us"
+                    onPress={() => {
+                      props.navigation.navigate("AboutUs");
+                    }}
+                  />
                 )}
-
               </Drawer.Section>
               <Drawer.Section style={{ flex: 1, marginTop: 8 }}>
-            
                 <DrawerItem
                   label="Dashboard"
                   onPress={() => {
@@ -238,70 +247,90 @@ export function DrawerContent(props) {
 
                 <DrawerItem
                   label={() => (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ flex: 1 }}>Member</Text>
-                    <Icon name={showSubMenusMember ? 'angle-up' : 'angle-down'} />
-                  </View>
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Text style={{ flex: 1 }}>Member</Text>
+                      <Icon
+                        name={showSubMenusMember ? "angle-up" : "angle-down"}
+                      />
+                    </View>
                   )}
                   onPress={toggleSubMenusMember}
                 />
 
                 {showSubMenusMember && (
-                                <DrawerItem
-                                label="Become a Dao member"
-                                onPress={() => {
-                                  props.navigation.navigate("BecomeMember");
-                                }}
-                                
-                              />
+                  <DrawerItem
+                    label="Become a Dao member"
+                    onPress={() => {
+                      props.navigation.navigate("BecomeMember");
+                    }}
+                  />
                 )}
 
                 {showSubMenusMember && (
-                <DrawerItem
-                label="All Proposals"
-                onPress={() => {
-                  props.navigation.navigate("ProposalDashboard");
-                }}
-               
-              />
+                  <DrawerItem
+                    label="All Proposals"
+                    onPress={() => {
+                      props.navigation.navigate("ProposalDashboard");
+                    }}
+                  />
                 )}
 
-              <DrawerItem
+                <DrawerItem
                   label={() => (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ flex: 1 }}>Our Approach</Text>
-                    <Icon name={showSubMenusOurApproach ? 'angle-up' : 'angle-down'} />
-                  </View>
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Text style={{ flex: 1 }}>Our Approach</Text>
+                      <Icon
+                        name={
+                          showSubMenusOurApproach ? "angle-up" : "angle-down"
+                        }
+                      />
+                    </View>
                   )}
                   onPress={toggleSubMenusOurApproach}
                 />
 
                 {showSubMenusOurApproach && (
-                 <DrawerItem
-                 label="Add Your Proposal"
-                 onPress={() => {
-                   props.navigation.navigate("uploadCertificate");
-                 }}
-                 
-               />
+                  <DrawerItem
+                    label="Add Your Proposal"
+                    onPress={() => {
+                      props.navigation.navigate("uploadCertificate");
+                    }}
+                  />
                 )}
 
                 {showSubMenusOurApproach && (
-                              <DrawerItem
-                              label="Calculate Carbon Footprints"
-                              onPress={() => {
-                                props.navigation.navigate("Calculator");
-                              }}
-                              
-                            />
+                  <DrawerItem
+                    label="Calculate Carbon Footprints"
+                    onPress={() => {
+                      props.navigation.navigate("Calculator");
+                    }}
+                  />
                 )}
               </Drawer.Section>
               <Drawer.Section
                 style={{ flex: 1, marginTop: 8, flexDirection: "row" }}
               >
-                <FontAwesome5 name={"facebook"} size={30} marginLeft={20} />
-                <FontAwesome5 name={"twitter"} size={30} marginLeft={20} />
-                <FontAwesome5 name={"globe"} size={30} marginLeft={20} />
+                <TouchableOpacity
+                  onPress={() => Linking.openURL("https://www.facebook.com/")}
+                >
+                  <FontAwesome5 name={"facebook"} size={30} marginLeft={20} />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => Linking.openURL("https://twitter.com/")}
+                >
+                  <FontAwesome5 name={"twitter"} size={30} marginLeft={20} />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => Linking.openURL("https://carboex.vercel.app/")}
+                >
+                  <FontAwesome5 name={"globe"} size={30} marginLeft={20} />
+                </TouchableOpacity>
               </Drawer.Section>
             </>
           )}
@@ -317,6 +346,6 @@ const styles = StyleSheet.create({
     height: 100,
     justifyContent: "center",
     alignItems: "center",
-    marginTop:"-5%"
+    marginTop: "-5%",
   },
 });

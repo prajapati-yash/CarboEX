@@ -373,7 +373,9 @@ function MyProposalScreen() {
                       marginTop: "5%",
                     }}
                     onPress={() => {
-                      const value1 = details[9] > new Date();
+                      const value1 =
+                        new Date(details[9] * 1000).toLocaleString() >
+                        new Date();
                       console.log("Value 1:", value1);
                       if (value1) {
                         console.log(Date());
