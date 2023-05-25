@@ -17,9 +17,7 @@ function Navbar() {
   const [knowMoreDropDown, setKnowMoreDropDown] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname;
-  console.log(currentPath)
-
-
+  // console.log(currentPath)
 
   const verifyUserAccount = async () => {
     try {

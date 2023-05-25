@@ -6,6 +6,7 @@ import { useAccount } from "wagmi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { BigNumber } from "ethers";
 
 function BuyCredits() {
   const navigate = useNavigate();
@@ -37,15 +38,15 @@ function BuyCredits() {
           console.log("Metamask is not installed, please install!");
         }
         const con = await companyInstance();
-        // console.log(address)
+        // console.log(address);
         const getUserOrCount = await con.orderCount();
         const countOfUserOrder = parseInt(getUserOrCount, 16);
-        console.log(countOfUserOrder);
+        // console.log(countOfUserOrder);
 
         let arr = [];
         for (let i = 1; i <= countOfUserOrder; i++) {
           const getUserOrDetail = await con.Orderstruct(i);
-          console.log(await con.Orderstruct(i))
+          // console.log(await con.Orderstruct(i))
           if (!getUserOrDetail[3]) {
             arr.push(getUserOrDetail);
           } else {
@@ -58,6 +59,19 @@ function BuyCredits() {
       }
     } catch (error) {
       console.log(error);
+      setbtnloading(false);
+      const ErrorReason = error.reason;
+      console.log(ErrorReason)
+      toast.error(`Error : ${ErrorReason}`, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setbtnloading(false);
     }
   };
@@ -74,16 +88,6 @@ function BuyCredits() {
     try {
       setLoadingIndex(key)
       setbtndisable(true)
-      // toast.info('Process is in Progress', {
-      //   position: "top-left",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      // });
       setbtnloading(true)
       const { ethereum } = window;
       if (ethereum) {
@@ -93,10 +97,14 @@ function BuyCredits() {
           console.log("Metamask is not installed, please install!");
         }
         const con = await companyInstance();
-        // console.log(id)
-        console.log(id, crd, prc);
+        // console.log(id, crd, prc);
+        // console.log(crd * prc)
+        // console.log(String(crd * prc))
+
+        const decPrice = ethers.utils.parseEther(String(prc));
+        console.log(decPrice)
         const buyCredits = await con.buycredit(id, {
-          value: String(crd * prc),
+          value: ethers.utils.parseEther(String(crd * prc)),
         });
         await buyCredits.wait();
         setCount((prev) => prev + 1);
@@ -112,10 +120,10 @@ function BuyCredits() {
       console.log(error)
       console.log(error.reason);
       const ErrorReason = error.reason;
-      console.log(ErrorReason)
+      // console.log(ErrorReason)
       toast.error(`Error : ${ErrorReason}`, {
         position: "top-left",
-        autoClose: 5000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -169,6 +177,7 @@ function BuyCredits() {
                           <span className="companyInfoLabel"> Credits: </span>{" "}
                           <p className="allBuyBg">
                             {parseInt(company[1]._hex, 16)}
+                            {/* {company[1]._hex} */}
                           </p>
                         </p>
                         <p className="company-price">
@@ -177,6 +186,7 @@ function BuyCredits() {
                           </span>{" "}
                           <p className="allBuyBg">
                             {" "}
+                            {/* {parseInt(company[2]._hex, 16)} */}
                             {parseInt(company[2]._hex, 16) / Math.pow(10, 18)}
                           </p>
                         </p>
@@ -187,6 +197,7 @@ function BuyCredits() {
                           <p className="allBuyBg">
                             {" "}
                             {(parseInt(company[2]._hex, 16) / Math.pow(10, 18)) * parseInt(company[1]._hex, 16)}
+                            {/* {(parseInt(company[2]._hex, 16)) * parseInt(company[1]._hex, 16)} */}
                           </p>
                         </p>
 
@@ -195,7 +206,7 @@ function BuyCredits() {
                           key={key}
                           disabled={btndisable}
                           onClick={() =>
-                            buyCreditsFunc(company[0], parseInt(company[1]._hex, 16), parseInt(company[2]._hex, 16), key)
+                            buyCreditsFunc(company[0], parseInt(company[1]._hex, 16), (parseInt(company[2]._hex, 16) / Math.pow(10, 18)), key)
                           }
                         >
                           {btnloading && loadingIndex === key ? (

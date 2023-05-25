@@ -60,7 +60,7 @@ function SellCredits() {
             console.log("Metamask is not installed, please install!");
           }
           const con = await companyInstance()
-          console.log(credits, ethers.utils.parseEther(price), address);
+          console.log(credits, price, ethers.utils.parseEther(price), address);
           const sellCreditsUser = await con.createOrder(credits, ethers.utils.parseEther(price), address)
           await sellCreditsUser.wait();
           setbtndisable(false)
