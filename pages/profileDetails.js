@@ -35,6 +35,15 @@ function EditProfileScreen() {
   const [companyName, setCompanyName] = useState();
   const [email, setEmail] = useState();
   const [userName, setUserName] = useState();
+  const [credits, setCredits] = useState();
+
+  const MainPropPageData = {
+    logo: logoImg,
+    name: companyName,
+    userName: userName,
+    email: email,
+    availableCredits: credits ? credits : 0,
+};
 
   const getUserAccountDetails = async () => {
     try {
@@ -67,6 +76,30 @@ function EditProfileScreen() {
   useEffect(() => {
     getUserAccountDetails();
   });
+
+  const getUserCreditDetails = async () => {
+    try {
+      if (!connector.connected) {
+        console.log("WalletConnect not connected");
+        return;
+      }
+      if (connector.connected) {
+        const provider = new Web3("https://pre-rpc.bt.io/");
+
+            const con = await companyInstance();
+            const totalCredits = await con.methods.totalcredit(connector.accounts[0]).call();
+            const creditsInDecimal = parseInt(totalCredits)
+            setCredits(creditsInDecimal);
+            // console.log(totalCredits)
+            return credits
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+useEffect(() => {
+    getUserCreditDetails()
+}, [])
 
   return (
     <View style={styles.container}>
@@ -122,7 +155,7 @@ function EditProfileScreen() {
                 <View style={{ flex: 1 }}>
                   <Text style={styles.input_text}>Credits Available:</Text>
                   <View style={styles.credit_input_box}>
-                    <Text>0</Text>
+                    <Text style={{}}>{MainPropPageData.availableCredits}</Text>
                   </View>
                 </View>
 

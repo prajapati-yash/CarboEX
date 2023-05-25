@@ -61,7 +61,7 @@ export default function BuyTokensDashboard() {
   const buyCreditsFunc = async (id, crd, prc) => {
     try {
       if (connector.connected) {
-        setIsLoading(true);
+        // setIsLoading(true);
         console.log("Connector---", connector);
         const provider = new Web3("https://pre-rpc.bt.io/");
 
@@ -72,7 +72,7 @@ export default function BuyTokensDashboard() {
         const valueMul = crd * prc;
         const valuePara = valueMul.toString();
         const buyCredits = await con.methods.buycredit(id).encodeABI();
-        await buyCredits.wait();
+        // await buyCredits.wait();
 
         const gasPrice = await provider.eth.getGasPrice();
         const gasLimit = 3000000;
@@ -86,7 +86,7 @@ export default function BuyTokensDashboard() {
           gasLimit,
           from: connector.accounts[0],
           to: recipient,
-          data: txObject,
+          data: buyCredits,
           nonce,
           value: valuePara,
         };
@@ -166,7 +166,7 @@ export default function BuyTokensDashboard() {
                     <View>
                       <Text style={styles.input_text}>Credits:</Text>
                       <View style={styles.input_box}>
-                        <Text>{parseInt(company[1]._hex, 16)}</Text>
+                        <Text>{parseInt(company[1])}</Text>
                       </View>
                     </View>
 
@@ -176,7 +176,7 @@ export default function BuyTokensDashboard() {
                       </Text>
                       <View style={styles.input_box}>
                         <Text>
-                          {parseInt(company[2]._hex, 16) / Math.pow(10, 18)}
+                          {parseInt(company[2]) / Math.pow(10, 18)}
                         </Text>
                       </View>
                     </View>
@@ -185,8 +185,8 @@ export default function BuyTokensDashboard() {
                       <Text style={styles.input_text}>Total (in ETH):</Text>
                       <View style={styles.input_box}>
                         <Text>
-                          {(parseInt(company[2]._hex, 16) / Math.pow(10, 18)) *
-                            parseInt(company[1]._hex, 16)}
+                          {(parseInt(company[2]) / Math.pow(10, 18)) *
+                            parseInt(company[1])}
                         </Text>
                       </View>
                     </View>
@@ -212,11 +212,13 @@ export default function BuyTokensDashboard() {
                         marginVertical: "2%",
                         marginBottom: "5%",
                       }}
-                      onPress={buyCreditsFunc(
-                        company[0],
-                        parseInt(company[1]._hex, 16),
-                        parseInt(company[2]._hex, 16)
-                      )}
+                      onPress={() =>
+                        buyCreditsFunc(
+                          company[0],
+                          parseInt(company[1]),
+                          parseInt(company[2])
+                        )
+                      }
                     />
                   </View>
                 </View>
