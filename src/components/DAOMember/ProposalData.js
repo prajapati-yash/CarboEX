@@ -50,6 +50,16 @@ function ProposalData() {
         console.log(address)
         const upvoteProposal = await con.upvote(proposal[0], { value: String(value[1]._hex, address) });
         // console.log(upvoteProposal)
+        toast.success('You Accepted the Proposal!', {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         setapprovebtnloading(false);
       }
     } catch (error) {
@@ -86,6 +96,16 @@ function ProposalData() {
         const value = await con.getConfigs()
         console.log(value[1]._hex)
         const downvoteProposal = await con.downvote(proposal[0], { value: String(value[1]._hex, address) });
+        toast.success('You Rejected the Proposal!', {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         setrejectbtnloading(false);
       }
     } catch (error) {
