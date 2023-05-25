@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView,ActivityIndicator } from "react-native";
 import styles from "../style/proposalDashboardStyle";
 import { Button } from "@rneui/themed";
 import { responsiveWidth } from "react-native-responsive-dimensions";
@@ -11,6 +11,7 @@ import { responsiveFontSize } from "react-native-responsive-dimensions";
 
 export default function ProposalDashboard() {
   const navigation = useNavigation();
+  const[loading,setLoading] = useState(true);
   const [allProposalData, setAllProposalData] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date());
   const localizedDate = currentDate;
@@ -29,10 +30,12 @@ export default function ProposalDashboard() {
         const daoProposalData = await con.methods.getAllProposal().call();
         // console.log("dao proposal");
         setAllProposalData(daoProposalData);
+        setLoading(false);
         // console.log("All Proposal Data", allProposalData);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -57,6 +60,9 @@ export default function ProposalDashboard() {
 
   return (
     <View style={styles.container}>
+      {loading ? (<View style={{marginTop:"10%"}}>
+    <ActivityIndicator size="large" color="#000000"/>
+  </View>):(
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.centerView}
@@ -147,6 +153,7 @@ export default function ProposalDashboard() {
           </View>
         </View>
       </ScrollView>
+      )}
     </View>
   );
 }

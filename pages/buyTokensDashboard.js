@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, ScrollView, ToastAndroid } from "react-native";
+import { View, Text, ScrollView, ToastAndroid, ActivityIndicator } from "react-native";
 import styles from "../style/buyTokensDashboardStyle";
 import {
   responsiveFontSize,
@@ -18,6 +18,7 @@ export default function BuyTokensDashboard() {
   const navigation = useNavigation();
   const [userDetailsById, setUserDetailsById] = useState([]);
   const [count, setCount] = useState(1);
+  const [loading,setLoading] = useState(true);
 
   const address = connector.accounts[0];
 
@@ -47,10 +48,12 @@ export default function BuyTokensDashboard() {
           // console.log(getUserOrDetail)
         }
         setUserDetailsById(arr);
+        setLoading(false);
         // setbtnloading(false);
       }
     } catch (error) {
       console.log("Selling Credits Error:", error);
+      setLoading(false);
     }
   };
 
@@ -69,8 +72,9 @@ export default function BuyTokensDashboard() {
         // console.log(id)
         console.log("Id :  crd :  prc :");
         console.log(id, crd, prc);
-        const valueMul = crd * prc;
-        const valuePara = valueMul.toString();
+        const valueMul = crd * (prc/Math.pow(10,18));
+        console.log("----------------------------------------valueMul",valueMul);
+        const valuePara = provider.utils.toWei(valueMul.toString(),"ether");
         const buyCredits = await con.methods.buycredit(id).encodeABI();
         // await buyCredits.wait();
 
@@ -123,6 +127,9 @@ export default function BuyTokensDashboard() {
 
   return (
     <View style={{ backgroundColor: "#AFF6FF", flex: 1 }}>
+      {loading?(<View style={{marginTop:"10%"}}>
+    <ActivityIndicator size="large" color="#000000"/>
+  </View>):(
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.centerView}
@@ -226,6 +233,7 @@ export default function BuyTokensDashboard() {
             ))}
         </View>
       </ScrollView>
+      )}
     </View>
   );
 }

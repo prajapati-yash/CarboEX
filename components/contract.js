@@ -4,9 +4,9 @@ import ercTokenABI from "../contracts/artifacts/ErcTokenabi.json";
 import Web3 from "web3";
 import { connector } from "./WalletConnectExperience";
 
-export const COMPANY_ADDRESS = "0x41057cB44bdcc927a0e9FeA6e0C5da47F9c5B97E";
-export const DAO_MEMBER_ADDRESS = "0x9b324829D71ffD688Eb4C8B61e3583E247dB1420";
-export const ERC_TOKEN_ADDRESS = "0xa44CD252520891cf84c8f555dd06D3cfe3c8893E";
+export const COMPANY_ADDRESS = "0xCE0f23D5547e93a33D5f67b4E13a7dE4054c68D4";
+export const DAO_MEMBER_ADDRESS = "0x8894Df7cC26DB1A2459a6Ec3d90689f0b4b3c41F";
+export const ERC_TOKEN_ADDRESS = "0x9AC4A2B494C509de39C1eEB493AbA82B6a00A7De";
 
 export const companyInstance = async () => {
   if (!connector.connected) {

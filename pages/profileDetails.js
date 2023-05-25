@@ -3,6 +3,7 @@ import {
   View,
   Text,
   ScrollView,
+  ActivityIndicator,
   ImageBackground,
   Image,
   TouchableOpacity,
@@ -192,7 +193,9 @@ function MyProposalScreen() {
   const [allData, setAllData] = useState();
   const [userProp, setUserProp] = useState([]);
   const [visible1, setVisible1] = useState(null);
+  const [loading, setLoading] = useState(true);
   const address = connector.accounts[0];
+
 
   const toggleDialog = (index) => {
     setVisible1(index);
@@ -226,10 +229,12 @@ function MyProposalScreen() {
         // console.log(arr)
         setUserProp(arr);
         setAllData(getUserID);
+        setLoading(false);
         return getUserID;
       }
     } catch (error) {
       console.log("GetUser Ids Error:", error);
+      setLoading(false);
     }
   };
 
@@ -295,6 +300,10 @@ function MyProposalScreen() {
 
   return (
     <View style={styles.container}>
+    {loading ? (<View style={{marginTop:"10%"}}>
+    <ActivityIndicator size="large" color="#000000"/>
+  </View>):(
+   
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.centerView}
@@ -426,12 +435,14 @@ function MyProposalScreen() {
           </View>
         </View>
       </ScrollView>
+    )}
     </View>
   );
 }
 
 function MyOrdersScreen() {
   const [userOrders, setUserOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
   const address = connector.accounts[0];
   console.log(address);
 
@@ -458,10 +469,12 @@ function MyOrdersScreen() {
         }
 
         setUserOrders(arr);
+        setLoading(false);
         // console.log(userOrders)
       }
     } catch (error) {
       console.log("OrdersData Error:", error);
+      setLoading(false);
     }
   };
 
@@ -471,6 +484,10 @@ function MyOrdersScreen() {
 
   return (
     <View style={styles.container}>
+      {loading ?(
+       <View style={{marginTop:"10%"}}>
+       <ActivityIndicator size="large" color="#000000"/>
+     </View>):(
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.centerView}
@@ -550,6 +567,7 @@ function MyOrdersScreen() {
           </View>
         </View>
       </ScrollView>
+     )}
     </View>
   );
 }
