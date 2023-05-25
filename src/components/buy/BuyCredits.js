@@ -45,6 +45,7 @@ function BuyCredits() {
         let arr = [];
         for (let i = 1; i <= countOfUserOrder; i++) {
           const getUserOrDetail = await con.Orderstruct(i);
+          console.log(await con.Orderstruct(i))
           if (!getUserOrDetail[3]) {
             arr.push(getUserOrDetail);
           } else {
