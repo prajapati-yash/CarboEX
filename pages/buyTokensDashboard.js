@@ -39,7 +39,7 @@ export default function BuyTokensDashboard() {
 
         let arr = [];
         for (let i = 1; i <= countOfUserOrder; i++) {
-          const getUserOrDetail = await con.methods.Orderstruct(i).call();
+          const getUserOrDetail = await con.methods.orderStructMapping(i).call();
           if (!getUserOrDetail[3]) {
             arr.push(getUserOrDetail);
           } else {
@@ -75,7 +75,7 @@ export default function BuyTokensDashboard() {
         const valueMul = crd * (prc/Math.pow(10,18));
         console.log("----------------------------------------valueMul",valueMul);
         const valuePara = provider.utils.toWei(valueMul.toString(),"ether");
-        const buyCredits = await con.methods.buycredit(id).encodeABI();
+        const buyCredits = await con.methods.buyCredit(id).encodeABI();
         // await buyCredits.wait();
 
         const gasPrice = await provider.eth.getGasPrice();

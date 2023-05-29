@@ -115,7 +115,7 @@ export default function HomeScreen() {
       let con = await companyInstance();
       console.log("Wallet Address", connector.accounts[0]);
       let verifyTx = await con.methods
-        .iscompaniesAdd(connector.accounts[0])
+        .isCompaniesAddMapping(connector.accounts[0])
         .call();
 
       console.log("VerifyTx: ", verifyTx);

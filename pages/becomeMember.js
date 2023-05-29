@@ -37,14 +37,15 @@ export default function BecomeMember() {
 
           const conToken = await ercTokenInstance();
           console.log("ConTokens", conToken);
-          const tokenPrice = await conToken.methods.gettokenPrice().call();
+          const tokenPrice = await conToken.methods.getTokenPrice().call();
           console.log("TokenPrice", tokenPrice);
           setTokenPrice(tokenPrice);
           const conDAO = await daoInstance();
           console.log("conDao", conDAO);
-          const tokenPriceValue = numOfTokens * tokenPrice;
+          const tokenPriceValue = provider.utils.toWei((numOfTokens * tokenPrice/Math.pow(10,18)).toString(),"ether");
+          console.log("Token Price value :",tokenPriceValue);
           const addMemberFunc = await conDAO.methods
-            .addmember(numOfTokens)
+            .addMember(numOfTokens)
             .encodeABI();
 
           const gasPrice = await provider.eth.getGasPrice();
@@ -62,7 +63,7 @@ export default function BecomeMember() {
             to: recipientDao,
             data: addMemberFunc,
             nonce,
-            value: numOfTokens * tokenPrice,
+            value: tokenPriceValue,
           };
 
           console.log("Number Of Tokens", numOfTokens);
@@ -101,8 +102,8 @@ export default function BecomeMember() {
         console.log("Connector---", connector);
 
         const conToken = await ercTokenInstance();
-        const tokenPrice = await conToken.methods.gettokenPrice().call();
-        console.log("TokenPrice:", tokenPrice);
+        const tokenPrice = await conToken.methods.getTokenPrice().call();
+        console.log("TokenPrice In getTokenPrice :", tokenPrice/Math.pow(10,18));
 
         setTokenPrice(tokenPrice);
       }

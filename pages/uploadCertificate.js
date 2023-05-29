@@ -110,7 +110,7 @@ export default function UploadCertificate() {
           console.log(proposal, cids, domain, emission);
           console.log(value[0]);
           const isDAOMember = await conDAO.methods
-            .isMember(connector.accounts[0])
+            .isMemberMapping(connector.accounts[0])
             .call();
           console.log("isDaoMember: ", isDAOMember);
           const CPTx = await conDAO.methods
@@ -166,7 +166,7 @@ export default function UploadCertificate() {
     if (connector.connected) {
       const conDAO = await daoInstance();
       const isDAOMember = await conDAO.methods
-        .isMember(connector.accounts[0])
+        .isMemberMapping(connector.accounts[0])
         .call();
       console.log(isDAOMember);
       return isDAOMember;

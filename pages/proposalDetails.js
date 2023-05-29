@@ -51,7 +51,7 @@ export default function ProposalDetails({ route }) {
         console.log(value[1]);
         // console.log(connector.accounts[0]);
         const upvoteProposal = await con.methods
-          .upvote(proposal[0])
+          .upVote(proposal[0])
           .encodeABI();
         // console.log(upvoteProposal)
         const gasPrice = await provider.eth.getGasPrice();
@@ -110,7 +110,7 @@ export default function ProposalDetails({ route }) {
         console.log(value[1]);
         // console.log(connector.accounts[0]);
         const downvoteProposal = await con.methods
-          .downvote(proposal[0])
+          .downVote(proposal[0])
           .encodeABI();
         // console.log(upvoteProposal)
         const gasPrice = await provider.eth.getGasPrice();
@@ -166,7 +166,7 @@ export default function ProposalDetails({ route }) {
     if (connector.connected) {
       const conDAO = await daoInstance();
       const isDAOMember = await conDAO.methods
-        .isMember(connector.accounts[0])
+        .isMemberMapping(connector.accounts[0])
         .call();
       console.log(isDAOMember);
       return isDAOMember;

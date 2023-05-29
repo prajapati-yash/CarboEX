@@ -88,7 +88,7 @@ function EditProfileScreen() {
         const provider = new Web3("https://pre-rpc.bt.io/");
 
             const con = await companyInstance();
-            const totalCredits = await con.methods.totalcredit(connector.accounts[0]).call();
+            const totalCredits = await con.methods.totalCreditMapping(connector.accounts[0]).call();
             const creditsInDecimal = parseInt(totalCredits)
             setCredits(creditsInDecimal);
             // console.log(totalCredits)
@@ -463,7 +463,7 @@ function MyOrdersScreen() {
         let arr = [];
         for (let i = 0; i < getUserOrId.length; i++) {
           const getUserData = await con.methods
-            .Orderstruct(getUserOrId[i])
+            .orderStructMapping(getUserOrId[i])
             .call();
           arr.push(getUserData);
         }
