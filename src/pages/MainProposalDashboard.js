@@ -111,7 +111,7 @@ function MainProposalDashboard() {
                     console.log("Metamask is not installed, please install!");
                 }
                 const con = await companyInstance();
-                const totalCredits = await con.totalcredit(address);
+                const totalCredits = await con.totalCreditMapping(address);
                 const creditsInDecimal = parseInt(totalCredits._hex, 16)
                 setCredits(creditsInDecimal);
                 // console.log(totalCredits)
@@ -136,8 +136,8 @@ function MainProposalDashboard() {
                 console.log("Metamask is not installed, please install!");
             }
             const conDAO = await daoInstance();
-            const isDAOMember = await conDAO.isMember(address)
-            console.log(isDAOMember)
+            const isDAOMember = await conDAO.isMemberMapping(address)
+            // console.log(isDAOMember)
             return isDAOMember;
         }
     }
@@ -174,7 +174,7 @@ function MainProposalDashboard() {
                                             <div><b>DAO MEMBER</b></div>
                                         </div>
 
-                                        
+
                                     ) : (
                                         <Link className='xmark-check-link-class' to={"/member/become-member"}><div className='fa-xmark-main-class d-flex justify-content-center align-items-center'>
                                             <div className='fa-xmark-sub-class mx-auto me-2'><i className="fa-solid fa-xmark mx-1" style={{ color: "#ffffff", }}></i></div>

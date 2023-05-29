@@ -64,16 +64,24 @@ function MemberLandingPage() {
             console.log("Metamask is not installed, please install!");
           }
           const conToken = await ercTokenInstance();
-          const tokenPrice = await conToken.gettokenPrice();
+          const tokenPrice = await conToken.getTokenPrice();
+          console.log(tokenPrice)
           const hexValue = tokenPrice._hex;
+          console.log(hexValue)
+
           const decimalValue = parseInt(hexValue, 16);
           setTokenPrice(decimalValue);
+
+          const finalValue = decimalValue / Math.pow(10, 18);
+
+          console.log(decimalValue / Math.pow(10, 18))
           const conDAO = await daoInstance();
-          // console.log(conDAO)
-          const addMemberFunc = await conDAO.addmember(numOfTokens, {
-            value: numOfTokens * hexValue,
+          const addMemberFunc = await conDAO.addMember(numOfTokens, {
+            value: ethers.utils.parseEther(String(numOfTokens * finalValue)),
           });
+
           await addMemberFunc.wait();
+
           console.log(addMemberFunc);
           setbtndisable(false)
           setbtnloading(false)
@@ -101,10 +109,12 @@ function MemberLandingPage() {
           console.log("Metamask is not installed, please install!");
         }
         const conToken = await ercTokenInstance();
-        const tokenPrice = await conToken.gettokenPrice();
-        const hexValue = tokenPrice._hex;
+        const tokenPrice1 = await conToken.getTokenPrice();
+        const hexValue = tokenPrice1._hex;
         const decimalValue = parseInt(hexValue, 16);
         console.log(decimalValue);
+
+        console.log(decimalValue / Math.pow(10, 18));
         setTokenPrice(decimalValue);
       }
     } catch (err) {
@@ -114,20 +124,15 @@ function MemberLandingPage() {
 
   useEffect(() => {
     setTknAmtResult(
+      // to convert value into ETH from wei
       numOfTokens ? (tokenPrice * numOfTokens) / Math.pow(10, 18) : "0"
     );
-    // to convert value into ETH from wei
   }, [numOfTokens]);
 
   useEffect(() => {
     getTokenPrice();
   }, []);
 
-  //   const showToastMessage = () => {
-  //     toast.success('Success Notification !', {
-  //         position: toast.POSITION.TOP_RIGHT
-  //     });
-  // };
 
   return (
     <>
@@ -230,7 +235,7 @@ function MemberLandingPage() {
             </div>
           </div>
         </div>
-        {/* <button onClick={ercTokenFunc}>click to get the erc token instance</button> */}
+        {/* <button onClick={getTokenPrice}>click to get the erc token instance</button> */}
       </div>
     </>
   );

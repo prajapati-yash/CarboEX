@@ -25,7 +25,7 @@ function Navbar() {
           console.log("Metamask is not installed, please install!");
         }
         const con = await companyInstance();
-        const verifyUser = await con.iscompaniesAdd(address)
+        const verifyUser = await con.isCompaniesAddMapping(address)
         // console.log(verifyUser)
         return verifyUser;
       }

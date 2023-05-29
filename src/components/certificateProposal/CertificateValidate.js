@@ -126,7 +126,7 @@ function CertificateValidate() {
           const value = await conDAO.getConfigs()
           console.log(value)
           console.log(proposal, cids, domain, emission)
-          const isDAOMember = conDAO.isMember(address)
+          const isDAOMember = conDAO.isMemberMapping(address)
           const CPTx = await conDAO.createProposal(proposal, cids, domain, emission, { value: String(value[0]) })
           await CPTx.wait();
           setbtnloading(false)
@@ -152,7 +152,7 @@ function CertificateValidate() {
         console.log("Metamask is not installed, please install!");
       }
       const conDAO = await daoInstance();
-      const isDAOMember = await conDAO.isMember(address)
+      const isDAOMember = await conDAO.isMemberMapping(address)
       console.log(isDAOMember)
       return isDAOMember;
     }

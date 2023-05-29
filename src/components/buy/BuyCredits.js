@@ -45,7 +45,7 @@ function BuyCredits() {
 
         let arr = [];
         for (let i = 1; i <= countOfUserOrder; i++) {
-          const getUserOrDetail = await con.Orderstruct(i);
+          const getUserOrDetail = await con.orderStructMapping(i);
           // console.log(await con.Orderstruct(i))
           if (!getUserOrDetail[3]) {
             arr.push(getUserOrDetail);
@@ -103,7 +103,7 @@ function BuyCredits() {
 
         const decPrice = ethers.utils.parseEther(String(prc));
         console.log(decPrice)
-        const buyCredits = await con.buycredit(id, {
+        const buyCredits = await con.buyCredit(id, {
           value: ethers.utils.parseEther(String(crd * prc)),
         });
         await buyCredits.wait();

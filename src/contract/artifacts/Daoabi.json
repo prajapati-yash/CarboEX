@@ -35,99 +35,6 @@
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "ProposalAddress",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "Proposals",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "image",
-				"type": "string"
-			},
-			{
-				"internalType": "bool",
-				"name": "Type",
-				"type": "bool"
-			},
-			{
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address payable",
-				"name": "creator",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "upvote",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "downvote",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "proposedAt",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "proposalExpiresAt",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "status",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "Token",
 		"outputs": [
@@ -148,7 +55,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "addmember",
+		"name": "addMember",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -234,7 +141,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "downvote",
+		"name": "downVote",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -277,12 +184,12 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "upvote",
+						"name": "upVote",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "downvote",
+						"name": "downVote",
 						"type": "uint256"
 					},
 					{
@@ -302,12 +209,12 @@
 					},
 					{
 						"internalType": "address payable[]",
-						"name": "upvoters",
+						"name": "upVoters",
 						"type": "address[]"
 					},
 					{
 						"internalType": "address payable[]",
-						"name": "downvoters",
+						"name": "downVoters",
 						"type": "address[]"
 					}
 				],
@@ -396,12 +303,12 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "upvote",
+						"name": "upVote",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "downvote",
+						"name": "downVote",
 						"type": "uint256"
 					},
 					{
@@ -421,12 +328,12 @@
 					},
 					{
 						"internalType": "address payable[]",
-						"name": "upvoters",
+						"name": "upVoters",
 						"type": "address[]"
 					},
 					{
 						"internalType": "address payable[]",
-						"name": "downvoters",
+						"name": "downVoters",
 						"type": "address[]"
 					}
 				],
@@ -478,7 +385,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "globallimit",
+		"name": "globalLimit",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -497,7 +404,7 @@
 				"type": "address"
 			}
 		],
-		"name": "isMember",
+		"name": "isMemberMapping",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -516,7 +423,7 @@
 				"type": "address"
 			}
 		],
-		"name": "memberWithdrawableAmount",
+		"name": "memberWithdrawableAmountMapping",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -541,6 +448,30 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "proposalAddressMapping",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "proposalCount",
 		"outputs": [
@@ -555,12 +486,81 @@
 	},
 	{
 		"inputs": [],
-		"name": "proposalstake",
+		"name": "proposalStake",
 		"outputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "proposalsMapping",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "image",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "Type",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address payable",
+				"name": "creator",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "upVote",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "downVote",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "proposedAt",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "proposalExpiresAt",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "status",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -594,7 +594,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "setproposalstake",
+		"name": "setProposalStake",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -607,7 +607,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "setvotingPercent",
+		"name": "setVotingPercent",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -620,7 +620,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "setvotingstake",
+		"name": "setVotingStake",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -633,7 +633,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "setvotingtimeperiod",
+		"name": "setVotingTimePeriod",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -659,33 +659,9 @@
 				"type": "uint256"
 			}
 		],
-		"name": "upvote",
+		"name": "upVote",
 		"outputs": [],
 		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "voters",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -703,7 +679,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "votingstake",
+		"name": "votingStake",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -716,7 +692,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "votingtimeperiod",
+		"name": "votingTimePeriod",
 		"outputs": [
 			{
 				"internalType": "uint256",

@@ -30,7 +30,7 @@ function ProposalOrderComponent() {
 
         let arr = []
         for (let i = 0; i < getUserOrId.length; i++) {
-          const getUserData = await con.Orderstruct(getUserOrId[i]["_hex"]);
+          const getUserData = await con.orderStructMapping(getUserOrId[i]["_hex"]);
           arr.push(getUserData);
         }
 

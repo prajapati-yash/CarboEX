@@ -27,7 +27,7 @@ function ProposalData() {
         console.log("Metamask is not installed, please install!");
       }
       const conDAO = await daoInstance();
-      const isDAOMember = await conDAO.isMember(address)
+      const isDAOMember = await conDAO.isMemberMapping(address)
       console.log(isDAOMember)
       return isDAOMember;
     }
@@ -48,7 +48,7 @@ function ProposalData() {
         console.log(proposal[0])
         console.log(value[1]._hex)
         console.log(address)
-        const upvoteProposal = await con.upvote(proposal[0], { value: String(value[1]._hex, address) });
+        const upvoteProposal = await con.upVote(proposal[0], { value: String(value[1]._hex, address) });
         // console.log(upvoteProposal)
         toast.success('You Accepted the Proposal!', {
           position: "top-left",
@@ -95,7 +95,7 @@ function ProposalData() {
         const con = await daoInstance();
         const value = await con.getConfigs()
         console.log(value[1]._hex)
-        const downvoteProposal = await con.downvote(proposal[0], { value: String(value[1]._hex, address) });
+        const downvoteProposal = await con.downVote(proposal[0], { value: String(value[1]._hex, address) });
         toast.success('You Rejected the Proposal!', {
           position: "top-left",
           autoClose: 5000,
