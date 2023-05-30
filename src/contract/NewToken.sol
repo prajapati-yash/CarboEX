@@ -1,41 +1,54 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
-//import "./Dao.sol";
+contract NewToken is ERC20, Ownable {
+    uint256 tokenPrice; // 1 token = 1000 Ether  wei =1000000000000000000000
 
-
-contract NewToken is ERC20,Ownable{
-    address admin;
-    uint256 tokenPrice = 10000000000000; // 1 token = .00001 Ether
-
-    constructor(uint _supply) ERC20("New Token","NT") {
-        admin=msg.sender;
-        _mint(msg.sender,_supply);
-    }
-    
-    function mintFifty(uint _supply) public onlyOwner {
-        uint256 mintTokens = _supply;
-        _mint(msg.sender,mintTokens);
+    constructor(uint _supply, uint _tokenPrice) ERC20("CarboEx", "CX") {
+        tokenPrice = _tokenPrice;
+        _mint(msg.sender, _supply);
     }
 
-    function withdrawFromContract(uint _amount,address _tokenAddress) public payable onlyOwner
-    {
-            IERC20 _token = IERC20(_tokenAddress);
-            _token.transfer(msg.sender,_amount);
+    function mint(uint _supply) public onlyOwner {
+        _mint(msg.sender, _supply);
+    }
+
+    function withdrawTokenFromContract(
+        uint _amount,
+        address _tokenAddress
+    ) public payable onlyOwner {
+        IERC20 _token = IERC20(_tokenAddress);
+        require(
+            _token.balanceOf(address(this)) >= _amount,
+            "Insufficient token balance in the contract"
+        );
+        _token.transfer(msg.sender, _amount);
     }
 
     // set token price for onlyOwner
-    function settokenprice(uint _tokenPrice) public onlyOwner {
+    function setTokenPrice(uint _tokenPrice) public onlyOwner {
         tokenPrice = _tokenPrice;
     }
 
-    function setadmin(address _admin) public onlyOwner {
-        admin = _admin;
-    }
-    
-    function gettokenPrice() public view returns(uint ){
+    function getTokenPrice() public view returns (uint) {
         return tokenPrice;
-    } 
+    }
+
+    function tokenTransfer(
+        address _contractAddress,
+        uint _amount
+    ) public payable onlyOwner {
+        IERC20 _token = IERC20(address(this));
+        _token.transferFrom(msg.sender, _contractAddress, _amount);
+    }
+
+    function withdrawFromContract(uint _amount) public payable onlyOwner {
+        require(
+            address(this).balance >= _amount,
+            "Insufficient contract balance"
+        );
+        payable(msg.sender).transfer(_amount);
+    }
 }
