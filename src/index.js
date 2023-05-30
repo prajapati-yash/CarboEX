@@ -66,7 +66,7 @@ const { chains, provider } = configureChains(
   [BTTChain, mainnet, polygon, optimism, arbitrum],
   [
     jsonRpcProvider({
-      rpc: (chain) => ({ http: "https://pre-rpc.bittorrentchain.io/" }),
+      rpc: (chain) => ({ http: "https://rpc.bt.io/" }),
     }),
     alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
     // publicProvider(),
