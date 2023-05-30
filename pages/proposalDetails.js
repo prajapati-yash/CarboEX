@@ -43,7 +43,7 @@ export default function ProposalDetails({ route }) {
       if (connector.connected) {
         setIsLoading(true);
         console.log("Connector---", connector);
-        const provider = new Web3("https://pre-rpc.bt.io/");
+        const provider = new Web3("https://rpc.bt.io");
 
         const con = await daoInstance();
         const value = await con.methods.getConfigs().call();
@@ -55,7 +55,6 @@ export default function ProposalDetails({ route }) {
           .encodeABI();
         // console.log(upvoteProposal)
         const gasPrice = await provider.eth.getGasPrice();
-        const gasLimit = 3000000;
         const recipient = DAO_MEMBER_ADDRESS; // replace with recipient address
         const nonce = await provider.eth.getTransactionCount(
           connector.accounts[0],
@@ -63,7 +62,6 @@ export default function ProposalDetails({ route }) {
         );
         const txOptions = {
           gasPrice,
-          gasLimit,
           from: connector.accounts[0],
           to: recipient,
           data: upvoteProposal,
@@ -102,7 +100,7 @@ export default function ProposalDetails({ route }) {
       if (connector.connected) {
         setIsLoadingReject(true);
         console.log("Connector---", connector);
-        const provider = new Web3("https://pre-rpc.bt.io/");
+        const provider = new Web3("https://rpc.bt.io");
 
         const con = await daoInstance();
         const value = await con.methods.getConfigs().call();
@@ -114,7 +112,6 @@ export default function ProposalDetails({ route }) {
           .encodeABI();
         // console.log(upvoteProposal)
         const gasPrice = await provider.eth.getGasPrice();
-        const gasLimit = 3000000;
         const recipient = DAO_MEMBER_ADDRESS; // replace with recipient address
         const nonce = await provider.eth.getTransactionCount(
           connector.accounts[0],
@@ -122,7 +119,6 @@ export default function ProposalDetails({ route }) {
         );
         const txOptions = {
           gasPrice,
-          gasLimit,
           from: connector.accounts[0],
           to: recipient,
           data: downvoteProposal,

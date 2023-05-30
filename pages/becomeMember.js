@@ -33,7 +33,7 @@ export default function BecomeMember() {
         setIsLoading(true);
         if (connector.connected) {
           console.log("Connector---", connector);
-          const provider = new Web3("https://pre-rpc.bt.io/");
+          const provider = new Web3("https://rpc.bt.io");
 
           const conToken = await ercTokenInstance();
           console.log("ConTokens", conToken);
@@ -49,7 +49,6 @@ export default function BecomeMember() {
             .encodeABI();
 
           const gasPrice = await provider.eth.getGasPrice();
-          const gasLimit = 3000000;
           const recipientDao = DAO_MEMBER_ADDRESS;
           const nonce = await provider.eth.getTransactionCount(
             connector.accounts[0],
@@ -58,7 +57,6 @@ export default function BecomeMember() {
 
           const txOptionsDao = {
             gasPrice,
-            gasLimit,
             from: connector.accounts[0],
             to: recipientDao,
             data: addMemberFunc,

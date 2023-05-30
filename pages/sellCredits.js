@@ -39,7 +39,7 @@ export default function SellCredits() {
       } else {
         if (connector.connected) {
           console.log("Connector---", connector);
-          const provider = new Web3("https://pre-rpc.bt.io/");
+          const provider = new Web3("https://rpc.bt.io");
 
           console.log("Company Instance");
           const con = await companyInstance();
@@ -58,7 +58,6 @@ export default function SellCredits() {
             .encodeABI();
 
           const gasPrice = await provider.eth.getGasPrice();
-          const gasLimit = 3000000;
           const recipient = COMPANY_ADDRESS; // replace with recipient address
           const nonce = await provider.eth.getTransactionCount(
             connector.accounts[0],
@@ -66,7 +65,6 @@ export default function SellCredits() {
           );
           const txOptions = {
             gasPrice,
-            gasLimit,
             from: connector.accounts[0],
             to: recipient,
             data: sellCreditsUser,

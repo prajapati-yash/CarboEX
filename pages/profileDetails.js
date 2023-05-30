@@ -54,7 +54,7 @@ function EditProfileScreen() {
         return;
       }
       if (connector.connected) {
-        const provider = new Web3("https://pre-rpc.bt.io/");
+        const provider = new Web3("https://rpc.bt.io");
 
         const con = await companyInstance();
         const userData = await con.methods
@@ -85,7 +85,7 @@ function EditProfileScreen() {
         return;
       }
       if (connector.connected) {
-        const provider = new Web3("https://pre-rpc.bt.io/");
+        const provider = new Web3("https://rpc.bt.io");
 
             const con = await companyInstance();
             const totalCredits = await con.methods.totalCreditMapping(connector.accounts[0]).call();
@@ -208,7 +208,7 @@ function MyProposalScreen() {
         return;
       }
       if (connector.connected) {
-        const provider = new Web3("https://pre-rpc.bt.io/");
+        const provider = new Web3("https://rpc.bt.io");
 
         const con = await daoInstance();
         // console.log(address)
@@ -248,7 +248,7 @@ function MyProposalScreen() {
       if (connector.connected) {
         setIsLoading(true);
         console.log("Connector---", connector);
-        const provider = new Web3("https://pre-rpc.bt.io/");
+        const provider = new Web3("https://rpc.bt.io");
 
         const con = await daoInstance();
         const getResult = await con.methods.getProposalResult(e).encodeABI();
@@ -256,7 +256,6 @@ function MyProposalScreen() {
         // await getResult.wait();
 
         const gasPrice = await provider.eth.getGasPrice();
-        const gasLimit = 3000000;
         const recipient = DAO_MEMBER_ADDRESS; // replace with recipient address
         const nonce = await provider.eth.getTransactionCount(
           connector.accounts[0],
@@ -264,7 +263,6 @@ function MyProposalScreen() {
         );
         const txOptions = {
           gasPrice,
-          gasLimit,
           from: connector.accounts[0],
           to: recipient,
           data: getResult,
@@ -453,7 +451,7 @@ function MyOrdersScreen() {
         return;
       }
       if (connector.connected) {
-        const provider = new Web3("https://pre-rpc.bt.io/");
+        const provider = new Web3("https://rpc.bt.io");
 
         const con = await companyInstance();
         console.log(address);
