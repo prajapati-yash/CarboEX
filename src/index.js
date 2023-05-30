@@ -12,9 +12,32 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
+// const BTTChain = {
+//   id: 1029,
+//   name: "BTTC",
+//   network: "BitTorrent Chain Donau",
+//   iconUrl: "https://testscan.bt.io/static/media/BTT.e13a6c4e.svg",
+//   iconBackground: "#fff",
+//   nativeCurrency: {
+//     decimals: 18,
+//     name: "BitTorrent Chain Donau",
+//     symbol: "BTT",
+//   },
+//   rpcUrls: {
+//     default: "https://pre-rpc.bittorrentchain.io/",
+//   },
+//   blockExplorers: {
+//     default: {
+//       name: "BitTorrent Chain Donau",
+//       url: "https://testscan.bt.io",
+//     },
+//   },
+//   testnet: true,
+// };
+
 const BTTChain = {
-  id: 1029,
-  name: "BTTC",
+  id: 199,
+  name: "BitTorrent Chain Donau",
   network: "BitTorrent Chain Donau",
   iconUrl: "https://testscan.bt.io/static/media/BTT.e13a6c4e.svg",
   iconBackground: "#fff",
@@ -24,15 +47,15 @@ const BTTChain = {
     symbol: "BTT",
   },
   rpcUrls: {
-    default: "https://pre-rpc.bittorrentchain.io/",
+    default: "https://rpc.bt.io/",
   },
   blockExplorers: {
     default: {
       name: "BitTorrent Chain Donau",
-      url: "https://testscan.bt.io",
+      url: "https://bttcscan.com",
     },
   },
-  testnet: true,
+  testnet: false,
 };
 
 
