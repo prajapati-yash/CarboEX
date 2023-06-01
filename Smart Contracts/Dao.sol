@@ -202,12 +202,12 @@ contract Dao is Ownable {
             TokenContract.transfer(msg.sender,_amount);
     }
 
-    function withdrawStake() public  {
+    function withdrawStake() public payable {
         require(isMemberMapping[msg.sender],"You are not a member of DAO"); 
       //  uint stakeAmount = memberWithdrawableAmountMapping[msg.sender];
         require(memberWithdrawableAmountMapping[msg.sender] > 0, "No stake available");
-         memberWithdrawableAmountMapping[msg.sender] = 0; 
         payable(msg.sender).transfer(memberWithdrawableAmountMapping[msg.sender]);
+        memberWithdrawableAmountMapping[msg.sender] = 0; 
     }
 }
 
