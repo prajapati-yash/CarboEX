@@ -55,6 +55,36 @@ function MainProposalDashboard() {
         }
     };
 
+    const withdrawStake = async () => {
+        try {
+            const { ethereum } = window;
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                if (!provider) {
+                    console.log("Metamask is not installed, please install!");
+                }
+                const conDAO = await daoInstance();
+                const returnedStake = await conDAO.withdrawStake();
+                returnedStake.wait();
+                window.location.reload();
+            }
+        } catch (error) {
+            console.log(error);
+            const ErrorReason = error.reason;
+            // console.log(ErrorReason)
+            toast.error(`${ErrorReason}`, {
+                position: "top-left",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
 
     const getUserAccountDetails = async () => {
         try {
@@ -242,6 +272,18 @@ function MainProposalDashboard() {
                                             handleNavigation(MainPropPageData.availableCredits)
                                         }}>SELL CREDITS</button>
                                     </div>
+                                    <div className='DAOSELL-btn mt-3'>
+                                        <button
+                                            className="withdraw-stake-btn"
+                                            // className="PData-sell-btn btn-primary rounded-pill p-2 px-2"
+                                            onClick={() => {
+                                                withdrawStake()
+                                            }}>WITHDRAW STAKE</button>
+                                        {/* <button className='PData-sell-btn' onClick={() => {
+                                            handleNavigation(MainPropPageData.availableCredits)
+                                        }}>SELL CREDITS</button> */}
+                                    </div>
+
                                     <ToastContainer />
                                 </div>
                             </div>
@@ -253,6 +295,7 @@ function MainProposalDashboard() {
                     <div className="Member-prop-orders-Btns row">
                         <button type="button" className="Member-prop-Btn col-12 col-md-5" onClick={handleProposalClick}>My proposals </button>
                         <button type="button" className="Member-orders-Btn col-12 col-md-5" onClick={handleOrdersClick}>My orders</button>
+
                     </div>
                 </div>
                 <>

@@ -12,32 +12,9 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
-// const BTTChain = {
-//   id: 1029,
-//   name: "BTTC",
-//   network: "BitTorrent Chain Donau",
-//   iconUrl: "https://testscan.bt.io/static/media/BTT.e13a6c4e.svg",
-//   iconBackground: "#fff",
-//   nativeCurrency: {
-//     decimals: 18,
-//     name: "BitTorrent Chain Donau",
-//     symbol: "BTT",
-//   },
-//   rpcUrls: {
-//     default: "https://pre-rpc.bittorrentchain.io/",
-//   },
-//   blockExplorers: {
-//     default: {
-//       name: "BitTorrent Chain Donau",
-//       url: "https://testscan.bt.io",
-//     },
-//   },
-//   testnet: true,
-// };
-
 const BTTChain = {
-  id: 199,
-  name: "BitTorrent Chain Donau",
+  id: 1029,
+  name: "BTTC",
   network: "BitTorrent Chain Donau",
   iconUrl: "https://testscan.bt.io/static/media/BTT.e13a6c4e.svg",
   iconBackground: "#fff",
@@ -47,16 +24,39 @@ const BTTChain = {
     symbol: "BTT",
   },
   rpcUrls: {
-    default: "https://rpc.bt.io/",
+    default: "https://pre-rpc.bittorrentchain.io/",
   },
   blockExplorers: {
     default: {
       name: "BitTorrent Chain Donau",
-      url: "https://bttcscan.com",
+      url: "https://testscan.bt.io",
     },
   },
-  testnet: false,
+  testnet: true,
 };
+
+// const BTTChain = {
+//   id: 199,
+//   name: "BitTorrent Chain Donau",
+//   network: "BitTorrent Chain Donau",
+//   iconUrl: "https://testscan.bt.io/static/media/BTT.e13a6c4e.svg",
+//   iconBackground: "#fff",
+//   nativeCurrency: {
+//     decimals: 18,
+//     name: "BitTorrent Chain Donau",
+//     symbol: "BTT",
+//   },
+//   rpcUrls: {
+//     default: "https://rpc.bt.io/",
+//   },
+//   blockExplorers: {
+//     default: {
+//       name: "BitTorrent Chain Donau",
+//       url: "https://bttcscan.com",
+//     },
+//   },
+//   testnet: false,
+// };
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -66,13 +66,25 @@ const { chains, provider } = configureChains(
   [BTTChain, mainnet, polygon, optimism, arbitrum],
   [
     jsonRpcProvider({
-      rpc: (chain) => ({ http: "https://rpc.bt.io/" }),
+      rpc: (chain) => ({ http: "https://pre-rpc.bittorrentchain.io/" }),
     }),
     alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
     // publicProvider(),
 
   ]
 );
+// const { chains, provider } = configureChains(
+//   // [BTTChain],
+//   [BTTChain, mainnet, polygon, optimism, arbitrum],
+//   [
+//     jsonRpcProvider({
+//       rpc: (chain) => ({ http: "https://rpc.bt.io/" }),
+//     }),
+//     alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+//     // publicProvider(),
+
+//   ]
+// );
 
 const { connectors } = getDefaultWallets({
   appName: 'My RainbowKit App',

@@ -3,7 +3,7 @@ import companyABI from "../../src/contract/artifacts/Companyabi.json"
 import daoABI from "../../src/contract/artifacts/Daoabi.json"
 import ercTokenABI from "../../src/contract/artifacts/ErcTokenabi.json"
 export const COMPANY_ADDRESS = "0x72e6d982Fd46FfB0BB697D0C21A9d0cC9A6cB1b9";
-export const DAO_MEMBER_ADDRESS = "0x2fc5dA502D72E644BA41158f8bb9a035970Fa5De";
+export const DAO_MEMBER_ADDRESS = "0xB2e93e6fd9b87715CaeA467875D9Adca99DF7D1C";
 export const ERC_TOKEN_ADDRESS = "0x9955a6b3b0025bc9B00246B38C94CFb42999E6d1";
 
 export const companyInstance = async () => {

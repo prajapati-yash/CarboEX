@@ -71,7 +71,7 @@ function StoreCalculation({ values }) {
                                 </ul> */}
                                 <p><b>Hello there!</b></p>
                                 <p>Thank you for using our Carbon Calculator. To view your carbon emissions, simply click on the Result button.</p>
-                                <p>If your carbon emissions exceed the global limit (1000 tons), <span style={{ borderBottom: "3px solid #4caf50" }}><b>Don't Worry!</b></span><br /></p><p><b>We have a solution for you.💡</b></p>
+                                <p>If your carbon emissions exceed the global limit (5000 tons), <span style={{ borderBottom: "3px solid #4caf50" }}><b>Don't Worry!</b></span><br /></p><p><b>We have a solution for you.💡</b></p>
                                 <p>After completing the calculation, you will be given the option to buy carbon credits to offset your excess emissions. By doing so, you can contribute to a more sustainable future and reduce your carbon footprint.👣</p>
                                 <p>We encourage you to take responsibility for your carbon emissions and join us in the fight against climate change.🌳</p>Thank you for your support!🙏<br />
                                 <div className='text-center'>
