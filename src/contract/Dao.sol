@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "./Company.sol";
 import "./NewToken.sol";
@@ -21,6 +22,7 @@ contract Dao is Ownable {
         address payable[] upVoters;
         address payable[] downVoters;
     }
+
     Company public company;
     NewToken public Token;
 
@@ -53,6 +55,7 @@ contract Dao is Ownable {
     ) public payable {
         require(isMemberMapping[msg.sender], "You are not a member of DAO");
         require(msg.value == proposalStake, "Your Proposal Stake Value is Low");
+
         proposalCount++;
         uint _proposalExpiresAt = SafeMath.add(
             block.timestamp,
@@ -148,6 +151,7 @@ contract Dao is Ownable {
         uint _proposalId
     ) public returns (string memory) {
         // Proposal storage proposal = proposalsMapping[_proposalId];
+
         // check if proposal exists and voting has ended
         require(
             proposalsMapping[_proposalId].proposedAt != 0,
@@ -163,6 +167,7 @@ contract Dao is Ownable {
                 keccak256(bytes(proposalsMapping[_proposalId].status)) !=
                 keccak256(bytes("Questionable"))
         );
+
         require(
             block.timestamp > proposalsMapping[_proposalId].proposalExpiresAt,
             "Voting has not ended yet"
@@ -171,6 +176,7 @@ contract Dao is Ownable {
         uint totalVotes = proposalsMapping[_proposalId].upVote +
             proposalsMapping[_proposalId].downVote;
         uint minimumVotes = (allmembersDAO.length * votingPercent) / 100;
+
         if (totalVotes == 0) {
             proposalsMapping[_proposalId].status = "Questionable";
         } else if (totalVotes < minimumVotes) {
@@ -180,6 +186,7 @@ contract Dao is Ownable {
             proposalsMapping[_proposalId].downVote
         ) {
             proposalsMapping[_proposalId].status = "Accept";
+
             if (proposalsMapping[_proposalId].Type == false) {
                 carbonCredit = proposalsMapping[_proposalId].value;
                 company.issueCredit(
@@ -215,6 +222,7 @@ contract Dao is Ownable {
             }
         } else {
             proposalsMapping[_proposalId].status = "Reject";
+
             // give back voting stake to downVoters
             uint downVotersStake = proposalsMapping[_proposalId].downVote *
                 votingStake;
@@ -283,16 +291,16 @@ contract Dao is Ownable {
         TokenContract.transfer(msg.sender, _amount);
     }
 
-    function withdrawStake() public {
+    function withdrawStake() public payable {
         require(isMemberMapping[msg.sender], "You are not a member of DAO");
         //  uint stakeAmount = memberWithdrawableAmountMapping[msg.sender];
         require(
             memberWithdrawableAmountMapping[msg.sender] > 0,
             "No stake available"
         );
-        memberWithdrawableAmountMapping[msg.sender] = 0;
         payable(msg.sender).transfer(
             memberWithdrawableAmountMapping[msg.sender]
         );
+        memberWithdrawableAmountMapping[msg.sender] = 0;
     }
 }

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -31,6 +32,7 @@ contract Company is
     mapping(address => uint) public creditToSellMapping; // Create order-> store credit
     mapping(address => uint[]) public orderStructIdMapping;
     mapping(uint => Order) public orderStructMapping;
+
     //uint public availableCredit;
     uint public orderCount;
     address public daoAddress;
@@ -93,6 +95,7 @@ contract Company is
             _sellCredit <= totalCreditMapping[msg.sender],
             "You don't have much credit available"
         );
+
         orderCount++;
         orderStructMapping[orderCount] = Order(
             orderCount,
@@ -102,6 +105,7 @@ contract Company is
             _address
         );
         orderStructIdMapping[msg.sender].push(orderCount);
+
         totalCreditMapping[msg.sender] -= _sellCredit;
         creditToSellMapping[msg.sender] += _sellCredit;
     }
