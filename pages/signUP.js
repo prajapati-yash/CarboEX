@@ -91,7 +91,7 @@ export default function SignUP() {
 
       if (connector.connected) {
         console.log("Connector---", connector);
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
         console.log("Company Instance");
         const con = await companyInstance();

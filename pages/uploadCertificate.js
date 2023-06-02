@@ -101,7 +101,7 @@ export default function UploadCertificate() {
         console.log("Cids :", cids);
         if (connector.connected) {
           console.log("Connector---", connector);
-          const provider = new Web3("https://rpc.bt.io");
+          const provider = new Web3("https://pre-rpc.bt.io/");
 
           const conDAO = await daoInstance();
           console.log("conDAO : ", conDAO);

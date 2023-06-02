@@ -46,6 +46,41 @@ function EditProfileScreen() {
     availableCredits: credits ? credits : 0,
 };
 
+const withdrawStake = async () => {
+  try {
+    if (!connector.connected) {
+      console.log("WalletConnect not connected");
+      return;
+    }
+    if (connector.connected) {
+      const provider = new Web3("https://pre-rpc.bt.io/");
+
+          const conDAO = await daoInstance();
+          const returnedStake = await conDAO.methods.withdrawStake().encodeABI();
+          const gasPrice = await provider.eth.getGasPrice();
+          const recipient = DAO_MEMBER_ADDRESS; // replace with recipient address
+          const nonce = await provider.eth.getTransactionCount(
+            connector.accounts[0],
+            "pending"
+          );
+          const txOptions = {
+            gasPrice,
+            from: connector.accounts[0],
+            to: recipient,
+            data: returnedStake,
+            nonce,
+          };
+
+          console.log("After txOptions");
+          console.log("connector transaction", connector);
+          const signTx = await connector.sendTransaction(txOptions);
+          // returnedStake.wait();
+      }
+  } catch (error) {
+      console.log(error);
+  }
+}
+
   const getUserAccountDetails = async () => {
     try {
       console.log("get user accounts....");
@@ -54,7 +89,7 @@ function EditProfileScreen() {
         return;
       }
       if (connector.connected) {
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await companyInstance();
         const userData = await con.methods
@@ -85,7 +120,7 @@ function EditProfileScreen() {
         return;
       }
       if (connector.connected) {
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
             const con = await companyInstance();
             const totalCredits = await con.methods.totalCreditMapping(connector.accounts[0]).call();
@@ -179,6 +214,28 @@ useEffect(() => {
                   onPress={() => navigation.navigate("SellCredits")}
                 />
               </View>
+                  
+              <View>
+              <Button
+                  title={"WITHDRAW STAKE"}
+                  loading={false}
+                  loadingProps={{ size: "large", color: "white" }}
+                  buttonStyle={{
+                    
+                    backgroundColor: "#5B9C7A",
+                    borderRadius: 15,
+                  }}
+                  titleStyle={{
+                    fontWeight: "bold",
+                    fontSize: responsiveFontSize(2.2),
+                  }}
+                  containerStyle={{
+                    width: responsiveWidth(70),
+                    marginTop: "4%",
+                  }}
+                  onPress={withdrawStake}
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -208,7 +265,7 @@ function MyProposalScreen() {
         return;
       }
       if (connector.connected) {
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await daoInstance();
         // console.log(address)
@@ -248,7 +305,7 @@ function MyProposalScreen() {
       if (connector.connected) {
         setIsLoading(true);
         console.log("Connector---", connector);
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await daoInstance();
         const getResult = await con.methods.getProposalResult(e).encodeABI();
@@ -451,7 +508,7 @@ function MyOrdersScreen() {
         return;
       }
       if (connector.connected) {
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await companyInstance();
         console.log(address);

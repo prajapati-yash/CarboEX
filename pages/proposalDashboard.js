@@ -24,7 +24,7 @@ export default function ProposalDashboard() {
         return;
       }
       if (connector.connected) {
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await daoInstance();
         const daoProposalData = await con.methods.getAllProposal().call();

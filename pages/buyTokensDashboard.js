@@ -29,7 +29,7 @@ export default function BuyTokensDashboard() {
         return;
       }
       if (connector.connected) {
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await companyInstance();
         const getUserOrCount = await con.methods.orderCount().call();
@@ -66,7 +66,7 @@ export default function BuyTokensDashboard() {
       if (connector.connected) {
         // setIsLoading(true);
         console.log("Connector---", connector);
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await companyInstance();
         // console.log(id)

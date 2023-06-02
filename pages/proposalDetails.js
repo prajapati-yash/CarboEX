@@ -43,7 +43,7 @@ export default function ProposalDetails({ route }) {
       if (connector.connected) {
         setIsLoading(true);
         console.log("Connector---", connector);
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await daoInstance();
         const value = await con.methods.getConfigs().call();
@@ -100,7 +100,7 @@ export default function ProposalDetails({ route }) {
       if (connector.connected) {
         setIsLoadingReject(true);
         console.log("Connector---", connector);
-        const provider = new Web3("https://rpc.bt.io");
+        const provider = new Web3("https://pre-rpc.bt.io/");
 
         const con = await daoInstance();
         const value = await con.methods.getConfigs().call();
