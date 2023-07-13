@@ -41,7 +41,7 @@ function App() {
           console.log("Metamask is not installed, please install!");
         }
         const con = await companyInstance();
-        const verifyTx = await con.iscompaniesAdd(address)
+        const verifyTx = await con.isCompaniesAddMapping(address)
         // result = verifyTx
         console.log(verifyTx)
         // console.log(con);
